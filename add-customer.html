@@ -3,205 +3,642 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1422">
 <title>ONE ONLINE | Add Customer</title>
+
 <style>
 :root{
- --bg:#0d1422;--panel:#151f30;--panel2:#1b293d;--border:#293950;
- --text:#f3f6fc;--muted:#91a1b8;--primary:#16a477;--primary2:#0d805d;
- --danger:#ef5350;--gold:#f5b942;--input:#101b2c;
+ --bg:#0b1220;
+ --panel:#151f30;
+ --panel2:#1b293d;
+ --border:#293950;
+ --text:#f3f6fc;
+ --muted:#91a1b8;
+ --primary:#16a477;
+ --primary2:#0d805d;
+ --danger:#ef5350;
+ --input:#101b2c;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;font-size:14px}
+html{-webkit-text-size-adjust:100%}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Inter,Arial,sans-serif;font-size:14px;
+ min-height:100vh;
+}
 button,input,select,textarea{font:inherit}
-.topbar{height:76px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:#111b2b;position:sticky;top:0;z-index:10}
-.brand{display:flex;align-items:center;gap:13px}
-.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(145deg,#20c997,#087f5b);display:grid;place-items:center;font-size:27px;font-weight:900;color:white;box-shadow:0 5px 18px #16a47735}
-.brand h1{font-size:20px;margin:0;font-weight:850;letter-spacing:.3px}
+button,a{-webkit-tap-highlight-color:transparent}
+.topbar{
+ min-height:72px;padding:12px 24px;
+ display:flex;align-items:center;justify-content:space-between;
+ border-bottom:1px solid var(--border);
+ background:#111b2b;position:sticky;top:0;z-index:10;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{
+ width:44px;height:44px;flex-shrink:0;border-radius:13px;
+ background:linear-gradient(145deg,#20c997,#087f5b);
+ display:grid;place-items:center;font-size:27px;
+ font-weight:900;color:white;box-shadow:0 5px 18px #16a47735;
+}
+.brand h1{font-size:19px;margin:0;font-weight:850;letter-spacing:.3px}
 .brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
 .top-right{font-size:11px;font-weight:800;color:#aabbd1;letter-spacing:.8px}
-.container{max-width:1150px;margin:28px auto;padding:0 22px 45px}
-.page-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}
-.page-heading h2{margin:0;font-size:23px}
-.page-heading p{color:var(--muted);font-size:12px;margin:7px 0 0}
-.btn{border:0;border-radius:8px;padding:11px 16px;cursor:pointer;font-size:12px;font-weight:800;transition:.2s}
-.btn-primary{background:var(--primary);color:white}.btn-primary:hover{background:var(--primary2)}
+
+.container{max-width:1150px;margin:25px auto;padding:0 20px 40px}
+.page-heading{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:15px;margin-bottom:20px;flex-wrap:wrap;
+}
+.page-heading h2{margin:0;font-size:24px;font-weight:850}
+.page-heading p{color:var(--muted);font-size:12px;margin:7px 0 0;line-height:1.5}
+.btn{
+ border:0;border-radius:9px;padding:12px 17px;
+ cursor:pointer;font-size:12px;font-weight:800;
+ transition:.2s;min-height:43px;
+ display:inline-flex;align-items:center;justify-content:center;
+ gap:7px;text-decoration:none;
+}
+.btn-primary{background:var(--primary);color:white}
+.btn-primary:hover{background:var(--primary2)}
 .btn-secondary{background:#26364d;color:#e5edf8;border:1px solid var(--border)}
 .btn:disabled{opacity:.55;cursor:not-allowed}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:22px;margin-bottom:18px;box-shadow:0 8px 25px #00000012}
-.card-heading{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:850;margin:0 0 21px}
-.card-heading:before{content:"";height:20px;width:4px;background:var(--primary);border-radius:5px}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 17px}
+
+.summary-card{
+ display:flex;align-items:center;gap:15px;
+ background:linear-gradient(120deg,#123e34,#172c3c);
+ border:1px solid #236451;border-radius:13px;
+ padding:17px 20px;margin-bottom:20px;
+}
+.summary-icon{
+ width:45px;height:45px;border-radius:12px;
+ background:#1a654e;display:grid;place-items:center;
+ font-size:23px;flex-shrink:0;
+}
+.summary-info small{display:block;color:#a9d9c9;font-size:11px;font-weight:700}
+.summary-info strong{display:block;font-size:23px;margin-top:3px}
+
+.card{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:14px;padding:23px;margin-bottom:17px;
+ box-shadow:0 8px 25px #00000012;
+}
+.card-heading{
+ display:flex;align-items:center;gap:11px;
+ font-size:15px;font-weight:850;margin:0 0 22px;
+}
+.heading-icon{
+ width:34px;height:34px;border-radius:9px;
+ background:#123e34;color:#35d6a4;
+ display:grid;place-items:center;font-size:17px;
+}
+.grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:19px 17px;
+}
 .field{min-width:0}
-.field label{display:block;font-size:12px;font-weight:750;color:#dbe5f2;margin-bottom:8px}
+.field label{
+ display:block;font-size:12px;font-weight:750;
+ color:#dbe5f2;margin-bottom:8px;
+}
 .req{color:#ff7373}
-.field input,.field select,.field textarea{width:100%;height:43px;background:var(--input);border:1px solid #31425a;border-radius:8px;color:var(--text);padding:0 12px;outline:none}
-.field textarea{height:85px;padding:11px;resize:vertical}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px #16a4771a}
+.field input,.field select,.field textarea{
+ width:100%;height:46px;background:var(--input);
+ border:1px solid #31425a;border-radius:9px;
+ color:var(--text);padding:0 12px;outline:none;
+ transition:.2s;min-width:0;
+}
+.field textarea{height:90px;padding:12px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{
+ border-color:var(--primary);box-shadow:0 0 0 3px #16a4771a;
+}
 .field input::placeholder,.field textarea::placeholder{color:#71839d}
 .field input[readonly]{color:#a7b6ca;background:#172438}
+.field select{color-scheme:dark}
 .full{grid-column:1/-1}
-.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
-.note{background:#102d2a;border:1px solid #1d6654;color:#a9e7d3;padding:12px 14px;border-radius:8px;font-size:12px;line-height:1.6;margin-bottom:18px}
+
+.form-actions{
+ display:flex;justify-content:flex-end;gap:11px;
+ margin-top:23px;padding-top:19px;
+ border-top:1px solid var(--border);
+}
+.form-actions .btn{min-width:145px}
+
+.note{
+ background:#102d2a;border:1px solid #1d6654;
+ color:#a9e7d3;padding:12px 14px;border-radius:9px;
+ font-size:12px;line-height:1.6;margin-bottom:18px;
+}
 .footer{text-align:center;color:#61738d;font-size:11px;padding:20px}
-.overlay{display:none;position:fixed;inset:0;background:#030914c9;z-index:100;align-items:center;justify-content:center;padding:18px}
+
+.overlay{
+ display:none;position:fixed;inset:0;background:#030914d9;
+ z-index:100;align-items:center;justify-content:center;padding:18px;
+}
 .overlay.show{display:flex}
-.modal{width:100%;max-width:390px;background:#172438;border:1px solid #34465f;border-radius:17px;padding:27px;text-align:center;box-shadow:0 25px 80px #0009}
-.modal-logo{width:54px;height:54px;margin:0 auto 15px;border-radius:16px;background:linear-gradient(145deg,#20c997,#087f5b);display:grid;place-items:center;font-size:31px;font-weight:900}
-.modal-icon{width:58px;height:58px;margin:0 auto 14px;border-radius:50%;background:#123e34;color:#37d6a4;display:grid;place-items:center;font-size:30px;font-weight:900}
+.modal{
+ width:100%;max-width:390px;background:#172438;
+ border:1px solid #34465f;border-radius:17px;
+ padding:25px;text-align:center;box-shadow:0 25px 80px #0009;
+}
+.modal-logo{
+ width:54px;height:54px;margin:0 auto 15px;border-radius:16px;
+ background:linear-gradient(145deg,#20c997,#087f5b);
+ display:grid;place-items:center;font-size:31px;font-weight:900;
+}
+.modal-icon{
+ width:58px;height:58px;margin:0 auto 14px;border-radius:50%;
+ background:#123e34;color:#37d6a4;
+ display:grid;place-items:center;font-size:30px;font-weight:900;
+}
 .modal-icon.error{background:#492426;color:#ff7777}
 .modal h3{margin:0 0 8px;font-size:20px}
 .modal p{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 20px}
 .modal .btn{min-width:120px}
-.toast-wrap{position:fixed;right:18px;top:90px;z-index:200;display:grid;gap:9px;width:min(350px,calc(100% - 36px))}
-.toast{padding:14px;background:#172438;border:1px solid #34465f;border-left:4px solid var(--primary);border-radius:9px;box-shadow:0 10px 30px #0006;display:flex;gap:11px;align-items:center;animation:appear .2s ease}
+
+.toast-wrap{
+ position:fixed;right:18px;top:85px;z-index:200;
+ display:grid;gap:9px;width:min(350px,calc(100% - 30px));
+}
+.toast{
+ padding:13px;background:#172438;border:1px solid #34465f;
+ border-left:4px solid var(--primary);border-radius:9px;
+ box-shadow:0 10px 30px #0006;display:flex;gap:11px;
+ align-items:center;animation:appear .2s ease;
+}
 .toast.error{border-left-color:var(--danger)}
-.toast-icon{width:30px;height:30px;border-radius:50%;background:#123e34;color:#37d6a4;display:grid;place-items:center;font-weight:900}
+.toast-icon{
+ width:30px;height:30px;border-radius:50%;
+ background:#123e34;color:#37d6a4;
+ display:grid;place-items:center;font-weight:900;flex-shrink:0;
+}
 .toast.error .toast-icon{background:#492426;color:#ff7777}
-.toast strong{display:block;font-size:12px;margin-bottom:4px}.toast span{font-size:11px;color:var(--muted)}
-@keyframes appear{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.container{margin:20px auto;padding:0 14px 30px}}
-@media(max-width:520px){.topbar{padding:0 14px;height:68px}.brand h1{font-size:17px}.top-right{display:none}.grid{grid-template-columns:1fr}.card{padding:16px}.page-heading h2{font-size:20px}.form-actions{flex-direction:column-reverse}.form-actions .btn{width:100%}}
+.toast strong{display:block;font-size:12px;margin-bottom:4px}
+.toast span{font-size:11px;color:var(--muted)}
+@keyframes appear{
+ from{opacity:0;transform:translateY(-8px)}
+ to{opacity:1;transform:none}
+}
+
+@media(max-width:850px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .container{padding:0 16px 30px}
+ .card{padding:19px}
+}
+@media(max-width:560px){
+ .topbar{min-height:65px;padding:10px 13px}
+ .logo{width:39px;height:39px;font-size:24px}
+ .brand h1{font-size:16px}
+ .brand small{font-size:10px}
+ .top-right{display:none}
+ .container{margin:18px auto;padding:0 12px 25px}
+ .page-heading{align-items:stretch;gap:13px}
+ .page-heading h2{font-size:21px}
+ .page-heading .btn{width:100%}
+ .grid{grid-template-columns:1fr;gap:15px}
+ .card{padding:16px;border-radius:12px}
+ .card-heading{margin-bottom:18px}
+ .field input,.field select{height:47px;font-size:14px}
+ .field textarea{font-size:14px}
+ .summary-card{padding:14px}
+ .summary-info strong{font-size:21px}
+ .form-actions{flex-direction:column-reverse}
+ .form-actions .btn{width:100%;min-height:47px}
+ .footer{padding:18px 5px}
+ .modal{padding:22px}
+}
 </style>
 </head>
+
 <body>
+
 <header class="topbar">
- <div class="brand"><div class="logo">◎</div><div><h1>ONE ONLINE</h1><small>Customer Management System</small></div></div>
+ <div class="brand">
+  <div class="logo">◎</div>
+  <div>
+   <h1>ONE ONLINE</h1>
+   <small>Customer Management System</small>
+  </div>
+ </div>
  <div class="top-right">ADD NEW CUSTOMER</div>
 </header>
 
 <main class="container">
+
  <div class="page-heading">
-  <div><h2>Add New Customer</h2><p>Create and save a customer account in your network database.</p></div>
-  <a href="customer-list.html"><button class="btn btn-secondary" type="button">☷ Customer List</button></a>
+  <div>
+   <h2>Add New Customer</h2>
+   <p>Create and save a customer account in your network database.</p>
+  </div>
+  <a class="btn btn-secondary" href="customer-list.html">
+   ☷ Customer List
+  </a>
+ </div>
+
+ <div class="summary-card">
+  <div class="summary-icon">👥</div>
+  <div class="summary-info">
+   <small>TOTAL CUSTOMER</small>
+   <strong id="totalCustomer">—</strong>
+  </div>
+ </div>
+
+ <div class="note">
+  <strong>Customer Registration</strong><br>
+  Fill in the required customer details and save the information.
+  Fields marked with <span class="req">*</span> are required.
  </div>
 
  <form id="customerForm">
+
   <section class="card">
-   <h3 class="card-heading">Customer Information</h3>
+   <h3 class="card-heading">
+    <span class="heading-icon">👤</span>
+    Customer Information
+   </h3>
+
    <div class="grid">
-    <div class="field"><label>Serial Number</label><input id="si" readonly placeholder="Auto generated"></div>
-    <div class="field"><label>Customer Name <span class="req">*</span></label><input id="name" required placeholder="Enter customer name"></div>
-    <div class="field"><label>Customer IP <span class="req">*</span></label><input id="ip" required placeholder="192.168.1.100"></div>
-    <div class="field"><label>Mobile Number</label><input id="phone" placeholder="01XXXXXXXXX"></div>
-    <div class="field"><label>Email Address</label><input id="email" type="email" placeholder="customer@gmail.com"></div>
-    <div class="field"><label>Area</label><input id="area" placeholder="Customer area"></div>
-    <div class="field"><label>Address</label><input id="address" placeholder="Full address"></div>
-    <div class="field"><label>Location</label><input id="location" placeholder="Location details"></div>
-    <div class="field"><label>Create Date</label><input id="createDate" type="date"></div>
-    <div class="field full"><label>Customer Reason / Note</label><textarea id="reason" placeholder="Customer information or note"></textarea></div>
+
+    <div class="field">
+     <label>Serial Number</label>
+     <input id="si" readonly placeholder="Auto generated">
+    </div>
+
+    <div class="field">
+     <label>Customer Name <span class="req">*</span></label>
+     <input id="name" required placeholder="Enter customer name">
+    </div>
+
+    <div class="field">
+     <label>Customer IP <span class="req">*</span></label>
+     <input id="ip" required placeholder="192.168.1.100">
+    </div>
+
+    <div class="field">
+     <label>Mobile Number</label>
+     <input id="phone" type="tel" inputmode="tel"
+      placeholder="01XXXXXXXXX">
+    </div>
+
+    <div class="field">
+     <label>Email Address</label>
+     <input id="email" type="email"
+      placeholder="customer@gmail.com">
+    </div>
+
+    <div class="field">
+     <label>Area</label>
+     <input id="area" placeholder="Customer area">
+    </div>
+
+    <div class="field">
+     <label>Address</label>
+     <input id="address" placeholder="Full address">
+    </div>
+
+    <div class="field">
+     <label>Location</label>
+     <input id="location" placeholder="Location details">
+    </div>
+
+    <div class="field">
+     <label>Create Date</label>
+     <input id="createDate" type="date">
+    </div>
+
+    <div class="field full">
+     <label>Customer Reason / Note</label>
+     <textarea id="reason"
+      placeholder="Customer information or note"></textarea>
+    </div>
+
    </div>
   </section>
 
   <section class="card">
-   <h3 class="card-heading">Billing Information</h3>
+   <h3 class="card-heading">
+    <span class="heading-icon">৳</span>
+    Billing Information
+   </h3>
+
    <div class="grid">
-    <div class="field"><label>Billing Date</label><input id="billingDate" type="date"></div>
-    <div class="field"><label>Customer Bill (৳)</label><input id="customerBill" type="number" min="0" step="0.01" placeholder="0"></div>
-    <div class="field"><label>Internet Bill (৳)</label><input id="ipBill" type="number" min="0" step="0.01" placeholder="0"></div>
-    <div class="field"><label>Opening Due Amount (৳)</label><input id="dueAmount" type="number" min="0" step="0.01" value="0"></div>
-    <div class="field"><label>Bill Trigger</label><select id="billTrigger"><option value="">Not Set</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
-    <div class="field"><label>IP Bill Trigger</label><select id="ipBillTrigger"><option value="">Not Set</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
+
+    <div class="field">
+     <label>Billing Date</label>
+     <input id="billingDate" type="date">
+    </div>
+
+    <div class="field">
+     <label>Customer Bill (৳)</label>
+     <input id="customerBill" type="number"
+      min="0" step="0.01" placeholder="0">
+    </div>
+
+    <div class="field">
+     <label>Internet Bill (৳)</label>
+     <input id="ipBill" type="number"
+      min="0" step="0.01" placeholder="0">
+    </div>
+
+    <div class="field">
+     <label>Opening Due Amount (৳)</label>
+     <input id="dueAmount" type="number"
+      min="0" step="0.01" value="0">
+    </div>
+
+    <div class="field">
+     <label>Bill Trigger</label>
+     <select id="billTrigger">
+      <option value="">Not Set</option>
+      <option value="ON">ON</option>
+      <option value="OFF">OFF</option>
+     </select>
+    </div>
+
+    <div class="field">
+     <label>IP Bill Trigger</label>
+     <select id="ipBillTrigger">
+      <option value="">Not Set</option>
+      <option value="ON">ON</option>
+      <option value="OFF">OFF</option>
+     </select>
+    </div>
+
    </div>
   </section>
 
   <section class="card">
-   <h3 class="card-heading">Network Information</h3>
+   <h3 class="card-heading">
+    <span class="heading-icon">🌐</span>
+    Network Information
+   </h3>
+
    <div class="grid">
-    <div class="field"><label>ONU MAC Address</label><input id="onu" placeholder="XX:XX:XX:XX:XX:XX"></div>
-    <div class="field"><label>Fiber Information</label><input id="fiber" placeholder="Fiber details"></div>
+
+    <div class="field">
+     <label>ONU MAC Address</label>
+     <input id="onu" placeholder="XX:XX:XX:XX:XX:XX">
+    </div>
+
+    <div class="field">
+     <label>Fiber Information</label>
+     <input id="fiber" placeholder="Fiber details">
+    </div>
+
    </div>
+
    <div class="form-actions">
-    <button type="reset" class="btn btn-secondary" id="resetBtn">↺ Reset Form</button>
-    <button type="submit" class="btn btn-primary" id="saveBtn">＋ Save Customer</button>
+    <button type="reset" class="btn btn-secondary" id="resetBtn">
+     ↺ Reset Form
+    </button>
+
+    <button type="submit" class="btn btn-primary" id="saveBtn">
+     ＋ Save Customer
+    </button>
    </div>
   </section>
+
  </form>
- <div class="footer">ONE ONLINE · Customer Management System</div>
+
+ <div class="footer">
+  ONE ONLINE · Customer Management System
+ </div>
+
 </main>
 
 <div class="overlay" id="messageOverlay">
  <div class="modal">
-  <div class="modal-logo">◎</div><div class="modal-icon" id="messageIcon">✓</div>
-  <h3 id="messageTitle">Success!</h3><p id="messageText"></p>
+  <div class="modal-logo">◎</div>
+  <div class="modal-icon" id="messageIcon">✓</div>
+  <h3 id="messageTitle">Success!</h3>
+  <p id="messageText"></p>
   <button class="btn btn-primary" id="messageOK">Continue</button>
  </div>
 </div>
+
 <div class="toast-wrap" id="toastWrap"></div>
 
 <script>
 "use strict";
+
 const API_URL="https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
+
 const $=id=>document.getElementById(id);
 let busy=false;
 
 function toast(type,title,message){
- const box=document.createElement("div");box.className="toast "+(type==="error"?"error":"");
- const ico=document.createElement("div");ico.className="toast-icon";ico.textContent=type==="error"?"×":"✓";
- const content=document.createElement("div");const strong=document.createElement("strong");strong.textContent=title;
- const span=document.createElement("span");span.textContent=message;content.append(strong,span);box.append(ico,content);$("toastWrap").append(box);
+ const box=document.createElement("div");
+ box.className="toast "+(type==="error"?"error":"");
+
+ const ico=document.createElement("div");
+ ico.className="toast-icon";
+ ico.textContent=type==="error"?"×":"✓";
+
+ const content=document.createElement("div");
+ const strong=document.createElement("strong");
+ strong.textContent=title;
+
+ const span=document.createElement("span");
+ span.textContent=message;
+
+ content.append(strong,span);
+ box.append(ico,content);
+ $("toastWrap").append(box);
+
  setTimeout(()=>box.remove(),3800);
 }
+
 function message(type,title,text){
  return new Promise(resolve=>{
-  const overlay=$("messageOverlay"),icon=$("messageIcon"),btn=$("messageOK");
-  $("messageTitle").textContent=title;$("messageText").textContent=text;
-  icon.className="modal-icon"+(type==="error"?" error":"");icon.textContent=type==="error"?"×":"✓";
+  const overlay=$("messageOverlay");
+  const icon=$("messageIcon");
+  const btn=$("messageOK");
+
+  $("messageTitle").textContent=title;
+  $("messageText").textContent=text;
+
+  icon.className="modal-icon"+(type==="error"?" error":"");
+  icon.textContent=type==="error"?"×":"✓";
+
   overlay.classList.add("show");
-  function close(){overlay.classList.remove("show");btn.removeEventListener("click",close);resolve()}
+
+  function close(){
+   overlay.classList.remove("show");
+   btn.removeEventListener("click",close);
+   resolve();
+  }
+
   btn.addEventListener("click",close);
  });
 }
-function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+
+function today(){
+ const d=new Date();
+ return d.getFullYear()+"-"+
+ String(d.getMonth()+1).padStart(2,"0")+"-"+
+ String(d.getDate()).padStart(2,"0");
+}
+
 async function apiGet(action){
  return new Promise((resolve,reject)=>{
-  const cb="oo_cb_"+Date.now()+"_"+Math.floor(Math.random()*9999),s=document.createElement("script");
-  const timer=setTimeout(()=>{clean();reject(new Error("API timeout. Please check your internet or deployment."))},20000);
-  function clean(){clearTimeout(timer);delete window[cb];s.remove()}
-  window[cb]=r=>{clean();if(r&&r.success)resolve(r);else reject(new Error(r?.message||"API request failed"))};
-  s.onerror=()=>{clean();reject(new Error("Could not connect to Apps Script."))};
-  s.src=API_URL+"?action="+encodeURIComponent(action)+"&callback="+cb;document.body.appendChild(s);
+
+  const cb="oo_cb_"+Date.now()+"_"+Math.floor(Math.random()*9999);
+  const s=document.createElement("script");
+
+  const timer=setTimeout(()=>{
+   clean();
+   reject(new Error("API timeout. Please check your internet or deployment."));
+  },20000);
+
+  function clean(){
+   clearTimeout(timer);
+   delete window[cb];
+   s.remove();
+  }
+
+  window[cb]=r=>{
+   clean();
+   if(r&&r.success)resolve(r);
+   else reject(new Error(r?.message||"API request failed"));
+  };
+
+  s.onerror=()=>{
+   clean();
+   reject(new Error("Could not connect to Apps Script."));
+  };
+
+  s.src=API_URL+"?action="+encodeURIComponent(action)+
+   "&callback="+cb;
+
+  document.body.appendChild(s);
  });
 }
+
 async function apiPost(data){
- const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
- const raw=await response.text();let result;
- try{result=JSON.parse(raw)}catch(e){throw new Error("Invalid API response. Check Apps Script Web App URL and deployment.")}
- if(!response.ok||!result.success)throw new Error(result.message||"Save failed");
+ const response=await fetch(API_URL,{
+  method:"POST",
+  headers:{"Content-Type":"text/plain;charset=utf-8"},
+  body:JSON.stringify(data)
+ });
+
+ const raw=await response.text();
+ let result;
+
+ try{
+  result=JSON.parse(raw);
+ }catch(e){
+  throw new Error("Invalid API response. Check Apps Script Web App URL and deployment.");
+ }
+
+ if(!response.ok||!result.success){
+  throw new Error(result.message||"Save failed");
+ }
+
  return result;
 }
-async function loadSerial(){
+
+async function loadCustomerInfo(){
  try{
-  const r=await apiGet("list"),arr=r.customers||r.data||[];
+  const r=await apiGet("list");
+  const arr=r.customers||r.data||[];
+
   const max=Math.max(0,...arr.map(c=>Number(c.si)||0));
+
   $("si").value=String(max+1).padStart(4,"0");
- }catch(e){$("si").value="Auto"}
+  $("totalCustomer").textContent=arr.length;
+
+ }catch(e){
+  $("si").value="Auto";
+  $("totalCustomer").textContent="—";
+  console.warn("Customer list loading:",e.message);
+ }
 }
+
 function getFormData(){
  return {
-  name:$("name").value.trim(),ip:$("ip").value.trim(),phone:$("phone").value.trim(),
-  email:$("email").value.trim(),area:$("area").value.trim(),address:$("address").value.trim(),
-  location:$("location").value.trim(),reason:$("reason").value.trim(),
-  createDate:$("createDate").value,billingDate:$("billingDate").value,
-  customerBill:Number($("customerBill").value)||0,ipBill:Number($("ipBill").value)||0,
-  dueAmount:Number($("dueAmount").value)||0,billTrigger:$("billTrigger").value,
-  ipBillTrigger:$("ipBillTrigger").value,onu:$("onu").value.trim(),fiber:$("fiber").value.trim()
+  name:$("name").value.trim(),
+  ip:$("ip").value.trim(),
+  phone:$("phone").value.trim(),
+  email:$("email").value.trim(),
+  area:$("area").value.trim(),
+  address:$("address").value.trim(),
+  location:$("location").value.trim(),
+  reason:$("reason").value.trim(),
+  createDate:$("createDate").value,
+  billingDate:$("billingDate").value,
+  customerBill:Number($("customerBill").value)||0,
+  ipBill:Number($("ipBill").value)||0,
+  dueAmount:Number($("dueAmount").value)||0,
+  billTrigger:$("billTrigger").value,
+  ipBillTrigger:$("ipBillTrigger").value,
+  onu:$("onu").value.trim(),
+  fiber:$("fiber").value.trim()
  };
 }
+
 $("customerForm").addEventListener("submit",async e=>{
- e.preventDefault();if(busy)return;
+ e.preventDefault();
+
+ if(busy)return;
+
  const data=getFormData();
- if(!data.name||!data.ip){toast("error","Required Fields","Customer name and IP are required.");return}
- busy=true;$("saveBtn").disabled=true;$("saveBtn").textContent="Saving Customer...";
+
+ if(!data.name||!data.ip){
+  toast("error","Required Fields","Customer name and IP are required.");
+  return;
+ }
+
+ busy=true;
+ $("saveBtn").disabled=true;
+ $("saveBtn").textContent="Saving Customer...";
+
  try{
+
   await apiPost({action:"add",...data});
-  await message("success","Customer Added Successfully","The new customer has been saved to ONE ONLINE.");
-  $("customerForm").reset();$("createDate").value=today();$("dueAmount").value="0";await loadSerial();
- }catch(err){await message("error","Customer Save Failed",err.message)}
- finally{busy=false;$("saveBtn").disabled=false;$("saveBtn").textContent="＋ Save Customer"}
+
+  $("customerForm").reset();
+  $("createDate").value=today();
+  $("dueAmount").value="0";
+
+  await loadCustomerInfo();
+
+  await message(
+   "success",
+   "Customer Added Successfully",
+   "The new customer has been saved to ONE ONLINE."
+  );
+
+ }catch(err){
+
+  await message(
+   "error",
+   "Customer Save Failed",
+   err.message
+  );
+
+ }finally{
+
+  busy=false;
+  $("saveBtn").disabled=false;
+  $("saveBtn").textContent="＋ Save Customer";
+
+ }
 });
-$("resetBtn").addEventListener("click",()=>setTimeout(()=>{$("createDate").value=today();$("dueAmount").value="0";loadSerial()},0));
-$("createDate").value=today();$("dueAmount").value="0";loadSerial();
+
+$("resetBtn").addEventListener("click",()=>{
+ setTimeout(()=>{
+  $("createDate").value=today();
+  $("dueAmount").value="0";
+  loadCustomerInfo();
+ },0);
+});
+
+$("createDate").value=today();
+$("dueAmount").value="0";
+
+loadCustomerInfo();
+
 </script>
 </body>
 </html>
