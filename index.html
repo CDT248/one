@@ -1,0 +1,1454 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONE ONLINE | Management System</title>
+
+<style>
+/* ===================================
+   ONE ONLINE - MAIN INDEX
+=================================== */
+
+:root {
+  --primary:#087f5b;
+  --primary2:#0ca678;
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --sidebar:#ffffff;
+  --text:#172033;
+  --muted:#718096;
+  --border:#e8edf3;
+  --hover:#e8f7ef;
+  --shadow:0 4px 18px rgba(0,0,0,.05);
+  --header:#ffffff;
+}
+
+body.dark {
+  --primary:#34d399;
+  --primary2:#10b981;
+  --bg:#111827;
+  --card:#1f2937;
+  --sidebar:#17212f;
+  --text:#f1f5f9;
+  --muted:#a1adbd;
+  --border:#334155;
+  --hover:#263d3a;
+  --shadow:0 4px 18px rgba(0,0,0,.20);
+  --header:#17212f;
+}
+
+body.funny {
+  --primary:#ec4899;
+  --primary2:#8b5cf6;
+  --bg:#fff0f7;
+  --card:#ffffff;
+  --sidebar:#fff8fc;
+  --text:#4a235a;
+  --muted:#986c9c;
+  --border:#f4c6e0;
+  --hover:#ffe0f0;
+  --shadow:0 5px 20px rgba(236,72,153,.10);
+  --header:#fff8fc;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+html,body {
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .25s,color .25s;
+}
+
+button {
+  font-family:inherit;
+}
+
+/* APP LAYOUT */
+
+.app {
+  min-height:100vh;
+}
+
+.sidebar {
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+  width:255px;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  transition:background .25s,transform .3s;
+}
+
+.brand {
+  height:75px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 20px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+
+.brand-logo {
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#087f5b,#12b886);
+  color:white;
+  font-size:19px;
+  font-weight:900;
+  border-radius:12px;
+}
+
+.brand-info strong {
+  display:block;
+  font-size:17px;
+  letter-spacing:.5px;
+}
+
+.brand-info small {
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1.5px;
+}
+
+.sidebar-content {
+  flex:1;
+  overflow-y:auto;
+  padding:17px 12px;
+}
+
+.nav-label {
+  font-size:10px;
+  color:var(--muted);
+  font-weight:800;
+  letter-spacing:1.4px;
+  padding:10px 12px;
+}
+
+.nav-item {
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:12px 13px;
+  border-radius:9px;
+  font-size:13px;
+  font-weight:600;
+  text-align:left;
+  cursor:pointer;
+  margin-bottom:4px;
+  transition:.2s;
+}
+
+.nav-item:hover {
+  background:var(--hover);
+  color:var(--primary);
+}
+
+.nav-item.active {
+  color:white;
+  background:linear-gradient(135deg,#087f5b,#0ca678);
+  box-shadow:0 4px 12px #087f5b25;
+}
+
+.nav-icon {
+  width:21px;
+  text-align:center;
+  font-size:16px;
+}
+
+.sidebar-bottom {
+  padding:14px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  font-size:10px;
+  text-align:center;
+}
+
+/* MAIN AREA */
+
+.main {
+  margin-left:255px;
+  min-height:100vh;
+  transition:margin .3s;
+}
+
+.topbar {
+  position:sticky;
+  top:0;
+  z-index:500;
+  height:75px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  background:var(--header);
+  border-bottom:1px solid var(--border);
+  gap:15px;
+}
+
+.top-left {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  min-width:0;
+}
+
+.menu-toggle {
+  display:none;
+  width:38px;
+  height:38px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:9px;
+  cursor:pointer;
+  font-size:19px;
+}
+
+.page-heading h2 {
+  margin:0;
+  font-size:17px;
+  font-weight:750;
+}
+
+.page-heading p {
+  margin:5px 0 0;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.top-right {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.theme-select-wrap {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  padding:6px 10px;
+  border-radius:10px;
+}
+
+.theme-select-wrap span {
+  font-size:16px;
+}
+
+.theme-select {
+  border:0;
+  outline:none;
+  background:transparent;
+  color:var(--text);
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  padding:5px 2px;
+}
+
+.theme-select option {
+  background:var(--card);
+  color:var(--text);
+}
+
+.profile {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding-left:12px;
+  border-left:1px solid var(--border);
+}
+
+.profile-avatar {
+  width:35px;
+  height:35px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:white;
+  font-weight:800;
+  background:linear-gradient(135deg,#087f5b,#12b886);
+  font-size:12px;
+}
+
+.profile-info strong {
+  display:block;
+  font-size:12px;
+}
+
+.profile-info small {
+  color:var(--muted);
+  font-size:10px;
+}
+
+/* PAGE CONTENT */
+
+#pageContainer {
+  min-height:calc(100vh - 75px);
+  background:var(--bg);
+  position:relative;
+}
+
+.loading-screen {
+  min-height:350px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:14px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.loader {
+  width:35px;
+  height:35px;
+  border:3px solid var(--border);
+  border-top-color:var(--primary);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {transform:rotate(360deg);}
+}
+
+.error-box {
+  margin:25px;
+  padding:25px;
+  border:1px solid #fecaca;
+  background:#fff1f2;
+  color:#b91c1c;
+  border-radius:12px;
+}
+
+.error-box h3 {
+  margin-top:0;
+}
+
+.error-box button {
+  border:0;
+  background:#b91c1c;
+  color:white;
+  padding:9px 16px;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+/* MOBILE OVERLAY */
+
+#mobileOverlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:900;
+}
+
+#mobileOverlay.show {
+  display:block;
+}
+
+/* FUNNY MODE */
+
+body.funny .brand-logo {
+  background:linear-gradient(135deg,#ec4899,#8b5cf6,#f59e0b);
+  animation:funnyLogo 3s ease-in-out infinite;
+}
+
+@keyframes funnyLogo {
+  0%,100% {transform:rotate(0deg);}
+  25% {transform:rotate(-7deg);}
+  75% {transform:rotate(7deg);}
+}
+
+body.funny .nav-item.active {
+  background:linear-gradient(120deg,#ec4899,#8b5cf6);
+  box-shadow:0 5px 15px #ec489944;
+}
+
+body.funny .profile-avatar {
+  background:linear-gradient(135deg,#ec4899,#8b5cf6);
+}
+
+body.funny .theme-select-wrap {
+  border-color:#f3b4d6;
+  background:#fff0f7;
+}
+
+body.funny .funny-decorations {
+  display:block;
+}
+
+.funny-decorations {
+  display:none;
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1500;
+  overflow:hidden;
+}
+
+.funny-emoji {
+  position:absolute;
+  font-size:23px;
+  opacity:.16;
+  animation:emojiFloat 7s ease-in-out infinite;
+}
+
+.funny-emoji:nth-child(1) {top:15%;right:7%;animation-delay:0s;}
+.funny-emoji:nth-child(2) {top:35%;right:3%;animation-delay:1s;}
+.funny-emoji:nth-child(3) {bottom:18%;right:6%;animation-delay:2s;}
+.funny-emoji:nth-child(4) {top:70%;left:27%;animation-delay:3s;}
+.funny-emoji:nth-child(5) {top:12%;left:35%;animation-delay:1.5s;}
+.funny-emoji:nth-child(6) {bottom:8%;left:55%;animation-delay:2.5s;}
+.funny-emoji:nth-child(7) {top:50%;right:20%;animation-delay:3.5s;}
+
+@keyframes emojiFloat {
+  0%,100% {transform:translateY(0) rotate(-8deg);}
+  50% {transform:translateY(-17px) rotate(10deg);}
+}
+
+body.funny .page-heading h2::after {
+  content:" 🤪";
+}
+
+body.funny .nav-item:hover {
+  transform:translateX(3px);
+}
+
+/* MOBILE */
+
+@media(max-width:900px) {
+  .sidebar {
+    transform:translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform:translateX(0);
+  }
+
+  .main {
+    margin-left:0;
+  }
+
+  .menu-toggle {
+    display:block;
+  }
+
+  .topbar {
+    padding:0 15px;
+  }
+}
+
+@media(max-width:600px) {
+  .topbar {
+    height:65px;
+  }
+
+  .page-heading h2 {
+    font-size:14px;
+  }
+
+  .page-heading p {
+    display:none;
+  }
+
+  .profile-info {
+    display:none;
+  }
+
+  .profile {
+    padding-left:7px;
+  }
+
+  .theme-select-wrap {
+    gap:4px;
+    padding:5px 7px;
+  }
+
+  .theme-select {
+    max-width:100px;
+    font-size:10px;
+  }
+
+  #pageContainer {
+    min-height:calc(100vh - 65px);
+  }
+}
+
+
+/* AUTHENTICATION + ACCOUNT MENU */
+#loginScreen{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#e7f8f0,#f5f7fb)}
+body.dark #loginScreen{background:linear-gradient(135deg,#101827,#172b2a)}
+body.funny #loginScreen{background:linear-gradient(135deg,#ffe4f2,#eee7ff)}
+#loginScreen.show{display:flex}
+.login-card{width:min(430px,100%);background:var(--card);border:1px solid var(--border);border-radius:22px;padding:30px;box-shadow:0 22px 70px #0002}
+.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:24px}.login-brand .brand-logo{flex:none}
+.login-card h2{margin:0 0 7px;font-size:23px}.login-card p{margin:0 0 22px;color:var(--muted);font-size:13px;line-height:1.6}
+.login-field{width:100%;height:46px;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:10px;padding:0 13px;margin:7px 0 14px;outline:none}
+.login-field:focus{border-color:var(--primary)}.login-label{font-size:12px;font-weight:700}
+.login-submit{width:100%;height:46px;border:0;border-radius:10px;background:linear-gradient(135deg,#087f5b,#0ca678);color:white;font-weight:800;cursor:pointer;margin-top:5px}
+.login-error{color:#dc2626;font-size:12px;min-height:18px;margin:0 0 7px}.login-note{font-size:11px;color:var(--muted);margin-top:15px;text-align:center}
+.profile-wrap{position:relative}.profile{cursor:pointer;user-select:none}.profile-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.profile-menu{position:absolute;right:0;top:48px;width:210px;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:13px;box-shadow:var(--shadow);display:none;z-index:1600}
+.profile-menu.show{display:block}.profile-menu button{width:100%;border:0;background:transparent;color:var(--text);padding:11px;border-radius:8px;text-align:left;cursor:pointer;font-size:13px}
+.profile-menu button:hover{background:var(--hover)}.profile-menu .menu-user{padding:10px;border-bottom:1px solid var(--border);margin-bottom:5px;font-size:12px}
+.profile-menu .menu-user small{display:block;color:var(--muted);margin-top:3px}.nav-item[hidden],.nav-label[hidden]{display:none!important}
+.auth-loading{position:fixed;inset:0;z-index:2500;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--muted);gap:12px}
+@media(max-width:600px){.login-card{padding:23px}.profile-menu{right:-5px}.top-right{gap:7px}}
+
+
+/* DESKTOP SIDEBAR MINIMIZE / EXPAND */
+#sidebarCollapseToggle{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:38px;
+  height:38px;
+  flex:none;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:9px;
+  cursor:pointer;
+  font-size:18px;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+#sidebarCollapseToggle:hover{background:var(--hover);border-color:var(--primary)}
+@media(min-width:901px){
+  .sidebar{width:255px;transition:width .3s,background .25s,transform .3s}
+  .main{margin-left:255px;transition:margin-left .3s}
+  body.sidebar-collapsed .sidebar{width:76px}
+  body.sidebar-collapsed .main{margin-left:76px}
+  body.sidebar-collapsed .brand{padding:0;justify-content:center}
+  body.sidebar-collapsed .brand-info{display:none}
+  body.sidebar-collapsed .sidebar-content{padding:17px 9px}
+  body.sidebar-collapsed .nav-label{display:none!important}
+  body.sidebar-collapsed .nav-item{
+    justify-content:center;
+    gap:0;
+    padding:12px 5px;
+    font-size:0;
+    text-align:center;
+  }
+  body.sidebar-collapsed .nav-icon{
+    width:auto;
+    min-width:21px;
+    font-size:18px;
+  }
+  body.sidebar-collapsed .sidebar-bottom{
+    font-size:0;
+    padding:12px 3px;
+  }
+  body.sidebar-collapsed .sidebar-bottom::after{
+    content:"v1.0";
+    font-size:9px;
+  }
+}
+@media(max-width:900px){
+  #sidebarCollapseToggle{display:none!important}
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div id="loginScreen" aria-hidden="true">
+  <form class="login-card" id="loginForm">
+    <div class="login-brand"><div class="brand-logo">O</div><div><strong>ONE ONLINE</strong><div style="font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:3px">MANAGEMENT SYSTEM</div></div></div>
+    <h2>Welcome back</h2><p>Sign in to continue to your management dashboard.</p>
+    <label class="login-label" for="loginUsername">Username / Email</label>
+    <input class="login-field" id="loginUsername" autocomplete="username" required placeholder="Enter your username or email">
+    <label class="login-label" for="loginPassword">Password</label>
+    <input class="login-field" id="loginPassword" type="password" autocomplete="current-password" required placeholder="Enter your password">
+    <div class="login-error" id="loginError"></div>
+    <button class="login-submit" id="loginSubmit" type="submit">Sign In</button>
+    <div class="login-note">Secure access · ONE ONLINE</div>
+  </form>
+</div>
+<div id="authLoading" class="auth-loading"><div class="loader"></div> Checking secure session…</div>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div class="brand-logo">O</div>
+      <div class="brand-info">
+        <strong>ONE ONLINE</strong>
+        <small>MANAGEMENT SYSTEM</small>
+      </div>
+    </div>
+
+    <div class="sidebar-content">
+
+      <div class="nav-label">MAIN MENU</div>
+
+      <button class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">📊</span>
+        Dashboard
+      </button>
+
+      <button class="nav-item" data-page="total-customer">
+        <span class="nav-icon">👥</span>
+        Total Customer
+      </button>
+
+      <button class="nav-item" data-page="add-customer">
+        <span class="nav-icon">➕</span>
+        Add Customer
+      </button>
+
+      <button class="nav-item" data-page="due-customer">
+        <span class="nav-icon">⏳</span>
+        Due Customer
+      </button>
+
+      <button class="nav-item" data-page="deleted-customer">
+        <span class="nav-icon">🗑️</span>
+        Deleted Customer
+      </button>
+
+      <button class="nav-item" data-page="customer-history">
+        <span class="nav-icon">📜</span>
+        Customer History
+      </button>
+
+      <div class="nav-label">EMAIL MANAGEMENT</div>
+
+      <button class="nav-item" data-page="email-settings">
+        <span class="nav-icon">⚙️</span>
+        Email Settings
+      </button>
+
+      <button class="nav-item" data-page="send-email">
+        <span class="nav-icon">📧</span>
+        Send Email
+      </button>
+
+      <button class="nav-item" data-page="email-history">
+        <span class="nav-icon">📨</span>
+        Email History
+      </button>
+
+      <button class="nav-item" data-page="email-template">
+        <span class="nav-icon">📝</span>
+        Email Template
+      </button>
+
+      <div class="nav-label">EXPENSE MANAGEMENT</div>
+
+      <button class="nav-item" data-page="spend-add">
+        <span class="nav-icon">💸</span>
+        Spend Add
+      </button>
+
+      <button class="nav-item" data-page="spend-history">
+        <span class="nav-icon">📈</span>
+        Spend History
+      </button>
+
+      <button class="nav-item" data-page="deleted-spend">
+        <span class="nav-icon">🗑️</span>
+        Deleted Spend
+      </button>
+
+      <div class="nav-label" data-admin-nav hidden>ADMINISTRATION</div>
+      <button class="nav-item" data-page="manage-admins" data-admin-nav hidden>
+        <span class="nav-icon">🛡️</span>
+        Manage Admins
+      </button>
+
+    </div>
+
+    <div class="sidebar-bottom">
+      ONE ONLINE Management System<br>
+      Version 1.0.0
+    </div>
+
+  </aside>
+
+  <div id="mobileOverlay"></div>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <button id="sidebarCollapseToggle" type="button" aria-label="Minimize sidebar" title="Minimize sidebar">❮</button>
+
+        <div class="page-heading">
+          <h2 id="pageTitle">Dashboard</h2>
+          <p id="pageBreadcrumb">Home / Dashboard</p>
+        </div>
+      </div>
+
+      <div class="top-right">
+
+        <!-- THREE MODE SELECTOR -->
+        <div class="theme-select-wrap">
+          <span id="themeIcon">☀️</span>
+
+          <select id="themeToggle" class="theme-select"
+                  aria-label="Choose appearance mode">
+            <option value="light">☀️ White Mode</option>
+            <option value="dark">🌙 Dark Mode</option>
+            <option value="funny">🤪 Funny Mode</option>
+          </select>
+        </div>
+
+        <div class="profile-wrap">
+          <div class="profile" id="profileButton" role="button" tabindex="0" aria-haspopup="true">
+            <div class="profile-avatar" id="profileAvatar">OO</div>
+            <div class="profile-info"><strong id="profileName">Account</strong><small id="profileRole">—</small></div>
+            <span style="font-size:10px;color:var(--muted)">▾</span>
+          </div>
+          <div class="profile-menu" id="profileMenu">
+            <div class="menu-user"><strong id="menuProfileName">Account</strong><small id="menuProfileEmail">—</small></div>
+            <button type="button" id="myAccountButton">👤 My Account</button>
+            <button type="button" id="logoutButton">↪ Logout</button>
+          </div>
+        </div>
+
+      </div>
+
+    </header>
+
+    <!-- CHILD PAGE CONTENT -->
+    <div id="pageContainer">
+      <div class="loading-screen">
+        <div class="loader"></div>
+        Loading Dashboard...
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- FUNNY EMOJI DECORATIONS -->
+<div class="funny-decorations" aria-hidden="true">
+  <span class="funny-emoji">😂</span>
+  <span class="funny-emoji">🤣</span>
+  <span class="funny-emoji">🥳</span>
+  <span class="funny-emoji">😎</span>
+  <span class="funny-emoji">🤪</span>
+  <span class="funny-emoji">🎉</span>
+  <span class="funny-emoji">🦄</span>
+</div>
+
+<script>
+/* ===================================
+   ONE ONLINE - MAIN JAVASCRIPT
+=================================== */
+
+(function () {
+"use strict";
+
+/* PAGE CONFIGURATION */
+
+const PAGE_CONFIG = {
+  "dashboard": {
+    file:"dashboard.html",
+    title:"Dashboard",
+    breadcrumb:"Home / Dashboard"
+  },
+
+  "total-customer": {
+    file:"total-customer.html",
+    title:"Total Customer",
+    breadcrumb:"Home / Customers / Total Customer"
+  },
+
+  "add-customer": {
+    file:"add-customer.html",
+    title:"Add Customer",
+    breadcrumb:"Home / Customers / Add Customer"
+  },
+
+  "due-customer": {
+    file:"due-customer.html",
+    title:"Due Customer",
+    breadcrumb:"Home / Customers / Due Customer"
+  },
+
+  "deleted-customer": {
+    file:"deleted-customer.html",
+    title:"Deleted Customer",
+    breadcrumb:"Home / Customers / Deleted Customer"
+  },
+
+  "customer-history": {
+    file:"customer-history.html",
+    title:"Customer History",
+    breadcrumb:"Home / Customers / Customer History"
+  },
+
+  "email-settings": {
+    file:"email-settings.html",
+    title:"Email Settings",
+    breadcrumb:"Home / Email / Email Settings"
+  },
+
+  "send-email": {
+    file:"send-email.html",
+    title:"Send Email",
+    breadcrumb:"Home / Email / Send Email"
+  },
+
+  "email-history": {
+    file:"email-history.html",
+    title:"Email History",
+    breadcrumb:"Home / Email / Email History"
+  },
+
+  "email-template": {
+    file:"email-template.html",
+    title:"Email Template",
+    breadcrumb:"Home / Email / Email Template"
+  },
+
+  "spend-add": {
+    file:"spend-add.html",
+    title:"Spend Add",
+    breadcrumb:"Home / Spend / Spend Add"
+  },
+
+  "spend-history": {
+    file:"spend-history.html",
+    title:"Spend History",
+    breadcrumb:"Home / Spend / Spend History"
+  },
+
+  "deleted-spend": {
+    file:"deleted-spend.html",
+    title:"Deleted Spend",
+    breadcrumb:"Home / Spend / Deleted Spend"
+  },
+  "manage-admins": {
+    file:"manage-admins.html",
+    title:"Manage Admins",
+    breadcrumb:"Home / Administration / Manage Admins"
+  },
+  "my-account": {
+    file:"my-account.html",
+    title:"My Account",
+    breadcrumb:"Home / Account / My Account"
+  }
+};
+
+/* GLOBAL ELEMENTS */
+
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("mobileOverlay");
+const pageContainer = document.getElementById("pageContainer");
+const pageTitle = document.getElementById("pageTitle");
+const pageBreadcrumb = document.getElementById("pageBreadcrumb");
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+
+let currentPage = "dashboard";
+let pageLoadController = null;
+let pageLoadNumber = 0;
+
+/* ===================================
+   ONE ONLINE AUTHENTICATION
+=================================== */
+const API_URL = "https://script.google.com/macros/s/AKfycbyAtHZqe4aj6uJV3vcrc4lP9bqC4ZrjjCBUGNTJAbmPYzMyCNuNNDNB-V4yP7LwhQkxRg/exec";
+const TOKEN_KEY = "one_online_session_token";
+let authUser = null;
+let authPermissions = {};
+let authToken = "";
+
+function apiRequest(action,data) {
+  const body = Object.assign({},data||{},{action:action});
+  if (authToken && !body.token) body.token = authToken;
+  return fetch(API_URL,{method:"POST",redirect:"follow",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)})
+    .then(function(response){ if(!response.ok) throw new Error("Server response: "+response.status); return response.text(); })
+    .then(function(raw){
+      let result;
+      try { result=JSON.parse(raw); } catch(e) { throw new Error("Invalid API response. Check Apps Script deployment and Web App URL."); }
+      if (!result || result.success !== true) throw new Error(result && result.message ? result.message : "Request failed.");
+      return result;
+    });
+}
+
+function getRole(user){return String(user && (user.role || user.ROLE) || "GUEST").toUpperCase();}
+function isSuperAdmin(){return getRole(authUser)==="SUPER_ADMIN";}
+function permissionObject(data){return data && (data.permissions || data.effectivePermissions || data.userPermissions) || {};}
+function hasPermission(keys){
+  if (isSuperAdmin()) return true;
+  if (!Array.isArray(keys)) keys=[keys];
+  for (const key of keys) {
+    if (Object.prototype.hasOwnProperty.call(authPermissions,key) && authPermissions[key]===true) return true;
+  }
+  return false;
+}
+function pagePermissionKeys(page){
+  const camel=page.replace(/-([a-z])/g,(_,c)=>c.toUpperCase());
+  return ["page."+page,"page_"+page,"view_"+page,"page."+camel,"view."+page];
+}
+function roleCanView(page){
+  if (isSuperAdmin()) return true;
+  return hasPermission(pagePermissionKeys(page));
+}
+function updateProfileUI(){
+  const name=authUser && (authUser.name || authUser.fullName || authUser.username || authUser.email) || "Account";
+  const email=authUser && (authUser.email || authUser.username) || "";
+  const role=getRole(authUser).replace(/_/g," ");
+  document.getElementById("profileName").textContent=name;
+  document.getElementById("menuProfileName").textContent=name;
+  document.getElementById("menuProfileEmail").textContent=email;
+  document.getElementById("profileRole").textContent=role;
+  const avatar=document.getElementById("profileAvatar");
+  const photo=authUser && (authUser.profilePicture || authUser.photoURL || authUser.photoUrl || authUser.picture) || "";
+  if(photo){avatar.innerHTML="";const img=document.createElement("img");img.src=photo;img.alt="Profile";avatar.appendChild(img);}
+  else avatar.textContent=String(name).trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase() || "OO";
+  document.querySelectorAll("[data-admin-nav]").forEach(el=>el.hidden=!isSuperAdmin());
+}
+function applyMenuPermissions(){
+  document.querySelectorAll(".nav-item[data-page]").forEach(function(item){
+    const page=item.dataset.page;
+    if(page==="manage-admins"){item.hidden=!isSuperAdmin();return;}
+    item.hidden=!roleCanView(page);
+  });
+  document.querySelectorAll(".nav-label").forEach(function(label){
+    const next=label.nextElementSibling;
+    if(next && next.classList.contains("nav-item")) label.hidden=next.hidden;
+  });
+}
+function showLogin(){
+  document.getElementById("authLoading").style.display="none";
+  document.querySelector(".app").style.display="none";
+  document.querySelector(".funny-decorations").style.display="none";
+  const box=document.getElementById("loginScreen");box.classList.add("show");box.setAttribute("aria-hidden","false");
+}
+function showApp(){
+  document.getElementById("authLoading").style.display="none";
+  document.querySelector(".app").style.display="block";
+  document.getElementById("loginScreen").classList.remove("show");
+  document.getElementById("loginScreen").setAttribute("aria-hidden","true");
+  updateProfileUI();applyMenuPermissions();
+}
+async function login(username,password){
+  const result=await apiRequest("login",{username:username,password:password});
+  authToken=result.token || result.sessionToken || result.data && (result.data.token || result.data.sessionToken) || "";
+  authUser=result.user || result.account || result.data && (result.data.user || result.data.account) || null;
+  authPermissions=permissionObject(result);
+  if(!authToken) throw new Error("Login response did not include a session token.");
+  localStorage.setItem(TOKEN_KEY,authToken);
+  if(!authUser){const check=await apiRequest("getSession",{token:authToken});authUser=check.user||check.account||check.data&&check.data.user;authPermissions=permissionObject(check);}
+  showApp();
+  const requested=getPageFromHash();
+  const first=roleCanView(requested)?requested:(Object.keys(PAGE_CONFIG).find(roleCanView)||"dashboard");
+  loadPage(first,false);
+}
+async function restoreSession(){
+  authToken=localStorage.getItem(TOKEN_KEY)||"";
+  if(!authToken){showLogin();return;}
+  try{
+    const result=await apiRequest("getSession",{token:authToken});
+    authUser=result.user||result.account||result.data&&result.data.user||null;
+    authPermissions=permissionObject(result);
+    if(!authUser) throw new Error("Session user missing.");
+    showApp();
+    const page=getPageFromHash();
+    loadPage(roleCanView(page)?page:(Object.keys(PAGE_CONFIG).find(roleCanView)||"dashboard"),false);
+  }catch(error){localStorage.removeItem(TOKEN_KEY);authToken="";authUser=null;authPermissions={};showLogin();}
+}
+async function logout(){
+ try{await apiRequest("logout",{});}catch(e){console.warn("Logout API:",e.message);}
+ localStorage.removeItem(TOKEN_KEY);authToken="";authUser=null;authPermissions={};
+ document.getElementById("profileMenu").classList.remove("show");showLogin();
+}
+
+document.getElementById("loginForm").addEventListener("submit",async function(event){
+  event.preventDefault();
+  const button=document.getElementById("loginSubmit"),error=document.getElementById("loginError");
+  button.disabled=true;button.textContent="Signing in…";error.textContent="";
+  try{await login(document.getElementById("loginUsername").value.trim(),document.getElementById("loginPassword").value);}
+  catch(e){error.textContent=e.message||"Unable to sign in.";}
+  finally{button.disabled=false;button.textContent="Sign In";}
+});
+const profileButton=document.getElementById("profileButton");
+profileButton.addEventListener("click",()=>document.getElementById("profileMenu").classList.toggle("show"));
+profileButton.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();document.getElementById("profileMenu").classList.toggle("show");}});
+document.addEventListener("click",e=>{if(!e.target.closest(".profile-wrap"))document.getElementById("profileMenu").classList.remove("show");});
+document.getElementById("myAccountButton").addEventListener("click",()=>{document.getElementById("profileMenu").classList.remove("show");if(authUser)loadPage("my-account",true);else showLogin();});
+document.getElementById("logoutButton").addEventListener("click",logout);
+
+
+/* ===================================
+   THEME SYSTEM - 3 MODES
+=================================== */
+
+const THEME_KEY = "one_online_theme";
+
+function applyTheme(theme) {
+
+  const validThemes = ["light","dark","funny"];
+
+  if (!validThemes.includes(theme)) {
+    theme = "light";
+  }
+
+  document.body.classList.remove("dark","funny");
+
+  if (theme === "dark") {
+    document.body.classList.add("dark");
+    themeIcon.textContent = "🌙";
+  }
+
+  else if (theme === "funny") {
+    document.body.classList.add("funny");
+    themeIcon.textContent = "🤪";
+  }
+
+  else {
+    themeIcon.textContent = "☀️";
+  }
+
+  themeToggle.value = theme;
+
+  try {
+    localStorage.setItem(THEME_KEY,theme);
+  } catch(error) {
+    console.warn("Theme storage unavailable",error);
+  }
+
+  window.currentTheme = theme;
+}
+
+let savedTheme = "light";
+
+try {
+  savedTheme = localStorage.getItem(THEME_KEY) || "light";
+} catch(error) {}
+
+applyTheme(savedTheme);
+
+themeToggle.addEventListener("change",function () {
+  applyTheme(this.value);
+});
+
+/* ===================================
+   DESKTOP SIDEBAR MINIMIZE / EXPAND
+=================================== */
+const SIDEBAR_STATE_KEY = "one_online_sidebar_collapsed";
+const sidebarCollapseToggle = document.getElementById("sidebarCollapseToggle");
+
+function applySidebarCollapsed(collapsed, saveState) {
+  const isDesktop = window.matchMedia("(min-width: 901px)").matches;
+  const shouldCollapse = Boolean(collapsed) && isDesktop;
+
+  document.body.classList.toggle("sidebar-collapsed", shouldCollapse);
+
+  if (sidebarCollapseToggle) {
+    sidebarCollapseToggle.textContent = shouldCollapse ? "❯" : "❮";
+    sidebarCollapseToggle.title = shouldCollapse ? "Expand sidebar" : "Minimize sidebar";
+    sidebarCollapseToggle.setAttribute("aria-label", shouldCollapse ? "Expand sidebar" : "Minimize sidebar");
+    sidebarCollapseToggle.setAttribute("aria-expanded", String(!shouldCollapse));
+  }
+
+  document.querySelectorAll(".nav-item[data-page]").forEach(function(item) {
+    const label = item.textContent.trim().replace(/\s+/g, " ");
+    const pageName = item.dataset.page || label;
+    item.title = shouldCollapse ? label : "";
+    item.setAttribute("aria-label", label || pageName);
+  });
+
+  if (saveState) {
+    try {
+      localStorage.setItem(SIDEBAR_STATE_KEY, shouldCollapse ? "1" : "0");
+    } catch (error) {
+      console.warn("Sidebar preference storage unavailable", error);
+    }
+  }
+}
+
+let savedSidebarCollapsed = false;
+try {
+  savedSidebarCollapsed = localStorage.getItem(SIDEBAR_STATE_KEY) === "1";
+} catch (error) {}
+
+applySidebarCollapsed(savedSidebarCollapsed, false);
+
+if (sidebarCollapseToggle) {
+  sidebarCollapseToggle.addEventListener("click", function() {
+    const nextState = !document.body.classList.contains("sidebar-collapsed");
+    applySidebarCollapsed(nextState, true);
+  });
+}
+
+window.addEventListener("resize", function() {
+  let saved = false;
+  try { saved = localStorage.getItem(SIDEBAR_STATE_KEY) === "1"; } catch (error) {}
+  applySidebarCollapsed(saved, false);
+});
+
+/* ===================================
+   MOBILE SIDEBAR
+=================================== */
+
+function openSidebar() {
+  sidebar.classList.add("open");
+  overlay.classList.add("show");
+}
+
+function closeSidebar() {
+  sidebar.classList.remove("open");
+  overlay.classList.remove("show");
+}
+
+document.getElementById("menuToggle").addEventListener("click",function () {
+  if (sidebar.classList.contains("open")) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+});
+
+overlay.addEventListener("click",closeSidebar);
+
+/* ===================================
+   ACTIVE MENU
+=================================== */
+
+function updateActiveMenu(page) {
+  document.querySelectorAll(".nav-item[data-page]").forEach(function(item) {
+    item.classList.toggle("active",item.dataset.page === page);
+  });
+}
+
+/* ===================================
+   PAGE HEADER
+=================================== */
+
+function updatePageHeader(page) {
+  const config = PAGE_CONFIG[page];
+
+  if (!config) return;
+
+  pageTitle.textContent = config.title;
+  pageBreadcrumb.textContent = config.breadcrumb;
+
+  document.title = "ONE ONLINE | " + config.title;
+}
+
+/* ===================================
+   CSS LOADER AND SCOPING
+=================================== */
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+}
+
+function scopeChildCSS(cssText) {
+
+  const root = "#pageContainer";
+
+  // Preserve @media and @supports while scoping normal selectors.
+  return cssText.replace(/(^|})\s*([^@{}][^{}]*)\{/g,function(match,before,selectors) {
+
+    const scoped = selectors.split(",").map(function(selector) {
+      selector = selector.trim();
+
+      if (!selector) return selector;
+
+      if (
+        selector.startsWith("@") ||
+        selector.includes("keyframes") ||
+        selector.startsWith("from") ||
+        selector.startsWith("to")
+      ) {
+        return selector;
+      }
+
+      if (selector.startsWith("html") || selector.startsWith("body")) {
+        return root + " " + selector.replace(/^(html|body)/,"").trim();
+      }
+
+      return root + " " + selector;
+    }).join(", ");
+
+    return before + "\n" + scoped + " {";
+  });
+}
+
+async function loadPageStyles(doc,pageFile) {
+
+  const oldStyles = document.querySelectorAll("[data-child-page-style]");
+
+  oldStyles.forEach(function(style) {
+    style.remove();
+  });
+
+  // Inline CSS
+  doc.querySelectorAll("style").forEach(function(styleTag,index) {
+
+    const style = document.createElement("style");
+
+    style.setAttribute("data-child-page-style",pageFile);
+    style.textContent = scopeChildCSS(styleTag.textContent);
+
+    document.head.appendChild(style);
+  });
+
+  // External CSS
+  const links = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'));
+
+  for (const link of links) {
+
+    const styleLink = document.createElement("link");
+
+    styleLink.rel = "stylesheet";
+    styleLink.href = new URL(link.getAttribute("href"),new URL(pageFile,location.href)).href;
+    styleLink.setAttribute("data-child-page-style",pageFile);
+
+    document.head.appendChild(styleLink);
+  }
+}
+
+/* ===================================
+   CHILD PAGE SCRIPT EXECUTION
+=================================== */
+
+async function executePageScripts(doc,pageFile) {
+
+  const scripts = Array.from(doc.querySelectorAll("script"));
+
+  for (const oldScript of scripts) {
+
+    const script = document.createElement("script");
+
+    Array.from(oldScript.attributes).forEach(function(attribute) {
+      script.setAttribute(attribute.name,attribute.value);
+    });
+
+    if (oldScript.src) {
+      script.src = new URL(oldScript.getAttribute("src"),new URL(pageFile,location.href)).href;
+    } else {
+      script.textContent = oldScript.textContent;
+    }
+
+    // Wait for external scripts before continuing.
+    if (script.src) {
+      await new Promise(function(resolve) {
+        script.onload = resolve;
+        script.onerror = resolve;
+        document.body.appendChild(script);
+      });
+    } else {
+      document.body.appendChild(script);
+    }
+  }
+}
+
+/* ===================================
+   LOAD PAGE
+=================================== */
+
+async function loadPage(page,addHistory) {
+
+  if (addHistory === undefined) addHistory = true;
+
+  const config = PAGE_CONFIG[page];
+
+  if (!config) {
+    console.error("Unknown page:",page);
+    return;
+  }
+  if (authUser && page !== "my-account" && !roleCanView(page)) {
+    pageContainer.innerHTML = '<div class="error-box"><h3>Access Restricted</h3><p>Your account does not have permission to view this page.</p></div>';
+    return;
+  }
+  if (page === "manage-admins" && !isSuperAdmin()) {
+    pageContainer.innerHTML = '<div class="error-box"><h3>Access Restricted</h3><p>Only Super Admin can manage accounts.</p></div>';
+    return;
+  }
+
+  const thisLoad = ++pageLoadNumber;
+
+  // Cancel previous pending request
+  if (pageLoadController) {
+    pageLoadController.abort();
+  }
+
+  pageLoadController = new AbortController();
+
+  currentPage = page;
+  window.currentPage = page;
+
+  updateActiveMenu(page);
+  updatePageHeader(page);
+  closeSidebar();
+
+  if (addHistory) {
+    const newUrl = "#" + page;
+
+    if (location.hash !== newUrl) {
+      history.pushState({page:page},"",newUrl);
+    }
+  }
+
+  pageContainer.innerHTML = `
+    <div class="loading-screen">
+      <div class="loader"></div>
+      Loading ${config.title}...
+    </div>
+  `;
+
+  try {
+
+    const response = await fetch("./" + config.file,{
+      cache:"no-cache",
+      signal:pageLoadController.signal
+    });
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status + " - " + config.file);
+    }
+
+    const html = await response.text();
+
+    if (thisLoad !== pageLoadNumber) return;
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html,"text/html");
+
+    // Load child styles
+    await loadPageStyles(doc,config.file);
+
+    if (thisLoad !== pageLoadNumber) return;
+
+    // Insert child body
+    pageContainer.innerHTML = doc.body ? doc.body.innerHTML : html;
+    // Granular visibility: child pages may tag cards/sections/buttons with data-permission="key".
+    pageContainer.querySelectorAll("[data-permission]").forEach(function(node){
+      const key=node.getAttribute("data-permission");
+      if(!hasPermission(key)) node.hidden=true;
+    });
+
+    // Execute child scripts
+    await executePageScripts(doc,config.file);
+
+    if (thisLoad !== pageLoadNumber) return;
+
+    // Page loaded event for child-page compatibility
+    window.dispatchEvent(new CustomEvent("oneonline:page-loaded",{
+      detail:{page:page,file:config.file}
+    }));
+
+  } catch(error) {
+
+    if (error.name === "AbortError") return;
+
+    console.error("Page loading error:",error);
+
+    pageContainer.innerHTML = `
+      <div class="error-box">
+        <h3>⚠️ Unable to Load Page</h3>
+        <p>
+          Could not load <strong>${config.file}</strong>.
+          Please check that the HTML file exists in your GitHub root folder.
+        </p>
+        <p style="font-size:12px">${String(error.message || error)}</p>
+        <button onclick="window.loadPage('${page}',false)">
+          Try Again
+        </button>
+      </div>
+    `;
+  }
+}
+
+/* ===================================
+   GLOBAL PAGE FUNCTION
+=================================== */
+
+window.loadPage = loadPage;
+window.oneOnlineAuth = {
+  getUser:()=>authUser,
+  getRole:()=>getRole(authUser),
+  getToken:()=>authToken,
+  hasPermission:hasPermission,
+  api:(action,data)=>apiRequest(action,data),
+  logout:logout
+};
+
+/* ===================================
+   SIDEBAR NAVIGATION
+=================================== */
+
+document.querySelectorAll(".nav-item[data-page]").forEach(function(item) {
+
+  item.addEventListener("click",function() {
+    loadPage(this.dataset.page,true);
+  });
+
+});
+
+/* ===================================
+   HASH ROUTING
+=================================== */
+
+function getPageFromHash() {
+
+  const page = location.hash.replace("#","").trim();
+
+  if (PAGE_CONFIG[page]) {
+    return page;
+  }
+
+  return "dashboard";
+}
+
+window.addEventListener("popstate",function() {
+  loadPage(getPageFromHash(),false);
+});
+
+window.addEventListener("hashchange",function() {
+  const page = getPageFromHash();
+
+  if (page !== currentPage) {
+    loadPage(page,false);
+  }
+});
+
+/* ===================================
+   INITIAL AUTHENTICATION + PAGE
+=================================== */
+
+restoreSession();
+
+})();
+</script>
+
+</body>
+</html>
