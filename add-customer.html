@@ -24,9 +24,7 @@
   transition:background .25s,color .25s;
 }
 
-.ca-page *{
-  box-sizing:border-box;
-}
+.ca-page *{box-sizing:border-box;}
 
 .ca-page button,
 .ca-page input,
@@ -157,9 +155,7 @@
   font-weight:650;
 }
 
-.ca-required{
-  color:#ef4444;
-}
+.ca-required{color:#ef4444;}
 
 .ca-group input,
 .ca-group select,
@@ -170,10 +166,8 @@
   border:1px solid var(--border);
   border-radius:7px;
   outline:none;
-
   background:var(--bg);
   color:var(--text);
-
   font-size:13px;
   transition:.2s;
   box-shadow:none;
@@ -203,9 +197,7 @@
   color-scheme:normal;
 }
 
-.ca-full{
-  grid-column:1/-1;
-}
+.ca-full{grid-column:1/-1;}
 
 /* BUTTONS */
 
@@ -247,9 +239,7 @@
   border-color:var(--border);
 }
 
-.ca-btn-light:hover{
-  border-color:var(--primary);
-}
+.ca-btn-light:hover{border-color:var(--primary);}
 
 .ca-btn:disabled{
   opacity:.5;
@@ -280,13 +270,8 @@
   font-size:13px;
 }
 
-.ca-search::placeholder{
-  color:var(--muted);
-}
-
-.ca-search:focus{
-  border-color:var(--primary);
-}
+.ca-search::placeholder{color:var(--muted);}
+.ca-search:focus{border-color:var(--primary);}
 
 .ca-table-wrap{
   overflow-x:auto;
@@ -319,13 +304,8 @@
   font-weight:750;
 }
 
-.ca-table tbody tr:hover td{
-  background:var(--hover);
-}
-
-.ca-table tbody tr:last-child td{
-  border-bottom:0;
-}
+.ca-table tbody tr:hover td{background:var(--hover);}
+.ca-table tbody tr:last-child td{border-bottom:0;}
 
 .ca-table-btn{
   border:0;
@@ -336,21 +316,14 @@
   font-weight:750;
 }
 
-.ca-edit{
-  color:var(--primary);
-}
-
-.ca-delete{
-  color:#ef4444;
-}
+.ca-edit{color:var(--primary);}
+.ca-delete{color:#ef4444;}
 
 .ca-empty{
   text-align:center!important;
   padding:35px!important;
   color:var(--muted)!important;
 }
-
-/* SMALL LABELS */
 
 .ca-count{
   display:inline-flex;
@@ -364,11 +337,7 @@
   font-weight:750;
 }
 
-/* FUNNY MODE DECORATION */
-
-.ca-page .ca-tag{
-  transition:.2s;
-}
+.ca-page .ca-tag{transition:.2s;}
 
 .ca-page .ca-card,
 .ca-page .ca-stat{
@@ -378,57 +347,20 @@
 /* RESPONSIVE */
 
 @media(max-width:900px){
-
-  .ca-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
+  .ca-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
 }
 
 @media(max-width:600px){
-
-  .ca-page{
-    padding:15px;
-  }
-
-  .ca-header h2{
-    font-size:21px;
-  }
-
-  .ca-stats{
-    grid-template-columns:1fr;
-    gap:11px;
-  }
-
-  .ca-stat{
-    padding:15px;
-  }
-
-  .ca-card{
-    padding:16px;
-  }
-
-  .ca-grid{
-    grid-template-columns:1fr;
-    gap:15px;
-  }
-
-  .ca-actions{
-    flex-direction:column-reverse;
-  }
-
-  .ca-actions .ca-btn{
-    width:100%;
-  }
-
-  .ca-toolbar{
-    align-items:stretch;
-  }
-
-  .ca-search{
-    max-width:none;
-  }
-
+  .ca-page{padding:15px;}
+  .ca-header h2{font-size:21px;}
+  .ca-stats{grid-template-columns:1fr;gap:11px;}
+  .ca-stat{padding:15px;}
+  .ca-card{padding:16px;}
+  .ca-grid{grid-template-columns:1fr;gap:15px;}
+  .ca-actions{flex-direction:column-reverse;}
+  .ca-actions .ca-btn{width:100%;}
+  .ca-toolbar{align-items:stretch;}
+  .ca-search{max-width:none;}
 }
 
 </style>
@@ -443,7 +375,6 @@
       <h2>Add Customer</h2>
       <p>ONE ONLINE / Customer Management</p>
     </div>
-
     <div class="ca-tag">CUSTOMER MODULE</div>
   </div>
 
@@ -477,9 +408,7 @@
 
     <div class="ca-card">
 
-      <div class="ca-card-title">
-        Customer Information
-      </div>
+      <div class="ca-card-title">Customer Information</div>
 
       <div class="ca-grid">
 
@@ -529,16 +458,13 @@
         </div>
 
       </div>
-
     </div>
 
     <!-- BILLING INFORMATION -->
 
     <div class="ca-card">
 
-      <div class="ca-card-title">
-        Billing Information
-      </div>
+      <div class="ca-card-title">Billing Information</div>
 
       <div class="ca-grid">
 
@@ -563,16 +489,13 @@
         </div>
 
       </div>
-
     </div>
 
     <!-- NETWORK INFORMATION -->
 
     <div class="ca-card">
 
-      <div class="ca-card-title">
-        Network Information
-      </div>
+      <div class="ca-card-title">Network Information</div>
 
       <div class="ca-grid">
 
@@ -664,14 +587,15 @@
 "use strict";
 
 /* =================================
-   CUSTOMER DEMO DATABASE
+   GOOGLE SHEETS API CONFIGURATION
 ================================= */
 
-const STORAGE_KEY="one_online_demo_customers";
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
 
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-const FIELD_MAP={
+const FIELD_MAP = {
   serial:"caSerial",
   name:"caName",
   ip:"caIP",
@@ -689,27 +613,18 @@ const FIELD_MAP={
   fiber:"caFiber"
 };
 
-let customers=[];
+let customers = [];
+let editId = null;
+let loading = false;
 
-let editId=null;
-
-try{
-  const saved=localStorage.getItem(STORAGE_KEY);
-  customers=saved?JSON.parse(saved):[];
-
-  if(!Array.isArray(customers))customers=[];
-
-}catch(error){
-  customers=[];
-}
 
 /* =================================
-   DATE
+   DATE HELPERS
 ================================= */
 
 function getToday(){
 
-  const d=new Date();
+  const d = new Date();
 
   return [
     d.getFullYear(),
@@ -719,44 +634,235 @@ function getToday(){
 
 }
 
+function dateForInput(value){
+
+  if(!value) return "";
+
+  const str = String(value);
+
+  // API date format: yyyy-MM-dd HH:mm:ss
+  if(/^\d{4}-\d{2}-\d{2}/.test(str)){
+    return str.substring(0,10);
+  }
+
+  const d = new Date(value);
+
+  if(isNaN(d.getTime())) return "";
+
+  return [
+    d.getFullYear(),
+    String(d.getMonth()+1).padStart(2,"0"),
+    String(d.getDate()).padStart(2,"0")
+  ].join("-");
+
+}
+
+
 /* =================================
    SERIAL
 ================================= */
 
 function getNextSerial(){
 
-  const highest=Math.max(
+  const highest = Math.max(
     0,
-    ...customers.map(c=>Number(c.serial)||0)
+    ...customers.map(c=>Number(c.si || c.serial || c.id)||0)
   );
 
   return String(highest+1).padStart(4,"0");
 
 }
 
+
 /* =================================
-   STORAGE
+   API GET — JSONP
+   Avoids browser CORS issues for GET
 ================================= */
 
-function saveData(){
+function apiGet(action, params={}){
+
+  return new Promise((resolve,reject)=>{
+
+    const callbackName =
+      "oneOnlineCallback_" +
+      Date.now() +
+      "_" +
+      Math.floor(Math.random()*100000);
+
+    const query = new URLSearchParams({
+      action,
+      ...params,
+      callback:callbackName
+    });
+
+    const script = document.createElement("script");
+
+    const timeout = setTimeout(()=>{
+
+      cleanup();
+
+      reject(new Error("API request timed out. Please try again."));
+
+    },20000);
+
+    function cleanup(){
+
+      clearTimeout(timeout);
+
+      delete window[callbackName];
+
+      if(script.parentNode){
+        script.parentNode.removeChild(script);
+      }
+
+    }
+
+    window[callbackName] = function(response){
+
+      cleanup();
+
+      if(!response || response.success !== true){
+
+        reject(new Error(
+          response?.message || "Unable to load data."
+        ));
+
+        return;
+
+      }
+
+      resolve(response);
+
+    };
+
+    script.onerror = function(){
+
+      cleanup();
+
+      reject(new Error(
+        "Could not connect to Google Sheets API."
+      ));
+
+    };
+
+    script.src =
+      API_URL + "?" + query.toString();
+
+    document.body.appendChild(script);
+
+  });
+
+}
+
+
+/* =================================
+   API POST
+================================= */
+
+async function apiPost(payload){
+
+  const response = await fetch(API_URL,{
+
+    method:"POST",
+
+    headers:{
+      "Content-Type":"text/plain;charset=utf-8"
+    },
+
+    body:JSON.stringify(payload)
+
+  });
+
+  if(!response.ok){
+
+    throw new Error(
+      "Server error: HTTP " + response.status
+    );
+
+  }
+
+  const result = await response.json();
+
+  if(!result || result.success !== true){
+
+    throw new Error(
+      result?.message || "Operation failed."
+    );
+
+  }
+
+  return result;
+
+}
+
+
+/* =================================
+   LOAD CUSTOMER DATA FROM SHEET
+================================= */
+
+async function loadCustomers(){
+
+  if(loading) return;
+
+  loading = true;
+
+  $("caSave").disabled = true;
 
   try{
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(customers)
-    );
+    const response = await apiGet("list");
 
-    return true;
+    customers = (response.customers || []).map(c=>({
+
+      id:String(c.si ?? c.id),
+      si:c.si,
+      serial:String(c.si ?? c.serial ?? ""),
+      name:c.name || "",
+      ip:c.ip || "",
+      mobile:c.mobile || c.phone || "",
+      email:c.email || "",
+      area:c.area || "",
+      address:c.address || "",
+      location:c.location || "",
+      createDate:dateForInput(c.createDate),
+      billingDate:dateForInput(c.billingDate),
+      customerBill:Number(c.customerBill)||0,
+      internetBill:Number(c.internetBill ?? c.ipBill)||0,
+      dueAmount:Number(c.dueAmount)||0,
+      onuMac:c.onuMac || c.onu || "",
+      fiber:c.fiber || ""
+
+    }));
+
+    renderCustomers();
 
   }catch(error){
 
-    alert("Unable to save customer data in browser storage.");
-    return false;
+    console.error("Customer load error:",error);
+
+    $("caCustomerList").innerHTML = "";
+
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+
+    td.colSpan = 10;
+    td.className = "ca-empty";
+    td.textContent = "Unable to load customers. " + error.message;
+
+    tr.appendChild(td);
+    $("caCustomerList").appendChild(tr);
+
+    alert("Customer Load Error: " + error.message);
+
+  }finally{
+
+    loading = false;
+    $("caSave").disabled = false;
 
   }
 
 }
+
 
 /* =================================
    RESET FORM
@@ -764,17 +870,18 @@ function saveData(){
 
 function resetCustomerForm(){
 
-  editId=null;
+  editId = null;
 
   $("caForm").reset();
 
-  $("caSerial").value=getNextSerial();
+  $("caSerial").value = getNextSerial();
 
-  $("caCreateDate").value=getToday();
+  $("caCreateDate").value = getToday();
 
-  $("caSave").textContent="+ Add Customer";
+  $("caSave").textContent = "+ Add Customer";
 
 }
+
 
 /* =================================
    FORMAT MONEY
@@ -782,11 +889,12 @@ function resetCustomerForm(){
 
 function money(value){
 
-  return "৳"+Number(value||0).toLocaleString("en-IN",{
+  return "৳" + Number(value||0).toLocaleString("en-IN",{
     maximumFractionDigits:2
   });
 
 }
+
 
 /* =================================
    RENDER CUSTOMER LIST
@@ -794,9 +902,9 @@ function money(value){
 
 function renderCustomers(){
 
-  const search=$("caSearch").value.toLowerCase().trim();
+  const search = $("caSearch").value.toLowerCase().trim();
 
-  const list=customers.filter(c=>{
+  const list = customers.filter(c=>{
 
     return [
 
@@ -816,34 +924,32 @@ function renderCustomers(){
 
   });
 
-  const tbody=$("caCustomerList");
+  const tbody = $("caCustomerList");
 
-  tbody.innerHTML="";
+  tbody.innerHTML = "";
 
   if(!list.length){
 
-    const tr=document.createElement("tr");
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
 
-    const td=document.createElement("td");
+    td.colSpan = 10;
+    td.className = "ca-empty";
 
-    td.colSpan=10;
-    td.className="ca-empty";
-
-    td.textContent=customers.length
-      ?"No matching customer found."
-      :"No customer records available. Add your first customer.";
+    td.textContent = customers.length
+      ? "No matching customer found."
+      : "No customer records available. Add your first customer.";
 
     tr.appendChild(td);
-
     tbody.appendChild(tr);
 
   }
 
   list.forEach(c=>{
 
-    const tr=document.createElement("tr");
+    const tr = document.createElement("tr");
 
-    const values=[
+    const values = [
 
       c.serial,
       c.name,
@@ -859,29 +965,29 @@ function renderCustomers(){
 
     values.forEach(value=>{
 
-      const td=document.createElement("td");
+      const td = document.createElement("td");
 
-      td.textContent=value||"-";
+      td.textContent = value || "-";
 
       tr.appendChild(td);
 
     });
 
-    const action=document.createElement("td");
+    const action = document.createElement("td");
 
-    const edit=document.createElement("button");
+    const edit = document.createElement("button");
 
-    edit.type="button";
-    edit.className="ca-table-btn ca-edit";
-    edit.textContent="Edit";
+    edit.type = "button";
+    edit.className = "ca-table-btn ca-edit";
+    edit.textContent = "Edit";
 
     edit.addEventListener("click",()=>editCustomer(c.id));
 
-    const del=document.createElement("button");
+    const del = document.createElement("button");
 
-    del.type="button";
-    del.className="ca-table-btn ca-delete";
-    del.textContent="Delete";
+    del.type = "button";
+    del.className = "ca-table-btn ca-delete";
+    del.textContent = "Delete";
 
     del.addEventListener("click",()=>deleteCustomer(c.id));
 
@@ -897,61 +1003,74 @@ function renderCustomers(){
 
 }
 
+
 /* =================================
    STATISTICS
 ================================= */
 
 function updateStatistics(){
 
-  $("caTotal").textContent=customers.length;
+  $("caTotal").textContent = customers.length;
 
-  const totalDue=customers.reduce(
+  const totalDue = customers.reduce(
     (sum,c)=>sum+(Number(c.dueAmount)||0),
     0
   );
 
-  $("caTotalDue").textContent=money(totalDue);
+  $("caTotalDue").textContent = money(totalDue);
 
-  $("caLastSerial").textContent=getNextSerial();
+  $("caLastSerial").textContent = getNextSerial();
 
-  $("caRecordCount").textContent=
-    customers.length+" Records";
+  $("caRecordCount").textContent =
+    customers.length + " Records";
 
 }
+
+
+/* =================================
+   GET FORM DATA
+================================= */
+
+function getFormData(){
+
+  return {
+
+    name:$("caName").value.trim(),
+    ip:$("caIP").value.trim(),
+    phone:$("caMobile").value.trim(),
+    email:$("caEmail").value.trim(),
+    area:$("caArea").value.trim(),
+    address:$("caAddress").value.trim(),
+    location:$("caLocation").value.trim(),
+
+    createDate:$("caCreateDate").value,
+    billingDate:$("caBillingDate").value,
+
+    customerBill:Number($("caCustomerBill").value)||0,
+    ipBill:Number($("caInternetBill").value)||0,
+    dueAmount:Number($("caDueAmount").value)||0,
+
+    onu:$("caOnuMac").value.trim(),
+    fiber:$("caFiber").value.trim()
+
+  };
+
+}
+
 
 /* =================================
    ADD / UPDATE CUSTOMER
 ================================= */
 
-$("caForm").addEventListener("submit",function(event){
+$("caForm").addEventListener("submit",async function(event){
 
   event.preventDefault();
 
-  const customer={
-    id:editId||Date.now()
-  };
+  if(loading) return;
 
-  Object.keys(FIELD_MAP).forEach(key=>{
+  const customer = getFormData();
 
-    const input=$(FIELD_MAP[key]);
-
-    if(
-      key==="customerBill"||
-      key==="internetBill"||
-      key==="dueAmount"
-    ){
-
-      customer[key]=Number(input.value)||0;
-
-    }else{
-
-      customer[key]=input.value.trim();
-
-    }
-
-  });
-
-  if(!customer.name||!customer.ip){
+  if(!customer.name || !customer.ip){
 
     alert("Customer Name and Customer IP are required.");
 
@@ -959,46 +1078,69 @@ $("caForm").addEventListener("submit",function(event){
 
   }
 
-  if(
-    customers.some(c=>
-      String(c.ip).toLowerCase()===customer.ip.toLowerCase()
-      &&c.id!==editId
-    )
-  ){
+  const updating = editId !== null;
 
-    alert("This Customer IP already exists!");
+  const button = $("caSave");
 
-    return;
+  button.disabled = true;
 
-  }
+  button.textContent = updating
+    ? "Updating..."
+    : "Saving...";
 
-  const updating=Boolean(editId);
+  try{
 
-  if(updating){
+    let result;
 
-    customers=customers.map(c=>
-      c.id===editId?customer:c
+    if(updating){
+
+      result = await apiPost({
+
+        action:"edit",
+        si:editId,
+        ...customer
+
+      });
+
+    }else{
+
+      result = await apiPost({
+
+        action:"add",
+        ...customer
+
+      });
+
+    }
+
+    await loadCustomers();
+
+    resetCustomerForm();
+
+    alert(
+      updating
+        ? "Customer Updated Successfully!"
+        : "Customer Added Successfully!"
     );
 
-  }else{
+  }catch(error){
 
-    customers.push(customer);
+    console.error("Save customer error:",error);
+
+    alert("Save Error: " + error.message);
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent = editId !== null
+      ? "Update Customer"
+      : "+ Add Customer";
 
   }
 
-  if(!saveData())return;
-
-  renderCustomers();
-
-  resetCustomerForm();
-
-  alert(
-    updating
-      ?"Customer Updated Successfully!"
-      :"Customer Added Successfully!"
-  );
-
 });
+
 
 /* =================================
    EDIT CUSTOMER
@@ -1006,19 +1148,29 @@ $("caForm").addEventListener("submit",function(event){
 
 function editCustomer(id){
 
-  const customer=customers.find(c=>c.id===id);
+  const customer = customers.find(c=>String(c.id)===String(id));
 
-  if(!customer)return;
+  if(!customer) return;
 
-  editId=id;
+  editId = String(customer.si);
 
-  Object.keys(FIELD_MAP).forEach(key=>{
+  $("caSerial").value = customer.serial;
+  $("caName").value = customer.name;
+  $("caIP").value = customer.ip;
+  $("caMobile").value = customer.mobile;
+  $("caEmail").value = customer.email;
+  $("caArea").value = customer.area;
+  $("caAddress").value = customer.address;
+  $("caLocation").value = customer.location;
+  $("caCreateDate").value = customer.createDate;
+  $("caBillingDate").value = customer.billingDate;
+  $("caCustomerBill").value = customer.customerBill;
+  $("caInternetBill").value = customer.internetBill;
+  $("caDueAmount").value = customer.dueAmount;
+  $("caOnuMac").value = customer.onuMac;
+  $("caFiber").value = customer.fiber;
 
-    $(FIELD_MAP[key]).value=customer[key]??"";
-
-  });
-
-  $("caSave").textContent="Update Customer";
+  $("caSave").textContent = "Update Customer";
 
   $("caForm").scrollIntoView({
     behavior:"smooth",
@@ -1027,27 +1179,56 @@ function editCustomer(id){
 
 }
 
+
 /* =================================
    DELETE CUSTOMER
+   Moves customer to Deleted Spreadsheet
 ================================= */
 
-function deleteCustomer(id){
+async function deleteCustomer(id){
 
-  if(!confirm("Are you sure you want to delete this customer?")){
+  const customer = customers.find(c=>String(c.id)===String(id));
+
+  if(!customer) return;
+
+  if(!confirm(
+    "Are you sure you want to delete this customer?\n\n" +
+    "Customer: " + customer.name +
+    "\nIP: " + customer.ip +
+    "\n\nThis customer will be moved to Deleted Customer."
+  )){
+
     return;
+
   }
 
-  customers=customers.filter(c=>c.id!==id);
+  try{
 
-  if(!saveData())return;
+    await apiPost({
 
-  renderCustomers();
+      action:"delete",
+      si:customer.si
 
-  if(editId===id){
-    resetCustomerForm();
+    });
+
+    await loadCustomers();
+
+    if(editId === String(customer.si)){
+      resetCustomerForm();
+    }
+
+    alert("Customer moved to Deleted Customer successfully!");
+
+  }catch(error){
+
+    console.error("Delete customer error:",error);
+
+    alert("Delete Error: " + error.message);
+
   }
 
 }
+
 
 /* =================================
    SEARCH
@@ -1059,19 +1240,27 @@ $("caSearch").addEventListener("input",function(){
 
 });
 
+
 /* =================================
    RESET BUTTON
 ================================= */
 
 $("caForm").addEventListener("reset",function(){
 
+  editId = null;
+
   setTimeout(()=>{
 
-    resetCustomerForm();
+    $("caSerial").value = getNextSerial();
+
+    $("caCreateDate").value = getToday();
+
+    $("caSave").textContent = "+ Add Customer";
 
   },0);
 
 });
+
 
 /* =================================
    EXPORT CSV
@@ -1087,7 +1276,8 @@ $("caExport").addEventListener("click",function(){
 
   }
 
-  const headers=[
+  const headers = [
+
     "Serial Number",
     "Customer Name",
     "Customer IP",
@@ -1103,31 +1293,53 @@ $("caExport").addEventListener("click",function(){
     "Due Amount",
     "ONU MAC",
     "Fiber"
+
   ];
 
-  const keys=Object.keys(FIELD_MAP);
+  const rows = [
 
-  const rows=[
     headers,
-    ...customers.map(c=>keys.map(k=>c[k]??""))
+
+    ...customers.map(c=>[
+
+      c.serial,
+      c.name,
+      c.ip,
+      c.mobile,
+      c.email,
+      c.area,
+      c.address,
+      c.location,
+      c.createDate,
+      c.billingDate,
+      c.customerBill,
+      c.internetBill,
+      c.dueAmount,
+      c.onuMac,
+      c.fiber
+
+    ])
+
   ];
 
-  const csv="\uFEFF"+rows.map(row=>
+  const csv = "\uFEFF" + rows.map(row=>
+
     row.map(value=>
-      '"'+String(value).replace(/"/g,'""')+'"'
+      '"' + String(value??"").replace(/"/g,'""') + '"'
     ).join(",")
+
   ).join("\r\n");
 
-  const blob=new Blob([csv],{
+  const blob = new Blob([csv],{
     type:"text/csv;charset=utf-8;"
   });
 
-  const url=URL.createObjectURL(blob);
+  const url = URL.createObjectURL(blob);
 
-  const link=document.createElement("a");
+  const link = document.createElement("a");
 
-  link.href=url;
-  link.download="ONE-ONLINE-CUSTOMERS.csv";
+  link.href = url;
+  link.download = "ONE-ONLINE-CUSTOMERS.csv";
 
   document.body.appendChild(link);
 
@@ -1139,13 +1351,14 @@ $("caExport").addEventListener("click",function(){
 
 });
 
+
 /* =================================
    INITIALIZE
 ================================= */
 
 resetCustomerForm();
 
-renderCustomers();
+loadCustomers();
 
 })();
 
