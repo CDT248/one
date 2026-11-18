@@ -3,1301 +3,185 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONE ONLINE | Add Customer</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ONE ONLINE - Add Customer</title>
 <style>
-/* =====================================
-   ONE ONLINE - ADD CUSTOMER
-   Uses parent index theme variables
-===================================== */
-
 #addCustomerPage {
-  --ac-radius:13px;
-  --ac-shadow:var(--shadow);
-  color:var(--text);
-  padding:25px;
-  width:100%;
-  max-width:1250px;
-  margin:0 auto;
-}
-
-#addCustomerPage * {
-  box-sizing:border-box;
-}
-
-#addCustomerPage button,
-#addCustomerPage input,
-#addCustomerPage select,
-#addCustomerPage textarea {
+  --ac-primary:var(--primary,#0d9488);
+  --ac-text:var(--text,#172033);
+  --ac-muted:var(--muted,#7b8495);
+  --ac-card:var(--card,#fff);
+  --ac-border:var(--border,#e5e7eb);
+  color:var(--ac-text);
   font-family:inherit;
 }
-
-#addCustomerPage .page-intro {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin-bottom:22px;
-  flex-wrap:wrap;
-}
-
-#addCustomerPage .intro-title {
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-
-#addCustomerPage .intro-icon {
-  width:48px;
-  height:48px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  color:white;
-  background:linear-gradient(135deg,#087f5b,#12b886);
-  box-shadow:0 5px 15px #087f5b25;
-  flex-shrink:0;
-}
-
-#addCustomerPage .intro-icon svg {
-  width:24px;
-  height:24px;
-}
-
-#addCustomerPage .intro-title h2 {
-  margin:0;
-  font-size:19px;
-  font-weight:800;
-}
-
-#addCustomerPage .intro-title p {
-  margin:5px 0 0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-}
-
-#addCustomerPage .form-card {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--ac-radius);
-  box-shadow:var(--ac-shadow);
-  overflow:hidden;
-}
-
-#addCustomerPage .form-top {
-  padding:19px 22px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-#addCustomerPage .form-top h3 {
-  margin:0;
-  font-size:15px;
-  font-weight:800;
-}
-
-#addCustomerPage .required-note {
-  font-size:11px;
-  color:var(--muted);
-}
-
-#addCustomerPage .required-note span {
-  color:#ef4444;
-  font-weight:900;
-}
-
-#addCustomerPage .form-body {
-  padding:22px;
-}
-
-#addCustomerPage .form-section {
-  margin-bottom:25px;
-}
-
-#addCustomerPage .section-heading {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding-bottom:13px;
-  margin-bottom:17px;
-  border-bottom:1px solid var(--border);
-}
-
-#addCustomerPage .section-icon {
-  width:34px;
-  height:34px;
-  display:grid;
-  place-items:center;
-  border-radius:9px;
-  background:var(--hover);
-  color:var(--primary);
-  flex-shrink:0;
-}
-
-#addCustomerPage .section-icon svg {
-  width:18px;
-  height:18px;
-}
-
-#addCustomerPage .section-heading h4 {
-  margin:0;
-  font-size:13px;
-  font-weight:800;
-}
-
-#addCustomerPage .section-heading p {
-  margin:4px 0 0;
-  font-size:10px;
-  color:var(--muted);
-}
-
-#addCustomerPage .form-grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:17px 20px;
-}
-
-#addCustomerPage .field {
-  min-width:0;
-}
-
-#addCustomerPage .field.full {
-  grid-column:1/-1;
-}
-
-#addCustomerPage .field label {
-  display:block;
-  margin-bottom:7px;
-  font-size:11px;
-  font-weight:750;
-  color:var(--text);
-}
-
-#addCustomerPage .field label .required {
-  color:#ef4444;
-  margin-left:2px;
-}
-
-#addCustomerPage .field label .optional {
-  color:var(--muted);
-  font-size:10px;
-  font-weight:500;
-  margin-left:4px;
-}
-
-#addCustomerPage .input-wrap {
-  position:relative;
-}
-
-#addCustomerPage .input-icon {
-  position:absolute;
-  left:12px;
-  top:50%;
-  transform:translateY(-50%);
-  width:17px;
-  height:17px;
-  color:var(--muted);
-  pointer-events:none;
-}
-
-#addCustomerPage .input-icon svg {
-  width:17px;
-  height:17px;
-}
-
-#addCustomerPage input,
-#addCustomerPage select,
-#addCustomerPage textarea {
-  display:block;
-  width:100%;
-  min-width:0;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  border-radius:9px;
-  outline:none;
-  font-size:12px;
-  transition:border .2s,box-shadow .2s;
-}
-
-#addCustomerPage input,
-#addCustomerPage select {
-  height:43px;
-  padding:0 12px 0 39px;
-}
-
-#addCustomerPage select {
-  cursor:pointer;
-}
-
-#addCustomerPage select option {
-  background:var(--card);
-  color:var(--text);
-}
-
-#addCustomerPage textarea {
-  min-height:82px;
-  resize:vertical;
-  padding:12px;
-  line-height:1.5;
-}
-
-#addCustomerPage input:focus,
-#addCustomerPage select:focus,
-#addCustomerPage textarea:focus {
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 12%,transparent);
-}
-
-#addCustomerPage input::placeholder,
-#addCustomerPage textarea::placeholder {
-  color:var(--muted);
-  opacity:.8;
-}
-
-#addCustomerPage .field-hint {
-  margin-top:5px;
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.5;
-}
-
-#addCustomerPage .check-grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-}
-
-#addCustomerPage .check-card {
-  display:flex;
-  align-items:center;
-  gap:11px;
-  min-height:61px;
-  padding:12px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  border-radius:10px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-#addCustomerPage .check-card:hover {
-  border-color:var(--primary);
-  background:var(--hover);
-}
-
-#addCustomerPage .check-card input {
-  width:17px;
-  height:17px;
-  min-width:17px;
-  padding:0;
-  margin:0;
-  accent-color:var(--primary);
-  cursor:pointer;
-}
-
-#addCustomerPage .check-card strong {
-  display:block;
-  font-size:11px;
-}
-
-#addCustomerPage .check-card small {
-  display:block;
-  margin-top:4px;
-  font-size:10px;
-  color:var(--muted);
-}
-
-#addCustomerPage .form-footer {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-  padding:18px 22px;
-  border-top:1px solid var(--border);
-  background:var(--bg);
-}
-
-#addCustomerPage .footer-note {
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.5;
-}
-
-#addCustomerPage .button-group {
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-#addCustomerPage .ac-btn {
-  min-height:41px;
-  padding:0 15px;
-  border-radius:9px;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  font-size:11px;
-  font-weight:750;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  transition:.2s;
-  white-space:nowrap;
-}
-
-#addCustomerPage .ac-btn svg {
-  width:16px;
-  height:16px;
-  flex-shrink:0;
-}
-
-#addCustomerPage .ac-btn:hover {
-  border-color:var(--primary);
-  color:var(--primary);
-  transform:translateY(-1px);
-}
-
-#addCustomerPage .ac-btn.primary {
-  color:white;
-  border-color:transparent;
-  background:linear-gradient(135deg,#087f5b,#0ca678);
-  box-shadow:0 4px 12px #087f5b25;
-}
-
-#addCustomerPage .ac-btn.primary:hover {
-  color:white;
-  box-shadow:0 6px 17px #087f5b35;
-}
-
-#addCustomerPage .ac-btn:disabled {
-  opacity:.6;
-  cursor:wait;
-  transform:none;
-}
-
-#addCustomerPage .alert {
-  display:none;
-  padding:12px 14px;
-  border-radius:9px;
-  margin-bottom:18px;
-  font-size:12px;
-  line-height:1.6;
-}
-
-#addCustomerPage .alert.show {
-  display:block;
-}
-
-#addCustomerPage .alert.error {
-  color:#b91c1c;
-  background:#fff1f2;
-  border:1px solid #fecaca;
-}
-
-#addCustomerPage .alert.success {
-  color:#087f5b;
-  background:#e8f7ef;
-  border:1px solid #a7e8c7;
-}
-
-#addCustomerPage .alert.info {
-  color:#1d4ed8;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
-}
-
-body.dark #addCustomerPage .alert.error {
-  color:#fca5a5;
-  background:#451d27;
-  border-color:#71303d;
-}
-
-body.dark #addCustomerPage .alert.success {
-  color:#6ee7b7;
-  background:#12382e;
-  border-color:#17634b;
-}
-
-body.dark #addCustomerPage .alert.info {
-  color:#93c5fd;
-  background:#172d4c;
-  border-color:#244c7b;
-}
-
-body.funny #addCustomerPage .intro-icon {
-  background:linear-gradient(135deg,#ec4899,#8b5cf6);
-}
-
-body.funny #addCustomerPage .ac-btn.primary {
-  background:linear-gradient(135deg,#ec4899,#8b5cf6);
-}
-
-#addCustomerPage .success-panel {
-  display:none;
-  margin-top:18px;
-  padding:18px;
-  border:1px solid #a7e8c7;
-  background:#e8f7ef;
-  border-radius:11px;
-}
-
-#addCustomerPage .success-panel.show {
-  display:block;
-}
-
-#addCustomerPage .success-panel h4 {
-  color:#087f5b;
-  margin:0 0 7px;
-  font-size:14px;
-}
-
-#addCustomerPage .success-panel p {
-  color:#276749;
-  margin:0;
-  font-size:11px;
-  line-height:1.6;
-}
-
-body.dark #addCustomerPage .success-panel {
-  background:#12382e;
-  border-color:#17634b;
-}
-
-body.dark #addCustomerPage .success-panel h4,
-body.dark #addCustomerPage .success-panel p {
-  color:#6ee7b7;
-}
-
-#addCustomerPage .spinner {
-  width:15px;
-  height:15px;
-  border:2px solid #ffffff70;
-  border-top-color:#fff;
-  border-radius:50%;
-  animation:acSpin .7s linear infinite;
-}
-
-@keyframes acSpin {
-  to { transform:rotate(360deg); }
-}
-
-@media(max-width:700px) {
-  #addCustomerPage {
-    padding:16px 12px 25px;
-  }
-
-  #addCustomerPage .page-intro {
-    margin-bottom:16px;
-  }
-
-  #addCustomerPage .intro-title h2 {
-    font-size:16px;
-  }
-
-  #addCustomerPage .intro-icon {
-    width:42px;
-    height:42px;
-  }
-
-  #addCustomerPage .form-top {
-    padding:15px;
-  }
-
-  #addCustomerPage .form-body {
-    padding:16px;
-  }
-
-  #addCustomerPage .form-grid {
-    grid-template-columns:1fr;
-    gap:14px;
-  }
-
-  #addCustomerPage .field.full {
-    grid-column:auto;
-  }
-
-  #addCustomerPage .check-grid {
-    grid-template-columns:1fr;
-  }
-
-  #addCustomerPage .form-footer {
-    padding:15px;
-    align-items:stretch;
-  }
-
-  #addCustomerPage .footer-note {
-    width:100%;
-  }
-
-  #addCustomerPage .button-group {
-    width:100%;
-  }
-
-  #addCustomerPage .button-group .ac-btn {
-    flex:1;
-  }
-}
-
-@media(max-width:380px) {
-  #addCustomerPage .button-group {
-    flex-direction:column;
-  }
-
-  #addCustomerPage .button-group .ac-btn {
-    width:100%;
-  }
-}
+#addCustomerPage * {box-sizing:border-box}
+#addCustomerPage .ac-head {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+#addCustomerPage h2 {font-size:22px;margin:0 0 5px}
+#addCustomerPage .muted {color:var(--ac-muted);font-size:13px}
+#addCustomerPage .ac-card {background:var(--ac-card);border:1px solid var(--ac-border);border-radius:14px;padding:20px;box-shadow:var(--shadow,0 4px 18px #00000008)}
+#addCustomerPage .ac-section {font-size:15px;font-weight:700;margin:18px 0 12px;padding-bottom:9px;border-bottom:1px solid var(--ac-border)}
+#addCustomerPage .ac-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+#addCustomerPage label {display:block;font-size:12px;font-weight:600;margin-bottom:6px}
+#addCustomerPage input,#addCustomerPage select,#addCustomerPage textarea {
+  width:100%;min-height:42px;border:1px solid var(--ac-border);border-radius:9px;
+  padding:10px 11px;background:var(--input-bg,var(--ac-card));color:var(--ac-text);
+  font:inherit;font-size:13px;outline:none;
+}
+#addCustomerPage input:focus,#addCustomerPage select:focus,#addCustomerPage textarea:focus {border-color:var(--ac-primary)}
+#addCustomerPage textarea {min-height:72px;resize:vertical}
+#addCustomerPage .ac-actions {display:flex;justify-content:flex-end;gap:10px;margin-top:22px;flex-wrap:wrap}
+#addCustomerPage button {border:0;border-radius:9px;padding:11px 18px;font-weight:700;cursor:pointer}
+#addCustomerPage .primary {background:var(--ac-primary);color:#fff}
+#addCustomerPage .secondary {background:var(--hover,#eef2f7);color:var(--ac-text)}
+#addCustomerPage .status {display:none;padding:11px 13px;border-radius:9px;margin-bottom:14px;font-size:13px}
+#addCustomerPage .status.ok {display:block;background:#dcfce7;color:#166534}
+#addCustomerPage .status.err {display:block;background:#fee2e2;color:#991b1b}
+@media(max-width:800px){#addCustomerPage .ac-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){#addCustomerPage .ac-grid{grid-template-columns:1fr}#addCustomerPage .ac-card{padding:14px}}
 </style>
 </head>
-
 <body>
-
 <div id="addCustomerPage">
-
-  <!-- PAGE INTRO -->
-  <div class="page-intro">
-    <div class="intro-title">
-      <div class="intro-icon" id="mainAddIcon"></div>
-      <div>
-        <h2>Add New Customer</h2>
-        <p>Create a new customer profile in ONE ONLINE</p>
-      </div>
+  <div class="ac-head">
+    <div>
+      <h2>Add New Customer</h2>
+      <div class="muted">Create a new customer record in ONE ONLINE</div>
     </div>
   </div>
 
-  <!-- ALERT -->
-  <div class="alert" id="formAlert" role="alert"></div>
+  <div class="ac-card">
+    <div id="acStatus" class="status"></div>
 
-  <!-- SUCCESS -->
-  <div class="success-panel" id="successPanel">
-    <h4>✓ Customer Added Successfully!</h4>
-    <p id="successMessage"></p>
-  </div>
-
-  <!-- FORM CARD -->
-  <div class="form-card">
-
-    <div class="form-top">
-      <h3>Customer Information Form</h3>
-      <div class="required-note">
-        <span>*</span> Required fields
-      </div>
-    </div>
-
-    <form id="customerForm" autocomplete="on">
-      <div class="form-body">
-
-        <!-- CUSTOMER INFORMATION -->
-        <section class="form-section">
-
-          <div class="section-heading">
-            <div class="section-icon" id="customerSectionIcon"></div>
-            <div>
-              <h4>Customer Information</h4>
-              <p>Enter the customer's personal and contact details</p>
-            </div>
-          </div>
-
-          <div class="form-grid">
-
-            <div class="field">
-              <label for="customerName">
-                Customer Name <span class="required">*</span>
-              </label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="user"></span>
-                <input
-                  type="text"
-                  id="customerName"
-                  name="name"
-                  placeholder="Enter customer name"
-                  maxlength="100"
-                  required
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="customerIP">
-                Customer IP <span class="required">*</span>
-              </label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="network"></span>
-                <input
-                  type="text"
-                  id="customerIP"
-                  name="ip"
-                  placeholder="Example: 192.168.1.10"
-                  maxlength="50"
-                  required
-                >
-              </div>
-              <div class="field-hint">Customer IP must be unique.</div>
-            </div>
-
-            <div class="field">
-              <label for="customerPhone">Phone Number</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="phone"></span>
-                <input
-                  type="tel"
-                  id="customerPhone"
-                  name="phone"
-                  placeholder="Enter phone number"
-                  maxlength="30"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="customerEmail">Gmail / Email</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="mail"></span>
-                <input
-                  type="email"
-                  id="customerEmail"
-                  name="email"
-                  placeholder="customer@gmail.com"
-                  maxlength="120"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="customerArea">Area</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="map"></span>
-                <input
-                  type="text"
-                  id="customerArea"
-                  name="area"
-                  placeholder="Enter area name"
-                  maxlength="100"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="customerLocation">Location</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="map-pin"></span>
-                <input
-                  type="text"
-                  id="customerLocation"
-                  name="location"
-                  placeholder="Customer location"
-                  maxlength="200"
-                >
-              </div>
-            </div>
-
-            <div class="field full">
-              <label for="customerAddress">Full Address</label>
-              <textarea
-                id="customerAddress"
-                name="address"
-                placeholder="Enter customer's full address..."
-                maxlength="500"
-              ></textarea>
-            </div>
-
-            <div class="field full">
-              <label for="customerReason">
-                Customer Reason <span class="optional">(Optional)</span>
-              </label>
-              <textarea
-                id="customerReason"
-                name="reason"
-                placeholder="Write any additional customer information..."
-                maxlength="500"
-              ></textarea>
-            </div>
-
-          </div>
-        </section>
-
-        <!-- BILLING INFORMATION -->
-        <section class="form-section">
-
-          <div class="section-heading">
-            <div class="section-icon" id="billingSectionIcon"></div>
-            <div>
-              <h4>Billing Information</h4>
-              <p>Set customer billing dates and payment amounts</p>
-            </div>
-          </div>
-
-          <div class="form-grid">
-
-            <div class="field">
-              <label for="createDate">Create Date</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="calendar"></span>
-                <input
-                  type="date"
-                  id="createDate"
-                  name="createDate"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="billingDate">Billing Date</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="calendar-clock"></span>
-                <input
-                  type="date"
-                  id="billingDate"
-                  name="billingDate"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="customerBill">Customer Bill (৳)</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="wallet"></span>
-                <input
-                  type="number"
-                  id="customerBill"
-                  name="customerBill"
-                  placeholder="0"
-                  min="0"
-                  step="0.01"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="ipBill">IP / Internet Bill (৳)</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="receipt"></span>
-                <input
-                  type="number"
-                  id="ipBill"
-                  name="ipBill"
-                  placeholder="0"
-                  min="0"
-                  step="0.01"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="dueAmount">Opening Due (৳)</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="alert-circle"></span>
-                <input
-                  type="number"
-                  id="dueAmount"
-                  name="dueAmount"
-                  placeholder="0"
-                  min="0"
-                  step="0.01"
-                >
-              </div>
-              <div class="field-hint">Enter the customer's existing due amount, if any.</div>
-            </div>
-
-          </div>
-        </section>
-
-        <!-- NETWORK INFORMATION -->
-        <section class="form-section">
-
-          <div class="section-heading">
-            <div class="section-icon" id="networkSectionIcon"></div>
-            <div>
-              <h4>Network Information</h4>
-              <p>Enter ONU and fiber connection details</p>
-            </div>
-          </div>
-
-          <div class="form-grid">
-
-            <div class="field">
-              <label for="onu">ONU / MAC Address</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="router"></span>
-                <input
-                  type="text"
-                  id="onu"
-                  name="onu"
-                  placeholder="Enter ONU MAC address"
-                  maxlength="100"
-                >
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="fiber">Fiber Information</label>
-              <div class="input-wrap">
-                <span class="input-icon" data-icon="cable"></span>
-                <input
-                  type="text"
-                  id="fiber"
-                  name="fiber"
-                  placeholder="Enter fiber details"
-                  maxlength="150"
-                >
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        <!-- OPTIONAL BILL TRIGGERS -->
-        <section class="form-section">
-
-          <div class="section-heading">
-            <div class="section-icon" id="triggerSectionIcon"></div>
-            <div>
-              <h4>Billing Trigger Settings</h4>
-              <p>Optional billing trigger configuration</p>
-            </div>
-          </div>
-
-          <div class="check-grid">
-
-            <label class="check-card">
-              <input type="checkbox" id="billTrigger" name="billTrigger">
-              <span>
-                <strong>Customer Bill Trigger</strong>
-                <small>Enable customer bill trigger</small>
-              </span>
-            </label>
-
-            <label class="check-card">
-              <input type="checkbox" id="ipBillTrigger" name="ipBillTrigger">
-              <span>
-                <strong>IP Bill Trigger</strong>
-                <small>Enable IP / internet bill trigger</small>
-              </span>
-            </label>
-
-          </div>
-        </section>
-
+    <form id="acForm">
+      <div class="ac-section">Customer Information</div>
+      <div class="ac-grid">
+        <div><label>Customer Name *</label><input name="name" required placeholder="Customer name"></div>
+        <div><label>Customer IP *</label><input name="ip" required placeholder="Example: LRSN014"></div>
+        <div><label>Phone</label><input name="phone" placeholder="Phone number"></div>
+        <div><label>Email</label><input name="email" type="email" placeholder="Email address"></div>
+        <div><label>Area</label><input name="area" placeholder="Area"></div>
+        <div><label>Location</label><input name="location" placeholder="Location"></div>
+        <div><label>Address</label><input name="address" placeholder="Full address"></div>
+        <div><label>ONU</label><input name="onu" placeholder="ONU details"></div>
+        <div><label>Fiber</label><input name="fiber" placeholder="Fiber details"></div>
+        <div><label>Create Date</label><input name="createDate" type="date" id="acCreateDate"></div>
       </div>
 
-      <!-- FORM FOOTER -->
-      <div class="form-footer">
-
-        <div class="footer-note">
-          <strong>Note:</strong> Customer IP and Name are required.
-          Serial number will be assigned automatically by the server.
+      <div class="ac-section">Billing Information</div>
+      <div class="ac-grid">
+        <div><label>Customer Bill (৳)</label><input name="customerBill" type="number" min="0" step="0.01" value="0"></div>
+        <div><label>IP Bill (৳)</label><input name="ipBill" type="number" min="0" step="0.01" value="0"></div>
+        <div><label>Current Due (৳)</label><input name="dueAmount" type="number" min="0" step="0.01" value="0"></div>
+        <div><label>Billing Date</label><input name="billingDate" type="date"></div>
+        <div><label>Bill Trigger</label>
+          <select name="billTrigger"><option value="ON">ON</option><option value="OFF">OFF</option></select>
         </div>
-
-        <div class="button-group">
-
-          <button type="reset" class="ac-btn" id="resetButton">
-            <span data-button-icon="reset"></span>
-            Reset Form
-          </button>
-
-          <button type="submit" class="ac-btn primary" id="saveButton">
-            <span data-button-icon="save"></span>
-            <span id="saveButtonText">Save Customer</span>
-          </button>
-
+        <div><label>IP Bill Trigger</label>
+          <select name="ipBillTrigger"><option value="OFF">OFF</option><option value="ON">ON</option></select>
         </div>
+        <div><label>Collection Status</label>
+          <select name="collect"><option value="Due">Due</option><option value="Collected">Collected</option></select>
+        </div>
+        <div><label>Reason</label><input name="reason" placeholder="Optional reason"></div>
       </div>
 
+      <div class="ac-actions">
+        <button type="reset" class="secondary">Reset</button>
+        <button type="submit" class="primary" id="acSubmit">Save Customer</button>
+      </div>
     </form>
   </div>
 </div>
 
 <script>
 (function(){
+  const API_URL = "https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
+  const TOKEN_KEY = "one_online_customer_token";
+  const PARENT_TOKEN_KEY = "one_online_session_token";
+  const root = document.getElementById("addCustomerPage");
+  if (!root || root.dataset.ready) return;
+  root.dataset.ready = "1";
 
-"use strict";
+  const form = root.querySelector("#acForm");
+  const statusBox = root.querySelector("#acStatus");
+  const submitBtn = root.querySelector("#acSubmit");
+  root.querySelector("#acCreateDate").value = new Date().toISOString().slice(0,10);
 
-/* =====================================
-   CONFIGURATION
-===================================== */
-
-/*
-  Keep this URL matched with your existing
-  Customer Management Apps Script deployment.
-*/
-
-const CUSTOMER_API_URL =
-"https://script.google.com/macros/s/AKfycbxrh_L_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
-
-
-/* =====================================
-   ICON SYSTEM
-===================================== */
-
-const icons = {
-
-  plusUser:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>`,
-
-  user:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>`,
-
-  network:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6h4a3 3 0 0 1 3 3v5M7 10v4a3 3 0 0 0 3 3h4"/></svg>`,
-
-  phone:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.2 10a16 16 0 0 0 6 6l1.5-1.8a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 1.5 2.8z"/></svg>`,
-
-  mail:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>`,
-
-  map:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>`,
-
-  "map-pin":`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="2.5"/></svg>`,
-
-  calendar:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>`,
-
-  "calendar-clock":`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><circle cx="16.5" cy="15.5" r="2.5"/><path d="M16.5 14v1.5l1 1"/></svg>`,
-
-  wallet:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="16" rx="2"/><path d="M16 14h6M2 9h20M6 5V3h13"/></svg>`,
-
-  receipt:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l4-2 4 2 4-2 4 2V2l-4 2-4-2-4 2z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>`,
-
-  "alert-circle":`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>`,
-
-  router:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="12" rx="2"/><path d="M6 9V5M18 9V5M9 15h.01M13 15h.01M17 15h.01M8 18h8"/></svg>`,
-
-  cable:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v5M16 3v5M5 8h14v3a7 7 0 0 1-14 0zM12 18v3"/></svg>`,
-
-  settings:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.7 2.9-.2-.1a1.7 1.7 0 0 0-1.8.3l-.1.1h-3.4l-.1-.2a1.7 1.7 0 0 0-1.8-.3l-.2.1-1.7-2.9.1-.1a1.7 1.7 0 0 0 .3-1.9l-.1-.2-2.9-1.7.1-.2a1.7 1.7 0 0 0-.3-1.8l-.1-.1V7.6l.2-.1a1.7 1.7 0 0 0 .3-1.8l-.1-.2 2.9-1.7.1.1a1.7 1.7 0 0 0 1.9-.3l.1-.1h3.4l.1.2a1.7 1.7 0 0 0 1.8.3l.2-.1 1.7 2.9-.1.1a1.7 1.7 0 0 0-.3 1.9l.1.2 2.9 1.7-.1.2a1.7 1.7 0 0 0 .3 1.8l.1.1v3.4l-.2.1a1.7 1.7 0 0 0-.3 1.8z"/></svg>`,
-
-  reset:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5"/></svg>`,
-
-  save:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>`
-};
-
-function putIcon(element, name) {
-  if(element && icons[name]) {
-    element.innerHTML = icons[name];
-  }
-}
-
-putIcon(document.getElementById("mainAddIcon"),"plusUser");
-putIcon(document.getElementById("customerSectionIcon"),"user");
-putIcon(document.getElementById("billingSectionIcon"),"wallet");
-putIcon(document.getElementById("networkSectionIcon"),"router");
-putIcon(document.getElementById("triggerSectionIcon"),"settings");
-
-document.querySelectorAll("#addCustomerPage [data-icon]").forEach(function(el){
-  putIcon(el,el.dataset.icon);
-});
-
-document.querySelectorAll("#addCustomerPage [data-button-icon]").forEach(function(el){
-  putIcon(el,el.dataset.buttonIcon);
-});
-
-
-/* =====================================
-   FORM HELPERS
-===================================== */
-
-const form = document.getElementById("customerForm");
-const alertBox = document.getElementById("formAlert");
-const saveButton = document.getElementById("saveButton");
-const saveButtonText = document.getElementById("saveButtonText");
-const successPanel = document.getElementById("successPanel");
-
-function showAlert(message,type) {
-  alertBox.textContent = message;
-  alertBox.className = "alert show " + (type || "info");
-
-  alertBox.scrollIntoView({
-    behavior:"smooth",
-    block:"nearest"
-  });
-}
-
-function hideAlert() {
-  alertBox.className = "alert";
-  alertBox.textContent = "";
-}
-
-function setSaving(isSaving) {
-  saveButton.disabled = isSaving;
-
-  if(isSaving) {
-    saveButton.querySelector("[data-button-icon]").innerHTML =
-      '<span class="spinner"></span>';
-
-    saveButtonText.textContent = "Saving Customer...";
-  } else {
-    putIcon(saveButton.querySelector("[data-button-icon]"),"save");
-    saveButtonText.textContent = "Save Customer";
-  }
-}
-
-function value(id) {
-  return document.getElementById(id).value.trim();
-}
-
-function numberValue(id) {
-  const n = Number(value(id) || 0);
-  return Number.isFinite(n) && n >= 0 ? n : 0;
-}
-
-function todayLocal() {
-  const now = new Date();
-  const offset = now.getTimezoneOffset();
-  return new Date(now.getTime() - offset * 60000)
-    .toISOString()
-    .slice(0,10);
-}
-
-
-/* =====================================
-   DATE DEFAULTS
-===================================== */
-
-const today = todayLocal();
-
-document.getElementById("createDate").value = today;
-
-
-/* =====================================
-   API REQUEST
-===================================== */
-
-async function sendCustomerData(payload) {
-
-  const response = await fetch(CUSTOMER_API_URL,{
-    method:"POST",
-    redirect:"follow",
-    headers:{
-      "Content-Type":"text/plain;charset=utf-8"
-    },
-    body:JSON.stringify(payload)
-  });
-
-  if(!response.ok) {
-    throw new Error("Server error: " + response.status);
+  function show(message, type){
+    statusBox.textContent = message;
+    statusBox.className = "status " + (type || "ok");
   }
 
-  const raw = await response.text();
-
-  let result;
-
-  try {
-    result = JSON.parse(raw);
-  } catch(error) {
-    throw new Error(
-      "Invalid API response. Please check your Apps Script Web App deployment."
-    );
+  function getToken(){
+    return sessionStorage.getItem(TOKEN_KEY) ||
+           sessionStorage.getItem(PARENT_TOKEN_KEY) || "";
   }
 
-  if(!result || result.success !== true) {
-    throw new Error(
-      result && result.message
-        ? result.message
-        : "Customer could not be saved."
-    );
-  }
+  async function login(){
+    let token = getToken();
+    if (token) return token;
 
-  return result;
-}
+    const password = prompt("ONE ONLINE API Password দিন:");
+    if (password === null || !password.trim()) throw new Error("Login cancelled.");
 
-
-/* =====================================
-   VALIDATION
-===================================== */
-
-function validateForm() {
-
-  const name = value("customerName");
-  const ip = value("customerIP");
-  const email = value("customerEmail");
-
-  if(!name) {
-    showAlert("Please enter customer name.","error");
-    document.getElementById("customerName").focus();
-    return false;
-  }
-
-  if(!ip) {
-    showAlert("Customer IP is required.","error");
-    document.getElementById("customerIP").focus();
-    return false;
-  }
-
-  if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showAlert("Please enter a valid email address.","error");
-    document.getElementById("customerEmail").focus();
-    return false;
-  }
-
-  const amountFields = [
-    "customerBill",
-    "ipBill",
-    "dueAmount"
-  ];
-
-  for(const id of amountFields) {
-    const input = document.getElementById(id);
-
-    if(input.value !== "" && (
-      !Number.isFinite(Number(input.value)) ||
-      Number(input.value) < 0
-    )) {
-      showAlert("Please enter a valid non-negative amount.","error");
-      input.focus();
-      return false;
-    }
-  }
-
-  return true;
-}
-
-
-/* =====================================
-   ADD CUSTOMER
-===================================== */
-
-form.addEventListener("submit",async function(event){
-
-  event.preventDefault();
-
-  hideAlert();
-  successPanel.classList.remove("show");
-
-  if(!validateForm()) return;
-
-  const payload = {
-
-    action:"add",
-
-    name:value("customerName"),
-    ip:value("customerIP"),
-    phone:value("customerPhone"),
-    email:value("customerEmail"),
-
-    area:value("customerArea"),
-    address:value("customerAddress"),
-    location:value("customerLocation"),
-    reason:value("customerReason"),
-
-    createDate:value("createDate"),
-    billingDate:value("billingDate"),
-
-    customerBill:numberValue("customerBill"),
-    ipBill:numberValue("ipBill"),
-    dueAmount:numberValue("dueAmount"),
-
-    billTrigger:document.getElementById("billTrigger").checked,
-    ipBillTrigger:document.getElementById("ipBillTrigger").checked,
-
-    onu:value("onu"),
-    fiber:value("fiber")
-  };
-
-  setSaving(true);
-
-  try {
-
-    const result = await sendCustomerData(payload);
-
-    const serial = result.si !== undefined && result.si !== null
-      ? " Serial Number: " + result.si + "."
-      : "";
-
-    document.getElementById("successMessage").textContent =
-      (result.message || "Customer has been added successfully.") + serial;
-
-    successPanel.classList.add("show");
-
-    showAlert(
-      "Customer information saved successfully.",
-      "success"
-    );
-
-    form.reset();
-
-    document.getElementById("createDate").value = todayLocal();
-
-    successPanel.scrollIntoView({
-      behavior:"smooth",
-      block:"center"
+    const res = await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({action:"login",password:password})
     });
 
-    /*
-      Notify the parent dashboard if it wants
-      to refresh customer-related information.
-    */
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || "Login failed.");
 
-    window.dispatchEvent(new CustomEvent(
-      "oneonline:customer-added",
-      {
-        detail:{
-          customer:payload,
-          result:result
-        }
+    sessionStorage.setItem(TOKEN_KEY,data.token);
+    return data.token;
+  }
+
+  form.addEventListener("submit",async function(e){
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Saving...";
+
+    try{
+      const token = await login();
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
+
+      data.action = "add";
+      data.token = token;
+
+      ["customerBill","ipBill","dueAmount"].forEach(k=>{
+        data[k] = Number(data[k] || 0);
+      });
+
+      const response = await fetch(API_URL,{
+        method:"POST",
+        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (!result.success){
+        if(result.unauthorized) sessionStorage.removeItem(TOKEN_KEY);
+        throw new Error(result.message || "Unable to save customer.");
       }
-    ));
 
-  } catch(error) {
+      show("Customer added successfully. Customer IP: " + data.ip,"ok");
+      form.reset();
+      root.querySelector("#acCreateDate").value = new Date().toISOString().slice(0,10);
 
-    console.error("Add customer error:",error);
+      document.dispatchEvent(new CustomEvent("oneonline:customer-added",{detail:result}));
 
-    showAlert(
-      error.message || "Unable to save customer. Please try again.",
-      "error"
-    );
-
-  } finally {
-
-    setSaving(false);
-
-  }
-
-});
-
-
-/* =====================================
-   RESET BUTTON
-===================================== */
-
-form.addEventListener("reset",function(){
-
-  setTimeout(function(){
-
-    hideAlert();
-    successPanel.classList.remove("show");
-
-    document.getElementById("createDate").value = todayLocal();
-
-  },0);
-
-});
-
-
-/* =====================================
-   PAGE RE-ENTRY SUPPORT
-===================================== */
-
-window.addEventListener("oneonline:page-loaded",function(event){
-
-  if(event.detail && event.detail.page === "add-customer") {
-
-    const dateField = document.getElementById("createDate");
-
-    if(dateField && !dateField.value) {
-      dateField.value = todayLocal();
+    }catch(err){
+      show(err.message || "Something went wrong.","err");
+    }finally{
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Save Customer";
     }
-
-  }
-
-});
-
+  });
 })();
 </script>
-
 </body>
 </html>
