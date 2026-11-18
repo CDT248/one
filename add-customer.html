@@ -7,37 +7,57 @@
 <title>Add Customer | ONE ONLINE</title>
 
 <style>
-:root{
-  --primary:#087f5b;
-  --primary-light:#e7f5ef;
-  --bg:#f4f7fb;
-  --card:#ffffff;
-  --text:#172033;
-  --muted:#718096;
-  --border:#e5eaf0;
-  --danger:#e5484d;
-  --shadow:0 4px 18px rgba(20,40,60,.05);
+/* =================================
+   ONE ONLINE CUSTOMER PAGE
+   ISOLATED CSS - NO THEME CONFLICT
+================================= */
+
+#customerApp{
+  --ca-primary:#087f5b;
+  --ca-primary-hover:#066b4c;
+  --ca-bg:#f4f7fb;
+  --ca-card:#ffffff;
+  --ca-text:#172033;
+  --ca-muted:#718096;
+  --ca-border:#e2e8f0;
+  --ca-input:#ffffff;
+  --ca-danger:#dc3545;
+
+  font-family:Arial,Helvetica,sans-serif !important;
+  background:var(--ca-bg) !important;
+  color:var(--ca-text) !important;
+  min-height:100vh;
+  padding:25px;
+  width:100%;
+  box-sizing:border-box;
+  color-scheme:light;
 }
 
-*{
-  margin:0;
-  padding:0;
+#customerApp *,
+#customerApp *::before,
+#customerApp *::after{
   box-sizing:border-box;
 }
 
-body{
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  padding:25px;
+#customerApp h1,
+#customerApp h2,
+#customerApp h3,
+#customerApp p,
+#customerApp label,
+#customerApp span,
+#customerApp td,
+#customerApp th{
+  font-family:Arial,Helvetica,sans-serif !important;
 }
 
-.container{
-  max-width:1200px;
+#customerApp .ca-container{
+  max-width:1400px;
   margin:auto;
 }
 
-.header{
+/* HEADER */
+
+#customerApp .ca-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -46,108 +66,168 @@ body{
   margin-bottom:25px;
 }
 
-.header h2{
+#customerApp .ca-header h2{
   font-size:25px;
-  margin-bottom:6px;
+  font-weight:700;
+  color:#172033 !important;
+  margin:0 0 7px;
 }
 
-.header p{
-  color:var(--muted);
+#customerApp .ca-header p{
+  color:#718096 !important;
   font-size:13px;
+  margin:0;
 }
 
-.header-tag{
-  background:var(--primary-light);
-  color:var(--primary);
-  padding:10px 16px;
-  border-radius:8px;
-  font-size:13px;
+#customerApp .ca-tag{
+  background:#e7f5ef !important;
+  color:#087f5b !important;
+  padding:10px 15px;
+  border-radius:7px;
+  font-size:12px;
   font-weight:bold;
 }
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:24px;
+/* STATISTICS */
+
+#customerApp .ca-stats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
   margin-bottom:22px;
-  box-shadow:var(--shadow);
 }
 
-.card-title{
-  font-size:17px;
-  font-weight:bold;
+#customerApp .ca-stat{
+  background:#ffffff !important;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.035);
+}
+
+#customerApp .ca-stat p{
+  color:#718096 !important;
+  font-size:12px;
+  margin:0 0 9px;
+}
+
+#customerApp .ca-stat h3{
+  color:#172033 !important;
+  font-size:25px;
+  margin:0;
+  font-weight:700;
+}
+
+/* CARDS */
+
+#customerApp .ca-card{
+  background:#ffffff !important;
+  border:1px solid #e2e8f0;
+  border-radius:11px;
+  padding:23px;
   margin-bottom:20px;
+  box-shadow:0 2px 10px rgba(0,0,0,.035);
+}
+
+#customerApp .ca-card-title{
   display:flex;
   align-items:center;
   gap:10px;
+  font-size:16px;
+  font-weight:700;
+  color:#172033 !important;
+  margin:0 0 22px;
 }
 
-.card-title span{
+#customerApp .ca-card-title::before{
+  content:"";
   width:4px;
-  height:20px;
-  background:var(--primary);
+  height:19px;
+  background:#10b981;
   border-radius:5px;
 }
 
-.form-grid{
+/* FORM GRID */
+
+#customerApp .ca-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:19px;
 }
 
-.form-group{
+#customerApp .ca-group{
   display:flex;
   flex-direction:column;
   gap:8px;
+  min-width:0;
 }
 
-.form-group label{
+#customerApp .ca-group label{
+  color:#465166 !important;
   font-size:13px;
   font-weight:600;
-  color:#465166;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea{
+#customerApp .ca-required{
+  color:#e5484d !important;
+}
+
+#customerApp .ca-group input,
+#customerApp .ca-group select,
+#customerApp .ca-group textarea{
+  display:block;
   width:100%;
-  padding:12px 13px;
-  border:1px solid var(--border);
+  min-width:0;
+  height:43px;
+  padding:10px 12px;
+
+  background:#ffffff !important;
+  background-color:#ffffff !important;
+  color:#172033 !important;
+  -webkit-text-fill-color:#172033 !important;
+
+  border:1px solid #dce3eb !important;
   border-radius:7px;
   outline:none;
-  font-size:14px;
-  background:#fff;
-  color:var(--text);
+  font-family:Arial,sans-serif !important;
+  font-size:13px;
+  box-shadow:none !important;
   transition:.2s;
+  opacity:1 !important;
+  color-scheme:light;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(8,127,91,.09);
+#customerApp .ca-group input::placeholder,
+#customerApp .ca-group textarea::placeholder{
+  color:#94a3b8 !important;
+  -webkit-text-fill-color:#94a3b8 !important;
+  opacity:1;
 }
 
-.form-group input[readonly]{
-  background:#f4f7f9;
-  color:#718096;
+#customerApp .ca-group input:focus,
+#customerApp .ca-group select:focus,
+#customerApp .ca-group textarea:focus{
+  border-color:#087f5b !important;
+  box-shadow:0 0 0 3px rgba(8,127,91,.10) !important;
 }
 
-.form-group textarea{
-  resize:vertical;
-  min-height:44px;
+#customerApp .ca-group input[readonly]{
+  background:#f1f5f9 !important;
+  color:#475569 !important;
+  -webkit-text-fill-color:#475569 !important;
 }
 
-.required{
-  color:var(--danger);
+#customerApp .ca-group input[type="date"]{
+  color-scheme:light;
 }
 
-.full{
+#customerApp .ca-full{
   grid-column:1/-1;
 }
 
-.actions{
+/* BUTTONS */
+
+#customerApp .ca-actions{
   display:flex;
   justify-content:flex-end;
   gap:10px;
@@ -155,319 +235,310 @@ body{
   flex-wrap:wrap;
 }
 
-.btn{
-  border:0;
-  padding:12px 22px;
+#customerApp .ca-btn{
+  border:0 !important;
   border-radius:7px;
-  font-weight:bold;
-  font-size:13px;
+  padding:12px 20px;
   cursor:pointer;
+  font-size:13px;
+  font-weight:700;
+  font-family:Arial,sans-serif !important;
   transition:.2s;
 }
 
-.btn-primary{
-  background:var(--primary);
-  color:white;
+#customerApp .ca-primary{
+  background:#087f5b !important;
+  color:#ffffff !important;
 }
 
-.btn-primary:hover{
-  background:#066b4c;
+#customerApp .ca-primary:hover{
+  background:#066b4c !important;
 }
 
-.btn-light{
-  background:#edf1f5;
-  color:#465166;
+#customerApp .ca-light{
+  background:#edf2f7 !important;
+  color:#334155 !important;
 }
 
-.btn-danger{
-  background:#fff0f0;
-  color:var(--danger);
+#customerApp .ca-light:hover{
+  background:#e2e8f0 !important;
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:22px;
-}
+/* CUSTOMER LIST */
 
-.stat{
-  background:white;
-  border:1px solid var(--border);
-  padding:18px;
-  border-radius:10px;
-}
-
-.stat p{
-  font-size:12px;
-  color:var(--muted);
-  margin-bottom:8px;
-}
-
-.stat h3{
-  font-size:23px;
-}
-
-.toolbar{
+#customerApp .ca-toolbar{
   display:flex;
   justify-content:space-between;
-  gap:12px;
+  align-items:center;
   flex-wrap:wrap;
+  gap:12px;
   margin-bottom:18px;
 }
 
-.search{
+#customerApp .ca-search{
+  width:100%;
   max-width:350px;
-  width:100%;
-  padding:11px 13px;
-  border:1px solid var(--border);
+  height:42px;
+  padding:10px 13px;
+  border:1px solid #dce3eb !important;
   border-radius:7px;
+  background:#ffffff !important;
+  color:#172033 !important;
+  -webkit-text-fill-color:#172033 !important;
   outline:none;
-}
-
-.table-wrap{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:950px;
-}
-
-th,td{
-  padding:14px 13px;
-  text-align:left;
-  border-bottom:1px solid var(--border);
   font-size:13px;
-  white-space:nowrap;
 }
 
-th{
-  background:#f8fafc;
-  color:#64748b;
+#customerApp .ca-search::placeholder{
+  color:#94a3b8 !important;
+}
+
+#customerApp .ca-table-wrap{
+  overflow-x:auto;
+  width:100%;
+}
+
+#customerApp table{
+  width:100%;
+  min-width:1000px;
+  border-collapse:collapse;
+  background:#ffffff !important;
+}
+
+#customerApp th,
+#customerApp td{
+  padding:14px 12px;
+  border-bottom:1px solid #e9eef4 !important;
+  text-align:left;
+  white-space:nowrap;
+  font-size:13px;
+  color:#334155 !important;
+  background:#ffffff !important;
+}
+
+#customerApp th{
+  background:#f8fafc !important;
+  color:#64748b !important;
+  font-weight:700;
   font-size:12px;
 }
 
-tbody tr:hover{
-  background:#f9fcfa;
+#customerApp tbody tr:hover td{
+  background:#f8fcfa !important;
 }
 
-.status{
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:bold;
-  background:#fff0e5;
-  color:#d97706;
-}
-
-.status.paid{
-  background:#e7f5ef;
-  color:#087f5b;
-}
-
-.table-btn{
-  border:0;
-  background:none;
+#customerApp .ca-table-btn{
+  border:0 !important;
+  background:transparent !important;
   cursor:pointer;
+  font-size:12px;
   font-weight:bold;
   padding:5px;
-  font-size:12px;
 }
 
-.edit{color:var(--primary)}
-.delete{color:var(--danger)}
+#customerApp .ca-edit{
+  color:#087f5b !important;
+}
 
-.empty{
+#customerApp .ca-delete{
+  color:#dc3545 !important;
+}
+
+#customerApp .ca-empty{
   text-align:center;
   padding:35px;
-  color:var(--muted);
+  color:#94a3b8 !important;
 }
 
-@media(max-width:800px){
-  body{padding:14px}
-  .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* RESPONSIVE */
+
+@media(max-width:850px){
+  #customerApp .ca-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
 }
 
-@media(max-width:520px){
-  .form-grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:1fr}
-  .card{padding:16px}
-  .header h2{font-size:21px}
-  .actions .btn{flex:1}
+@media(max-width:550px){
+  #customerApp{
+    padding:14px;
+  }
+
+  #customerApp .ca-grid{
+    grid-template-columns:1fr;
+  }
+
+  #customerApp .ca-stats{
+    grid-template-columns:1fr;
+  }
+
+  #customerApp .ca-card{
+    padding:16px;
+  }
+
+  #customerApp .ca-header h2{
+    font-size:21px;
+  }
+
+  #customerApp .ca-actions .ca-btn{
+    flex:1;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div id="customerApp">
+<div class="ca-container">
 
-  <div class="header">
+  <div class="ca-header">
     <div>
       <h2>Add Customer</h2>
       <p>ONE ONLINE / Customer Management</p>
     </div>
-    <div class="header-tag">CUSTOMER MODULE</div>
+    <div class="ca-tag">CUSTOMER MODULE</div>
   </div>
 
-  <div class="stats">
-    <div class="stat">
+  <div class="ca-stats">
+    <div class="ca-stat">
       <p>Total Customers</p>
-      <h3 id="totalCustomers">0</h3>
+      <h3 id="caTotal">0</h3>
     </div>
-    <div class="stat">
+
+    <div class="ca-stat">
       <p>Total Due Amount</p>
-      <h3 id="totalDue">৳0</h3>
+      <h3 id="caDue">৳0</h3>
     </div>
-    <div class="stat">
+
+    <div class="ca-stat">
       <p>Last Serial Number</p>
-      <h3 id="lastSerial">0001</h3>
+      <h3 id="caLast">0001</h3>
     </div>
   </div>
 
-  <form id="customerForm">
+  <form id="caForm">
 
-    <div class="card">
+    <div class="ca-card">
+      <div class="ca-card-title">Customer Information</div>
 
-      <div class="card-title">
-        <span></span> Customer Information
-      </div>
+      <div class="ca-grid">
 
-      <div class="form-grid">
-
-        <div class="form-group">
+        <div class="ca-group">
           <label>Serial Number</label>
-          <input id="serial" readonly>
+          <input id="caSerial" readonly>
         </div>
 
-        <div class="form-group">
-          <label>Customer Name <span class="required">*</span></label>
-          <input id="name" required placeholder="Enter customer name">
+        <div class="ca-group">
+          <label>Customer Name <span class="ca-required">*</span></label>
+          <input id="caName" required placeholder="Enter customer name">
         </div>
 
-        <div class="form-group">
-          <label>Customer IP <span class="required">*</span></label>
-          <input id="ip" required placeholder="192.168.1.100">
+        <div class="ca-group">
+          <label>Customer IP <span class="ca-required">*</span></label>
+          <input id="caIP" required placeholder="192.168.1.100">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Mobile Number</label>
-          <input id="mobile" placeholder="01XXXXXXXXX">
+          <input id="caMobile" placeholder="01XXXXXXXXX">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Email Address</label>
-          <input id="email" type="email" placeholder="customer@gmail.com">
+          <input id="caEmail" type="email" placeholder="customer@gmail.com">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Area</label>
-          <input id="area" placeholder="Enter area">
+          <input id="caArea" placeholder="Enter area">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Address</label>
-          <input id="address" placeholder="Enter full address">
+          <input id="caAddress" placeholder="Enter full address">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Location</label>
-          <input id="location" placeholder="Enter location">
+          <input id="caLocation" placeholder="Enter location">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Create Date</label>
-          <input id="createDate" type="date">
+          <input id="caCreateDate" type="date">
         </div>
 
       </div>
     </div>
 
-    <div class="card">
+    <div class="ca-card">
+      <div class="ca-card-title">Billing Information</div>
 
-      <div class="card-title">
-        <span></span> Billing Information
-      </div>
+      <div class="ca-grid">
 
-      <div class="form-grid">
-
-        <div class="form-group">
+        <div class="ca-group">
           <label>Billing Date</label>
-          <input id="billingDate" type="date">
+          <input id="caBillingDate" type="date">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Customer Bill (৳)</label>
-          <input id="customerBill" type="number" min="0" step="0.01" placeholder="0">
+          <input id="caCustomerBill" type="number" min="0" step="0.01" placeholder="0">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Internet Bill (৳)</label>
-          <input id="internetBill" type="number" min="0" step="0.01" placeholder="0">
+          <input id="caInternetBill" type="number" min="0" step="0.01" placeholder="0">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Due Amount (৳)</label>
-          <input id="dueAmount" type="number" min="0" step="0.01" placeholder="0">
+          <input id="caDueAmount" type="number" min="0" step="0.01" placeholder="0">
         </div>
 
       </div>
     </div>
 
-    <div class="card">
+    <div class="ca-card">
+      <div class="ca-card-title">Network Information</div>
 
-      <div class="card-title">
-        <span></span> Network Information
-      </div>
+      <div class="ca-grid">
 
-      <div class="form-grid">
-
-        <div class="form-group">
+        <div class="ca-group">
           <label>ONU MAC Address</label>
-          <input id="onuMac" placeholder="XX:XX:XX:XX:XX:XX">
+          <input id="caOnuMac" placeholder="XX:XX:XX:XX:XX:XX">
         </div>
 
-        <div class="form-group">
+        <div class="ca-group">
           <label>Fiber</label>
-          <input id="fiber" placeholder="Enter fiber information">
+          <input id="caFiber" placeholder="Enter fiber information">
         </div>
 
       </div>
 
-      <div class="actions">
-        <button type="reset" class="btn btn-light" id="resetBtn">
-          Reset
-        </button>
-
-        <button type="submit" class="btn btn-primary" id="saveBtn">
+      <div class="ca-actions">
+        <button type="reset" class="ca-btn ca-light">Reset</button>
+        <button type="submit" class="ca-btn ca-primary" id="caSave">
           + Add Customer
         </button>
       </div>
-
     </div>
 
   </form>
 
-  <div class="card">
+  <div class="ca-card">
 
-    <div class="card-title">
-      <span></span> Customer Records
+    <div class="ca-card-title">Customer Records</div>
+
+    <div class="ca-toolbar">
+      <input id="caSearch" class="ca-search"
+        placeholder="Search name, IP, mobile...">
+
+      <button class="ca-btn ca-light" type="button"
+        id="caExport">Export CSV</button>
     </div>
 
-    <div class="toolbar">
-      <input
-        class="search"
-        id="search"
-        placeholder="Search name, IP, mobile..."
-      >
-      <button class="btn btn-light" onclick="exportCSV()">
-        Export CSV
-      </button>
-    </div>
-
-    <div class="table-wrap">
+    <div class="ca-table-wrap">
       <table>
         <thead>
           <tr>
@@ -483,29 +554,55 @@ tbody tr:hover{
             <th>Action</th>
           </tr>
         </thead>
-
-        <tbody id="customerList"></tbody>
+        <tbody id="caList"></tbody>
       </table>
     </div>
 
   </div>
 
 </div>
+</div>
 
 <script>
+(function(){
 
-const STORAGE_KEY = "one_online_demo_customers";
+"use strict";
 
-let customers = JSON.parse(
-  localStorage.getItem(STORAGE_KEY) || "[]"
-);
+const KEY="one_online_demo_customers";
 
-let editId = null;
+const $=id=>document.getElementById(id);
 
-const $ = id => document.getElementById(id);
+let customers=[];
+
+try{
+  customers=JSON.parse(localStorage.getItem(KEY)||"[]");
+  if(!Array.isArray(customers))customers=[];
+}catch(e){
+  customers=[];
+}
+
+let editId=null;
+
+const fields={
+  serial:"caSerial",
+  name:"caName",
+  ip:"caIP",
+  mobile:"caMobile",
+  email:"caEmail",
+  area:"caArea",
+  address:"caAddress",
+  location:"caLocation",
+  createDate:"caCreateDate",
+  billingDate:"caBillingDate",
+  customerBill:"caCustomerBill",
+  internetBill:"caInternetBill",
+  dueAmount:"caDueAmount",
+  onuMac:"caOnuMac",
+  fiber:"caFiber"
+};
 
 function today(){
-  const d = new Date();
+  const d=new Date();
   return [
     d.getFullYear(),
     String(d.getMonth()+1).padStart(2,"0"),
@@ -514,144 +611,134 @@ function today(){
 }
 
 function nextSerial(){
-  return String(
-    Math.max(0,...customers.map(c=>Number(c.serial)||0))+1
-  ).padStart(4,"0");
+  const max=Math.max(0,...customers.map(c=>Number(c.serial)||0));
+  return String(max+1).padStart(4,"0");
 }
 
 function saveStorage(){
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(customers)
-  );
+  localStorage.setItem(KEY,JSON.stringify(customers));
 }
 
 function resetForm(){
-  $("customerForm").reset();
-  editId = null;
-
-  $("serial").value = nextSerial();
-  $("createDate").value = today();
-
-  $("saveBtn").textContent = "+ Add Customer";
+  $("caForm").reset();
+  editId=null;
+  $("caSerial").value=nextSerial();
+  $("caCreateDate").value=today();
+  $("caSave").textContent="+ Add Customer";
 }
 
 function render(){
 
-  const search = $("search").value.toLowerCase();
+  const search=$("caSearch").value.toLowerCase().trim();
 
-  const filtered = customers.filter(c =>
-    [
-      c.name,c.ip,c.mobile,c.email,c.area
-    ].some(v => String(v||"").toLowerCase().includes(search))
+  const filtered=customers.filter(c=>
+    [c.name,c.ip,c.mobile,c.email,c.area]
+    .some(v=>String(v||"").toLowerCase().includes(search))
   );
 
-  $("customerList").innerHTML = "";
+  const tbody=$("caList");
+  tbody.innerHTML="";
 
   if(!filtered.length){
-    $("customerList").innerHTML =
-      `<tr><td colspan="10" class="empty">No customer records found.</td></tr>`;
+    const tr=document.createElement("tr");
+    const td=document.createElement("td");
+    td.colSpan=10;
+    td.className="ca-empty";
+    td.textContent="No customer records found.";
+    tr.appendChild(td);
+    tbody.appendChild(tr);
   }
 
   filtered.forEach(c=>{
 
-    const tr = document.createElement("tr");
+    const tr=document.createElement("tr");
 
-    const values = [
+    const values=[
       c.serial,c.name,c.ip,c.mobile,c.area,
       c.billingDate,
-      "৳"+c.customerBill,
-      "৳"+c.internetBill,
-      "৳"+c.dueAmount
+      "৳"+(c.customerBill||0),
+      "৳"+(c.internetBill||0),
+      "৳"+(c.dueAmount||0)
     ];
 
-    values.forEach((value,index)=>{
-      const td = document.createElement("td");
-      td.textContent = value || "-";
+    values.forEach(v=>{
+      const td=document.createElement("td");
+      td.textContent=v||"-";
       tr.appendChild(td);
     });
 
-    const action = document.createElement("td");
+    const td=document.createElement("td");
 
-    const edit = document.createElement("button");
-    edit.className = "table-btn edit";
-    edit.textContent = "Edit";
-    edit.onclick = ()=>editCustomer(c.id);
+    const edit=document.createElement("button");
+    edit.className="ca-table-btn ca-edit";
+    edit.textContent="Edit";
+    edit.onclick=()=>editCustomer(c.id);
 
-    const del = document.createElement("button");
-    del.className = "table-btn delete";
-    del.textContent = "Delete";
-    del.onclick = ()=>deleteCustomer(c.id);
+    const del=document.createElement("button");
+    del.className="ca-table-btn ca-delete";
+    del.textContent="Delete";
+    del.onclick=()=>deleteCustomer(c.id);
 
-    action.append(edit,del);
-    tr.appendChild(action);
+    td.append(edit,del);
+    tr.appendChild(td);
 
-    $("customerList").appendChild(tr);
-
+    tbody.appendChild(tr);
   });
 
-  $("totalCustomers").textContent = customers.length;
+  $("caTotal").textContent=customers.length;
 
-  const due = customers.reduce(
+  const totalDue=customers.reduce(
     (sum,c)=>sum+(Number(c.dueAmount)||0),0
   );
 
-  $("totalDue").textContent = "৳"+due.toLocaleString();
+  $("caDue").textContent="৳"+totalDue.toLocaleString();
 
-  $("lastSerial").textContent = nextSerial();
-
+  $("caLast").textContent=nextSerial();
 }
 
-$("customerForm").addEventListener("submit",function(e){
+$("caForm").addEventListener("submit",function(e){
 
   e.preventDefault();
 
-  const customer = {
-    id:editId || Date.now(),
-    serial:$("serial").value,
-    name:$("name").value.trim(),
-    ip:$("ip").value.trim(),
-    mobile:$("mobile").value.trim(),
-    email:$("email").value.trim(),
-    area:$("area").value.trim(),
-    address:$("address").value.trim(),
-    location:$("location").value.trim(),
-    createDate:$("createDate").value,
-    billingDate:$("billingDate").value,
-    customerBill:Number($("customerBill").value)||0,
-    internetBill:Number($("internetBill").value)||0,
-    dueAmount:Number($("dueAmount").value)||0,
-    onuMac:$("onuMac").value.trim(),
-    fiber:$("fiber").value.trim()
-  };
+  const c={id:editId||Date.now()};
 
-  if(!customer.name || !customer.ip){
+  Object.keys(fields).forEach(key=>{
+    const el=$(fields[key]);
+    c[key]=el.value.trim();
+
+    if(["customerBill","internetBill","dueAmount"].includes(key)){
+      c[key]=Number(el.value)||0;
+    }
+  });
+
+  if(!c.name||!c.ip){
     alert("Customer Name and IP are required!");
     return;
   }
 
-  if(customers.some(c=>
-    c.ip.toLowerCase()===customer.ip.toLowerCase() &&
-    c.id!==editId
-  )){
+  const duplicate=customers.some(x=>
+    String(x.ip).toLowerCase()===c.ip.toLowerCase() &&
+    x.id!==editId
+  );
+
+  if(duplicate){
     alert("This Customer IP already exists!");
     return;
   }
 
   if(editId){
-    customers=customers.map(c=>
-      c.id===editId ? customer : c
-    );
+    customers=customers.map(x=>x.id===editId?c:x);
   }else{
-    customers.push(customer);
+    customers.push(c);
   }
+
+  const wasEdit=Boolean(editId);
 
   saveStorage();
   render();
   resetForm();
 
-  alert(editId ? "Customer Updated Successfully!" :
-                   "Customer Added Successfully!");
+  alert(wasEdit?"Customer Updated Successfully!":"Customer Added Successfully!");
 
 });
 
@@ -662,13 +749,16 @@ function editCustomer(id){
 
   editId=id;
 
-  Object.keys(c).forEach(key=>{
-    if($(key)) $(key).value=c[key];
+  Object.keys(fields).forEach(key=>{
+    $(fields[key]).value=c[key]??"";
   });
 
-  $("saveBtn").textContent="Update Customer";
+  $("caSave").textContent="Update Customer";
 
-  window.scrollTo({top:0,behavior:"smooth"});
+  $("caForm").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
 }
 
 function deleteCustomer(id){
@@ -680,33 +770,30 @@ function deleteCustomer(id){
   saveStorage();
   render();
   resetForm();
-
 }
 
-$("search").addEventListener("input",render);
+$("caSearch").addEventListener("input",render);
 
-$("resetBtn").addEventListener("click",()=>{
-  setTimeout(resetForm,0);
+$("caForm").addEventListener("reset",function(){
+  setTimeout(()=>{
+    if(!editId)resetForm();
+  },0);
 });
 
-function exportCSV(){
+$("caExport").addEventListener("click",function(){
 
   if(!customers.length){
     alert("No customers to export!");
     return;
   }
 
-  const headers=[
-    "Serial","Customer Name","Customer IP",
-    "Mobile","Email","Area","Address","Location",
-    "Create Date","Billing Date","Customer Bill",
-    "Internet Bill","Due Amount","ONU MAC","Fiber"
-  ];
+  const keys=Object.keys(fields);
 
-  const keys=[
-    "serial","name","ip","mobile","email","area",
-    "address","location","createDate","billingDate",
-    "customerBill","internetBill","dueAmount","onuMac","fiber"
+  const headers=[
+    "Serial","Customer Name","Customer IP","Mobile",
+    "Email","Area","Address","Location","Create Date",
+    "Billing Date","Customer Bill","Internet Bill",
+    "Due Amount","ONU MAC","Fiber"
   ];
 
   const rows=[
@@ -716,23 +803,27 @@ function exportCSV(){
 
   const csv="\uFEFF"+rows.map(row=>
     row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")
-  ).join("\n");
+  ).join("\r\n");
 
-  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const blob=new Blob([csv],{
+    type:"text/csv;charset=utf-8;"
+  });
+
   const url=URL.createObjectURL(blob);
-
   const a=document.createElement("a");
+
   a.href=url;
   a.download="ONE-ONLINE-Customers.csv";
   a.click();
 
   URL.revokeObjectURL(url);
 
-}
+});
 
 resetForm();
 render();
 
+})();
 </script>
 
 </body>
