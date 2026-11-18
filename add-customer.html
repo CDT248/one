@@ -1,812 +1,207 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONE ONLINE | Customer Management</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ONE ONLINE | Add Customer</title>
 <style>
 :root{
-  --oo-primary:var(--primary,#087f5b);
-  --oo-bg:var(--bg,#f7f9fc);
-  --oo-card:var(--card,#fff);
-  --oo-text:var(--text,#172033);
-  --oo-muted:var(--muted,#718096);
-  --oo-border:var(--border,#e5e7eb);
-  --oo-hover:var(--hover,#f1f5f9);
-  --oo-shadow:var(--shadow,0 3px 12px #0000000a);
+ --bg:#0d1422;--panel:#151f30;--panel2:#1b293d;--border:#293950;
+ --text:#f3f6fc;--muted:#91a1b8;--primary:#16a477;--primary2:#0d805d;
+ --danger:#ef5350;--gold:#f5b942;--input:#101b2c;
 }
-.oo-page{width:100%;min-height:100vh;padding:22px;background:var(--oo-bg);color:var(--oo-text);font-family:Arial,sans-serif}
-.oo-page *{box-sizing:border-box}
-.oo-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;margin-bottom:22px}
-.oo-brand{display:flex;align-items:center;gap:12px}
-.oo-brand-logo{width:48px;height:48px;border-radius:13px;background:var(--oo-primary);color:white;display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:900}
-.oo-brand h2{font-size:22px;margin:0 0 5px;font-weight:800}
-.oo-brand p{font-size:11px;color:var(--oo-muted);margin:0}
-.oo-header-tag{padding:10px 14px;border:1px solid var(--oo-border);border-radius:8px;color:var(--oo-primary);background:var(--oo-hover);font-size:11px;font-weight:800}
-.oo-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}
-.oo-stat,.oo-card{background:var(--oo-card);border:1px solid var(--oo-border);border-radius:11px;box-shadow:var(--oo-shadow)}
-.oo-stat{padding:17px}
-.oo-stat-label{font-size:12px;color:var(--oo-muted);margin-bottom:10px}
-.oo-stat-value{font-size:23px;font-weight:800;overflow-wrap:anywhere}
-.oo-stat-icon{float:right;font-size:21px}
-.oo-card{padding:20px;margin-bottom:18px}
-.oo-card-title{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:800;margin:0 0 18px}
-.oo-card-title:before{content:"";width:4px;height:19px;border-radius:5px;background:var(--oo-primary)}
-.oo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.oo-field{display:flex;flex-direction:column;gap:7px;min-width:0}
-.oo-field label{font-size:12px;font-weight:700}
-.oo-field input,.oo-field select,.oo-field textarea,.oo-search{
-  width:100%;min-height:42px;padding:10px 12px;border:1px solid var(--oo-border);
-  border-radius:7px;outline:none;background:var(--oo-bg);color:var(--oo-text);font-size:13px
-}
-.oo-field textarea{height:75px;resize:vertical}
-.oo-field input:focus,.oo-field select:focus,.oo-field textarea:focus,.oo-search:focus{border-color:var(--oo-primary)}
-.oo-field input[readonly]{background:var(--oo-hover);color:var(--oo-muted)}
-.oo-full{grid-column:1/-1}
-.oo-required{color:#ef4444}
-.oo-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:9px;margin-top:20px}
-.oo-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 15px;border:1px solid transparent;border-radius:7px;cursor:pointer;font-size:12px;font-weight:750}
-.oo-btn:disabled{opacity:.55;cursor:not-allowed}
-.oo-btn-primary{background:var(--oo-primary);color:white}
-.oo-btn-light{background:var(--oo-hover);color:var(--oo-text);border-color:var(--oo-border)}
-.oo-btn-danger{background:#dc2626;color:white}
-.oo-btn-success{background:#16a34a;color:white}
-.oo-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.oo-tab{padding:10px 14px;border:1px solid var(--oo-border);border-radius:7px;background:var(--oo-card);color:var(--oo-text);font-size:12px;font-weight:750;cursor:pointer}
-.oo-tab.active{background:var(--oo-primary);border-color:var(--oo-primary);color:white}
-.oo-panel{display:none}
-.oo-panel.active{display:block}
-.oo-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:15px}
-.oo-search{max-width:350px}
-.oo-table-wrap{width:100%;overflow-x:auto;border:1px solid var(--oo-border);border-radius:8px}
-.oo-table{width:100%;min-width:900px;border-collapse:collapse;background:var(--oo-card)}
-.oo-table th,.oo-table td{padding:12px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--oo-border);font-size:12px;color:var(--oo-text)}
-.oo-table th{background:var(--oo-hover);color:var(--oo-muted);font-size:11px;font-weight:800}
-.oo-table tbody tr:hover td{background:var(--oo-hover)}
-.oo-table tbody tr:last-child td{border-bottom:0}
-.oo-empty{text-align:center!important;padding:35px!important;color:var(--oo-muted)!important}
-.oo-count{display:inline-block;background:var(--oo-hover);color:var(--oo-primary);border-radius:20px;padding:5px 9px;font-size:11px}
-.oo-table-btn{border:0;background:transparent;padding:5px;cursor:pointer;font-size:12px;font-weight:750}
-.oo-edit{color:var(--oo-primary)}
-.oo-delete{color:#dc2626}
-.oo-restore{color:#16a34a}
-.oo-notice{padding:12px;border:1px solid var(--oo-border);background:var(--oo-hover);border-radius:7px;color:var(--oo-muted);font-size:12px;line-height:1.6;margin-bottom:15px}
-
-/* CUSTOM POPUPS */
-.oo-overlay{display:none;position:fixed;inset:0;z-index:999999;background:#101827a8;backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:16px}
-.oo-overlay.show{display:flex}
-.oo-modal{width:100%;max-width:390px;padding:27px 23px 22px;background:var(--oo-card);color:var(--oo-text);border:1px solid var(--oo-border);border-radius:18px;text-align:center;box-shadow:0 20px 65px #0004;animation:ooPop .22s ease}
-@keyframes ooPop{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-.oo-modal-logo{width:53px;height:53px;margin:0 auto 14px;border-radius:15px;background:var(--oo-primary);color:white;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900}
-.oo-modal-icon{width:65px;height:65px;margin:0 auto 14px;border-radius:50%;background:#dcfce7;color:#16a34a;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900}
-.oo-modal-icon.error{background:#fee2e2;color:#dc2626}
-.oo-modal-icon.warning{background:#fef3c7;color:#d97706}
-.oo-modal-icon.info{background:#dbeafe;color:#2563eb}
-.oo-modal h3{font-size:21px;margin:0 0 9px;font-weight:800}
-.oo-modal p{font-size:13px;line-height:1.65;color:var(--oo-muted);margin:0 auto 21px;overflow-wrap:anywhere}
-.oo-modal-actions{display:flex;justify-content:center;gap:10px}
-.oo-modal-actions .oo-btn{min-width:110px}
-.oo-amount-input{width:100%;height:48px;padding:12px;margin:0 0 18px;border:1px solid var(--oo-border);border-radius:8px;background:var(--oo-bg);color:var(--oo-text);font-size:17px;outline:none}
-.oo-amount-input:focus{border-color:var(--oo-primary)}
-.oo-toast-container{position:fixed;top:18px;right:18px;z-index:1000000;width:min(360px,calc(100vw - 30px));display:flex;flex-direction:column;gap:10px;pointer-events:none}
-.oo-toast{display:flex;align-items:center;gap:11px;padding:13px;background:var(--oo-card);border:1px solid var(--oo-border);border-left:4px solid #16a34a;border-radius:10px;box-shadow:0 8px 28px #0002;color:var(--oo-text);animation:ooToastIn .2s ease}
-.oo-toast.error{border-left-color:#dc2626}
-.oo-toast.warning{border-left-color:#d97706}
-.oo-toast-icon{width:34px;height:34px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#dcfce7;color:#16a34a;font-weight:900;font-size:18px}
-.oo-toast.error .oo-toast-icon{background:#fee2e2;color:#dc2626}
-.oo-toast.warning .oo-toast-icon{background:#fef3c7;color:#d97706}
-.oo-toast-content strong{display:block;font-size:13px;margin-bottom:4px}
-.oo-toast-content span{font-size:11px;line-height:1.5;color:var(--oo-muted)}
-@keyframes ooToastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-
-@media(max-width:950px){.oo-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.oo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){
- .oo-page{padding:12px}.oo-brand h2{font-size:19px}.oo-stats{gap:9px}.oo-stat{padding:12px}.oo-stat-value{font-size:19px}
- .oo-grid{grid-template-columns:1fr}.oo-card{padding:14px}.oo-actions{flex-direction:column-reverse}.oo-actions .oo-btn{width:100%}
- .oo-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.oo-tab{width:100%}
- .oo-toolbar{align-items:stretch}.oo-search{max-width:none}
- .oo-modal{padding:23px 17px}.oo-modal-actions .oo-btn{min-width:0;flex:1}
- .oo-toast-container{top:9px;right:9px}
-}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;font-size:14px}
+button,input,select,textarea{font:inherit}
+.topbar{height:76px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:#111b2b;position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:13px}
+.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(145deg,#20c997,#087f5b);display:grid;place-items:center;font-size:27px;font-weight:900;color:white;box-shadow:0 5px 18px #16a47735}
+.brand h1{font-size:20px;margin:0;font-weight:850;letter-spacing:.3px}
+.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.top-right{font-size:11px;font-weight:800;color:#aabbd1;letter-spacing:.8px}
+.container{max-width:1150px;margin:28px auto;padding:0 22px 45px}
+.page-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}
+.page-heading h2{margin:0;font-size:23px}
+.page-heading p{color:var(--muted);font-size:12px;margin:7px 0 0}
+.btn{border:0;border-radius:8px;padding:11px 16px;cursor:pointer;font-size:12px;font-weight:800;transition:.2s}
+.btn-primary{background:var(--primary);color:white}.btn-primary:hover{background:var(--primary2)}
+.btn-secondary{background:#26364d;color:#e5edf8;border:1px solid var(--border)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:22px;margin-bottom:18px;box-shadow:0 8px 25px #00000012}
+.card-heading{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:850;margin:0 0 21px}
+.card-heading:before{content:"";height:20px;width:4px;background:var(--primary);border-radius:5px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 17px}
+.field{min-width:0}
+.field label{display:block;font-size:12px;font-weight:750;color:#dbe5f2;margin-bottom:8px}
+.req{color:#ff7373}
+.field input,.field select,.field textarea{width:100%;height:43px;background:var(--input);border:1px solid #31425a;border-radius:8px;color:var(--text);padding:0 12px;outline:none}
+.field textarea{height:85px;padding:11px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px #16a4771a}
+.field input::placeholder,.field textarea::placeholder{color:#71839d}
+.field input[readonly]{color:#a7b6ca;background:#172438}
+.full{grid-column:1/-1}
+.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
+.note{background:#102d2a;border:1px solid #1d6654;color:#a9e7d3;padding:12px 14px;border-radius:8px;font-size:12px;line-height:1.6;margin-bottom:18px}
+.footer{text-align:center;color:#61738d;font-size:11px;padding:20px}
+.overlay{display:none;position:fixed;inset:0;background:#030914c9;z-index:100;align-items:center;justify-content:center;padding:18px}
+.overlay.show{display:flex}
+.modal{width:100%;max-width:390px;background:#172438;border:1px solid #34465f;border-radius:17px;padding:27px;text-align:center;box-shadow:0 25px 80px #0009}
+.modal-logo{width:54px;height:54px;margin:0 auto 15px;border-radius:16px;background:linear-gradient(145deg,#20c997,#087f5b);display:grid;place-items:center;font-size:31px;font-weight:900}
+.modal-icon{width:58px;height:58px;margin:0 auto 14px;border-radius:50%;background:#123e34;color:#37d6a4;display:grid;place-items:center;font-size:30px;font-weight:900}
+.modal-icon.error{background:#492426;color:#ff7777}
+.modal h3{margin:0 0 8px;font-size:20px}
+.modal p{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 20px}
+.modal .btn{min-width:120px}
+.toast-wrap{position:fixed;right:18px;top:90px;z-index:200;display:grid;gap:9px;width:min(350px,calc(100% - 36px))}
+.toast{padding:14px;background:#172438;border:1px solid #34465f;border-left:4px solid var(--primary);border-radius:9px;box-shadow:0 10px 30px #0006;display:flex;gap:11px;align-items:center;animation:appear .2s ease}
+.toast.error{border-left-color:var(--danger)}
+.toast-icon{width:30px;height:30px;border-radius:50%;background:#123e34;color:#37d6a4;display:grid;place-items:center;font-weight:900}
+.toast.error .toast-icon{background:#492426;color:#ff7777}
+.toast strong{display:block;font-size:12px;margin-bottom:4px}.toast span{font-size:11px;color:var(--muted)}
+@keyframes appear{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.container{margin:20px auto;padding:0 14px 30px}}
+@media(max-width:520px){.topbar{padding:0 14px;height:68px}.brand h1{font-size:17px}.top-right{display:none}.grid{grid-template-columns:1fr}.card{padding:16px}.page-heading h2{font-size:20px}.form-actions{flex-direction:column-reverse}.form-actions .btn{width:100%}}
 </style>
 </head>
-
 <body>
-<div class="oo-page">
-
-<header class="oo-header">
-  <div class="oo-brand">
-    <div class="oo-brand-logo">◎</div>
-    <div><h2>ONE ONLINE</h2><p>Customer Management System</p></div>
-  </div>
-  <div class="oo-header-tag">CUSTOMER MANAGEMENT</div>
+<header class="topbar">
+ <div class="brand"><div class="logo">◎</div><div><h1>ONE ONLINE</h1><small>Customer Management System</small></div></div>
+ <div class="top-right">ADD NEW CUSTOMER</div>
 </header>
 
-<div class="oo-stats">
-  <div class="oo-stat"><span class="oo-stat-icon">👥</span><div class="oo-stat-label">Total Customers</div><div class="oo-stat-value" id="ooTotal">0</div></div>
-  <div class="oo-stat"><span class="oo-stat-icon">💰</span><div class="oo-stat-label">Total Due Amount</div><div class="oo-stat-value" id="ooTotalDue">৳0</div></div>
-  <div class="oo-stat"><span class="oo-stat-icon">🗑️</span><div class="oo-stat-label">Deleted Customers</div><div class="oo-stat-value" id="ooDeletedTotal">0</div></div>
-  <div class="oo-stat"><span class="oo-stat-icon">🔢</span><div class="oo-stat-label">Next Serial Number</div><div class="oo-stat-value" id="ooSerialStat">0001</div></div>
+<main class="container">
+ <div class="page-heading">
+  <div><h2>Add New Customer</h2><p>Create and save a customer account in your network database.</p></div>
+  <a href="customer-list.html"><button class="btn btn-secondary" type="button">☷ Customer List</button></a>
+ </div>
+
+ <form id="customerForm">
+  <section class="card">
+   <h3 class="card-heading">Customer Information</h3>
+   <div class="grid">
+    <div class="field"><label>Serial Number</label><input id="si" readonly placeholder="Auto generated"></div>
+    <div class="field"><label>Customer Name <span class="req">*</span></label><input id="name" required placeholder="Enter customer name"></div>
+    <div class="field"><label>Customer IP <span class="req">*</span></label><input id="ip" required placeholder="192.168.1.100"></div>
+    <div class="field"><label>Mobile Number</label><input id="phone" placeholder="01XXXXXXXXX"></div>
+    <div class="field"><label>Email Address</label><input id="email" type="email" placeholder="customer@gmail.com"></div>
+    <div class="field"><label>Area</label><input id="area" placeholder="Customer area"></div>
+    <div class="field"><label>Address</label><input id="address" placeholder="Full address"></div>
+    <div class="field"><label>Location</label><input id="location" placeholder="Location details"></div>
+    <div class="field"><label>Create Date</label><input id="createDate" type="date"></div>
+    <div class="field full"><label>Customer Reason / Note</label><textarea id="reason" placeholder="Customer information or note"></textarea></div>
+   </div>
+  </section>
+
+  <section class="card">
+   <h3 class="card-heading">Billing Information</h3>
+   <div class="grid">
+    <div class="field"><label>Billing Date</label><input id="billingDate" type="date"></div>
+    <div class="field"><label>Customer Bill (৳)</label><input id="customerBill" type="number" min="0" step="0.01" placeholder="0"></div>
+    <div class="field"><label>Internet Bill (৳)</label><input id="ipBill" type="number" min="0" step="0.01" placeholder="0"></div>
+    <div class="field"><label>Opening Due Amount (৳)</label><input id="dueAmount" type="number" min="0" step="0.01" value="0"></div>
+    <div class="field"><label>Bill Trigger</label><select id="billTrigger"><option value="">Not Set</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
+    <div class="field"><label>IP Bill Trigger</label><select id="ipBillTrigger"><option value="">Not Set</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
+   </div>
+  </section>
+
+  <section class="card">
+   <h3 class="card-heading">Network Information</h3>
+   <div class="grid">
+    <div class="field"><label>ONU MAC Address</label><input id="onu" placeholder="XX:XX:XX:XX:XX:XX"></div>
+    <div class="field"><label>Fiber Information</label><input id="fiber" placeholder="Fiber details"></div>
+   </div>
+   <div class="form-actions">
+    <button type="reset" class="btn btn-secondary" id="resetBtn">↺ Reset Form</button>
+    <button type="submit" class="btn btn-primary" id="saveBtn">＋ Save Customer</button>
+   </div>
+  </section>
+ </form>
+ <div class="footer">ONE ONLINE · Customer Management System</div>
+</main>
+
+<div class="overlay" id="messageOverlay">
+ <div class="modal">
+  <div class="modal-logo">◎</div><div class="modal-icon" id="messageIcon">✓</div>
+  <h3 id="messageTitle">Success!</h3><p id="messageText"></p>
+  <button class="btn btn-primary" id="messageOK">Continue</button>
+ </div>
 </div>
-
-<div class="oo-tabs">
-  <button class="oo-tab active" data-tab="active">👥 Active Customers</button>
-  <button class="oo-tab" data-tab="deleted">🗑️ Deleted Customers</button>
-  <button class="oo-tab" data-tab="due">💰 Due Entries</button>
-  <button class="oo-tab" data-tab="history">📜 Customer History</button>
-</div>
-
-<!-- ACTIVE CUSTOMERS -->
-<section class="oo-panel active" id="oo-panel-active">
-<form id="ooCustomerForm">
-  <div class="oo-card">
-    <h3 class="oo-card-title">Customer Information</h3>
-    <div class="oo-grid">
-      <div class="oo-field"><label>Serial Number</label><input id="ooSI" readonly></div>
-      <div class="oo-field"><label>Customer Name <span class="oo-required">*</span></label><input id="ooName" required placeholder="Customer name"></div>
-      <div class="oo-field"><label>Customer IP <span class="oo-required">*</span></label><input id="ooIP" required placeholder="192.168.1.100"></div>
-      <div class="oo-field"><label>Mobile Number</label><input id="ooPhone" placeholder="01XXXXXXXXX"></div>
-      <div class="oo-field"><label>Email Address</label><input id="ooEmail" type="email" placeholder="customer@gmail.com"></div>
-      <div class="oo-field"><label>Area</label><input id="ooArea" placeholder="Area"></div>
-      <div class="oo-field"><label>Address</label><input id="ooAddress" placeholder="Full address"></div>
-      <div class="oo-field"><label>Location</label><input id="ooLocation" placeholder="Location"></div>
-      <div class="oo-field"><label>Create Date</label><input id="ooCreateDate" type="date"></div>
-      <div class="oo-field oo-full"><label>Customer Reason / Note</label><input id="ooReason" placeholder="Customer information or note"></div>
-    </div>
-  </div>
-
-  <div class="oo-card">
-    <h3 class="oo-card-title">Billing Information</h3>
-    <div class="oo-grid">
-      <div class="oo-field"><label>Billing Date</label><input id="ooBillingDate" type="date"></div>
-      <div class="oo-field"><label>Customer Bill (৳)</label><input id="ooCustomerBill" type="number" min="0" step="0.01" placeholder="0"></div>
-      <div class="oo-field"><label>Internet Bill (৳)</label><input id="ooIPBill" type="number" min="0" step="0.01" placeholder="0"></div>
-      <div class="oo-field"><label>Due Amount (৳)</label><input id="ooDueAmount" type="number" min="0" step="0.01" placeholder="0"></div>
-      <div class="oo-field"><label>Bill Trigger</label><select id="ooBillTrigger"><option value="">Optional - Not Set</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
-      <div class="oo-field"><label>IP Bill Trigger</label><select id="ooIPBillTrigger"><option value="">Optional - Not Set</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
-    </div>
-  </div>
-
-  <div class="oo-card">
-    <h3 class="oo-card-title">Network Information</h3>
-    <div class="oo-grid">
-      <div class="oo-field"><label>ONU MAC Address</label><input id="ooONU" placeholder="XX:XX:XX:XX:XX:XX"></div>
-      <div class="oo-field"><label>Fiber</label><input id="ooFiber" placeholder="Fiber information"></div>
-    </div>
-    <div class="oo-actions">
-      <button type="button" class="oo-btn oo-btn-light" id="ooReset">↺ Reset</button>
-      <button type="submit" class="oo-btn oo-btn-primary" id="ooSave">＋ Add Customer</button>
-    </div>
-  </div>
-</form>
-
-<div class="oo-card">
-  <h3 class="oo-card-title">Active Customer Records <span class="oo-count" id="ooCustomerCount">0 Records</span></h3>
-  <div class="oo-toolbar">
-    <input class="oo-search" id="ooSearch" type="search" placeholder="Search name, IP, mobile, email...">
-    <button class="oo-btn oo-btn-light" id="ooExport">↓ Export CSV</button>
-    <button class="oo-btn oo-btn-light" id="ooRefresh">↻ Refresh</button>
-  </div>
-  <div class="oo-table-wrap">
-    <table class="oo-table">
-      <thead><tr><th>Serial</th><th>Name</th><th>IP</th><th>Mobile</th><th>Area</th><th>Billing Date</th><th>Customer Bill</th><th>Internet Bill</th><th>Due</th><th>Actions</th></tr></thead>
-      <tbody id="ooCustomerRows"><tr><td colspan="10" class="oo-empty">Loading...</td></tr></tbody>
-    </table>
-  </div>
-</div>
-</section>
-
-<!-- DELETED CUSTOMERS -->
-<section class="oo-panel" id="oo-panel-deleted">
-<div class="oo-card">
-  <h3 class="oo-card-title">Deleted Customers <span class="oo-count" id="ooDeletedCount">0 Records</span></h3>
-  <div class="oo-toolbar">
-    <input class="oo-search" id="ooDeletedSearch" type="search" placeholder="Search deleted customers...">
-    <button class="oo-btn oo-btn-light" id="ooDeletedRefresh">↻ Refresh</button>
-  </div>
-  <div class="oo-table-wrap">
-    <table class="oo-table">
-      <thead><tr><th>Serial</th><th>Name</th><th>IP</th><th>Mobile</th><th>Due</th><th>Deleted Date</th><th>Actions</th></tr></thead>
-      <tbody id="ooDeletedRows"><tr><td colspan="7" class="oo-empty">Loading...</td></tr></tbody>
-    </table>
-  </div>
-</div>
-</section>
-
-<!-- DUE ENTRIES -->
-<section class="oo-panel" id="oo-panel-due">
-<div class="oo-card">
-  <h3 class="oo-card-title">Add New Due Entry</h3>
-  <div class="oo-notice">Due From, Due Amount এবং Due Reason আবশ্যক। Bill Trigger ঐচ্ছিক। Due Entry যোগ করলে Customer-এর Total Due Amount বাড়বে।</div>
-  <form id="ooDueForm">
-    <div class="oo-grid">
-      <div class="oo-field oo-full"><label>Select Customer <span class="oo-required">*</span></label><select id="ooDueCustomer" required><option value="">Select Customer</option></select></div>
-      <div class="oo-field"><label>Due From <span class="oo-required">*</span></label><input id="ooDueFrom" required placeholder="Example: October 2026"></div>
-      <div class="oo-field"><label>Due Amount (৳) <span class="oo-required">*</span></label><input id="ooDueEntryAmount" type="number" min="0.01" step="0.01" required placeholder="Enter amount"></div>
-      <div class="oo-field"><label>Bill Trigger (Optional)</label><select id="ooDueTrigger"><option value="">Not Set</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
-      <div class="oo-field oo-full"><label>Due Reason <span class="oo-required">*</span></label><textarea id="ooDueReason" required placeholder="Why was this due added?"></textarea></div>
-      <div class="oo-field oo-full"><label>Additional Notes</label><textarea id="ooDueNotes" placeholder="Optional notes"></textarea></div>
-    </div>
-    <div class="oo-actions"><button class="oo-btn oo-btn-primary" type="submit" id="ooDueSave">＋ Add Due Entry</button></div>
-  </form>
-</div>
-<div class="oo-card">
-  <h3 class="oo-card-title">Due Entry Records <span class="oo-count" id="ooDueCount">0 Records</span></h3>
-  <div class="oo-toolbar">
-    <input class="oo-search" id="ooDueSearch" type="search" placeholder="Search customer, IP, reason...">
-    <button class="oo-btn oo-btn-light" id="ooDueRefresh">↻ Refresh</button>
-  </div>
-  <div class="oo-table-wrap">
-    <table class="oo-table">
-      <thead><tr><th>Date</th><th>Customer</th><th>IP</th><th>Due From</th><th>Amount</th><th>Reason</th><th>Status</th></tr></thead>
-      <tbody id="ooDueRows"><tr><td colspan="7" class="oo-empty">Loading...</td></tr></tbody>
-    </table>
-  </div>
-</div>
-</section>
-
-<!-- CUSTOMER HISTORY -->
-<section class="oo-panel" id="oo-panel-history">
-<div class="oo-card">
-  <h3 class="oo-card-title">Customer History Log <span class="oo-count" id="ooHistoryCount">0 Records</span></h3>
-  <div class="oo-toolbar">
-    <input class="oo-search" id="ooHistorySearch" type="search" placeholder="Search name, IP, action, field...">
-    <button class="oo-btn oo-btn-light" id="ooHistoryRefresh">↻ Refresh</button>
-  </div>
-  <div class="oo-table-wrap">
-    <table class="oo-table">
-      <thead><tr><th>Date</th><th>Customer</th><th>IP</th><th>Action</th><th>Field</th><th>Old Value</th><th>New Value</th><th>Amount</th><th>Due From</th><th>Due Reason</th><th>Description</th></tr></thead>
-      <tbody id="ooHistoryRows"><tr><td colspan="11" class="oo-empty">Loading...</td></tr></tbody>
-    </table>
-  </div>
-</div>
-</section>
-
-</div>
-
-<!-- CUSTOM MESSAGE MODAL -->
-<div class="oo-overlay" id="ooMessageOverlay">
-  <div class="oo-modal">
-    <div class="oo-modal-logo">◎</div>
-    <div class="oo-modal-icon" id="ooMessageIcon">✓</div>
-    <h3 id="ooMessageTitle">Success!</h3>
-    <p id="ooMessageText">Operation completed successfully.</p>
-    <div class="oo-modal-actions">
-      <button class="oo-btn oo-btn-light" id="ooMessageCancel">Cancel</button>
-      <button class="oo-btn oo-btn-primary" id="ooMessageOK">Continue</button>
-    </div>
-  </div>
-</div>
-
-<!-- COLLECT AMOUNT MODAL -->
-<div class="oo-overlay" id="ooAmountOverlay">
-  <div class="oo-modal">
-    <div class="oo-modal-logo">◎</div>
-    <div class="oo-modal-icon">৳</div>
-    <h3>Collect Payment</h3>
-    <p id="ooAmountCustomer">Enter payment amount</p>
-    <input class="oo-amount-input" id="ooAmountInput" type="number" min="0.01" step="0.01" placeholder="Enter amount">
-    <div class="oo-modal-actions">
-      <button class="oo-btn oo-btn-light" id="ooAmountCancel">Cancel</button>
-      <button class="oo-btn oo-btn-primary" id="ooAmountOK">Continue</button>
-    </div>
-  </div>
-</div>
-
-<div class="oo-toast-container" id="ooToastContainer"></div>
+<div class="toast-wrap" id="toastWrap"></div>
 
 <script>
-(function(){
 "use strict";
-
-/* =====================================
-   CONFIGURATION
-===================================== */
 const API_URL="https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
-
 const $=id=>document.getElementById(id);
-let customers=[],deletedCustomers=[],dueEntries=[],historyEntries=[];
-let editId=null,busy=false;
+let busy=false;
 
-/* =====================================
-   CUSTOM SUCCESS / ERROR / CONFIRM
-===================================== */
-function ooToast(type,title,message){
-  const container=$("ooToastContainer");
-  const toast=document.createElement("div");
-  toast.className="oo-toast "+(type==="error"?"error":type==="warning"?"warning":"");
-  const icon=document.createElement("div");
-  icon.className="oo-toast-icon";
-  icon.textContent=type==="error"?"✕":type==="warning"?"!":"✓";
-  const content=document.createElement("div");
-  content.className="oo-toast-content";
-  const strong=document.createElement("strong");
-  strong.textContent=title;
-  const span=document.createElement("span");
-  span.textContent=message;
-  content.append(strong,span);
-  toast.append(icon,content);
-  container.appendChild(toast);
-  setTimeout(()=>{toast.style.opacity="0";toast.style.transform="translateX(20px)";setTimeout(()=>toast.remove(),250)},3500);
+function toast(type,title,message){
+ const box=document.createElement("div");box.className="toast "+(type==="error"?"error":"");
+ const ico=document.createElement("div");ico.className="toast-icon";ico.textContent=type==="error"?"×":"✓";
+ const content=document.createElement("div");const strong=document.createElement("strong");strong.textContent=title;
+ const span=document.createElement("span");span.textContent=message;content.append(strong,span);box.append(ico,content);$("toastWrap").append(box);
+ setTimeout(()=>box.remove(),3800);
 }
-function ooSuccess(message,title="Successful!"){ooToast("success",title,message)}
-function ooError(message,title="Operation Failed"){ooToast("error",title,message)}
-function ooWarning(message,title="Warning!"){ooToast("warning",title,message)}
-
-function ooConfirm(message,title="Are you sure?"){
-  return new Promise(resolve=>{
-    const overlay=$("ooMessageOverlay"),icon=$("ooMessageIcon");
-    const ok=$("ooMessageOK"),cancel=$("ooMessageCancel");
-    $("ooMessageTitle").textContent=title;
-    $("ooMessageText").textContent=message;
-    icon.className="oo-modal-icon warning";
-    icon.textContent="!";
-    ok.textContent="Yes, Continue";
-    cancel.style.display="inline-block";
-    overlay.classList.add("show");
-    function finish(v){
-      overlay.classList.remove("show");
-      ok.removeEventListener("click",yes);
-      cancel.removeEventListener("click",no);
-      resolve(v);
-    }
-    function yes(){finish(true)}
-    function no(){finish(false)}
-    ok.addEventListener("click",yes);
-    cancel.addEventListener("click",no);
-  });
+function message(type,title,text){
+ return new Promise(resolve=>{
+  const overlay=$("messageOverlay"),icon=$("messageIcon"),btn=$("messageOK");
+  $("messageTitle").textContent=title;$("messageText").textContent=text;
+  icon.className="modal-icon"+(type==="error"?" error":"");icon.textContent=type==="error"?"×":"✓";
+  overlay.classList.add("show");
+  function close(){overlay.classList.remove("show");btn.removeEventListener("click",close);resolve()}
+  btn.addEventListener("click",close);
+ });
 }
-function ooInfo(message,title="Information"){
-  return new Promise(resolve=>{
-    const overlay=$("ooMessageOverlay"),icon=$("ooMessageIcon");
-    const ok=$("ooMessageOK"),cancel=$("ooMessageCancel");
-    $("ooMessageTitle").textContent=title;
-    $("ooMessageText").textContent=message;
-    icon.className="oo-modal-icon info";
-    icon.textContent="i";
-    ok.textContent="Continue";
-    cancel.style.display="none";
-    overlay.classList.add("show");
-    function finish(){overlay.classList.remove("show");ok.removeEventListener("click",finish);resolve(true)}
-    ok.addEventListener("click",finish);
-  });
+function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+async function apiGet(action){
+ return new Promise((resolve,reject)=>{
+  const cb="oo_cb_"+Date.now()+"_"+Math.floor(Math.random()*9999),s=document.createElement("script");
+  const timer=setTimeout(()=>{clean();reject(new Error("API timeout. Please check your internet or deployment."))},20000);
+  function clean(){clearTimeout(timer);delete window[cb];s.remove()}
+  window[cb]=r=>{clean();if(r&&r.success)resolve(r);else reject(new Error(r?.message||"API request failed"))};
+  s.onerror=()=>{clean();reject(new Error("Could not connect to Apps Script."))};
+  s.src=API_URL+"?action="+encodeURIComponent(action)+"&callback="+cb;document.body.appendChild(s);
+ });
 }
-
-/* CUSTOM AMOUNT INPUT */
-function ooGetAmount(name,due){
-  return new Promise(resolve=>{
-    const overlay=$("ooAmountOverlay"),input=$("ooAmountInput");
-    const ok=$("ooAmountOK"),cancel=$("ooAmountCancel");
-    $("ooAmountCustomer").textContent=name+" | Total Due: "+money(due);
-    input.value="";
-    input.max=due>0?due:"";
-    overlay.classList.add("show");
-    setTimeout(()=>input.focus(),100);
-    function cleanup(value){
-      overlay.classList.remove("show");
-      ok.removeEventListener("click",submit);
-      cancel.removeEventListener("click",cancelFn);
-      input.removeEventListener("keydown",keyHandler);
-      resolve(value);
-    }
-    function submit(){
-      const n=Number(input.value);
-      if(!Number.isFinite(n)||n<=0){ooWarning("Please enter a valid amount.");return}
-      if(due>0&&n>due){ooWarning("Amount cannot exceed total due.");return}
-      cleanup(n);
-    }
-    function cancelFn(){cleanup(null)}
-    function keyHandler(e){if(e.key==="Enter")submit();if(e.key==="Escape")cancelFn()}
-    ok.addEventListener("click",submit);
-    cancel.addEventListener("click",cancelFn);
-    input.addEventListener("keydown",keyHandler);
-  });
+async function apiPost(data){
+ const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
+ const raw=await response.text();let result;
+ try{result=JSON.parse(raw)}catch(e){throw new Error("Invalid API response. Check Apps Script Web App URL and deployment.")}
+ if(!response.ok||!result.success)throw new Error(result.message||"Save failed");
+ return result;
 }
-
-/* =====================================
-   HELPERS
-===================================== */
-function today(){
-  const d=new Date();
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+async function loadSerial(){
+ try{
+  const r=await apiGet("list"),arr=r.customers||r.data||[];
+  const max=Math.max(0,...arr.map(c=>Number(c.si)||0));
+  $("si").value=String(max+1).padStart(4,"0");
+ }catch(e){$("si").value="Auto"}
 }
-function dateInput(v){
-  if(!v)return "";
-  const s=String(v);
-  if(/^\d{4}-\d{2}-\d{2}/.test(s))return s.slice(0,10);
-  const d=new Date(v);
-  return isNaN(d.getTime())?"":d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+function getFormData(){
+ return {
+  name:$("name").value.trim(),ip:$("ip").value.trim(),phone:$("phone").value.trim(),
+  email:$("email").value.trim(),area:$("area").value.trim(),address:$("address").value.trim(),
+  location:$("location").value.trim(),reason:$("reason").value.trim(),
+  createDate:$("createDate").value,billingDate:$("billingDate").value,
+  customerBill:Number($("customerBill").value)||0,ipBill:Number($("ipBill").value)||0,
+  dueAmount:Number($("dueAmount").value)||0,billTrigger:$("billTrigger").value,
+  ipBillTrigger:$("ipBillTrigger").value,onu:$("onu").value.trim(),fiber:$("fiber").value.trim()
+ };
 }
-function money(v){return "৳"+Number(v||0).toLocaleString("en-IN",{maximumFractionDigits:2})}
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-
-/* =====================================
-   API
-===================================== */
-function apiGet(action,params={}){
-  return new Promise((resolve,reject)=>{
-    const callback="ooCallback_"+Date.now()+"_"+Math.floor(Math.random()*100000);
-    const script=document.createElement("script");
-    const query=new URLSearchParams({action,...params,callback});
-    const timeout=setTimeout(()=>{cleanup();reject(new Error("API request timed out."))},25000);
-    function cleanup(){clearTimeout(timeout);delete window[callback];script.remove()}
-    window[callback]=r=>{
-      cleanup();
-      if(!r||r.success!==true)reject(new Error(r?.message||"Unable to load data."));
-      else resolve(r);
-    };
-    script.onerror=()=>{cleanup();reject(new Error("Could not connect to Google Sheets API."))};
-    script.src=API_URL+"?"+query.toString();
-    document.body.appendChild(script);
-  });
-}
-async function apiPost(payload){
-  const response=await fetch(API_URL,{
-    method:"POST",
-    headers:{"Content-Type":"text/plain;charset=utf-8"},
-    body:JSON.stringify(payload)
-  });
-  const body=await response.text();
-  let result;
-  try{result=JSON.parse(body)}catch(e){throw new Error("Invalid server response. Check your Apps Script deployment URL.")}
-  if(!response.ok||!result.success)throw new Error(result?.message||"Operation failed.");
-  return result;
-}
-
-/* =====================================
-   TABS
-===================================== */
-document.querySelectorAll(".oo-tab").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".oo-tab").forEach(x=>x.classList.remove("active"));
-    document.querySelectorAll(".oo-panel").forEach(x=>x.classList.remove("active"));
-    btn.classList.add("active");
-    $("oo-panel-"+btn.dataset.tab).classList.add("active");
-    if(btn.dataset.tab==="deleted")loadDeleted();
-    if(btn.dataset.tab==="due")loadDues();
-    if(btn.dataset.tab==="history")loadHistory();
-  });
+$("customerForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(busy)return;
+ const data=getFormData();
+ if(!data.name||!data.ip){toast("error","Required Fields","Customer name and IP are required.");return}
+ busy=true;$("saveBtn").disabled=true;$("saveBtn").textContent="Saving Customer...";
+ try{
+  await apiPost({action:"add",...data});
+  await message("success","Customer Added Successfully","The new customer has been saved to ONE ONLINE.");
+  $("customerForm").reset();$("createDate").value=today();$("dueAmount").value="0";await loadSerial();
+ }catch(err){await message("error","Customer Save Failed",err.message)}
+ finally{busy=false;$("saveBtn").disabled=false;$("saveBtn").textContent="＋ Save Customer"}
 });
-
-/* =====================================
-   SERIAL / RESET / STATISTICS
-===================================== */
-function nextSerial(){
-  return String(Math.max(0,...customers.map(c=>Number(c.si)||0))+1).padStart(4,"0");
-}
-function resetForm(){
-  editId=null;
-  $("ooCustomerForm").reset();
-  $("ooSI").value=nextSerial();
-  $("ooCreateDate").value=today();
-  $("ooSave").textContent="＋ Add Customer";
-}
-function updateStats(){
-  $("ooTotal").textContent=customers.length;
-  $("ooTotalDue").textContent=money(customers.reduce((s,c)=>s+Number(c.dueAmount||0),0));
-  $("ooSerialStat").textContent=nextSerial();
-  $("ooCustomerCount").textContent=customers.length+" Records";
-}
-$("ooReset").onclick=resetForm;
-
-/* =====================================
-   ACTIVE CUSTOMERS
-===================================== */
-async function loadCustomers(showError=true){
-  try{
-    const r=await apiGet("list");
-    customers=(r.customers||r.data||[]).map(c=>({
-      ...c,
-      si:c.si??c.id,
-      phone:c.phone??c.mobile??"",
-      ipBill:c.ipBill??c.internetBill??0,
-      onu:c.onu??c.onuMac??"",
-      billingDate:dateInput(c.billingDate),
-      createDate:dateInput(c.createDate)
-    }));
-    renderCustomers();
-    updateStats();
-    populateDueCustomers();
-  }catch(e){
-    $("ooCustomerRows").innerHTML='<tr><td colspan="10" class="oo-empty">'+esc(e.message)+'</td></tr>';
-    if(showError)ooError(e.message,"Customer Load Failed");
-  }
-}
-function renderCustomers(){
-  const q=$("ooSearch").value.toLowerCase().trim();
-  const list=customers.filter(c=>[c.si,c.name,c.ip,c.phone,c.email,c.area,c.address,c.location].some(v=>String(v??"").toLowerCase().includes(q)));
-  const tbody=$("ooCustomerRows");
-  tbody.innerHTML="";
-  if(!list.length){
-    tbody.innerHTML='<tr><td colspan="10" class="oo-empty">'+(customers.length?"No matching customer found.":"No customer records available.")+'</td></tr>';
-    return;
-  }
-  list.forEach(c=>{
-    const tr=document.createElement("tr");
-    [c.si,c.name,c.ip,c.phone,c.area,c.billingDate,money(c.customerBill),money(c.ipBill),money(c.dueAmount)].forEach(v=>{
-      const td=document.createElement("td");td.textContent=v||"-";tr.appendChild(td);
-    });
-    const td=document.createElement("td");
-    const edit=document.createElement("button");
-    edit.className="oo-table-btn oo-edit";edit.textContent="Edit";
-    edit.onclick=()=>editCustomer(c.si);
-    const del=document.createElement("button");
-    del.className="oo-table-btn oo-delete";del.textContent="Delete";
-    del.onclick=()=>deleteCustomer(c);
-    const collect=document.createElement("button");
-    collect.className="oo-table-btn oo-restore";collect.textContent="Collect";
-    collect.onclick=()=>collectBill(c);
-    td.append(edit,del,collect);tr.appendChild(td);tbody.appendChild(tr);
-  });
-}
-$("ooSearch").addEventListener("input",renderCustomers);
-
-function formData(){
-  return {
-    name:$("ooName").value.trim(),
-    ip:$("ooIP").value.trim(),
-    phone:$("ooPhone").value.trim(),
-    email:$("ooEmail").value.trim(),
-    area:$("ooArea").value.trim(),
-    address:$("ooAddress").value.trim(),
-    location:$("ooLocation").value.trim(),
-    reason:$("ooReason").value.trim(),
-    createDate:$("ooCreateDate").value,
-    billingDate:$("ooBillingDate").value,
-    customerBill:Number($("ooCustomerBill").value)||0,
-    ipBill:Number($("ooIPBill").value)||0,
-    dueAmount:Number($("ooDueAmount").value)||0,
-    billTrigger:$("ooBillTrigger").value,
-    ipBillTrigger:$("ooIPBillTrigger").value,
-    onu:$("ooONU").value.trim(),
-    fiber:$("ooFiber").value.trim()
-  };
-}
-$("ooCustomerForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  if(busy)return;
-  const data=formData();
-  if(!data.name||!data.ip){ooWarning("Customer Name and IP are required.");return}
-  const updating=editId!==null;
-  busy=true;$("ooSave").disabled=true;
-  $("ooSave").textContent=updating?"Updating...":"Saving...";
-  try{
-    await apiPost(updating?{action:"edit",si:editId,...data}:{action:"add",...data});
-    await loadCustomers(false);
-    resetForm();
-    ooSuccess(updating?"Customer updated successfully.":"New customer added successfully.");
-  }catch(e){ooError(e.message,"Customer Save Failed")}
-  finally{busy=false;$("ooSave").disabled=false;$("ooSave").textContent=editId?"Update Customer":"＋ Add Customer"}
-});
-
-function editCustomer(si){
-  const c=customers.find(x=>String(x.si)===String(si));
-  if(!c)return;
-  editId=String(c.si);
-  $("ooSI").value=c.si||"";
-  $("ooName").value=c.name||"";
-  $("ooIP").value=c.ip||"";
-  $("ooPhone").value=c.phone||"";
-  $("ooEmail").value=c.email||"";
-  $("ooArea").value=c.area||"";
-  $("ooAddress").value=c.address||"";
-  $("ooLocation").value=c.location||"";
-  $("ooReason").value=c.reason||"";
-  $("ooCreateDate").value=dateInput(c.createDate);
-  $("ooBillingDate").value=dateInput(c.billingDate);
-  $("ooCustomerBill").value=c.customerBill??0;
-  $("ooIPBill").value=c.ipBill??0;
-  $("ooDueAmount").value=c.dueAmount??0;
-  $("ooBillTrigger").value=c.billTrigger||"";
-  $("ooIPBillTrigger").value=c.ipBillTrigger||"";
-  $("ooONU").value=c.onu||"";
-  $("ooFiber").value=c.fiber||"";
-  $("ooSave").textContent="Update Customer";
-  $("ooCustomerForm").scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-async function deleteCustomer(c){
-  if(!await ooConfirm(c.name+" ("+c.ip+") will be moved to Deleted Customers.","Delete Customer?"))return;
-  try{
-    await apiPost({action:"delete",si:c.si});
-    await loadCustomers(false);
-    if(String(editId)===String(c.si))resetForm();
-    ooSuccess("Customer moved to Deleted Customers.");
-  }catch(e){ooError(e.message,"Delete Failed")}
-}
-
-/* =====================================
-   DELETED CUSTOMERS
-===================================== */
-async function loadDeleted(){
-  $("ooDeletedRows").innerHTML='<tr><td colspan="7" class="oo-empty">Loading...</td></tr>';
-  try{
-    const r=await apiGet("deleted");
-    deletedCustomers=r.customers||r.data||[];
-    renderDeleted();
-    $("ooDeletedTotal").textContent=deletedCustomers.length;
-  }catch(e){$("ooDeletedRows").innerHTML='<tr><td colspan="7" class="oo-empty">'+esc(e.message)+'</td></tr>';ooError(e.message,"Deleted Customer Load Failed")}
-}
-function renderDeleted(){
-  const q=$("ooDeletedSearch").value.toLowerCase().trim();
-  const list=deletedCustomers.filter(c=>[c.si,c.name,c.ip,c.phone,c.dueAmount].some(v=>String(v??"").toLowerCase().includes(q)));
-  $("ooDeletedCount").textContent=deletedCustomers.length+" Records";
-  const tbody=$("ooDeletedRows");tbody.innerHTML="";
-  if(!list.length){tbody.innerHTML='<tr><td colspan="7" class="oo-empty">No deleted customers found.</td></tr>';return}
-  list.forEach(c=>{
-    const tr=document.createElement("tr");
-    [c.si,c.name,c.ip,c.phone,money(c.dueAmount),dateInput(c.deletedDate)].forEach(v=>{
-      const td=document.createElement("td");td.textContent=v||"-";tr.appendChild(td);
-    });
-    const td=document.createElement("td");
-    const restore=document.createElement("button");
-    restore.className="oo-table-btn oo-restore";restore.textContent="Restore";
-    restore.onclick=()=>restoreCustomer(c);
-    const permanent=document.createElement("button");
-    permanent.className="oo-table-btn oo-delete";permanent.textContent="Permanent Delete";
-    permanent.onclick=()=>permanentDelete(c);
-    td.append(restore,permanent);tr.appendChild(td);tbody.appendChild(tr);
-  });
-}
-$("ooDeletedSearch").addEventListener("input",renderDeleted);
-
-async function restoreCustomer(c){
-  if(!await ooConfirm("Restore "+c.name+" ("+c.ip+") to Active Customers?","Restore Customer?"))return;
-  try{
-    await apiPost({action:"restore",si:c.si});
-    await loadDeleted();await loadCustomers(false);
-    ooSuccess("Customer restored successfully.");
-  }catch(e){ooError(e.message,"Restore Failed")}
-}
-async function permanentDelete(c){
-  if(!await ooConfirm("This customer will be permanently deleted. This action cannot be undone.","Permanent Delete?"))return;
-  try{
-    await apiPost({action:"permanentDelete",si:c.si});
-    await loadDeleted();
-    ooSuccess("Customer permanently deleted.");
-  }catch(e){ooError(e.message,"Permanent Delete Failed")}
-}
-
-/* =====================================
-   DUE ENTRIES
-===================================== */
-function populateDueCustomers(){
-  const select=$("ooDueCustomer"),previous=select.value;
-  select.innerHTML='<option value="">Select Customer</option>';
-  customers.forEach(c=>{
-    const option=document.createElement("option");
-    option.value=c.si;
-    option.textContent=c.name+" — "+c.ip+" — Due: "+money(c.dueAmount);
-    select.appendChild(option);
-  });
-  if(previous)select.value=previous;
-}
-$("ooDueForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const si=$("ooDueCustomer").value;
-  const dueFrom=$("ooDueFrom").value.trim();
-  const amount=Number($("ooDueEntryAmount").value);
-  const reason=$("ooDueReason").value.trim();
-  if(!si||!dueFrom||!Number.isFinite(amount)||amount<=0||!reason){
-    ooWarning("Please complete all required Due fields.");return;
-  }
-  const c=customers.find(x=>String(x.si)===String(si));
-  if(!c){ooError("Selected customer was not found.");return}
-  $("ooDueSave").disabled=true;$("ooDueSave").textContent="Saving...";
-  try{
-    await apiPost({
-      action:"addDue",si:c.si,ip:c.ip,dueFrom,
-      dueAmount:amount,dueReason:reason,
-      billTrigger:$("ooDueTrigger").value,
-      notes:$("ooDueNotes").value.trim(),user:"Admin"
-    });
-    $("ooDueForm").reset();
-    await loadCustomers(false);await loadDues();
-    ooSuccess("Due entry added successfully.");
-  }catch(e){ooError(e.message,"Due Entry Failed")}
-  finally{$("ooDueSave").disabled=false;$("ooDueSave").textContent="＋ Add Due Entry"}
-});
-
-async function loadDues(){
-  $("ooDueRows").innerHTML='<tr><td colspan="7" class="oo-empty">Loading...</td></tr>';
-  try{
-    const r=await apiGet("dueentries");
-    dueEntries=r.dueEntries||r.data||[];
-    renderDues();
-  }catch(e){$("ooDueRows").innerHTML='<tr><td colspan="7" class="oo-empty">'+esc(e.message)+'</td></tr>';ooError(e.message,"Due Entries Load Failed")}
-}
-function renderDues(){
-  const q=$("ooDueSearch").value.toLowerCase().trim();
-  const list=dueEntries.filter(d=>[d.name,d.ip,d.dueFrom,d.dueReason,d.status,d.user].some(v=>String(v??"").toLowerCase().includes(q)));
-  $("ooDueCount").textContent=dueEntries.length+" Records";
-  const tbody=$("ooDueRows");tbody.innerHTML="";
-  if(!list.length){tbody.innerHTML='<tr><td colspan="7" class="oo-empty">No due entries found.</td></tr>';return}
-  list.forEach(d=>{
-    const tr=document.createElement("tr");
-    [d.entryDate,d.name,d.ip,d.dueFrom,money(d.dueAmount),d.dueReason,d.status||d.collectStatus].forEach(v=>{
-      const td=document.createElement("td");td.textContent=v||"-";tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-}
-$("ooDueSearch").addEventListener("input",renderDues);
-
-/* =====================================
-   CUSTOMER HISTORY
-===================================== */
-async function loadHistory(){
-  $("ooHistoryRows").innerHTML='<tr><td colspan="11" class="oo-empty">Loading...</td></tr>';
-  try{
-    const r=await apiGet("history");
-    historyEntries=r.history||r.data||[];
-    renderHistory();
-  }catch(e){$("ooHistoryRows").innerHTML='<tr><td colspan="11" class="oo-empty">'+esc(e.message)+'</td></tr>';ooError(e.message,"History Load Failed")}
-}
-function renderHistory(){
-  const q=$("ooHistorySearch").value.toLowerCase().trim();
-  const list=historyEntries.filter(h=>[h.name,h.ip,h.action,h.field,h.oldValue,h.newValue,h.description,h.dueFrom,h.dueReason].some(v=>String(v??"").toLowerCase().includes(q)));
-  $("ooHistoryCount").textContent=historyEntries.length+" Records";
-  const tbody=$("ooHistoryRows");tbody.innerHTML="";
-  if(!list.length){tbody.innerHTML='<tr><td colspan="11" class="oo-empty">No history records found.</td></tr>';return}
-  list.forEach(h=>{
-    const tr=document.createElement("tr");
-    [h.actionDate,h.name,h.ip,h.action,h.field,h.oldValue,h.newValue,h.amount?money(h.amount):"",h.dueFrom,h.dueReason,h.description].forEach(v=>{
-      const td=document.createElement("td");td.textContent=v||"-";tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-}
-$("ooHistorySearch").addEventListener("input",renderHistory);
-
-/* =====================================
-   COLLECT BILL
-===================================== */
-async function collectBill(c){
-  const due=Number(c.dueAmount)||0;
-  const amount=await ooGetAmount(c.name,due);
-  if(amount===null)return;
-  if(!await ooConfirm("Collect "+money(amount)+" from "+c.name+"?","Confirm Payment"))return;
-  try{
-    await apiPost({action:"collect",si:c.si,ip:c.ip,amount});
-    await loadCustomers(false);
-    await loadDues();
-    await loadHistory();
-    ooSuccess("Payment of "+money(amount)+" collected successfully.");
-  }catch(e){ooError(e.message,"Payment Failed")}
-}
-
-/* =====================================
-   CSV EXPORT
-===================================== */
-$("ooExport").addEventListener("click",()=>{
-  if(!customers.length){ooWarning("No customers available to export.");return}
-  const headers=["SI","IP","NAME","PHONE","REASON","BILL_TRIGGER","CUSTOMER_BILL","BILLING_DATE","IP_BILL_TRIGGER","IP_BILL","AREA","ADDRESS","LOCATION","ONU","FIBER","EMAIL","COLLECT","RENEW","CREATE_DATE","DUE_AMOUNT"];
-  const rows=[headers,...customers.map(c=>[
-    c.si,c.ip,c.name,c.phone,c.reason,c.billTrigger,c.customerBill,c.billingDate,
-    c.ipBillTrigger,c.ipBill,c.area,c.address,c.location,c.onu,c.fiber,c.email,
-    c.collect,c.renew,c.createDate,c.dueAmount
-  ])];
-  const csv="\uFEFF"+rows.map(row=>row.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
-  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");a.href=url;a.download="ONE-ONLINE-CUSTOMERS.csv";a.click();
-  URL.revokeObjectURL(url);
-  ooSuccess("Customer CSV file exported.");
-});
-
-/* =====================================
-   REFRESH / START
-===================================== */
-$("ooRefresh").onclick=()=>loadCustomers();
-$("ooDeletedRefresh").onclick=()=>loadDeleted();
-$("ooDueRefresh").onclick=()=>loadDues();
-$("ooHistoryRefresh").onclick=()=>loadHistory();
-
-resetForm();
-loadCustomers();
-
-})();
+$("resetBtn").addEventListener("click",()=>setTimeout(()=>{$("createDate").value=today();$("dueAmount").value="0";loadSerial()},0));
+$("createDate").value=today();$("dueAmount").value="0";loadSerial();
 </script>
 </body>
 </html>
