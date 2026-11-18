@@ -3,89 +3,121 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ONE ONLINE - Total Customer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ONE ONLINE | Total Customer</title>
+
 <style>
-#totalCustomerPage{--tc-primary:var(--primary,#0d9488);--tc-text:var(--text,#172033);--tc-muted:var(--muted,#7b8495);--tc-card:var(--card,#fff);--tc-border:var(--border,#e5e7eb);color:var(--tc-text);font-family:inherit}
+#totalCustomerPage{
+  --tc-primary:var(--primary,#0d9488);
+  --tc-text:var(--text,#172033);
+  --tc-muted:var(--muted,#7b8495);
+  --tc-card:var(--card,#fff);
+  --tc-border:var(--border,#e5e7eb);
+  color:var(--tc-text);font-family:inherit;
+}
 #totalCustomerPage *{box-sizing:border-box}
-#totalCustomerPage .tc-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-#totalCustomerPage h2{font-size:22px;margin:0 0 4px}
-#totalCustomerPage .muted{font-size:13px;color:var(--tc-muted)}
+#totalCustomerPage .tc-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:17px}
+#totalCustomerPage h2{font-size:23px;margin:0 0 5px;font-weight:750}
+#totalCustomerPage .tc-subtitle{font-size:13px;color:var(--tc-muted)}
+#totalCustomerPage button{border:0;border-radius:8px;padding:9px 12px;font-size:12px;font-weight:700;cursor:pointer}
+#totalCustomerPage button:disabled{opacity:.55;cursor:wait}
+#totalCustomerPage .tc-primary{background:var(--tc-primary);color:#fff}
+#totalCustomerPage .tc-soft{background:var(--hover,#eef2f7);color:var(--tc-text)}
+#totalCustomerPage .tc-danger{background:#fee2e2;color:#991b1b}
 #totalCustomerPage .tc-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
 #totalCustomerPage .tc-stat{background:var(--tc-card);border:1px solid var(--tc-border);border-radius:12px;padding:14px}
 #totalCustomerPage .tc-stat small{display:block;color:var(--tc-muted);font-size:12px}
-#totalCustomerPage .tc-stat strong{display:block;font-size:21px;margin-top:6px}
+#totalCustomerPage .tc-stat strong{display:block;font-size:21px;margin-top:7px}
 #totalCustomerPage .tc-panel{background:var(--tc-card);border:1px solid var(--tc-border);border-radius:13px;overflow:hidden}
-#totalCustomerPage .tc-toolbar{display:flex;gap:9px;align-items:center;padding:13px;border-bottom:1px solid var(--tc-border);flex-wrap:wrap}
-#totalCustomerPage input,#totalCustomerPage select{background:var(--input-bg,var(--tc-card));color:var(--tc-text);border:1px solid var(--tc-border);border-radius:8px;padding:10px;font:inherit;font-size:13px;min-height:39px}
-#totalCustomerPage .tc-search{flex:1;min-width:180px}
-#totalCustomerPage button{border:0;border-radius:8px;padding:9px 12px;font-weight:650;cursor:pointer;font-size:12px}
-#totalCustomerPage button:disabled{opacity:.55;cursor:wait}
-#totalCustomerPage .primary{background:var(--tc-primary);color:#fff}
-#totalCustomerPage .soft{background:var(--hover,#eef2f7);color:var(--tc-text)}
-#totalCustomerPage .danger{background:#fee2e2;color:#991b1b}
+#totalCustomerPage .tc-toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:13px;border-bottom:1px solid var(--tc-border)}
+#totalCustomerPage input,#totalCustomerPage select,#totalCustomerPage textarea{background:var(--input-bg,var(--tc-card));color:var(--tc-text);border:1px solid var(--tc-border);border-radius:8px;padding:10px;font:inherit;font-size:13px;min-height:39px;outline:none}
+#totalCustomerPage input:focus,#totalCustomerPage select:focus,#totalCustomerPage textarea:focus{border-color:var(--tc-primary)}
+#totalCustomerPage .tc-search{flex:1;min-width:190px}
 #totalCustomerPage .tc-table-wrap{width:100%;overflow:auto}
-#totalCustomerPage table{width:100%;border-collapse:collapse;min-width:940px}
+#totalCustomerPage table{width:100%;border-collapse:collapse;min-width:1030px}
 #totalCustomerPage th,#totalCustomerPage td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--tc-border);font-size:12px;white-space:nowrap}
-#totalCustomerPage th{background:var(--table-head,var(--hover,#f7f8fa));font-weight:700}
+#totalCustomerPage th{background:var(--table-head,var(--hover,#f5f7f9));font-weight:750;position:sticky;top:0;z-index:1}
+#totalCustomerPage tbody tr:hover{background:var(--hover,#f8fafc)}
+#totalCustomerPage .tc-customer-name{font-weight:750}
+#totalCustomerPage .tc-small{font-size:11px;color:var(--tc-muted);margin-top:3px}
 #totalCustomerPage .tc-actions{display:flex;gap:5px;flex-wrap:wrap}
-#totalCustomerPage .tc-actions button{padding:7px 9px}
-#totalCustomerPage .pill{display:inline-block;border-radius:20px;padding:4px 8px;font-size:11px;font-weight:700}
-#totalCustomerPage .pill.due{background:#fef3c7;color:#92400e}
-#totalCustomerPage .pill.paid{background:#dcfce7;color:#166534}
+#totalCustomerPage .tc-actions button{padding:7px 9px;font-size:11px}
+#totalCustomerPage .tc-pill{display:inline-block;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:800}
+#totalCustomerPage .tc-pill.due{background:#fef3c7;color:#92400e}
+#totalCustomerPage .tc-pill.paid{background:#dcfce7;color:#166534}
 #totalCustomerPage .tc-empty{text-align:center;padding:35px;color:var(--tc-muted)}
-#totalCustomerPage .tc-message{padding:11px 14px;font-size:13px;display:none}
+#totalCustomerPage .tc-message{display:none;padding:11px 14px;font-size:13px;white-space:pre-wrap}
 #totalCustomerPage .tc-message.show{display:block}
-#totalCustomerPage .tc-message.err{background:#fee2e2;color:#991b1b}
-#totalCustomerPage .tc-message.ok{background:#dcfce7;color:#166534}
-#totalCustomerPage .tc-modal{position:fixed;inset:0;background:#0008;z-index:9999;display:none;align-items:center;justify-content:center;padding:15px}
+#totalCustomerPage .tc-message.error{background:#fee2e2;color:#991b1b}
+#totalCustomerPage .tc-message.success{background:#dcfce7;color:#166534}
+#totalCustomerPage .tc-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px;font-size:12px;color:var(--tc-muted)}
+#totalCustomerPage .tc-modal{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:none;align-items:center;justify-content:center;padding:14px}
 #totalCustomerPage .tc-modal.open{display:flex}
-#totalCustomerPage .tc-dialog{width:min(680px,100%);max-height:90vh;overflow:auto;background:var(--tc-card);color:var(--tc-text);border-radius:14px;padding:19px;box-shadow:0 15px 50px #0003}
-#totalCustomerPage .tc-dialog h3{margin:0 0 15px;font-size:18px}
+#totalCustomerPage .tc-dialog{width:min(720px,100%);max-height:91vh;overflow:auto;background:var(--tc-card,#fff);color:var(--tc-text,#172033);border:1px solid var(--tc-border,#ddd);border-radius:14px;padding:20px;box-shadow:0 18px 60px #0004}
+#totalCustomerPage .tc-dialog h3{font-size:18px;margin:0 0 16px}
 #totalCustomerPage .tc-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-#totalCustomerPage .tc-field label{display:block;font-size:12px;font-weight:650;margin-bottom:5px}
-#totalCustomerPage .tc-field input,#totalCustomerPage .tc-field select{width:100%}
-#totalCustomerPage .tc-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
-#totalCustomerPage .tc-pages{display:flex;align-items:center;justify-content:space-between;padding:12px;font-size:12px;color:var(--tc-muted)}
-@media(max-width:700px){#totalCustomerPage .tc-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:450px){#totalCustomerPage .tc-stats{gap:7px}#totalCustomerPage .tc-stat{padding:10px}#totalCustomerPage .tc-stat strong{font-size:18px}#totalCustomerPage .tc-form-grid{grid-template-columns:1fr}}
+#totalCustomerPage .tc-field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+#totalCustomerPage .tc-field input,#totalCustomerPage .tc-field select,#totalCustomerPage .tc-field textarea{width:100%}
+#totalCustomerPage .tc-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid var(--tc-border)}
+#totalCustomerPage .tc-check{display:flex;align-items:center;gap:8px;font-size:12px}
+#totalCustomerPage .tc-check input{width:auto;min-height:auto}
+@media(max-width:750px){#totalCustomerPage .tc-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:500px){
+  #totalCustomerPage .tc-stats{gap:8px}
+  #totalCustomerPage .tc-stat{padding:11px}
+  #totalCustomerPage .tc-stat strong{font-size:18px}
+  #totalCustomerPage .tc-dialog{padding:14px}
+  #totalCustomerPage .tc-form-grid{grid-template-columns:1fr}
+  #totalCustomerPage h2{font-size:20px}
+}
 </style>
 </head>
+
 <body>
 <div id="totalCustomerPage">
-  <div class="tc-head">
+
+  <div class="tc-header">
     <div>
       <h2>Total Customers</h2>
-      <div class="muted">Manage customers, bills, payments and renewals</div>
+      <div class="tc-subtitle">Manage customer details, bills, due payments and renewals</div>
     </div>
-    <button class="primary" id="tcAdd">+ Add Customer</button>
+    <button class="tc-primary" id="tcAddCustomer">+ Add Customer</button>
   </div>
 
   <div class="tc-stats">
     <div class="tc-stat"><small>Total Customers</small><strong id="tcTotal">0</strong></div>
-    <div class="tc-stat"><small>Collected</small><strong id="tcCollected">0</strong></div>
+    <div class="tc-stat"><small>Collected Customers</small><strong id="tcCollected">0</strong></div>
     <div class="tc-stat"><small>Due Customers</small><strong id="tcDueCount">0</strong></div>
     <div class="tc-stat"><small>Total Due Amount</small><strong id="tcDueAmount">৳0</strong></div>
   </div>
 
   <div class="tc-panel">
     <div class="tc-toolbar">
-      <input id="tcSearch" class="tc-search" placeholder="Search name, IP, phone, area...">
+      <input id="tcSearch" class="tc-search" placeholder="Search by name, IP, phone, area...">
       <select id="tcFilter">
         <option value="all">All Customers</option>
         <option value="due">Due Customers</option>
-        <option value="collected">Collected</option>
+        <option value="collected">Collected Customers</option>
       </select>
-      <button class="soft" id="tcRefresh">Refresh</button>
+      <button class="tc-soft" id="tcRefresh">↻ Refresh</button>
     </div>
+
     <div id="tcMessage" class="tc-message"></div>
+
     <div class="tc-table-wrap">
       <table>
         <thead>
           <tr>
-            <th>SI</th><th>Customer</th><th>IP Address</th><th>Phone</th>
-            <th>Area</th><th>Bill</th><th>Due Amount</th>
-            <th>Billing Date</th><th>Status</th><th>Actions</th>
+            <th>SI</th>
+            <th>Customer Details</th>
+            <th>IP Address</th>
+            <th>Phone</th>
+            <th>Area</th>
+            <th>Monthly Bill</th>
+            <th>Due Amount</th>
+            <th>Billing Date</th>
+            <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="tcRows">
@@ -93,168 +125,247 @@
         </tbody>
       </table>
     </div>
-    <div class="tc-pages"><span id="tcCount">0 customers</span><span>ONE ONLINE</span></div>
+
+    <div class="tc-footer">
+      <span id="tcCount">0 customers</span>
+      <span>ONE ONLINE | Customer Management</span>
+    </div>
   </div>
 
+  <!-- EDIT CUSTOMER MODAL -->
   <div class="tc-modal" id="tcEditModal">
     <div class="tc-dialog">
-      <h3>Edit Customer</h3>
+      <h3>Edit Customer Information</h3>
       <form id="tcEditForm">
         <input type="hidden" name="oldIp">
         <div class="tc-form-grid" id="tcEditFields"></div>
         <div class="tc-modal-actions">
-          <button type="button" class="soft" data-close="tcEditModal">Cancel</button>
-          <button type="submit" class="primary" id="tcEditSave">Save Changes</button>
+          <button type="button" class="tc-soft" data-close="tcEditModal">Cancel</button>
+          <button type="submit" class="tc-primary" id="tcEditSave">Save Changes</button>
         </div>
       </form>
     </div>
   </div>
 
+  <!-- BILL / PAYMENT MODAL -->
   <div class="tc-modal" id="tcBillModal">
     <div class="tc-dialog">
       <h3 id="tcBillTitle">Bill / Payment</h3>
       <form id="tcBillForm">
         <input type="hidden" name="ip">
-        <div class="tc-field"><label>Action</label>
+
+        <div class="tc-field">
+          <label>Transaction Type</label>
           <select name="mode" id="tcBillMode">
             <option value="due">Add Bill / Due</option>
             <option value="collect">Collect Payment</option>
           </select>
         </div>
-        <div class="tc-field" style="margin-top:12px"><label>Amount (৳) *</label><input name="amount" type="number" min="0.01" step="0.01" required></div>
-        <div id="tcDueFields">
-          <div class="tc-field" style="margin-top:12px"><label>Due From</label>
-            <select name="dueFrom"><option>Bill</option><option>Previous Due</option><option>IP Bill</option><option>Other</option></select>
-          </div>
-          <div class="tc-field" style="margin-top:12px"><label>Due Reason</label><input name="dueReason" placeholder="Why is this due?"></div>
+
+        <div class="tc-field" style="margin-top:13px">
+          <label>Amount (৳) *</label>
+          <input name="amount" type="number" min="0.01" step="0.01" required placeholder="Enter amount">
         </div>
-        <div class="tc-field" style="margin-top:12px"><label><input type="checkbox" name="renewBilling" value="true" style="width:auto;min-height:0"> Also renew billing date by one month after collection</label></div>
+
+        <div id="tcDueFields">
+          <div class="tc-field" style="margin-top:13px">
+            <label>Due From</label>
+            <select name="dueFrom">
+              <option value="Bill">Bill</option>
+              <option value="Previous Due">Previous Due</option>
+              <option value="IP Bill">IP Bill</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="tc-field" style="margin-top:13px">
+            <label>Due Reason</label>
+            <input name="dueReason" placeholder="Why is this due?">
+          </div>
+
+          <div class="tc-field" style="margin-top:13px">
+            <label>Note</label>
+            <input name="notes" placeholder="Optional note">
+          </div>
+        </div>
+
+        <div id="tcCollectFields" style="display:none;margin-top:13px">
+          <label class="tc-check">
+            <input type="checkbox" name="renewBilling" value="true">
+            Renew billing date by one month after collection
+          </label>
+        </div>
+
         <div class="tc-modal-actions">
-          <button type="button" class="soft" data-close="tcBillModal">Cancel</button>
-          <button type="submit" class="primary" id="tcBillSave">Submit</button>
+          <button type="button" class="tc-soft" data-close="tcBillModal">Cancel</button>
+          <button type="submit" class="tc-primary" id="tcBillSave">Submit</button>
         </div>
       </form>
     </div>
   </div>
+
+  <!-- RENEW MODAL -->
+  <div class="tc-modal" id="tcRenewModal">
+    <div class="tc-dialog">
+      <h3>Renew Customer Billing Date</h3>
+      <form id="tcRenewForm">
+        <input type="hidden" name="ip">
+        <div class="tc-field">
+          <label>New Billing Date</label>
+          <input type="date" name="billingDate" required>
+        </div>
+        <div class="tc-modal-actions">
+          <button type="button" class="tc-soft" data-close="tcRenewModal">Cancel</button>
+          <button type="submit" class="tc-primary" id="tcRenewSave">Save Renewal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </div>
 
 <script>
 (function(){
-  const API_URL = "https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
-  const TOKEN_KEY = "one_online_customer_token";
-  const PARENT_TOKEN_KEY = "one_online_session_token";
-  const root = document.getElementById("totalCustomerPage");
-  if(!root || root.dataset.ready) return;
-  root.dataset.ready = "1";
+  const API_URL="https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
+  const TOKEN_KEY="one_online_customer_token";
+  const root=document.getElementById("totalCustomerPage");
 
-  const $ = id => root.querySelector("#"+id);
-  let customers = [];
-  let activeCustomer = null;
+  if(!root || root.dataset.initialized==="yes") return;
+  root.dataset.initialized="yes";
 
-  function token(){
-    return sessionStorage.getItem(TOKEN_KEY) ||
-           sessionStorage.getItem(PARENT_TOKEN_KEY) || "";
+  const $=id=>root.querySelector("#"+id);
+  let customers=[];
+  let loginPromise=null;
+
+  function escapeHTML(value){
+    return String(value??"").replace(/[&<>"']/g,ch=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    })[ch]);
+  }
+
+  function money(value){
+    return "৳"+Number(value||0).toLocaleString("en-US",{maximumFractionDigits:2});
+  }
+
+  function savedToken(){
+    return localStorage.getItem(TOKEN_KEY)||"";
+  }
+
+  function clearToken(){
+    localStorage.removeItem(TOKEN_KEY);
   }
 
   async function login(){
-    let t = token();
-    if(t) return t;
+    const password=prompt("ONE ONLINE API Password দিন:");
+    if(password===null || !password.trim()) throw new Error("Login cancelled.");
 
-    const password = prompt("ONE ONLINE API Password দিন:");
-    if(password === null || !password.trim()) throw new Error("Login cancelled.");
-
-    const res = await fetch(API_URL,{
+    const response=await fetch(API_URL,{
       method:"POST",
       headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body:JSON.stringify({action:"login",password})
+      body:JSON.stringify({action:"login",password:password})
     });
-    const data = await res.json();
 
-    if(!data.success) throw new Error(data.message || "Login failed.");
-    sessionStorage.setItem(TOKEN_KEY,data.token);
-    return data.token;
+    const result=await response.json();
+    if(!result.success) throw new Error(result.message||"Login failed.");
+
+    localStorage.setItem(TOKEN_KEY,result.token);
+    return result.token;
+  }
+
+  async function getToken(){
+    const token=savedToken();
+    if(token) return token;
+
+    if(!loginPromise){
+      loginPromise=login().finally(()=>{loginPromise=null;});
+    }
+    return loginPromise;
   }
 
   function jsonp(url){
     return new Promise((resolve,reject)=>{
-      const callback = "oneOnlineCallback_" + Date.now() + "_" + Math.floor(Math.random()*10000);
-      const script = document.createElement("script");
-      const timer = setTimeout(()=>{
+      const callback="oneOnlineJSONP_"+Date.now()+"_"+Math.floor(Math.random()*100000);
+      const script=document.createElement("script");
+      const timeout=setTimeout(()=>{
         cleanup();
-        reject(new Error("API response timeout."));
+        reject(new Error("Customer API response timeout."));
       },20000);
 
       function cleanup(){
-        clearTimeout(timer);
-        delete window[callback];
+        clearTimeout(timeout);
+        try{delete window[callback];}catch(_){}
         script.remove();
       }
 
-      window[callback] = data=>{
+      window[callback]=data=>{
         cleanup();
         resolve(data);
       };
 
-      script.onerror = ()=>{
+      script.onerror=()=>{
         cleanup();
         reject(new Error("Unable to connect to Customer API."));
       };
 
-      script.src = url + (url.includes("?") ? "&" : "?") +
-        "callback=" + callback + "&_=" + Date.now();
+      script.src=url+(url.includes("?")?"&":"?")+
+        "callback="+callback+"&_="+Date.now();
 
       document.body.appendChild(script);
     });
   }
 
-  async function get(action){
-    const t = await login();
-    const data = await jsonp(API_URL+"?action="+encodeURIComponent(action)+"&token="+encodeURIComponent(t));
-    if(!data.success){
-      if(data.unauthorized) sessionStorage.removeItem(TOKEN_KEY);
-      throw new Error(data.message || "Unable to load data.");
+  async function get(action,retried){
+    const token=await getToken();
+    const result=await jsonp(
+      API_URL+"?action="+encodeURIComponent(action)+
+      "&token="+encodeURIComponent(token)
+    );
+
+    if(result.unauthorized && !retried){
+      clearToken();
+      return get(action,true);
     }
-    return data;
+
+    if(!result.success) throw new Error(result.message||"Unable to load data.");
+    return result;
   }
 
-  async function post(payload){
-    const t = await login();
-    const res = await fetch(API_URL,{
+  async function post(payload,retried){
+    const token=await getToken();
+
+    const response=await fetch(API_URL,{
       method:"POST",
       headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body:JSON.stringify({...payload,token:t})
+      body:JSON.stringify({...payload,token:token})
     });
-    const data = await res.json();
 
-    if(!data.success){
-      if(data.unauthorized) sessionStorage.removeItem(TOKEN_KEY);
-      throw new Error(data.message || "Request failed.");
+    const result=await response.json();
+
+    if(result.unauthorized && !retried){
+      clearToken();
+      return post(payload,true);
     }
-    return data;
+
+    if(!result.success) throw new Error(result.message||"Request failed.");
+    return result;
   }
 
-  function money(value){
-    return "৳" + Number(value || 0).toLocaleString("en-US",{maximumFractionDigits:2});
+  function showMessage(text,type){
+    const box=$("tcMessage");
+    box.textContent=text;
+    box.className="tc-message show "+(type||"success");
+    setTimeout(()=>{box.className="tc-message";},5000);
   }
 
-  function escapeHTML(value){
-    return String(value ?? "").replace(/[&<>"']/g,ch=>({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    })[ch]);
-  }
-
-  function message(text,type){
-    const el=$("tcMessage");
-    el.textContent=text;
-    el.className="tc-message show "+(type || "ok");
-    setTimeout(()=>{el.className="tc-message";},4500);
-  }
-
-  function stats(){
-    const totalDue=customers.reduce((s,c)=>s+Number(c.DUE_AMOUNT||0),0);
+  function updateStats(){
+    const totalDue=customers.reduce((sum,c)=>sum+Number(c.DUE_AMOUNT||0),0);
     $("tcTotal").textContent=customers.length;
-    $("tcCollected").textContent=customers.filter(c=>String(c.COLLECT).toLowerCase()==="collected").length;
-    $("tcDueCount").textContent=customers.filter(c=>Number(c.DUE_AMOUNT||0)>0).length;
+    $("tcCollected").textContent=customers.filter(c=>
+      Number(c.DUE_AMOUNT||0)<=0
+    ).length;
+    $("tcDueCount").textContent=customers.filter(c=>
+      Number(c.DUE_AMOUNT||0)>0
+    ).length;
     $("tcDueAmount").textContent=money(totalDue);
   }
 
@@ -263,191 +374,283 @@
     const filter=$("tcFilter").value;
 
     const list=customers.filter(c=>{
-      const hay=[c.NAME,c.IP,c.PHONE,c.AREA,c.ADDRESS,c.LOCATION].join(" ").toLowerCase();
-      if(query && !hay.includes(query)) return false;
-      if(filter==="due" && Number(c.DUE_AMOUNT||0)<=0) return false;
-      if(filter==="collected" && String(c.COLLECT).toLowerCase()!=="collected") return false;
+      const searchText=[
+        c.NAME,c.IP,c.PHONE,c.AREA,c.ADDRESS,c.LOCATION,c.EMAIL
+      ].join(" ").toLowerCase();
+
+      if(query && !searchText.includes(query)) return false;
+
+      const due=Number(c.DUE_AMOUNT||0)>0;
+      if(filter==="due" && !due) return false;
+      if(filter==="collected" && due) return false;
+
       return true;
     });
 
     $("tcCount").textContent=list.length+" customers";
-    $("tcRows").innerHTML=list.length ? list.map(c=>{
-      const isDue=Number(c.DUE_AMOUNT||0)>0;
+
+    if(!list.length){
+      $("tcRows").innerHTML='<tr><td colspan="10" class="tc-empty">No customers found.</td></tr>';
+      updateStats();
+      return;
+    }
+
+    $("tcRows").innerHTML=list.map(c=>{
+      const due=Number(c.DUE_AMOUNT||0);
+      const bill=Number(c.CUSTOMER_BILL||0)+Number(c.IP_BILL||0);
+
       return `<tr>
         <td>${escapeHTML(c.SI)}</td>
-        <td><b>${escapeHTML(c.NAME)}</b><br><span class="muted">${escapeHTML(c.EMAIL||"")}</span></td>
-        <td>${escapeHTML(c.IP)}</td>
-        <td>${escapeHTML(c.PHONE)}</td>
-        <td>${escapeHTML(c.AREA)}</td>
-        <td>${money(Number(c.CUSTOMER_BILL||0)+Number(c.IP_BILL||0))}</td>
-        <td><b>${money(c.DUE_AMOUNT)}</b></td>
+        <td>
+          <div class="tc-customer-name">${escapeHTML(c.NAME)}</div>
+          <div class="tc-small">${escapeHTML(c.EMAIL||"")}</div>
+        </td>
+        <td><b>${escapeHTML(c.IP)}</b></td>
+        <td>${escapeHTML(c.PHONE||"—")}</td>
+        <td>${escapeHTML(c.AREA||"—")}</td>
+        <td>${money(bill)}</td>
+        <td><b>${money(due)}</b></td>
         <td>${escapeHTML(c.BILLING_DATE||"—")}</td>
-        <td><span class="pill ${isDue?"due":"paid"}">${isDue?"DUE":"COLLECTED"}</span></td>
-        <td><div class="tc-actions">
-          <button class="soft" data-action="edit" data-ip="${escapeHTML(c.IP)}">Edit</button>
-          <button class="soft" data-action="bill" data-ip="${escapeHTML(c.IP)}">Bill</button>
-          <button class="soft" data-action="renew" data-ip="${escapeHTML(c.IP)}">Renew</button>
-          <button class="danger" data-action="delete" data-ip="${escapeHTML(c.IP)}">Delete</button>
-        </div></td>
+        <td><span class="tc-pill ${due>0?"due":"paid"}">${due>0?"DUE":"COLLECTED"}</span></td>
+        <td>
+          <div class="tc-actions">
+            <button class="tc-soft" data-action="edit" data-ip="${escapeHTML(c.IP)}">Edit</button>
+            <button class="tc-soft" data-action="bill" data-ip="${escapeHTML(c.IP)}">Bill</button>
+            <button class="tc-soft" data-action="renew" data-ip="${escapeHTML(c.IP)}">Renew</button>
+            <button class="tc-danger" data-action="delete" data-ip="${escapeHTML(c.IP)}">Delete</button>
+          </div>
+        </td>
       </tr>`;
-    }).join("") : `<tr><td colspan="10" class="tc-empty">No customers found.</td></tr>`;
+    }).join("");
 
-    stats();
+    updateStats();
   }
 
   async function loadCustomers(){
     $("tcRows").innerHTML='<tr><td colspan="10" class="tc-empty">Loading customers...</td></tr>';
+
     try{
-      const data=await get("list");
-      customers=data.customers || [];
+      const result=await get("list",false);
+      customers=Array.isArray(result.customers)?result.customers:[];
       render();
-    }catch(err){
-      $("tcRows").innerHTML='<tr><td colspan="10" class="tc-empty">Unable to load customers: '+escapeHTML(err.message)+'</td></tr>';
-      message(err.message,"err");
+    }catch(error){
+      $("tcRows").innerHTML=
+        '<tr><td colspan="10" class="tc-empty">'+escapeHTML(error.message)+'</td></tr>';
+      showMessage(error.message,"error");
     }
   }
 
-  function openModal(id){$(id).classList.add("open");}
-  function closeModal(id){$(id).classList.remove("open");}
+  function openModal(id){
+    $(id).classList.add("open");
+  }
 
+  function closeModal(id){
+    $(id).classList.remove("open");
+  }
+
+  // EDIT CUSTOMER
   const editFields=[
     ["name","Customer Name","NAME","text"],
     ["ip","Customer IP","IP","text"],
     ["phone","Phone","PHONE","text"],
     ["email","Email","EMAIL","email"],
     ["area","Area","AREA","text"],
-    ["address","Address","ADDRESS","text"],
     ["location","Location","LOCATION","text"],
-    ["reason","Reason","REASON","text"],
+    ["address","Address","ADDRESS","text"],
+    ["reason","Reason / Note","REASON","text"],
     ["createDate","Create Date","CREATE_DATE","date"],
     ["billingDate","Billing Date","BILLING_DATE","date"],
-    ["customerBill","Customer Bill","CUSTOMER_BILL","number"],
+    ["customerBill","Customer Monthly Bill","CUSTOMER_BILL","number"],
     ["ipBill","IP Bill","IP_BILL","number"],
-    ["dueAmount","Due Amount","DUE_AMOUNT","number"],
     ["onu","ONU","ONU","text"],
     ["fiber","Fiber","FIBER","text"]
   ];
 
   function openEdit(c){
-    activeCustomer=c;
-    $("tcEditForm").elements.oldIp.value=c.IP;
+    const form=$("tcEditForm");
+    form.reset();
+    form.elements.oldIp.value=c.IP;
 
-    $("tcEditFields").innerHTML=editFields.map(([key,label,col,type])=>
-      `<div class="tc-field"><label>${label}</label><input name="${key}" type="${type}" value="${escapeHTML(c[col]??"")}" ${type==="number"?'step="0.01" min="0"':""}></div>`
-    ).join("") + `
-      <div class="tc-field"><label>Bill Trigger</label><select name="billTrigger"><option value="ON" ${c.BILL_TRIGGER==="ON"?"selected":""}>ON</option><option value="OFF" ${c.BILL_TRIGGER==="OFF"?"selected":""}>OFF</option></select></div>
-      <div class="tc-field"><label>IP Bill Trigger</label><select name="ipBillTrigger"><option value="ON" ${c.IP_BILL_TRIGGER==="ON"?"selected":""}>ON</option><option value="OFF" ${c.IP_BILL_TRIGGER==="OFF"?"selected":""}>OFF</option></select></div>
-      <div class="tc-field"><label>Collection Status</label><select name="collect"><option value="Due" ${c.COLLECT==="Due"?"selected":""}>Due</option><option value="Collected" ${c.COLLECT==="Collected"?"selected":""}>Collected</option></select></div>
-      <div class="tc-field"><label>Renew Status</label><input name="renew" value="${escapeHTML(c.RENEW||"")}"></div>`;
+    const fields=editFields.map(([key,label,column,type])=>{
+      const value=c[column]??"";
+      const step=type==="number"?'min="0" step="0.01"':"";
+      return `<div class="tc-field">
+        <label>${label}</label>
+        <input name="${key}" type="${type}" value="${escapeHTML(value)}" ${step}>
+      </div>`;
+    }).join("");
 
+    $("tcEditFields").innerHTML=fields;
     openModal("tcEditModal");
   }
 
-  $("tcEditForm").addEventListener("submit",async e=>{
-    e.preventDefault();
+  $("tcEditForm").addEventListener("submit",async event=>{
+    event.preventDefault();
     const btn=$("tcEditSave");
     btn.disabled=true;
     btn.textContent="Saving...";
 
     try{
-      const fd=new FormData(e.currentTarget);
-      const data=Object.fromEntries(fd.entries());
+      const data=Object.fromEntries(new FormData(event.currentTarget).entries());
       data.action="edit";
-      editFields.filter(x=>x[3]==="number").forEach(x=>data[x[0]]=Number(data[x[0]]||0));
 
-      await post(data);
+      ["customerBill","ipBill"].forEach(k=>{
+        data[k]=Number(data[k]||0);
+      });
+
+      await post(data,false);
       closeModal("tcEditModal");
-      message("Customer updated successfully.","ok");
+      showMessage("Customer updated successfully.","success");
       await loadCustomers();
-    }catch(err){message(err.message,"err");}
-    finally{btn.disabled=false;btn.textContent="Save Changes";}
+
+    }catch(error){
+      showMessage(error.message,"error");
+    }finally{
+      btn.disabled=false;
+      btn.textContent="Save Changes";
+    }
   });
 
+  // BILL / PAYMENT
   function openBill(c){
-    activeCustomer=c;
-    $("tcBillForm").reset();
-    $("tcBillForm").elements.ip.value=c.IP;
+    const form=$("tcBillForm");
+    form.reset();
+    form.elements.ip.value=c.IP;
     $("tcBillMode").value="due";
     $("tcDueFields").style.display="";
+    $("tcCollectFields").style.display="none";
     $("tcBillTitle").textContent="Bill / Payment — "+c.NAME;
     openModal("tcBillModal");
   }
 
   $("tcBillMode").addEventListener("change",()=>{
-    $("tcDueFields").style.display=$("tcBillMode").value==="due"?"":"none";
+    const mode=$("tcBillMode").value;
+    $("tcDueFields").style.display=mode==="due"?"":"none";
+    $("tcCollectFields").style.display=mode==="collect"?"":"none";
   });
 
-  $("tcBillForm").addEventListener("submit",async e=>{
-    e.preventDefault();
+  $("tcBillForm").addEventListener("submit",async event=>{
+    event.preventDefault();
     const btn=$("tcBillSave");
     btn.disabled=true;
     btn.textContent="Processing...";
 
     try{
-      const fd=new FormData(e.currentTarget);
-      const data=Object.fromEntries(fd.entries());
+      const data=Object.fromEntries(new FormData(event.currentTarget).entries());
       const mode=data.mode;
+      data.amount=Number(data.amount||0);
+
+      if(data.amount<=0) throw new Error("Enter a valid amount.");
 
       if(mode==="due"){
+        if(!String(data.dueReason||"").trim()){
+          throw new Error("Please enter the Due Reason.");
+        }
         data.action="addDue";
       }else{
         data.action="collect";
-        data.renewBilling=data.renewBilling==="true" ? "true" : "false";
+        data.renewBilling=data.renewBilling==="true"?"true":"false";
       }
 
-      data.amount=Number(data.amount||0);
-      await post(data);
+      await post(data,false);
       closeModal("tcBillModal");
-      message(mode==="due"?"Due added successfully.":"Payment collected successfully.","ok");
+      showMessage(mode==="due"?"Due entry added successfully.":"Payment collected successfully.","success");
       await loadCustomers();
-    }catch(err){message(err.message,"err");}
-    finally{btn.disabled=false;btn.textContent="Submit";}
-  });
 
-  async function renew(c){
-    const current=c.BILLING_DATE || "";
-    const input=prompt("New billing date (YYYY-MM-DD):",current);
-    if(input===null) return;
-
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(input)){
-      message("Please enter date in YYYY-MM-DD format.","err");
-      return;
+    }catch(error){
+      showMessage(error.message,"error");
+    }finally{
+      btn.disabled=false;
+      btn.textContent="Submit";
     }
-
-    try{
-      await post({action:"edit",oldIp:c.IP,ip:c.IP,billingDate:input,renew:"Renewed"});
-      message("Billing date renewed successfully.","ok");
-      await loadCustomers();
-    }catch(err){message(err.message,"err");}
-  }
-
-  async function removeCustomer(c){
-    if(!confirm("Delete customer "+c.NAME+" ("+c.IP+")?")) return;
-    try{
-      await post({action:"delete",ip:c.IP});
-      message("Customer moved to Deleted Customer.","ok");
-      await loadCustomers();
-    }catch(err){message(err.message,"err");}
-  }
-
-  $("tcRows").addEventListener("click",e=>{
-    const btn=e.target.closest("button[data-action]");
-    if(!btn) return;
-
-    const c=customers.find(x=>String(x.IP)===btn.dataset.ip);
-    if(!c) return;
-
-    if(btn.dataset.action==="edit") openEdit(c);
-    if(btn.dataset.action==="bill") openBill(c);
-    if(btn.dataset.action==="renew") renew(c);
-    if(btn.dataset.action==="delete") removeCustomer(c);
   });
 
-  $("tcAdd").addEventListener("click",()=>{
+  // RENEW BILLING DATE
+  function openRenew(c){
+    const form=$("tcRenewForm");
+    form.reset();
+    form.elements.ip.value=c.IP;
+    form.elements.billingDate.value=c.BILLING_DATE||"";
+    openModal("tcRenewModal");
+  }
+
+  $("tcRenewForm").addEventListener("submit",async event=>{
+    event.preventDefault();
+    const btn=$("tcRenewSave");
+    btn.disabled=true;
+    btn.textContent="Saving...";
+
+    try{
+      const data=Object.fromEntries(new FormData(event.currentTarget).entries());
+      data.action="edit";
+      data.oldIp=data.ip;
+      data.renew="Renewed";
+
+      await post(data,false);
+      closeModal("tcRenewModal");
+      showMessage("Billing date renewed successfully.","success");
+      await loadCustomers();
+
+    }catch(error){
+      showMessage(error.message,"error");
+    }finally{
+      btn.disabled=false;
+      btn.textContent="Save Renewal";
+    }
+  });
+
+  // DELETE CUSTOMER
+  async function deleteCustomer(c){
+    const confirmed=confirm(
+      "Are you sure you want to delete this customer?\n\n"+
+      "Name: "+c.NAME+"\nIP: "+c.IP+
+      "\n\nCustomer will move to Deleted Customer."
+    );
+
+    if(!confirmed) return;
+
+    try{
+      await post({action:"delete",ip:c.IP},false);
+      showMessage("Customer moved to Deleted Customer successfully.","success");
+      await loadCustomers();
+    }catch(error){
+      showMessage(error.message,"error");
+    }
+  }
+
+  // TABLE ACTIONS
+  $("tcRows").addEventListener("click",event=>{
+    const button=event.target.closest("button[data-action]");
+    if(!button) return;
+
+    const customer=customers.find(c=>
+      String(c.IP)===String(button.dataset.ip)
+    );
+
+    if(!customer) return;
+
+    switch(button.dataset.action){
+      case "edit":
+        openEdit(customer);
+        break;
+      case "bill":
+        openBill(customer);
+        break;
+      case "renew":
+        openRenew(customer);
+        break;
+      case "delete":
+        deleteCustomer(customer);
+        break;
+    }
+  });
+
+  // NAVIGATION TO ADD CUSTOMER PAGE
+  $("tcAddCustomer").addEventListener("click",()=>{
     if(typeof window.loadPage==="function"){
       window.loadPage("add-customer",true);
     }else{
-      message("Parent page loadPage() function was not found.","err");
+      showMessage("Parent page loadPage() function not found.","error");
     }
   });
 
@@ -455,13 +658,15 @@
   $("tcSearch").addEventListener("input",render);
   $("tcFilter").addEventListener("change",render);
 
-  root.querySelectorAll("[data-close]").forEach(btn=>{
-    btn.addEventListener("click",()=>closeModal(btn.dataset.close));
+  root.querySelectorAll("[data-close]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      closeModal(button.dataset.close);
+    });
   });
 
   root.querySelectorAll(".tc-modal").forEach(modal=>{
-    modal.addEventListener("click",e=>{
-      if(e.target===modal) modal.classList.remove("open");
+    modal.addEventListener("click",event=>{
+      if(event.target===modal) modal.classList.remove("open");
     });
   });
 
