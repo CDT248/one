@@ -4,166 +4,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONE ONLINE - Dashboard</title>
+<title>ONE ONLINE Dashboard</title>
 
 <style>
-/* Dashboard CSS */
-#pageContainer .dash-page {
+/* =========================
+   ONE ONLINE DASHBOARD CSS
+========================= */
+
+#pageContainer .oo-dashboard {
   --primary:#087f5b;
-  --primary-light:#e8f7ef;
+  --primary2:#0ca678;
   --bg:#f5f7fb;
   --card:#ffffff;
   --text:#172033;
   --muted:#718096;
   --border:#e8edf3;
+  font-family:Arial,Helvetica,sans-serif;
   color:var(--text);
-  font-family:Arial, sans-serif;
-}
-
-#pageContainer .dash-page * {
+  background:var(--bg);
+  min-height:100%;
+  padding:24px;
   box-sizing:border-box;
 }
 
-#pageContainer .dash-page {
-  padding:24px;
-  background:var(--bg);
-  min-height:100%;
+#pageContainer .oo-dashboard *,
+#pageContainer .oo-dashboard *::before,
+#pageContainer .oo-dashboard *::after {
+  box-sizing:border-box;
 }
 
-#pageContainer .dash-header {
+#pageContainer .oo-demo {
+  position:fixed;
+  top:12px;
+  right:16px;
+  z-index:9999;
+  background:#fff1c7;
+  color:#946200;
+  border:1px solid #f0d47b;
+  padding:7px 14px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+  box-shadow:0 3px 12px #00000012;
+}
+
+#pageContainer .oo-header {
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:15px;
+  justify-content:space-between;
   flex-wrap:wrap;
+  gap:15px;
   margin-bottom:25px;
 }
 
-#pageContainer .dash-heading h2 {
+#pageContainer .oo-heading h2 {
   margin:0;
   font-size:25px;
   font-weight:750;
 }
 
-#pageContainer .dash-heading p {
-  color:var(--muted);
-  font-size:13px;
+#pageContainer .oo-heading p {
   margin:7px 0 0;
+  font-size:13px;
+  color:var(--muted);
 }
 
-#pageContainer .dash-date {
-  background:white;
+#pageContainer .oo-date {
+  background:#fff;
   border:1px solid var(--border);
   padding:11px 15px;
-  border-radius:10px;
-  color:#475569;
-  font-size:13px;
+  border-radius:9px;
+  font-size:12px;
+  color:#526078;
 }
 
-#pageContainer .demo-label {
-  position:fixed;
-  top:12px;
-  right:15px;
-  z-index:9999;
-  background:#fff0c2;
-  color:#925c00;
-  border:1px solid #f3d47a;
-  padding:7px 13px;
-  border-radius:7px;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:1.2px;
-  box-shadow:0 2px 8px #00000012;
-}
-
-#pageContainer .dash-section-title {
+#pageContainer .oo-section-title {
   font-size:16px;
-  font-weight:700;
+  font-weight:750;
   margin:25px 0 14px;
 }
 
-#pageContainer .dash-grid {
+#pageContainer .oo-grid {
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:16px;
 }
 
-#pageContainer .dash-card {
+#pageContainer .oo-card {
   background:var(--card);
   border:1px solid var(--border);
   border-radius:13px;
   padding:19px;
   min-width:0;
   box-shadow:0 2px 8px #17203305;
-  transition:.2s;
+  transition:transform .2s,box-shadow .2s;
 }
 
-#pageContainer .dash-card:hover {
+#pageContainer .oo-card:hover {
   transform:translateY(-3px);
-  box-shadow:0 7px 20px #1720330c;
+  box-shadow:0 8px 22px #1720330d;
 }
 
-#pageContainer .dash-card-top {
+#pageContainer .oo-card-top {
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:10px;
 }
 
-#pageContainer .dash-card-label {
-  font-size:12px;
+#pageContainer .oo-card-label {
   color:var(--muted);
+  font-size:12px;
   font-weight:600;
 }
 
-#pageContainer .dash-icon {
-  width:38px;
-  height:38px;
+#pageContainer .oo-icon {
+  width:39px;
+  height:39px;
   border-radius:10px;
   display:grid;
   place-items:center;
-  font-size:18px;
+  font-size:19px;
+  flex-shrink:0;
 }
 
-#pageContainer .dash-value {
+#pageContainer .oo-value {
   font-size:27px;
-  font-weight:750;
+  font-weight:800;
   margin-top:13px;
   letter-spacing:-.5px;
+  overflow-wrap:anywhere;
 }
 
-#pageContainer .dash-bottom {
-  font-size:11px;
-  color:var(--muted);
+#pageContainer .oo-note {
   margin-top:8px;
+  color:var(--muted);
+  font-size:11px;
 }
 
-#pageContainer .dash-up {
-  color:#0b9b68;
+#pageContainer .oo-green {
+  color:#07945e;
   font-weight:700;
 }
 
-#pageContainer .dash-down {
-  color:#e05252;
+#pageContainer .oo-red {
+  color:#dc5555;
   font-weight:700;
 }
 
-#pageContainer .dash-main-grid {
+#pageContainer .oo-main-grid {
   display:grid;
   grid-template-columns:1.55fr 1fr;
   gap:16px;
   margin-top:16px;
 }
 
-#pageContainer .dash-panel {
-  background:white;
+#pageContainer .oo-panel {
+  background:#fff;
   border:1px solid var(--border);
   border-radius:13px;
   padding:20px;
   min-width:0;
 }
 
-#pageContainer .dash-panel-header {
+#pageContainer .oo-panel-head {
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -171,21 +176,21 @@
   margin-bottom:20px;
 }
 
-#pageContainer .dash-panel-header h3 {
-  font-size:15px;
+#pageContainer .oo-panel-head h3 {
   margin:0;
+  font-size:15px;
 }
 
-#pageContainer .dash-panel-header span {
-  font-size:11px;
+#pageContainer .oo-panel-head span {
   color:var(--muted);
+  font-size:11px;
 }
 
-#pageContainer .dash-chart {
-  height:210px;
+#pageContainer .oo-chart {
+  height:215px;
   display:flex;
   align-items:flex-end;
-  gap:12px;
+  gap:13px;
   padding:10px 5px 0;
   border-bottom:1px solid var(--border);
   background:repeating-linear-gradient(
@@ -196,197 +201,228 @@
   );
 }
 
-#pageContainer .dash-chart-col {
-  flex:1;
+#pageContainer .oo-chart-column {
   height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  align-items:center;
-  gap:8px;
+  flex:1;
   min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-direction:column;
+  gap:8px;
 }
 
-#pageContainer .dash-bar {
-  width:min(35px,75%);
-  min-height:5px;
-  background:#0a9b70;
+#pageContainer .oo-bar {
+  width:min(38px,75%);
+  min-height:4px;
+  background:linear-gradient(180deg,#12b886,#087f5b);
   border-radius:6px 6px 0 0;
+  transition:height .5s;
 }
 
-#pageContainer .dash-chart-col small {
+#pageContainer .oo-chart-column small {
   font-size:10px;
   color:var(--muted);
 }
 
-#pageContainer .dash-legend {
-  display:flex;
-  gap:18px;
-  margin-top:16px;
+#pageContainer .oo-legend {
+  margin-top:15px;
   font-size:11px;
   color:var(--muted);
 }
 
-#pageContainer .dash-legend i {
+#pageContainer .oo-legend i {
   display:inline-block;
-  width:8px;
-  height:8px;
+  width:9px;
+  height:9px;
   border-radius:50%;
-  margin-right:5px;
-  background:#0a9b70;
+  background:#0ca678;
+  margin-right:6px;
 }
 
-#pageContainer .dash-progress-item {
-  margin:18px 0;
+#pageContainer .oo-progress-item {
+  margin:19px 0;
 }
 
-#pageContainer .dash-progress-info {
+#pageContainer .oo-progress-info {
   display:flex;
   justify-content:space-between;
   font-size:12px;
   margin-bottom:8px;
 }
 
-#pageContainer .dash-progress-info span:last-child {
-  font-weight:700;
+#pageContainer .oo-progress-info strong {
+  font-weight:750;
 }
 
-#pageContainer .dash-progress {
+#pageContainer .oo-progress {
   height:8px;
   background:#edf1f5;
   border-radius:20px;
   overflow:hidden;
 }
 
-#pageContainer .dash-progress-fill {
+#pageContainer .oo-progress-fill {
   height:100%;
   border-radius:20px;
 }
 
-#pageContainer .dash-table-wrap {
+#pageContainer .oo-total-box {
+  margin-top:22px;
+  padding:14px;
+  background:#f0faf5;
+  border-radius:9px;
+}
+
+#pageContainer .oo-total-box small {
+  color:var(--muted);
+  font-size:11px;
+}
+
+#pageContainer .oo-total-box strong {
+  display:block;
+  margin-top:6px;
+  font-size:22px;
+}
+
+#pageContainer .oo-table-wrap {
   overflow-x:auto;
 }
 
-#pageContainer .dash-table {
+#pageContainer .oo-table {
   width:100%;
   border-collapse:collapse;
-  min-width:550px;
+  min-width:570px;
 }
 
-#pageContainer .dash-table th {
+#pageContainer .oo-table th {
   text-align:left;
+  color:#8490a1;
   font-size:11px;
-  color:#8792a4;
-  font-weight:700;
   padding:12px 10px;
   border-bottom:1px solid var(--border);
-  white-space:nowrap;
 }
 
-#pageContainer .dash-table td {
-  padding:14px 10px;
+#pageContainer .oo-table td {
+  padding:13px 10px;
   border-bottom:1px solid #f0f2f6;
   font-size:12px;
   white-space:nowrap;
 }
 
-#pageContainer .dash-user {
+#pageContainer .oo-user {
   display:flex;
   align-items:center;
   gap:9px;
 }
 
-#pageContainer .dash-avatar {
-  width:32px;
-  height:32px;
+#pageContainer .oo-avatar {
+  width:33px;
+  height:33px;
   border-radius:50%;
-  background:#e7f5ee;
-  color:#087f5b;
   display:grid;
   place-items:center;
-  font-weight:700;
+  background:#e7f5ee;
+  color:#087f5b;
   font-size:11px;
+  font-weight:800;
 }
 
-#pageContainer .dash-status {
+#pageContainer .oo-status {
   display:inline-block;
   padding:5px 9px;
   border-radius:20px;
   font-size:10px;
-  font-weight:700;
+  font-weight:750;
 }
 
-#pageContainer .status-paid {
+#pageContainer .oo-paid {
+  color:#087f50;
   background:#e5f8ef;
-  color:#07804e;
 }
 
-#pageContainer .status-due {
+#pageContainer .oo-due {
+  color:#c46b19;
   background:#fff0e5;
-  color:#d66b20;
 }
 
-#pageContainer .status-pending {
+#pageContainer .oo-pending {
+  color:#987400;
   background:#fff6d9;
-  color:#a77a00;
 }
 
-#pageContainer .dash-bottom-grid {
+#pageContainer .oo-bottom-grid {
   display:grid;
   grid-template-columns:1.2fr 1fr;
   gap:16px;
   margin-top:16px;
 }
 
-#pageContainer .dash-activity {
+#pageContainer .oo-activity {
   display:flex;
   gap:12px;
+  align-items:center;
   padding:13px 0;
   border-bottom:1px solid #f0f2f6;
 }
 
-#pageContainer .dash-activity:last-child {
+#pageContainer .oo-activity:last-child {
   border-bottom:0;
 }
 
-#pageContainer .dash-activity-icon {
-  width:34px;
-  height:34px;
+#pageContainer .oo-activity-icon {
+  width:36px;
+  height:36px;
+  flex-shrink:0;
+  border-radius:10px;
   display:grid;
   place-items:center;
-  border-radius:9px;
   background:#e8f7ef;
-  flex-shrink:0;
+  font-size:16px;
 }
 
-#pageContainer .dash-activity-info strong {
+#pageContainer .oo-activity-info strong {
   display:block;
   font-size:12px;
   margin-bottom:5px;
 }
 
-#pageContainer .dash-activity-info small {
+#pageContainer .oo-activity-info small {
   color:var(--muted);
   font-size:11px;
 }
 
-#pageContainer .dash-amount-row {
+#pageContainer .oo-spend-row {
   display:flex;
   justify-content:space-between;
+  gap:10px;
   padding:13px 0;
   border-bottom:1px solid #f0f2f6;
   font-size:12px;
 }
 
-#pageContainer .dash-amount-row:last-child {
-  border:0;
-}
-
-#pageContainer .dash-amount-row strong {
+#pageContainer .oo-spend-row strong {
   font-size:13px;
 }
 
-#pageContainer .dash-footer {
+#pageContainer .oo-spend-total {
+  margin-top:15px;
+  padding:14px;
+  background:#fff2ef;
+  border-radius:9px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12px;
+  font-weight:750;
+}
+
+#pageContainer .oo-spend-total strong {
+  color:#d9534f;
+  font-size:18px;
+}
+
+#pageContainer .oo-footer {
   text-align:center;
   color:#9aa4b2;
   font-size:11px;
@@ -394,49 +430,47 @@
 }
 
 @media(max-width:1100px) {
-  #pageContainer .dash-grid {
+  #pageContainer .oo-grid {
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
 }
 
 @media(max-width:750px) {
-  #pageContainer .dash-page {
+  #pageContainer .oo-dashboard {
     padding:16px;
   }
 
-  #pageContainer .dash-main-grid,
-  #pageContainer .dash-bottom-grid {
+  #pageContainer .oo-main-grid,
+  #pageContainer .oo-bottom-grid {
     grid-template-columns:1fr;
   }
 
-  #pageContainer .dash-heading h2 {
+  #pageContainer .oo-heading h2 {
     font-size:21px;
-  }
-
-  #pageContainer .dash-value {
-    font-size:23px;
-  }
-
-  #pageContainer .dash-card {
-    padding:15px;
   }
 }
 
-@media(max-width:420px) {
-  #pageContainer .dash-grid {
+@media(max-width:430px) {
+  #pageContainer .oo-grid {
     gap:10px;
   }
 
-  #pageContainer .dash-card {
-    padding:12px;
+  #pageContainer .oo-card {
+    padding:13px;
   }
 
-  #pageContainer .dash-value {
+  #pageContainer .oo-value {
     font-size:20px;
   }
 
-  #pageContainer .dash-card-label {
+  #pageContainer .oo-card-label {
     font-size:10px;
+  }
+
+  #pageContainer .oo-icon {
+    width:32px;
+    height:32px;
+    font-size:16px;
   }
 }
 </style>
@@ -444,208 +478,162 @@
 
 <body>
 
-<div class="dash-page">
+<div class="oo-dashboard">
 
-  <div class="demo-label">DEMO VERSION</div>
+  <div class="oo-demo">DEMO VERSION</div>
 
-  <!-- HEADER -->
-  <div class="dash-header">
-    <div class="dash-heading">
+  <header class="oo-header">
+    <div class="oo-heading">
       <h2>Dashboard Overview</h2>
-      <p>Welcome back! Here's what's happening with your business.</p>
+      <p>Welcome back! Here's your business overview.</p>
     </div>
+    <div class="oo-date" id="ooDate">Loading date...</div>
+  </header>
 
-    <div class="dash-date" id="dashToday">
-      📅 Loading date...
-    </div>
-  </div>
+  <div class="oo-section-title">Customer Overview</div>
 
-  <!-- CUSTOMER STATISTICS -->
-  <div class="dash-section-title">Customer Overview</div>
+  <div class="oo-grid">
 
-  <div class="dash-grid">
-
-    <div class="dash-card">
-      <div class="dash-card-top">
-        <span class="dash-card-label">Total Customers</span>
-        <div class="dash-icon" style="background:#e8f7ef">👥</div>
+    <div class="oo-card">
+      <div class="oo-card-top">
+        <span class="oo-card-label">Total Customers</span>
+        <div class="oo-icon" style="background:#e8f7ef">👥</div>
       </div>
-      <div class="dash-value">1,248</div>
-      <div class="dash-bottom"><span class="dash-up">↑ 12.5%</span> Compared to last month</div>
+      <div class="oo-value">1,248</div>
+      <div class="oo-note"><span class="oo-green">↑ 12.5%</span> Compared to last month</div>
     </div>
 
-    <div class="dash-card">
-      <div class="dash-card-top">
-        <span class="dash-card-label">Active Customers</span>
-        <div class="dash-icon" style="background:#e7f0ff">🟢</div>
+    <div class="oo-card">
+      <div class="oo-card-top">
+        <span class="oo-card-label">Active Customers</span>
+        <div class="oo-icon" style="background:#e7f0ff">🟢</div>
       </div>
-      <div class="dash-value">1,105</div>
-      <div class="dash-bottom">Currently active customers</div>
+      <div class="oo-value">1,105</div>
+      <div class="oo-note">Currently active customers</div>
     </div>
 
-    <div class="dash-card">
-      <div class="dash-card-top">
-        <span class="dash-card-label">Due Customers</span>
-        <div class="dash-icon" style="background:#fff0e5">⏳</div>
+    <div class="oo-card">
+      <div class="oo-card-top">
+        <span class="oo-card-label">Due Customers</span>
+        <div class="oo-icon" style="background:#fff0e5">⏳</div>
       </div>
-      <div class="dash-value">86</div>
-      <div class="dash-bottom"><span class="dash-down">↑ 8 customers</span> This month</div>
+      <div class="oo-value">86</div>
+      <div class="oo-note"><span class="oo-red">8 customers</span> need payment</div>
     </div>
 
-    <div class="dash-card">
-      <div class="dash-card-top">
-        <span class="dash-card-label">Upcoming Customers</span>
-        <div class="dash-icon" style="background:#fff6d9">📅</div>
+    <div class="oo-card">
+      <div class="oo-card-top">
+        <span class="oo-card-label">Upcoming Customers</span>
+        <div class="oo-icon" style="background:#fff6d9">📅</div>
       </div>
-      <div class="dash-value">57</div>
-      <div class="dash-bottom">Billing date approaching</div>
+      <div class="oo-value">57</div>
+      <div class="oo-note">Billing date approaching</div>
     </div>
 
   </div>
 
-  <!-- FINANCIAL STATISTICS -->
-  <div class="dash-section-title">Financial Overview</div>
+  <div class="oo-section-title">Financial Overview</div>
 
-  <div class="dash-grid">
+  <div class="oo-grid">
 
-    <div class="dash-card">
-      <div class="dash-card-top">
-        <span class="dash-card-label">Total Collection</span>
-        <div class="dash-icon" style="background:#e5f8ef">💰</div>
+    <div class="oo-card">
+      <div class="oo-card-top">
+        <span class="oo-card-label">Total Collection</span>
+        <div class="oo-icon" style="background:#e5f8ef">💰</div>
       </div>
-      <div class="dash-value">৳ 2,45,800</div>
-      <div class="dash-bottom"><span class="dash-up">↑ 15.2%</span> This month</div>
+      <div class="oo-value">৳ 2,45,800</div>
+      <div class="oo-note"><span class="oo-green">↑ 15.2%</span> This month</div>
     </div>
 
-    <div class="dash-card">
-      <div class="dash-card-top">
-        <span class="dash-card-label">Total Due Amount</span>
-        <div class="dash-icon" style="background:#fff0e5">💳</div>
+    <div class="oo-card">
+      <div class="oo-card-top">
+        <span class="oo-card-label">Total Due Amount</span>
+        <div class="oo-icon" style="background:#fff0e5">💳</div>
       </div>
-      <div class="dash-value">৳ 28,500</div>
-      <div class="dash-bottom">Outstanding customer payments</div>
+      <div class="oo-value">৳ 28,500</div>
+      <div class="oo-note">Outstanding payments</div>
     </div>
 
-    <div class="dash-card">
-      <div class="dash-card-top">
-        <span class="dash-card-label">Total Spend</span>
-        <div class="dash-icon" style="background:#ffecec">📉</div>
+    <div class="oo-card">
+      <div class="oo-card-top">
+        <span class="oo-card-label">Total Spend</span>
+        <div class="oo-icon" style="background:#ffecec">📉</div>
       </div>
-      <div class="dash-value">৳ 45,200</div>
-      <div class="dash-bottom">Total business expenses</div>
+      <div class="oo-value">৳ 45,200</div>
+      <div class="oo-note">Business expenses</div>
     </div>
 
-    <div class="dash-card">
-      <div class="dash-card-top">
-        <span class="dash-card-label">Net Balance</span>
-        <div class="dash-icon" style="background:#e7f0ff">🏦</div>
+    <div class="oo-card">
+      <div class="oo-card-top">
+        <span class="oo-card-label">Net Balance</span>
+        <div class="oo-icon" style="background:#e7f0ff">🏦</div>
       </div>
-      <div class="dash-value">৳ 2,00,600</div>
-      <div class="dash-bottom">Collection minus spend</div>
+      <div class="oo-value">৳ 2,00,600</div>
+      <div class="oo-note">Collection minus spend</div>
     </div>
 
   </div>
 
-  <!-- CHART AND PAYMENT STATUS -->
-  <div class="dash-main-grid">
+  <div class="oo-main-grid">
 
-    <div class="dash-panel">
-      <div class="dash-panel-header">
+    <section class="oo-panel">
+      <div class="oo-panel-head">
         <h3>Monthly Collection</h3>
-        <span>Last 7 months · Demo data</span>
+        <span>Last 7 months · Demo</span>
       </div>
 
-      <div class="dash-chart">
-        <div class="dash-chart-col">
-          <div class="dash-bar" style="height:42%"></div>
-          <small>May</small>
-        </div>
-        <div class="dash-chart-col">
-          <div class="dash-bar" style="height:55%"></div>
-          <small>Jun</small>
-        </div>
-        <div class="dash-chart-col">
-          <div class="dash-bar" style="height:48%"></div>
-          <small>Jul</small>
-        </div>
-        <div class="dash-chart-col">
-          <div class="dash-bar" style="height:68%"></div>
-          <small>Aug</small>
-        </div>
-        <div class="dash-chart-col">
-          <div class="dash-bar" style="height:61%"></div>
-          <small>Sep</small>
-        </div>
-        <div class="dash-chart-col">
-          <div class="dash-bar" style="height:82%"></div>
-          <small>Oct</small>
-        </div>
-        <div class="dash-chart-col">
-          <div class="dash-bar" style="height:95%"></div>
-          <small>Nov</small>
-        </div>
+      <div class="oo-chart">
+        <div class="oo-chart-column"><div class="oo-bar" style="height:42%"></div><small>May</small></div>
+        <div class="oo-chart-column"><div class="oo-bar" style="height:55%"></div><small>Jun</small></div>
+        <div class="oo-chart-column"><div class="oo-bar" style="height:48%"></div><small>Jul</small></div>
+        <div class="oo-chart-column"><div class="oo-bar" style="height:68%"></div><small>Aug</small></div>
+        <div class="oo-chart-column"><div class="oo-bar" style="height:61%"></div><small>Sep</small></div>
+        <div class="oo-chart-column"><div class="oo-bar" style="height:82%"></div><small>Oct</small></div>
+        <div class="oo-chart-column"><div class="oo-bar" style="height:95%"></div><small>Nov</small></div>
       </div>
 
-      <div class="dash-legend">
-        <span><i></i> Collection Amount</span>
-      </div>
-    </div>
+      <div class="oo-legend"><i></i> Collection Amount</div>
+    </section>
 
-    <div class="dash-panel">
-      <div class="dash-panel-header">
+    <section class="oo-panel">
+      <div class="oo-panel-head">
         <h3>Payment Summary</h3>
         <span>This month</span>
       </div>
 
-      <div class="dash-progress-item">
-        <div class="dash-progress-info">
-          <span>Collected Payments</span>
-          <span>78%</span>
-        </div>
-        <div class="dash-progress">
-          <div class="dash-progress-fill" style="width:78%;background:#0a9b70"></div>
-        </div>
+      <div class="oo-progress-item">
+        <div class="oo-progress-info"><span>Collected Payments</span><strong>78%</strong></div>
+        <div class="oo-progress"><div class="oo-progress-fill" style="width:78%;background:#0ca678"></div></div>
       </div>
 
-      <div class="dash-progress-item">
-        <div class="dash-progress-info">
-          <span>Due Payments</span>
-          <span>15%</span>
-        </div>
-        <div class="dash-progress">
-          <div class="dash-progress-fill" style="width:15%;background:#f59e0b"></div>
-        </div>
+      <div class="oo-progress-item">
+        <div class="oo-progress-info"><span>Due Payments</span><strong>15%</strong></div>
+        <div class="oo-progress"><div class="oo-progress-fill" style="width:15%;background:#f59e0b"></div></div>
       </div>
 
-      <div class="dash-progress-item">
-        <div class="dash-progress-info">
-          <span>Pending Payments</span>
-          <span>7%</span>
-        </div>
-        <div class="dash-progress">
-          <div class="dash-progress-fill" style="width:7%;background:#64748b"></div>
-        </div>
+      <div class="oo-progress-item">
+        <div class="oo-progress-info"><span>Pending Payments</span><strong>7%</strong></div>
+        <div class="oo-progress"><div class="oo-progress-fill" style="width:7%;background:#64748b"></div></div>
       </div>
 
-      <div style="margin-top:22px;padding:13px;background:#f5faf7;border-radius:9px">
-        <div style="font-size:11px;color:#718096">Total Monthly Billing</div>
-        <div style="font-size:21px;font-weight:750;margin-top:5px">৳ 3,15,000</div>
+      <div class="oo-total-box">
+        <small>Total Monthly Billing</small>
+        <strong>৳ 3,15,000</strong>
       </div>
-    </div>
+    </section>
 
   </div>
 
-  <!-- RECENT CUSTOMERS -->
-  <div class="dash-section-title">Recent Customer Records</div>
+  <div class="oo-section-title">Recent Customer Records</div>
 
-  <div class="dash-panel">
-    <div class="dash-panel-header">
+  <section class="oo-panel">
+    <div class="oo-panel-head">
       <h3>Recent Customers</h3>
       <span>Latest 5 records · Demo</span>
     </div>
 
-    <div class="dash-table-wrap">
-      <table class="dash-table">
+    <div class="oo-table-wrap">
+      <table class="oo-table">
         <thead>
           <tr>
             <th>Customer</th>
@@ -657,175 +645,156 @@
         </thead>
         <tbody>
           <tr>
-            <td>
-              <div class="dash-user">
-                <div class="dash-avatar">AR</div>
-                <strong>Abdur Rahman</strong>
-              </div>
-            </td>
-            <td>192.168.1.101</td>
-            <td>01712-345678</td>
-            <td>৳ 1,000</td>
-            <td><span class="dash-status status-paid">Paid</span></td>
+            <td><div class="oo-user"><div class="oo-avatar">AR</div><strong>Abdur Rahman</strong></div></td>
+            <td>192.168.1.101</td><td>01712-345678</td><td>৳ 1,000</td>
+            <td><span class="oo-status oo-paid">Paid</span></td>
           </tr>
-
           <tr>
-            <td>
-              <div class="dash-user">
-                <div class="dash-avatar">MK</div>
-                <strong>Mohammad Karim</strong>
-              </div>
-            </td>
-            <td>192.168.1.102</td>
-            <td>01812-456789</td>
-            <td>৳ 700</td>
-            <td><span class="dash-status status-due">Due</span></td>
+            <td><div class="oo-user"><div class="oo-avatar">MK</div><strong>Mohammad Karim</strong></div></td>
+            <td>192.168.1.102</td><td>01812-456789</td><td>৳ 700</td>
+            <td><span class="oo-status oo-due">Due</span></td>
           </tr>
-
           <tr>
-            <td>
-              <div class="dash-user">
-                <div class="dash-avatar">SH</div>
-                <strong>Shahid Hasan</strong>
-              </div>
-            </td>
-            <td>192.168.1.103</td>
-            <td>01912-567890</td>
-            <td>৳ 1,200</td>
-            <td><span class="dash-status status-paid">Paid</span></td>
+            <td><div class="oo-user"><div class="oo-avatar">SH</div><strong>Shahid Hasan</strong></div></td>
+            <td>192.168.1.103</td><td>01912-567890</td><td>৳ 1,200</td>
+            <td><span class="oo-status oo-paid">Paid</span></td>
           </tr>
-
           <tr>
-            <td>
-              <div class="dash-user">
-                <div class="dash-avatar">MR</div>
-                <strong>Mahmudur Rahman</strong>
-              </div>
-            </td>
-            <td>192.168.1.104</td>
-            <td>01612-678901</td>
-            <td>৳ 500</td>
-            <td><span class="dash-status status-pending">Pending</span></td>
+            <td><div class="oo-user"><div class="oo-avatar">MR</div><strong>Mahmudur Rahman</strong></div></td>
+            <td>192.168.1.104</td><td>01612-678901</td><td>৳ 500</td>
+            <td><span class="oo-status oo-pending">Pending</span></td>
           </tr>
-
           <tr>
-            <td>
-              <div class="dash-user">
-                <div class="dash-avatar">NS</div>
-                <strong>Nazmul Sarker</strong>
-              </div>
-            </td>
-            <td>192.168.1.105</td>
-            <td>01512-789012</td>
-            <td>৳ 800</td>
-            <td><span class="dash-status status-paid">Paid</span></td>
+            <td><div class="oo-user"><div class="oo-avatar">NS</div><strong>Nazmul Sarker</strong></div></td>
+            <td>192.168.1.105</td><td>01512-789012</td><td>৳ 800</td>
+            <td><span class="oo-status oo-paid">Paid</span></td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 
-  <!-- ACTIVITY AND EXPENSE -->
-  <div class="dash-bottom-grid">
+  <div class="oo-bottom-grid">
 
-    <div class="dash-panel">
-      <div class="dash-panel-header">
+    <section class="oo-panel">
+      <div class="oo-panel-head">
         <h3>Recent Activities</h3>
         <span>Demo activity</span>
       </div>
 
-      <div class="dash-activity">
-        <div class="dash-activity-icon">💰</div>
-        <div class="dash-activity-info">
+      <div class="oo-activity">
+        <div class="oo-activity-icon">💰</div>
+        <div class="oo-activity-info">
           <strong>Payment Received</strong>
           <small>Abdur Rahman paid ৳1,000 · 10 minutes ago</small>
         </div>
       </div>
 
-      <div class="dash-activity">
-        <div class="dash-activity-icon">👤</div>
-        <div class="dash-activity-info">
+      <div class="oo-activity">
+        <div class="oo-activity-icon">👤</div>
+        <div class="oo-activity-info">
           <strong>New Customer Added</strong>
           <small>Nazmul Sarker added · 1 hour ago</small>
         </div>
       </div>
 
-      <div class="dash-activity">
-        <div class="dash-activity-icon">📧</div>
-        <div class="dash-activity-info">
+      <div class="oo-activity">
+        <div class="oo-activity-icon">📧</div>
+        <div class="oo-activity-info">
           <strong>Email Sent Successfully</strong>
           <small>Monthly bill notification · 2 hours ago</small>
         </div>
       </div>
 
-      <div class="dash-activity">
-        <div class="dash-activity-icon">📉</div>
-        <div class="dash-activity-info">
+      <div class="oo-activity">
+        <div class="oo-activity-icon">📉</div>
+        <div class="oo-activity-info">
           <strong>New Spend Added</strong>
           <small>Office expense ৳2,500 · Yesterday</small>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="dash-panel">
-      <div class="dash-panel-header">
+    <section class="oo-panel">
+      <div class="oo-panel-head">
         <h3>Spend Overview</h3>
         <span>This month</span>
       </div>
 
-      <div class="dash-amount-row">
-        <span>Office Expenses</span>
-        <strong>৳ 8,500</strong>
-      </div>
+      <div class="oo-spend-row"><span>Office Expenses</span><strong>৳ 8,500</strong></div>
+      <div class="oo-spend-row"><span>Internet Bandwidth</span><strong>৳ 22,000</strong></div>
+      <div class="oo-spend-row"><span>Electricity Bill</span><strong>৳ 6,200</strong></div>
+      <div class="oo-spend-row"><span>Maintenance</span><strong>৳ 5,000</strong></div>
+      <div class="oo-spend-row"><span>Other Expenses</span><strong>৳ 3,500</strong></div>
 
-      <div class="dash-amount-row">
-        <span>Internet Bandwidth</span>
-        <strong>৳ 22,000</strong>
+      <div class="oo-spend-total">
+        <span>Total Spend</span>
+        <strong>৳ 45,200</strong>
       </div>
-
-      <div class="dash-amount-row">
-        <span>Electricity Bill</span>
-        <strong>৳ 6,200</strong>
-      </div>
-
-      <div class="dash-amount-row">
-        <span>Maintenance</span>
-        <strong>৳ 5,000</strong>
-      </div>
-
-      <div class="dash-amount-row">
-        <span>Other Expenses</span>
-        <strong>৳ 3,500</strong>
-      </div>
-
-      <div style="background:#fff5f2;padding:14px;border-radius:9px;margin-top:15px;display:flex;justify-content:space-between;align-items:center">
-        <strong style="font-size:12px">Total Spend</strong>
-        <strong style="font-size:19px;color:#d9534f">৳ 45,200</strong>
-      </div>
-    </div>
+    </section>
 
   </div>
 
-  <div class="dash-footer">
+  <footer class="oo-footer">
     © 2026 ONE ONLINE · Dashboard Demo Preview
-  </div>
+  </footer>
 
 </div>
 
 <script>
-(function(){
+/* =========================
+   ONE ONLINE DASHBOARD JS
+========================= */
 
-  const dateElement = document.getElementById("dashToday");
+(function () {
+  "use strict";
 
-  if(dateElement){
-    dateElement.textContent = "📅 " + new Date().toLocaleDateString(
-      "en-BD",
-      {
-        day:"2-digit",
-        month:"long",
-        year:"numeric"
-      }
+  function initializeDashboard() {
+    const root = document.querySelector(
+      "#pageContainer .oo-dashboard"
     );
+
+    if (!root) return;
+
+    // Current date
+    const dateElement = root.querySelector("#ooDate");
+
+    if (dateElement) {
+      dateElement.textContent = new Date().toLocaleDateString(
+        "en-BD",
+        {
+          weekday: "long",
+          day: "2-digit",
+          month: "long",
+          year: "numeric"
+        }
+      );
+    }
+
+    // Animate chart bars
+    const bars = root.querySelectorAll(".oo-bar");
+
+    bars.forEach(function (bar) {
+      const finalHeight = bar.style.height;
+      bar.style.height = "0";
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          bar.style.height = finalHeight;
+        });
+      });
+    });
+  }
+
+  // Works with dynamically loaded dashboard HTML
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initializeDashboard,
+      { once: true }
+    );
+  } else {
+    initializeDashboard();
   }
 
 })();
