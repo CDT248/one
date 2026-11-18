@@ -3,219 +3,349 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0d1422">
-<title>ONE ONLINE | Dashboard</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<title>ONE ONLINE | Admin Dashboard</title>
 
 <style>
 :root{
- --bg:#0b1220;
- --panel:#151f30;
- --panel2:#1b293d;
+ --bg:#0b1120;
+ --sidebar:#101a2b;
+ --panel:#141f31;
+ --panel2:#19263a;
  --border:#293950;
- --text:#f3f6fc;
- --muted:#91a1b8;
- --primary:#16a477;
- --primary2:#0d805d;
- --danger:#ef5350;
- --gold:#f5b942;
- --input:#101b2c;
+ --text:#edf3fc;
+ --muted:#8c9db5;
+ --green:#16a477;
+ --green2:#0d805d;
+ --green-soft:#123d34;
+ --blue:#559bfa;
+ --blue-soft:#192f4d;
+ --orange:#f5b942;
+ --orange-soft:#42331c;
+ --red:#ef6262;
+ --red-soft:#44272b;
+ --input:#0e1929;
+ --radius:13px;
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
  margin:0;background:var(--bg);color:var(--text);
- font-family:Inter,Arial,sans-serif;font-size:14px;
- min-height:100vh;
+ font-family:Inter,system-ui,-apple-system,Arial,sans-serif;
+ font-size:14px;min-height:100vh;
 }
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.topbar{
- min-height:70px;padding:12px 24px;
- display:flex;align-items:center;justify-content:space-between;
+svg{width:18px;height:18px;flex-shrink:0}
+button:disabled{opacity:.5;cursor:not-allowed}
+
+/* SIDEBAR */
+.sidebar{
+ position:fixed;left:0;top:0;bottom:0;width:245px;
+ background:var(--sidebar);border-right:1px solid var(--border);
+ display:flex;flex-direction:column;z-index:30;
+ transition:transform .25s;
+}
+.brand{
+ height:76px;padding:0 21px;
+ display:flex;align-items:center;gap:12px;
  border-bottom:1px solid var(--border);
- background:#111b2b;position:sticky;top:0;z-index:20;
 }
-.brand{display:flex;align-items:center;gap:12px}
 .logo{
- width:43px;height:43px;border-radius:13px;
+ width:42px;height:42px;border-radius:13px;
+ display:grid;place-items:center;
  background:linear-gradient(145deg,#20c997,#087f5b);
- display:grid;place-items:center;font-size:27px;
- font-weight:900;color:white;
- box-shadow:0 5px 18px #16a47735;
+ color:white;font-size:26px;font-weight:900;
+ box-shadow:0 5px 20px #16a47735;
 }
-.brand h1{font-size:19px;margin:0;font-weight:850}
-.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
-.top-status{
- color:#4adea8;font-size:11px;font-weight:800;
- background:#123e34;padding:8px 12px;border-radius:20px;
+.brand-name{font-size:17px;font-weight:900;letter-spacing:.5px}
+.brand-sub{font-size:10px;color:var(--muted);margin-top:4px}
+.nav-label{
+ padding:24px 20px 10px;color:#687b96;
+ font-size:10px;font-weight:850;letter-spacing:1.2px;
 }
-.container{max-width:1250px;margin:auto;padding:25px 22px 45px}
-.heading{
- display:flex;align-items:center;justify-content:space-between;
- gap:15px;flex-wrap:wrap;margin-bottom:23px;
-}
-.heading h2{margin:0;font-size:25px;font-weight:850}
-.heading p{margin:7px 0 0;color:var(--muted);font-size:12px}
-.btn{
- border:0;border-radius:9px;padding:12px 17px;
- font-size:12px;font-weight:800;min-height:43px;
- display:inline-flex;align-items:center;justify-content:center;gap:7px;
+.nav{padding:0 12px;display:grid;gap:5px}
+.nav-btn{
+ width:100%;display:flex;align-items:center;gap:12px;
+ padding:12px 13px;border:1px solid transparent;
+ border-radius:9px;background:transparent;
+ color:#a6b5c9;text-align:left;font-size:12px;font-weight:700;
  transition:.2s;
 }
-.btn-primary{background:var(--primary);color:white}
-.btn-primary:hover{background:var(--primary2)}
-.btn-secondary{background:#26364d;color:#e5edf8;border:1px solid var(--border)}
-.btn-danger{background:#54292c;color:#ffaaaa}
-.btn:disabled{opacity:.5;cursor:not-allowed}
+.nav-btn:hover{background:#1b2a40;color:white}
+.nav-btn.active{
+ color:#4ce0ad;background:#123d34;
+ border-color:#205c4a;
+}
+.nav-btn svg{width:17px;height:17px}
+.nav-bottom{margin-top:auto;padding:15px;border-top:1px solid var(--border)}
+.system-status{
+ display:flex;align-items:center;gap:10px;
+ background:#122c29;border:1px solid #235346;
+ border-radius:10px;padding:12px;
+}
+.online-dot{
+ width:8px;height:8px;border-radius:50%;
+ background:#3cdb9e;box-shadow:0 0 10px #3cdb9e;
+}
+.system-status strong{display:block;font-size:11px;color:#7be6bd}
+.system-status small{font-size:9px;color:#789d90}
 
-/* Dashboard cards */
+/* MAIN */
+.main{margin-left:245px;min-height:100vh}
+.topbar{
+ height:76px;padding:0 28px;
+ background:#101a2b;border-bottom:1px solid var(--border);
+ display:flex;align-items:center;justify-content:space-between;
+ position:sticky;top:0;z-index:20;
+}
+.top-left{display:flex;align-items:center;gap:13px}
+.menu-btn{
+ display:none;width:38px;height:38px;
+ border:1px solid var(--border);border-radius:9px;
+ background:var(--panel2);color:white;
+ align-items:center;justify-content:center;
+}
+.breadcrumb{font-size:12px;color:var(--muted)}
+.breadcrumb strong{color:white}
+.top-actions{display:flex;align-items:center;gap:12px}
+.date-label{
+ display:flex;align-items:center;gap:7px;
+ font-size:11px;color:var(--muted);
+ background:var(--panel);border:1px solid var(--border);
+ padding:9px 12px;border-radius:8px;
+}
+.admin-profile{
+ display:flex;align-items:center;gap:10px;
+ padding-left:13px;border-left:1px solid var(--border);
+}
+.admin-avatar{
+ width:36px;height:36px;border-radius:11px;
+ background:linear-gradient(145deg,#20c997,#087f5b);
+ display:grid;place-items:center;font-weight:900;
+ color:white;font-size:14px;
+}
+.admin-profile strong{display:block;font-size:11px}
+.admin-profile small{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+
+/* CONTENT */
+.content{max-width:1500px;margin:auto;padding:28px}
+.welcome{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:15px;margin-bottom:25px;flex-wrap:wrap;
+}
+.welcome h1{font-size:25px;margin:0;font-weight:850;letter-spacing:-.5px}
+.welcome p{font-size:12px;color:var(--muted);margin:7px 0 0}
+.btn{
+ border:1px solid transparent;border-radius:9px;
+ padding:11px 15px;min-height:41px;
+ display:inline-flex;align-items:center;justify-content:center;
+ gap:8px;font-size:11px;font-weight:800;
+ transition:.2s;white-space:nowrap;
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{
+ background:var(--green);color:white;
+ box-shadow:0 4px 14px #16a47725;
+}
+.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}
+.btn-secondary{
+ background:#202f45;border-color:#354760;color:#e0e9f6;
+}
+.btn-secondary:hover{background:#2a3c55}
+.btn-icon{
+ width:35px;height:35px;padding:0;
+ display:inline-flex;align-items:center;justify-content:center;
+ border-radius:8px;border:1px solid var(--border);
+ background:#1b2a40;color:#b9c9dd;
+}
+.btn-icon:hover{background:#2b3e57;color:white}
+.btn-icon svg{width:15px;height:15px}
+.btn-danger{background:var(--red-soft);color:#ff9999;border-color:#68383d}
+
+/* STATS */
 .stats{
  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
- gap:15px;margin-bottom:25px;
+ gap:15px;margin-bottom:24px;
 }
-.stat{
+.stat-card{
  background:var(--panel);border:1px solid var(--border);
- border-radius:13px;padding:19px;
- display:flex;align-items:center;gap:14px;
-}
-.stat-icon{
- width:45px;height:45px;flex-shrink:0;border-radius:12px;
- display:grid;place-items:center;font-size:21px;
- background:#123e34;color:#38d6a3;
-}
-.stat:nth-child(2) .stat-icon{background:#342e19;color:#f5c451}
-.stat:nth-child(3) .stat-icon{background:#192e4d;color:#6baaff}
-.stat:nth-child(4) .stat-icon{background:#3b2438;color:#e9a0e5}
-.stat-info small{color:var(--muted);font-size:11px;font-weight:700}
-.stat-info strong{display:block;font-size:24px;margin-top:5px}
-.stat-info span{display:block;font-size:10px;color:#75869f;margin-top:3px}
-
-/* Section */
-.section{
- background:var(--panel);border:1px solid var(--border);
- border-radius:14px;overflow:hidden;
-}
-.section-head{
- padding:19px 20px;border-bottom:1px solid var(--border);
- display:flex;justify-content:space-between;align-items:center;
- gap:12px;flex-wrap:wrap;
-}
-.section-head h3{margin:0;font-size:16px;font-weight:850}
-.section-head p{margin:5px 0 0;font-size:11px;color:var(--muted)}
-.toolbar{
- padding:15px 20px;display:flex;align-items:center;
- gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--border);
-}
-.search-box{position:relative;flex:1;min-width:190px}
-.search-box input{
- width:100%;height:42px;padding:0 13px;
- background:var(--input);border:1px solid #31425a;
- border-radius:9px;color:white;outline:none;
-}
-.search-box input:focus{border-color:var(--primary)}
-.toolbar select{
- height:42px;background:var(--input);
- border:1px solid #31425a;color:white;
- border-radius:9px;padding:0 12px;outline:none;
-}
-.count-label{font-size:11px;color:var(--muted);font-weight:700}
-
-/* Customer cards */
-.customer-list{
- padding:17px;display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;
-}
-.customer-card{
- background:#111c2d;border:1px solid #2b3c54;
- border-radius:12px;padding:16px;min-width:0;
+ border-radius:var(--radius);padding:19px;
+ position:relative;overflow:hidden;
  transition:.2s;
 }
-.customer-card:hover{border-color:#16a47780}
-.customer-top{
- display:flex;align-items:center;justify-content:space-between;
- gap:10px;margin-bottom:14px;
+.stat-card:hover{border-color:#42604f;transform:translateY(-2px)}
+.stat-top{display:flex;justify-content:space-between;align-items:center}
+.stat-icon{
+ width:43px;height:43px;border-radius:12px;
+ display:grid;place-items:center;
+ background:var(--green-soft);color:#4cdbab;
 }
-.customer-identity{display:flex;align-items:center;gap:11px;min-width:0}
-.avatar{
- width:43px;height:43px;flex-shrink:0;border-radius:12px;
- display:grid;place-items:center;background:#164b3d;
- color:#54e0b1;font-weight:900;font-size:17px;
-}
-.customer-name{font-weight:850;font-size:14px;overflow-wrap:anywhere}
-.customer-ip{font-size:11px;color:#70b9ff;margin-top:4px}
-.status{
- padding:6px 9px;border-radius:20px;
- font-size:10px;font-weight:800;white-space:nowrap;
- background:#123e34;color:#45dfa9;
-}
-.status.due{background:#482d1b;color:#ffc36a}
-.status.other{background:#28364b;color:#aebdd1}
-.customer-fields{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
- gap:12px 10px;padding:13px 0;
- border-top:1px solid #293950;border-bottom:1px solid #293950;
-}
-.info-item{min-width:0}
-.info-item small{display:block;color:#8495ad;font-size:10px;margin-bottom:5px}
-.info-item strong{display:block;font-size:12px;overflow-wrap:anywhere}
-.customer-actions{
- display:flex;justify-content:space-between;align-items:center;
- gap:10px;margin-top:13px;
-}
-.customer-actions small{color:var(--muted);font-size:10px}
-.details-toggle{
- background:#26364d;border:1px solid #34465f;
- color:#dce8f5;border-radius:7px;padding:8px 11px;
- font-size:10px;font-weight:800;
-}
-.extra-details{
- display:none;border-top:1px solid #293950;
- margin-top:13px;padding-top:13px;
- grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
-}
-.extra-details.show{display:grid}
-.empty{
- grid-column:1/-1;text-align:center;padding:55px 15px;
- color:var(--muted);
-}
-.empty-icon{font-size:40px;margin-bottom:12px}
-.empty strong{display:block;color:#dce6f4;font-size:15px}
-.empty p{font-size:12px;line-height:1.6}
+.stat-icon svg{width:21px;height:21px}
+.stat-card:nth-child(2) .stat-icon{background:var(--blue-soft);color:#77b1ff}
+.stat-card:nth-child(3) .stat-icon{background:#183c32;color:#62dba9}
+.stat-card:nth-child(4) .stat-icon{background:var(--orange-soft);color:#f7c66b}
+.stat-tag{font-size:9px;color:#7f91a9;font-weight:800}
+.stat-title{font-size:11px;color:var(--muted);margin-top:16px;font-weight:700}
+.stat-value{font-size:27px;font-weight:850;margin-top:6px;letter-spacing:-.7px}
+.stat-desc{font-size:10px;color:#71839c;margin-top:5px}
 
-/* Modal */
+/* SECTION */
+.section{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:var(--radius);overflow:hidden;
+}
+.section-header{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:19px 21px;gap:12px;flex-wrap:wrap;
+ border-bottom:1px solid var(--border);
+}
+.section-title{display:flex;align-items:center;gap:11px}
+.section-title-icon{
+ width:37px;height:37px;border-radius:10px;
+ display:grid;place-items:center;background:#1d3046;color:#80b5ff;
+}
+.section-title-icon svg{width:19px;height:19px}
+.section-title h2{font-size:14px;margin:0;font-weight:850}
+.section-title p{font-size:10px;color:var(--muted);margin:5px 0 0}
+.toolbar{
+ display:flex;align-items:center;gap:10px;
+ padding:14px 20px;border-bottom:1px solid var(--border);
+ flex-wrap:wrap;
+}
+.search-wrap{position:relative;flex:1;min-width:190px}
+.search-wrap svg{
+ position:absolute;left:12px;top:50%;transform:translateY(-50%);
+ color:#7f91a9;width:16px;height:16px;
+}
+.search-wrap input{
+ width:100%;height:41px;padding:0 12px 0 38px;
+ border:1px solid #34465f;border-radius:8px;
+ background:var(--input);color:white;outline:none;
+}
+.search-wrap input:focus{border-color:var(--green)}
+.filter-select{
+ height:41px;min-width:135px;padding:0 12px;
+ background:var(--input);border:1px solid #34465f;
+ border-radius:8px;color:#dce8f5;outline:none;
+ font-size:11px;
+}
+.result-count{font-size:10px;color:var(--muted);font-weight:750}
+
+/* DESKTOP TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:750px}
+thead{background:#111c2d}
+th{
+ padding:14px 16px;text-align:left;color:#8193ad;
+ font-size:9px;letter-spacing:.6px;font-weight:850;
+ white-space:nowrap;
+}
+td{
+ padding:14px 16px;border-top:1px solid #26364c;
+ font-size:11px;color:#c7d4e4;white-space:nowrap;
+}
+tbody tr:hover{background:#19273b}
+.customer-cell{display:flex;align-items:center;gap:10px}
+.customer-avatar{
+ width:34px;height:34px;flex-shrink:0;
+ display:grid;place-items:center;border-radius:10px;
+ background:#183f35;color:#4ce0ad;font-weight:900;
+}
+.customer-cell strong{display:block;color:white;font-size:11px}
+.customer-cell small{display:block;color:#7d91ac;font-size:9px;margin-top:4px}
+.ip-label{color:#78b6ff;font-weight:750}
+.status{
+ display:inline-flex;align-items:center;gap:5px;
+ border-radius:20px;padding:6px 9px;
+ font-size:9px;font-weight:850;
+ background:var(--green-soft);color:#54dfae;
+}
+.status.due{background:var(--orange-soft);color:#ffd07a}
+.status.other{background:#26364b;color:#b8c7d8}
+.status-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.action-group{display:flex;gap:6px}
+.empty{
+ text-align:center;padding:55px 15px;color:var(--muted);
+}
+.empty svg{width:40px;height:40px;color:#526681;margin-bottom:12px}
+.empty strong{display:block;color:#dce6f4;font-size:14px}
+.empty p{font-size:11px;line-height:1.6}
+
+/* MOBILE CUSTOMER CARDS */
+.mobile-list{display:none;padding:12px;gap:11px}
+.mobile-card{
+ background:#101b2d;border:1px solid #2b3b53;
+ border-radius:11px;padding:14px;
+}
+.mobile-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.mobile-name{display:flex;align-items:center;gap:10px;min-width:0}
+.mobile-name strong{display:block;font-size:12px;overflow-wrap:anywhere}
+.mobile-name small{display:block;color:#75b5f9;font-size:10px;margin-top:4px}
+.mobile-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;margin-top:14px;padding-top:13px;
+ border-top:1px solid var(--border);
+}
+.mobile-info small{display:block;color:#8192a9;font-size:9px;margin-bottom:5px}
+.mobile-info strong{font-size:11px;overflow-wrap:anywhere}
+.mobile-actions{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-top:13px;padding-top:12px;border-top:1px solid var(--border);
+}
+.mobile-extra{display:none}
+.mobile-extra.show{display:grid}
+.mobile-actions button{font-size:10px}
+
+/* MODAL */
 .overlay{
- display:none;position:fixed;inset:0;
- background:#030914dc;z-index:100;
- align-items:center;justify-content:center;padding:15px;
+ position:fixed;inset:0;z-index:100;
+ display:none;align-items:center;justify-content:center;
+ background:#030914db;padding:14px;
 }
 .overlay.show{display:flex}
 .modal{
- width:100%;max-width:780px;max-height:92vh;
- overflow-y:auto;background:#151f30;
- border:1px solid #34465f;border-radius:16px;
- box-shadow:0 25px 80px #000b;
+ width:100%;max-width:780px;max-height:94vh;
+ display:flex;flex-direction:column;
+ background:#141f31;border:1px solid #354760;
+ border-radius:15px;overflow:hidden;
+ box-shadow:0 25px 90px #000b;
+ animation:modalIn .2s ease;
 }
-.modal-head{
- position:sticky;top:0;background:#172438;z-index:2;
- padding:17px 20px;border-bottom:1px solid var(--border);
- display:flex;align-items:center;justify-content:space-between;
+@keyframes modalIn{
+ from{opacity:0;transform:translateY(10px)}
+ to{opacity:1;transform:none}
 }
-.modal-head h3{margin:0;font-size:17px}
-.modal-head p{margin:5px 0 0;color:var(--muted);font-size:11px}
-.close{
+.modal-header{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:17px 20px;background:#19263a;
+ border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.modal-heading{display:flex;align-items:center;gap:12px}
+.modal-symbol{
+ width:40px;height:40px;border-radius:11px;
+ background:#123d34;color:#4ce0ad;
+ display:grid;place-items:center;
+}
+.modal-symbol svg{width:21px;height:21px}
+.modal-heading h3{font-size:15px;margin:0}
+.modal-heading p{font-size:10px;color:var(--muted);margin:5px 0 0}
+.close-btn{
  width:35px;height:35px;border-radius:9px;
- background:#26364d;color:white;border:1px solid #34465f;
- font-size:20px;
+ background:#27364b;border:1px solid #3a4b62;color:white;
+ display:grid;place-items:center;
 }
-.modal-body{padding:20px}
+.modal-body{padding:19px;overflow-y:auto}
 .form-section{
- background:#111c2d;border:1px solid #2b3c54;
- border-radius:11px;padding:17px;margin-bottom:14px;
+ background:#101b2d;border:1px solid #2b3d55;
+ border-radius:11px;padding:16px;margin-bottom:13px;
 }
-.form-section h4{
- margin:0 0 16px;font-size:13px;
- display:flex;align-items:center;gap:8px;
+.form-heading{
+ display:flex;align-items:center;gap:9px;
+ margin-bottom:16px;font-size:12px;font-weight:850;
 }
+.form-heading svg{color:#4bd9a8}
 .form-grid{
  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
  gap:14px;
@@ -223,218 +353,379 @@ button{cursor:pointer}
 .field{min-width:0}
 .field.full{grid-column:1/-1}
 .field label{
- display:block;font-size:11px;font-weight:750;
- color:#dbe5f2;margin-bottom:7px;
+ display:block;color:#d4e0ef;font-size:10px;
+ font-weight:750;margin-bottom:7px;
 }
-.req{color:#ff7373}
+.req{color:#ff7777}
 .field input,.field select,.field textarea{
- width:100%;height:43px;background:var(--input);
- border:1px solid #31425a;border-radius:8px;
- color:white;padding:0 11px;outline:none;
+ width:100%;height:43px;padding:0 11px;
+ border:1px solid #354760;border-radius:8px;
+ background:#0c1728;color:white;outline:none;
+ font-size:12px;min-width:0;
 }
-.field textarea{height:75px;padding:10px;resize:vertical}
-.field input:focus,.field select:focus,
-.field textarea:focus{
- border-color:var(--primary);
- box-shadow:0 0 0 3px #16a4771a;
+.field textarea{height:76px;padding:10px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{
+ border-color:var(--green);box-shadow:0 0 0 3px #16a47718;
 }
-.field input[readonly]{color:#a7b6ca;background:#172438}
-.field input::placeholder,.field textarea::placeholder{color:#71839d}
-.modal-actions{
- display:flex;justify-content:flex-end;gap:10px;
- padding-top:5px;
+.field input::placeholder,.field textarea::placeholder{color:#70829c}
+.field input[readonly]{color:#9eafc3;background:#172438}
+.form-actions{
+ display:flex;justify-content:flex-end;gap:9px;
+ padding-top:6px;
 }
+.form-actions .btn{min-width:120px}
 
-/* Loading */
-.loading{
- grid-column:1/-1;text-align:center;padding:40px;
- color:var(--muted);font-size:12px;
-}
-.spinner{
- display:inline-block;width:25px;height:25px;
- border:3px solid #31425a;border-top-color:var(--primary);
- border-radius:50%;animation:spin .7s linear infinite;
- margin-bottom:12px;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* Toast */
+/* TOAST */
 .toast-wrap{
- position:fixed;right:16px;top:83px;z-index:200;
- display:grid;gap:9px;width:min(350px,calc(100% - 32px));
+ position:fixed;right:18px;top:87px;z-index:200;
+ display:grid;gap:9px;width:min(350px,calc(100% - 36px));
 }
 .toast{
- padding:13px;background:#172438;
- border:1px solid #34465f;border-left:4px solid var(--primary);
- border-radius:9px;box-shadow:0 10px 30px #0006;
- display:flex;gap:10px;align-items:center;
+ display:flex;align-items:center;gap:11px;
+ background:#19283b;border:1px solid #354760;
+ border-left:4px solid var(--green);
+ border-radius:10px;padding:13px;
+ box-shadow:0 10px 35px #0007;
+ animation:toastIn .2s ease;
 }
-.toast.error{border-left-color:var(--danger)}
-.toast strong{display:block;font-size:12px;margin-bottom:4px}
-.toast span{font-size:11px;color:var(--muted)}
-.footer{text-align:center;color:#61738d;font-size:11px;padding:20px}
+.toast.error{border-left-color:var(--red)}
+.toast-icon{
+ width:29px;height:29px;display:grid;place-items:center;
+ border-radius:9px;background:#123d34;color:#55dfad;
+}
+.toast.error .toast-icon{background:#44272b;color:#ff9999}
+.toast strong{display:block;font-size:11px}
+.toast small{display:block;font-size:10px;color:var(--muted);margin-top:4px}
+@keyframes toastIn{
+ from{opacity:0;transform:translateY(-8px)}
+ to{opacity:1;transform:none}
+}
+.loading{text-align:center;padding:45px;color:var(--muted);font-size:11px}
+.spinner{
+ width:27px;height:27px;border:3px solid #31445c;
+ border-top-color:var(--green);border-radius:50%;
+ animation:spin .7s linear infinite;margin:0 auto 12px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.footer{text-align:center;padding:22px;color:#60728b;font-size:10px}
+.overlay-bg{
+ display:none;position:fixed;inset:0;background:#0009;z-index:25;
+}
+.overlay-bg.show{display:block}
 
-@media(max-width:950px){
+/* RESPONSIVE */
+@media(max-width:1050px){
  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .content{padding:23px}
 }
-@media(max-width:650px){
- .topbar{padding:10px 13px;min-height:64px}
- .logo{width:39px;height:39px;font-size:24px}
- .brand h1{font-size:16px}
- .brand small{font-size:10px}
- .top-status{font-size:9px;padding:7px}
- .container{padding:19px 12px 30px}
- .heading h2{font-size:22px}
- .heading{align-items:stretch}
- .heading .btn{width:100%}
- .stats{gap:9px}
- .stat{padding:12px;gap:9px}
- .stat-icon{width:37px;height:37px;font-size:17px}
- .stat-info strong{font-size:20px}
- .stat-info small{font-size:9px}
- .stat-info span{font-size:9px}
- .section-head{padding:15px}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%)}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0}
+ .menu-btn{display:flex}
+ .topbar{height:65px;padding:0 13px}
+ .content{padding:19px 13px}
+ .welcome h1{font-size:22px}
+ .welcome{align-items:stretch}
+ .welcome>.btn{width:100%}
+ .date-label{display:none}
+ .admin-profile{padding-left:9px}
+ .admin-profile>div:last-child{display:none}
+ .desktop-table{display:none}
+ .mobile-list{display:grid}
  .toolbar{padding:12px;gap:8px}
- .search-box{flex-basis:100%}
- .toolbar select{flex:1;min-width:0}
- .customer-list{grid-template-columns:1fr;padding:10px;gap:10px}
- .customer-card{padding:14px}
- .modal{max-height:94vh}
- .modal-body{padding:12px}
- .modal-head{padding:14px}
- .form-section{padding:13px}
- .form-grid{grid-template-columns:1fr;gap:13px}
+ .search-wrap{flex-basis:100%}
+ .filter-select{flex:1;min-width:0}
+ .section-header{padding:14px}
+ .section-title h2{font-size:13px}
+}
+@media(max-width:450px){
+ .stats{gap:9px}
+ .stat-card{padding:13px}
+ .stat-icon{width:36px;height:36px}
+ .stat-icon svg{width:18px;height:18px}
+ .stat-title{font-size:9px;margin-top:12px}
+ .stat-value{font-size:22px}
+ .stat-desc{font-size:9px}
+ .form-grid{grid-template-columns:1fr;gap:12px}
  .field.full{grid-column:auto}
- .modal-actions{flex-direction:column-reverse}
- .modal-actions .btn{width:100%}
+ .modal-body{padding:12px}
+ .form-section{padding:13px}
+ .form-actions{flex-direction:column-reverse}
+ .form-actions .btn{width:100%}
+ .modal{max-height:95vh}
+ .welcome p{line-height:1.5}
 }
 </style>
 </head>
 
 <body>
 
-<header class="topbar">
+<!-- SVG ICON LIBRARY -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+ <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+ <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6m3-3h-6"/></symbol>
+ <symbol id="i-user-plus" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM19 8v6m3-3h-6"/></symbol>
+ <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 9h18M16 14h2"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+ <symbol id="i-alert" viewBox="0 0 24 24"><path d="m10.3 3.9-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3.1l-8-14a2 2 0 0 0-3.4 0ZM12 9v4m0 4h.01"/></symbol>
+ <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+ <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2"/></symbol>
+ <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+ <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+ <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+ <symbol id="i-close" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+ <symbol id="i-network" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4m-6 4v-3h12v3"/></symbol>
+ <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/></symbol>
+ <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+ <symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+ <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+</svg>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
  <div class="brand">
   <div class="logo">◎</div>
   <div>
-   <h1>ONE ONLINE</h1>
-   <small>Customer Management System</small>
+   <div class="brand-name">ONE ONLINE</div>
+   <div class="brand-sub">ISP MANAGEMENT SYSTEM</div>
   </div>
  </div>
- <div class="top-status">● SYSTEM ONLINE</div>
-</header>
 
-<main class="container">
-
- <div class="heading">
-  <div>
-   <h2>Dashboard</h2>
-   <p>Welcome to ONE ONLINE Customer Management System.</p>
-  </div>
-  <button class="btn btn-primary" id="openAdd">
-   ＋ Add Customer
+ <div class="nav-label">MAIN MENU</div>
+ <nav class="nav">
+  <button class="nav-btn active" type="button">
+   <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-grid"/></svg>
+   Dashboard
   </button>
- </div>
 
- <!-- Statistics -->
- <section class="stats">
+  <button class="nav-btn" type="button" id="navCustomers">
+   <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-users"/></svg>
+   Customer List
+  </button>
 
-  <div class="stat">
-   <div class="stat-icon">👥</div>
-   <div class="stat-info">
-    <small>TOTAL CUSTOMER</small>
-    <strong id="totalCustomer">0</strong>
-    <span>All active customers</span>
-   </div>
-  </div>
+  <button class="nav-btn" type="button" id="navAdd">
+   <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-user-plus"/></svg>
+   Add Customer
+  </button>
+ </nav>
 
-  <div class="stat">
-   <div class="stat-icon">৳</div>
-   <div class="stat-info">
-    <small>TOTAL BILL</small>
-    <strong id="totalBill">৳0</strong>
-    <span>Customer bill amount</span>
-   </div>
-  </div>
+ <div class="nav-label">SYSTEM</div>
+ <nav class="nav">
+  <button class="nav-btn" type="button" id="navRefresh">
+   <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-refresh"/></svg>
+   Refresh Data
+  </button>
+ </nav>
 
-  <div class="stat">
-   <div class="stat-icon">✓</div>
-   <div class="stat-info">
-    <small>COLLECTED</small>
-    <strong id="collectedCount">0</strong>
-    <span>Collected customers</span>
-   </div>
-  </div>
-
-  <div class="stat">
-   <div class="stat-icon">!</div>
-   <div class="stat-info">
-    <small>DUE CUSTOMER</small>
-    <strong id="dueCount">0</strong>
-    <span>Not collected customers</span>
-   </div>
-  </div>
-
- </section>
-
- <!-- Customer List -->
- <section class="section">
-
-  <div class="section-head">
+ <div class="nav-bottom">
+  <div class="system-status">
+   <span class="online-dot"></span>
    <div>
-    <h3>☷ Customer Details</h3>
-    <p>Manage and view all your network customers.</p>
-   </div>
-   <button class="btn btn-secondary" id="refreshBtn">↻ Refresh</button>
-  </div>
-
-  <div class="toolbar">
-   <div class="search-box">
-    <input id="searchInput"
-     type="search"
-     placeholder="⌕ Search name, IP, phone, area...">
-   </div>
-
-   <select id="statusFilter">
-    <option value="all">All Customers</option>
-    <option value="collected">Collected</option>
-    <option value="due">Not Collected</option>
-   </select>
-
-   <span class="count-label" id="showingCount">0 Customers</span>
-  </div>
-
-  <div class="customer-list" id="customerList">
-   <div class="loading">
-    <div class="spinner"></div><br>
-    Loading customers...
+    <strong>System Connected</strong>
+    <small>ONE ONLINE Dashboard</small>
    </div>
   </div>
+ </div>
+</aside>
 
- </section>
+<div class="overlay-bg" id="sidebarOverlay"></div>
 
- <div class="footer">ONE ONLINE · Customer Management System</div>
+<!-- MAIN -->
+<div class="main">
 
-</main>
+ <header class="topbar">
+  <div class="top-left">
+   <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+    <svg fill="none" stroke="currentColor" stroke-width="2"><use href="#i-menu"/></svg>
+   </button>
+   <div class="breadcrumb">Pages / <strong>Dashboard</strong></div>
+  </div>
+
+  <div class="top-actions">
+   <div class="date-label">
+    <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-calendar"/></svg>
+    <span id="todayLabel">Today</span>
+   </div>
+
+   <div class="admin-profile">
+    <div class="admin-avatar">A</div>
+    <div>
+     <strong>Administrator</strong>
+     <small>System Admin</small>
+    </div>
+   </div>
+  </div>
+ </header>
+
+ <main class="content">
+
+  <div class="welcome">
+   <div>
+    <h1>Dashboard Overview</h1>
+    <p>Manage your internet customers from one place.</p>
+   </div>
+
+   <button class="btn btn-primary" id="openAdd">
+    <svg fill="none" stroke="currentColor" stroke-width="2"><use href="#i-plus"/></svg>
+    Add New Customer
+   </button>
+  </div>
+
+  <!-- STATISTICS -->
+  <section class="stats">
+
+   <div class="stat-card">
+    <div class="stat-top">
+     <div class="stat-icon">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-users"/></svg>
+     </div>
+     <span class="stat-tag">CUSTOMERS</span>
+    </div>
+    <div class="stat-title">Total Customer</div>
+    <div class="stat-value" id="totalCustomer">0</div>
+    <div class="stat-desc">All registered customers</div>
+   </div>
+
+   <div class="stat-card">
+    <div class="stat-top">
+     <div class="stat-icon">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-wallet"/></svg>
+     </div>
+     <span class="stat-tag">BILLING</span>
+    </div>
+    <div class="stat-title">Total Customer Bill</div>
+    <div class="stat-value" id="totalBill">৳0</div>
+    <div class="stat-desc">Total monthly bill amount</div>
+   </div>
+
+   <div class="stat-card">
+    <div class="stat-top">
+     <div class="stat-icon">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-check"/></svg>
+     </div>
+     <span class="stat-tag">PAYMENT</span>
+    </div>
+    <div class="stat-title">Collected Customers</div>
+    <div class="stat-value" id="collectedCount">0</div>
+    <div class="stat-desc">Customers marked collected</div>
+   </div>
+
+   <div class="stat-card">
+    <div class="stat-top">
+     <div class="stat-icon">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-alert"/></svg>
+     </div>
+     <span class="stat-tag">DUE</span>
+    </div>
+    <div class="stat-title">Due Customers</div>
+    <div class="stat-value" id="dueCount">0</div>
+    <div class="stat-desc">Customers marked due</div>
+   </div>
+
+  </section>
+
+  <!-- CUSTOMER SECTION -->
+  <section class="section" id="customerSection">
+
+   <div class="section-header">
+    <div class="section-title">
+     <div class="section-title-icon">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-list"/></svg>
+     </div>
+     <div>
+      <h2>Customer Management</h2>
+      <p>View and manage all customer records</p>
+     </div>
+    </div>
+
+    <button class="btn btn-secondary" id="refreshBtn">
+     <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-refresh"/></svg>
+     Refresh
+    </button>
+   </div>
+
+   <div class="toolbar">
+    <div class="search-wrap">
+     <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-search"/></svg>
+     <input id="searchInput" type="search" placeholder="Search name, IP, mobile, area...">
+    </div>
+
+    <select class="filter-select" id="statusFilter">
+     <option value="all">All Customers</option>
+     <option value="collected">Collected</option>
+     <option value="due">Due</option>
+    </select>
+
+    <span class="result-count" id="showingCount">0 Customers</span>
+   </div>
+
+   <!-- DESKTOP TABLE -->
+   <div class="desktop-table table-wrap">
+    <table>
+     <thead>
+      <tr>
+       <th>CUSTOMER</th>
+       <th>IP ADDRESS</th>
+       <th>PHONE</th>
+       <th>AREA</th>
+       <th>BILL</th>
+       <th>BILLING DATE</th>
+       <th>STATUS</th>
+       <th>DETAILS</th>
+      </tr>
+     </thead>
+     <tbody id="customerTable">
+      <tr><td colspan="8">
+       <div class="loading"><div class="spinner"></div>Loading customers...</div>
+      </td></tr>
+     </tbody>
+    </table>
+   </div>
+
+   <!-- MOBILE LIST -->
+   <div class="mobile-list" id="mobileList">
+    <div class="loading"><div class="spinner"></div>Loading customers...</div>
+   </div>
+
+  </section>
+
+  <div class="footer">ONE ONLINE · Professional ISP Management Dashboard</div>
+
+ </main>
+</div>
 
 <!-- ADD CUSTOMER MODAL -->
 <div class="overlay" id="addModal">
  <div class="modal">
 
-  <div class="modal-head">
-   <div>
-    <h3>＋ Add New Customer</h3>
-    <p>Fill customer information to register a new account.</p>
+  <div class="modal-header">
+   <div class="modal-heading">
+    <div class="modal-symbol">
+     <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-user-plus"/></svg>
+    </div>
+    <div>
+     <h3>Add New Customer</h3>
+     <p>Enter customer details to register a new account.</p>
+    </div>
    </div>
-   <button class="close" id="closeModal" type="button">×</button>
+
+   <button class="close-btn" type="button" id="closeModal" aria-label="Close">
+    <svg fill="none" stroke="currentColor" stroke-width="2"><use href="#i-close"/></svg>
+   </button>
   </div>
 
   <div class="modal-body">
-
    <form id="customerForm">
 
     <section class="form-section">
-     <h4>👤 Customer Information</h4>
+     <div class="form-heading">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-users"/></svg>
+      Customer Information
+     </div>
 
      <div class="form-grid">
 
@@ -455,7 +746,7 @@ button{cursor:pointer}
 
       <div class="field">
        <label>Mobile Number</label>
-       <input id="phone" type="tel" placeholder="01XXXXXXXXX">
+       <input id="phone" type="tel" inputmode="tel" placeholder="01XXXXXXXXX">
       </div>
 
       <div class="field">
@@ -492,7 +783,10 @@ button{cursor:pointer}
     </section>
 
     <section class="form-section">
-     <h4>৳ Billing Information</h4>
+     <div class="form-heading">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-wallet"/></svg>
+      Billing Information
+     </div>
 
      <div class="form-grid">
 
@@ -538,7 +832,10 @@ button{cursor:pointer}
     </section>
 
     <section class="form-section">
-     <h4>🌐 Network Information</h4>
+     <div class="form-heading">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-network"/></svg>
+      Network Information
+     </div>
 
      <div class="form-grid">
 
@@ -555,61 +852,102 @@ button{cursor:pointer}
      </div>
     </section>
 
-    <div class="modal-actions">
+    <div class="form-actions">
      <button type="button" class="btn btn-secondary" id="cancelBtn">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-close"/></svg>
       Cancel
      </button>
+
      <button type="submit" class="btn btn-primary" id="saveBtn">
-      ＋ Save Customer
+      <svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-check"/></svg>
+      Save Customer
      </button>
     </div>
 
    </form>
-
   </div>
  </div>
 </div>
 
+<!-- TOAST -->
 <div class="toast-wrap" id="toastWrap"></div>
 
 <script>
 "use strict";
 
 /* ======================================
-   API CONFIGURATION
+ API CONFIG
 ====================================== */
 
 const API_URL="https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
 
 const $=id=>document.getElementById(id);
-
 let customers=[];
 let busy=false;
 
+const icon=(name)=>`<svg fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-${name}"/></svg>`;
+
 /* ======================================
-   TOAST
+ TOAST
 ====================================== */
 
 function toast(type,title,msg){
  const box=document.createElement("div");
  box.className="toast "+(type==="error"?"error":"");
 
- const content=document.createElement("div");
+ const ic=document.createElement("div");
+ ic.className="toast-icon";
+ ic.innerHTML=icon(type==="error"?"alert":"check");
+
+ const text=document.createElement("div");
  const strong=document.createElement("strong");
  strong.textContent=title;
+ const small=document.createElement("small");
+ small.textContent=msg;
 
- const span=document.createElement("span");
- span.textContent=msg;
-
- content.append(strong,span);
- box.append(content);
+ text.append(strong,small);
+ box.append(ic,text);
  $("toastWrap").append(box);
 
  setTimeout(()=>box.remove(),4000);
 }
 
 /* ======================================
-   API GET JSONP
+ DATE AND HELPERS
+====================================== */
+
+function today(){
+ const d=new Date();
+ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+
+function money(v){
+ return "৳"+(Number(v)||0).toLocaleString("en-BD");
+}
+
+function esc(v){
+ return String(v??"").replace(/[&<>"']/g,ch=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
+ })[ch]);
+}
+
+function getStatus(c){
+ const v=String(c.collect??"").trim().toLowerCase();
+ if(["collect","collected","paid","yes"].includes(v))return "collected";
+ if(["due","not collected","unpaid","no"].includes(v))return "due";
+ return "other";
+}
+
+function statusHTML(c){
+ const s=getStatus(c);
+ const label=s==="collected"?"Collected":s==="due"?"Due":(c.collect||"Not Set");
+ return `<span class="status ${s==="due"?"due":s==="other"?"other":""}">
+ <span class="status-dot"></span>${esc(label)}</span>`;
+}
+
+/* ======================================
+ API GET
 ====================================== */
 
 async function apiGet(action){
@@ -646,11 +984,10 @@ async function apiGet(action){
 }
 
 /* ======================================
-   API POST
+ API POST
 ====================================== */
 
 async function apiPost(data){
-
  const response=await fetch(API_URL,{
   method:"POST",
   headers:{"Content-Type":"text/plain;charset=utf-8"},
@@ -660,11 +997,8 @@ async function apiPost(data){
  const raw=await response.text();
  let result;
 
- try{
-  result=JSON.parse(raw);
- }catch(e){
-  throw new Error("Invalid API response. Check Apps Script deployment.");
- }
+ try{result=JSON.parse(raw)}
+ catch(e){throw new Error("Invalid API response. Check deployment.")}
 
  if(!response.ok||!result.success){
   throw new Error(result.message||"Request failed");
@@ -674,79 +1008,40 @@ async function apiPost(data){
 }
 
 /* ======================================
-   DATE / MONEY HELPERS
-====================================== */
-
-function today(){
- const d=new Date();
- return d.getFullYear()+"-"+
- String(d.getMonth()+1).padStart(2,"0")+"-"+
- String(d.getDate()).padStart(2,"0");
-}
-
-function money(v){
- return "৳"+(Number(v)||0).toLocaleString("en-BD");
-}
-
-function esc(value){
- return String(value??"").replace(/[&<>"']/g,ch=>({
-  "&":"&amp;",
-  "<":"&lt;",
-  ">":"&gt;",
-  '"':"&quot;",
-  "'":"&#39;"
- })[ch]);
-}
-
-function getStatus(c){
- const v=String(c.collect??"").trim().toLowerCase();
-
- if(["collect","collected","paid","yes"].includes(v))return "collected";
- if(["due","not collected","unpaid","no"].includes(v))return "due";
-
- return "other";
-}
-
-function getStatusLabel(c){
- const s=getStatus(c);
- if(s==="collected")return "COLLECTED";
- if(s==="due")return "DUE";
- return c.collect||"NOT SET";
-}
-
-/* ======================================
-   LOAD CUSTOMERS
+ LOAD DATA
 ====================================== */
 
 async function loadCustomers(){
 
- $("customerList").innerHTML=
- '<div class="loading"><div class="spinner"></div><br>Loading customers...</div>';
+ $("customerTable").innerHTML=`
+ <tr><td colspan="8"><div class="loading">
+ <div class="spinner"></div>Loading customers...</div></td></tr>`;
+
+ $("mobileList").innerHTML=`
+ <div class="loading"><div class="spinner"></div>Loading customers...</div>`;
 
  $("refreshBtn").disabled=true;
 
  try{
-
   const r=await apiGet("list");
-
   customers=r.customers||r.data||[];
 
-  customers.sort((a,b)=>
-   (Number(a.si)||0)-(Number(b.si)||0)
-  );
+  customers.sort((a,b)=>(Number(a.si)||0)-(Number(b.si)||0));
 
   updateStats();
   renderCustomers();
 
  }catch(err){
 
-  $("customerList").innerHTML=`
+  const error=`
    <div class="empty">
-    <div class="empty-icon">⚠️</div>
+    ${icon("alert")}
     <strong>Unable to Load Customers</strong>
     <p>${esc(err.message)}</p>
-    <button class="btn btn-secondary" onclick="loadCustomers()">Try Again</button>
    </div>`;
+
+  $("customerTable").innerHTML=`<tr><td colspan="8">${error}</td></tr>`;
+  $("mobileList").innerHTML=error;
 
   toast("error","Loading Failed",err.message);
 
@@ -756,19 +1051,16 @@ async function loadCustomers(){
 }
 
 /* ======================================
-   DASHBOARD STATS
+ STATISTICS
 ====================================== */
 
 function updateStats(){
 
  const total=customers.length;
-
  const collected=customers.filter(c=>getStatus(c)==="collected").length;
  const due=customers.filter(c=>getStatus(c)==="due").length;
 
- const bill=customers.reduce((sum,c)=>
-  sum+(Number(c.customerBill)||0),0
- );
+ const bill=customers.reduce((sum,c)=>sum+(Number(c.customerBill)||0),0);
 
  $("totalCustomer").textContent=total.toLocaleString("en-BD");
  $("totalBill").textContent=money(bill);
@@ -777,144 +1069,26 @@ function updateStats(){
 }
 
 /* ======================================
-   CUSTOMER CARD
+ CUSTOMER DETAILS
 ====================================== */
 
-function customerCard(c,index){
-
- const status=getStatus(c);
-
- const statusClass=
-  status==="collected"?"status":
-  status==="due"?"status due":"status other";
-
- const name=c.name||"Unknown Customer";
- const ip=c.ip||"No IP";
-
+function extraDetails(c){
  return `
- <article class="customer-card">
-
-  <div class="customer-top">
-
-   <div class="customer-identity">
-    <div class="avatar">${esc(name.trim().charAt(0).toUpperCase())}</div>
-
-    <div style="min-width:0">
-     <div class="customer-name">${esc(name)}</div>
-     <div class="customer-ip">${esc(ip)}</div>
-    </div>
-   </div>
-
-   <span class="${statusClass}">${esc(getStatusLabel(c))}</span>
-
-  </div>
-
-  <div class="customer-fields">
-
-   <div class="info-item">
-    <small>Serial Number</small>
-    <strong>${esc(c.si||c.serial||index+1)}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Mobile Number</small>
-    <strong>${esc(c.phone||c.mobile||"—")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Customer Bill</small>
-    <strong>${money(c.customerBill)}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Billing Date</small>
-    <strong>${esc(c.billingDate||"Not Set")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Area</small>
-    <strong>${esc(c.area||"—")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Opening Due</small>
-    <strong>${money(c.dueAmount)}</strong>
-   </div>
-
-  </div>
-
-  <div class="customer-actions">
-   <small>Customer #${esc(c.si||index+1)}</small>
-   <button class="details-toggle" type="button"
-    onclick="toggleDetails(${index},this)">
-    + View Details
-   </button>
-  </div>
-
-  <div class="extra-details" id="extra-${index}">
-
-   <div class="info-item">
-    <small>Email</small>
-    <strong>${esc(c.email||"—")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Internet Bill</small>
-    <strong>${money(c.ipBill??c.internetBill)}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Bill Trigger</small>
-    <strong>${esc(c.billTrigger||"Not Set")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>IP Bill Trigger</small>
-    <strong>${esc(c.ipBillTrigger||"Not Set")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Address</small>
-    <strong>${esc(c.address||"—")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Location</small>
-    <strong>${esc(c.location||"—")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>ONU MAC</small>
-    <strong>${esc(c.onu||c.onuMac||"—")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Fiber</small>
-    <strong>${esc(c.fiber||"—")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Create Date</small>
-    <strong>${esc(c.createDate||"—")}</strong>
-   </div>
-
-   <div class="info-item">
-    <small>Renew</small>
-    <strong>${esc(c.renew||"—")}</strong>
-   </div>
-
-   <div class="info-item" style="grid-column:1/-1">
-    <small>Customer Reason / Note</small>
-    <strong>${esc(c.reason||"—")}</strong>
-   </div>
-
-  </div>
-
- </article>`;
+  <div class="mobile-info"><small>Email</small><strong>${esc(c.email||"—")}</strong></div>
+  <div class="mobile-info"><small>Internet Bill</small><strong>${money(c.ipBill)}</strong></div>
+  <div class="mobile-info"><small>Bill Trigger</small><strong>${esc(c.billTrigger||"Not Set")}</strong></div>
+  <div class="mobile-info"><small>IP Bill Trigger</small><strong>${esc(c.ipBillTrigger||"Not Set")}</strong></div>
+  <div class="mobile-info"><small>Address</small><strong>${esc(c.address||"—")}</strong></div>
+  <div class="mobile-info"><small>Location</small><strong>${esc(c.location||"—")}</strong></div>
+  <div class="mobile-info"><small>ONU MAC</small><strong>${esc(c.onu||"—")}</strong></div>
+  <div class="mobile-info"><small>Fiber</small><strong>${esc(c.fiber||"—")}</strong></div>
+  <div class="mobile-info"><small>Create Date</small><strong>${esc(c.createDate||"—")}</strong></div>
+  <div class="mobile-info"><small>Reason</small><strong>${esc(c.reason||"—")}</strong></div>
+ `;
 }
 
 /* ======================================
-   RENDER CUSTOMER LIST
+ RENDER TABLE AND MOBILE
 ====================================== */
 
 function renderCustomers(){
@@ -925,72 +1099,152 @@ function renderCustomers(){
  const filtered=customers.filter(c=>{
 
   const text=[
-   c.name,c.ip,c.phone,c.mobile,c.email,
-   c.area,c.address,c.location,c.si
+   c.name,c.ip,c.phone,c.email,c.area,c.address,c.location,c.si
   ].join(" ").toLowerCase();
 
-  const matchSearch=text.includes(search);
-
+  const match=text.includes(search);
   const status=getStatus(c);
 
-  const matchFilter=
-   filter==="all"||
+  const matchFilter=filter==="all"||
    (filter==="collected"&&status==="collected")||
    (filter==="due"&&status==="due");
 
-  return matchSearch&&matchFilter;
+  return match&&matchFilter;
  });
 
- $("showingCount").textContent=
-  filtered.length+" / "+customers.length+" Customers";
+ $("showingCount").textContent=filtered.length+" / "+customers.length+" Customers";
 
  if(!filtered.length){
-
-  $("customerList").innerHTML=`
+  const empty=`
    <div class="empty">
-    <div class="empty-icon">👥</div>
+    ${icon("users")}
     <strong>No Customer Found</strong>
-    <p>No matching customer found. Add a new customer or change your search.</p>
+    <p>Try another search or add a new customer.</p>
    </div>`;
 
+  $("customerTable").innerHTML=`<tr><td colspan="8">${empty}</td></tr>`;
+  $("mobileList").innerHTML=empty;
   return;
  }
 
- $("customerList").innerHTML=
-  filtered.map((c,i)=>customerCard(c,customers.indexOf(c))).join("");
+ $("customerTable").innerHTML=filtered.map((c,i)=>`
+  <tr>
+   <td>
+    <div class="customer-cell">
+     <div class="customer-avatar">${esc((c.name||"C").charAt(0).toUpperCase())}</div>
+     <div><strong>${esc(c.name||"Unknown")}</strong><small>#${esc(c.si||i+1)}</small></div>
+    </div>
+   </td>
+   <td><span class="ip-label">${esc(c.ip||"—")}</span></td>
+   <td>${esc(c.phone||"—")}</td>
+   <td>${esc(c.area||"—")}</td>
+   <td><strong>${money(c.customerBill)}</strong></td>
+   <td>${esc(c.billingDate||"—")}</td>
+   <td>${statusHTML(c)}</td>
+   <td>
+    <button class="btn-icon" title="View details" aria-label="View details"
+     onclick="viewCustomer(${customers.indexOf(c)})">${icon("eye")}</button>
+   </td>
+  </tr>
+ `).join("");
+
+ $("mobileList").innerHTML=filtered.map((c,i)=>{
+  const index=customers.indexOf(c);
+  return `
+   <article class="mobile-card">
+    <div class="mobile-top">
+     <div class="mobile-name">
+      <div class="customer-avatar">${esc((c.name||"C").charAt(0).toUpperCase())}</div>
+      <div><strong>${esc(c.name||"Unknown")}</strong>
+       <small>${esc(c.ip||"—")}</small></div>
+     </div>
+     ${statusHTML(c)}
+    </div>
+
+    <div class="mobile-grid">
+     <div class="mobile-info"><small>Mobile Number</small><strong>${esc(c.phone||"—")}</strong></div>
+     <div class="mobile-info"><small>Customer Bill</small><strong>${money(c.customerBill)}</strong></div>
+     <div class="mobile-info"><small>Billing Date</small><strong>${esc(c.billingDate||"—")}</strong></div>
+     <div class="mobile-info"><small>Area</small><strong>${esc(c.area||"—")}</strong></div>
+    </div>
+
+    <div class="mobile-actions">
+     <small style="color:var(--muted)">Customer #${esc(c.si||i+1)}</small>
+     <button class="btn btn-secondary" type="button" onclick="toggleMobile(${index},this)">
+      ${icon("eye")} View Details
+     </button>
+    </div>
+
+    <div class="mobile-grid mobile-extra" id="mobileExtra${index}">
+     ${extraDetails(c)}
+    </div>
+   </article>
+  `;
+ }).join("");
 }
 
 /* ======================================
-   EXPAND CUSTOMER DETAILS
+ VIEW CUSTOMER
 ====================================== */
 
-function toggleDetails(index,btn){
+function viewCustomer(index){
+ const c=customers[index];
+ if(!c)return;
 
- const box=$("extra-"+index);
+ const lines=[
+  ["Name",c.name],["IP",c.ip],["Phone",c.phone],
+  ["Email",c.email],["Area",c.area],["Address",c.address],
+  ["Location",c.location],["Customer Bill",money(c.customerBill)],
+  ["Internet Bill",money(c.ipBill)],["Billing Date",c.billingDate],
+  ["Bill Trigger",c.billTrigger],["IP Bill Trigger",c.ipBillTrigger],
+  ["ONU",c.onu],["Fiber",c.fiber],["Reason",c.reason]
+ ];
+
+ const content=lines.map(([k,v])=>
+  `<div class="mobile-info"><small>${esc(k)}</small><strong>${esc(v||"—")}</strong></div>`
+ ).join("");
+
+ const modal=document.createElement("div");
+ modal.className="overlay show";
+ modal.innerHTML=`
+  <div class="modal" style="max-width:550px">
+   <div class="modal-header">
+    <div class="modal-heading">
+     <div class="modal-symbol">${icon("users")}</div>
+     <div><h3>Customer Details</h3><p>${esc(c.name||"Customer")}</p></div>
+    </div>
+    <button class="close-btn" aria-label="Close">${icon("close")}</button>
+   </div>
+   <div class="modal-body">
+    <div class="mobile-grid">${content}</div>
+   </div>
+  </div>`;
+
+ modal.addEventListener("click",e=>{
+  if(e.target===modal||e.target.closest(".close-btn"))modal.remove();
+ });
+ document.body.append(modal);
+}
+
+function toggleMobile(index,btn){
+ const box=$("mobileExtra"+index);
  if(!box)return;
-
  box.classList.toggle("show");
-
- btn.textContent=box.classList.contains("show")
-  ? "− Hide Details"
-  : "+ View Details";
+ btn.innerHTML=box.classList.contains("show")
+  ?icon("close")+" Hide Details"
+  :icon("eye")+" View Details";
 }
 
 /* ======================================
-   OPEN / CLOSE MODAL
+ ADD CUSTOMER MODAL
 ====================================== */
 
 function openModal(){
-
- $("addModal").classList.add("show");
-
  $("customerForm").reset();
-
  $("createDate").value=today();
  $("dueAmount").value="0";
-
  loadSerial();
-
+ $("addModal").classList.add("show");
  setTimeout(()=>$("name").focus(),150);
 }
 
@@ -1000,6 +1254,7 @@ function closeModal(){
 }
 
 $("openAdd").addEventListener("click",openModal);
+$("navAdd").addEventListener("click",openModal);
 $("closeModal").addEventListener("click",closeModal);
 $("cancelBtn").addEventListener("click",closeModal);
 
@@ -1008,26 +1263,27 @@ $("addModal").addEventListener("click",e=>{
 });
 
 document.addEventListener("keydown",e=>{
- if(e.key==="Escape"&&!busy)closeModal();
+ if(e.key==="Escape"&&!busy){
+  closeModal();
+  $("sidebar").classList.remove("open");
+  $("sidebarOverlay").classList.remove("show");
+ }
 });
 
 /* ======================================
-   SERIAL NUMBER
+ SERIAL NUMBER
 ====================================== */
 
-async function loadSerial(){
-
+function loadSerial(){
  const max=Math.max(0,...customers.map(c=>Number(c.si)||0));
-
  $("si").value=String(max+1).padStart(4,"0");
 }
 
 /* ======================================
-   FORM DATA
+ FORM DATA
 ====================================== */
 
 function getFormData(){
-
  return {
   name:$("name").value.trim(),
   ip:$("ip").value.trim(),
@@ -1037,30 +1293,24 @@ function getFormData(){
   address:$("address").value.trim(),
   location:$("location").value.trim(),
   reason:$("reason").value.trim(),
-
   createDate:$("createDate").value,
   billingDate:$("billingDate").value,
-
   customerBill:Number($("customerBill").value)||0,
   ipBill:Number($("ipBill").value)||0,
   dueAmount:Number($("dueAmount").value)||0,
-
   billTrigger:$("billTrigger").value,
   ipBillTrigger:$("ipBillTrigger").value,
-
   onu:$("onu").value.trim(),
   fiber:$("fiber").value.trim()
  };
 }
 
 /* ======================================
-   ADD CUSTOMER
+ SAVE CUSTOMER
 ====================================== */
 
 $("customerForm").addEventListener("submit",async e=>{
-
  e.preventDefault();
-
  if(busy)return;
 
  const data=getFormData();
@@ -1071,54 +1321,72 @@ $("customerForm").addEventListener("submit",async e=>{
  }
 
  busy=true;
-
  $("saveBtn").disabled=true;
- $("saveBtn").textContent="Saving Customer...";
+ $("saveBtn").innerHTML=icon("clock")+" Saving Customer...";
 
  try{
-
-  await apiPost({
-   action:"add",
-   ...data
-  });
-
-  toast("success","Customer Added","Customer saved successfully.");
+  await apiPost({action:"add",...data});
 
   $("addModal").classList.remove("show");
-
   $("customerForm").reset();
   $("createDate").value=today();
   $("dueAmount").value="0";
 
   await loadCustomers();
 
+  toast("success","Customer Added Successfully",
+   "New customer has been saved successfully.");
+
  }catch(err){
-
   toast("error","Save Failed",err.message);
-
  }finally{
-
   busy=false;
   $("saveBtn").disabled=false;
-  $("saveBtn").textContent="＋ Save Customer";
-
+  $("saveBtn").innerHTML=icon("check")+" Save Customer";
  }
-
 });
 
 /* ======================================
-   SEARCH / FILTER / REFRESH
+ SEARCH / FILTER / REFRESH
 ====================================== */
 
 $("searchInput").addEventListener("input",renderCustomers);
-
 $("statusFilter").addEventListener("change",renderCustomers);
 
 $("refreshBtn").addEventListener("click",loadCustomers);
+$("navRefresh").addEventListener("click",loadCustomers);
+
+$("navCustomers").addEventListener("click",()=>{
+ $("customerSection").scrollIntoView({behavior:"smooth"});
+ closeSidebar();
+});
+
+$("navRefresh").addEventListener("click",closeSidebar);
+$("navAdd").addEventListener("click",closeSidebar);
+
+function closeSidebar(){
+ $("sidebar").classList.remove("open");
+ $("sidebarOverlay").classList.remove("show");
+}
 
 /* ======================================
-   START DASHBOARD
+ MOBILE SIDEBAR
 ====================================== */
+
+$("menuBtn").addEventListener("click",()=>{
+ $("sidebar").classList.toggle("open");
+ $("sidebarOverlay").classList.toggle("show");
+});
+
+$("sidebarOverlay").addEventListener("click",closeSidebar);
+
+/* ======================================
+ START
+====================================== */
+
+$("todayLabel").textContent=new Date().toLocaleDateString("en-BD",{
+ day:"2-digit",month:"short",year:"numeric"
+});
 
 $("createDate").value=today();
 $("dueAmount").value="0";
@@ -1126,6 +1394,5 @@ $("dueAmount").value="0";
 loadCustomers();
 
 </script>
-
 </body>
 </html>
