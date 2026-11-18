@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONE ONLINE | Management System</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+  --primary:#087f5b;
+  --primary-light:#e8f7ef;
+  --bg:#f5f7fb;
+  --sidebar:#ffffff;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#718096;
+  --border:#e8edf3;
+  --sidebar-width:260px;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden;
+}
+
+.app{
+  display:flex;
+  height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:var(--sidebar-width);
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  flex-shrink:0;
+  z-index:100;
+  transition:.3s;
+}
+
+.brand{
+  height:76px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid var(--border);
+}
+
+.brand-logo{
+  width:40px;
+  height:40px;
+  background:var(--primary);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:11px;
+  font-size:19px;
+}
+
+.brand h2{
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:.4px;
+}
+
+.brand p{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.sidebar-scroll{
+  flex:1;
+  overflow-y:auto;
+  padding:17px 13px;
+}
+
+.menu-label{
+  font-size:10px;
+  font-weight:800;
+  color:#9aa5b5;
+  padding:13px 11px 9px;
+  letter-spacing:1px;
+}
+
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:11px 13px;
+  margin-bottom:4px;
+  color:#64748b;
+  font-size:12px;
+  font-weight:600;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.2s;
+  text-decoration:none;
+}
+
+.menu-item i{
+  width:19px;
+  text-align:center;
+  font-size:14px;
+}
+
+.menu-item:hover{
+  background:#f0f7f4;
+  color:var(--primary);
+}
+
+.menu-item.active{
+  background:var(--primary-light);
+  color:var(--primary);
+  font-weight:700;
+}
+
+.sidebar-footer{
+  border-top:1px solid var(--border);
+  padding:15px;
+  font-size:11px;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* MAIN */
+.main{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.topbar{
+  height:76px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  flex-shrink:0;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.toggle-btn{
+  width:36px;
+  height:36px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:white;
+  cursor:pointer;
+  color:#64748b;
+}
+
+.page-title{
+  font-size:16px;
+  font-weight:700;
+}
+
+.top-right{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.status{
+  background:var(--primary-light);
+  color:var(--primary);
+  padding:8px 12px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.profile{
+  width:36px;
+  height:36px;
+  background:#e8f7ef;
+  color:var(--primary);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+  font-weight:800;
+}
+
+/* CONTENT */
+.content{
+  flex:1;
+  overflow:auto;
+  padding:20px;
+  position:relative;
+}
+
+#pageFrame{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+  background:transparent;
+}
+
+.loading{
+  position:absolute;
+  inset:0;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
+  color:var(--muted);
+  z-index:5;
+}
+
+.loading i{
+  color:var(--primary);
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* MOBILE */
+.mobile-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.4);
+  z-index:90;
+}
+
+@media(max-width:768px){
+  .sidebar{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    transform:translateX(-100%);
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .mobile-overlay.show{
+    display:block;
+  }
+
+  .topbar{
+    height:64px;
+    padding:0 13px;
+  }
+
+  .content{
+    padding:12px;
+  }
+
+  .page-title{
+    font-size:14px;
+  }
+
+  .status{
+    display:none;
+  }
+}
+
+.sidebar.collapsed{
+  width:76px;
+}
+
+.sidebar.collapsed .brand h2,
+.sidebar.collapsed .brand p,
+.sidebar.collapsed .menu-label,
+.sidebar.collapsed .menu-item span,
+.sidebar.collapsed .sidebar-footer{
+  display:none;
+}
+
+.sidebar.collapsed .brand{
+  padding:0;
+  justify-content:center;
+}
+
+.sidebar.collapsed .menu-item{
+  justify-content:center;
+  padding:13px 5px;
+}
+
+.sidebar.collapsed .menu-item i{
+  font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div class="brand-logo">
+        <i class="fa-solid fa-globe"></i>
+      </div>
+      <div>
+        <h2>ONE ONLINE</h2>
+        <p>Management System</p>
+      </div>
+    </div>
+
+    <div class="sidebar-scroll">
+
+      <div class="menu-label">MAIN MENU</div>
+
+      <a class="menu-item active" data-page="dashboard.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <div class="menu-label">CUSTOMER MANAGEMENT</div>
+
+      <a class="menu-item" data-page="customer/total-customer.html">
+        <i class="fa-solid fa-users"></i>
+        <span>Total Customer</span>
+      </a>
+
+      <a class="menu-item" data-page="customer/add-customer.html">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Add Customer</span>
+      </a>
+
+      <a class="menu-item" data-page="customer/due-customer.html">
+        <i class="fa-solid fa-clock"></i>
+        <span>Due Customer</span>
+      </a>
+
+      <a class="menu-item" data-page="customer/deleted-customer.html">
+        <i class="fa-solid fa-user-xmark"></i>
+        <span>Deleted Customer</span>
+      </a>
+
+      <a class="menu-item" data-page="customer/customer-history.html">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Customer History</span>
+      </a>
+
+      <div class="menu-label">EMAIL MANAGEMENT</div>
+
+      <a class="menu-item" data-page="email/email-settings.html">
+        <i class="fa-solid fa-gear"></i>
+        <span>Email Settings</span>
+      </a>
+
+      <a class="menu-item" data-page="email/send-email.html">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span>Send Email</span>
+      </a>
+
+      <a class="menu-item" data-page="email/email-history.html">
+        <i class="fa-solid fa-envelope-open-text"></i>
+        <span>Email History</span>
+      </a>
+
+      <a class="menu-item" data-page="email/email-template.html">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Email Template</span>
+      </a>
+
+      <div class="menu-label">SPEND MANAGEMENT</div>
+
+      <a class="menu-item" data-page="spend/spend-add.html">
+        <i class="fa-solid fa-circle-plus"></i>
+        <span>Spend Add</span>
+      </a>
+
+      <a class="menu-item" data-page="spend/spend-history.html">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Spend History</span>
+      </a>
+
+      <a class="menu-item" data-page="spend/deleted-spend.html">
+        <i class="fa-solid fa-trash-can"></i>
+        <span>Deleted Spend</span>
+      </a>
+
+    </div>
+
+    <div class="sidebar-footer">
+      © 2026 ONE ONLINE
+    </div>
+
+  </aside>
+
+  <div class="mobile-overlay" id="overlay"></div>
+
+  <!-- MAIN AREA -->
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+        <button class="toggle-btn" id="toggleBtn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="page-title" id="pageTitle">
+          Dashboard
+        </div>
+      </div>
+
+      <div class="top-right">
+        <div class="status">
+          <i class="fa-solid fa-circle-check"></i>
+          System Online
+        </div>
+
+        <div class="profile">O</div>
+      </div>
+
+    </header>
+
+    <section class="content">
+
+      <div class="loading" id="loading">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Loading Page...
+      </div>
+
+      <iframe
+        id="pageFrame"
+        src="dashboard.html"
+        title="ONE ONLINE Page"
+      ></iframe>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+const toggleBtn = document.getElementById("toggleBtn");
+const pageFrame = document.getElementById("pageFrame");
+const pageTitle = document.getElementById("pageTitle");
+const loading = document.getElementById("loading");
+
+const menuItems = document.querySelectorAll(".menu-item");
+
+function openPage(path, title, element){
+
+  loading.classList.remove("hidden");
+
+  pageFrame.src = path;
+  pageTitle.textContent = title;
+
+  menuItems.forEach(item=>{
+    item.classList.remove("active");
+  });
+
+  if(element){
+    element.classList.add("active");
+  }
+
+  closeMobileSidebar();
+}
+
+menuItems.forEach(item=>{
+
+  item.addEventListener("click",()=>{
+
+    const path = item.dataset.page;
+    const title = item.querySelector("span")?.textContent || "Dashboard";
+
+    openPage(path,title,item);
+
+  });
+
+});
+
+pageFrame.addEventListener("load",()=>{
+  loading.classList.add("hidden");
+});
+
+toggleBtn.addEventListener("click",()=>{
+
+  if(window.innerWidth <= 768){
+    sidebar.classList.toggle("open");
+    overlay.classList.toggle("show");
+  }else{
+    sidebar.classList.toggle("collapsed");
+  }
+
+});
+
+overlay.addEventListener("click",closeMobileSidebar);
+
+function closeMobileSidebar(){
+  sidebar.classList.remove("open");
+  overlay.classList.remove("show");
+}
+
+// Browser back/forward support
+window.addEventListener("popstate",()=>{
+
+  const page = new URLSearchParams(location.search).get("page");
+
+  const item = [...menuItems].find(x=>x.dataset.page===page);
+
+  if(item){
+    const title = item.querySelector("span")?.textContent || "Dashboard";
+    openPage(page,title,item);
+  }else{
+    const dashboard = document.querySelector('[data-page="dashboard.html"]');
+    openPage("dashboard.html","Dashboard",dashboard);
+  }
+
+});
+
+// Initial loading
+const initialPage = new URLSearchParams(location.search).get("page");
+
+if(initialPage){
+  const item = [...menuItems].find(x=>x.dataset.page===initialPage);
+
+  if(item){
+    openPage(
+      initialPage,
+      item.querySelector("span").textContent,
+      item
+    );
+  }
+}
+</script>
+
+</body>
+</html>
