@@ -7,266 +7,258 @@
 <title>Add Customer | ONE ONLINE</title>
 
 <style>
-/* =================================
-   ONE ONLINE CUSTOMER PAGE
-   ISOLATED CSS - NO THEME CONFLICT
-================================= */
 
-#customerApp{
-  --ca-primary:#087f5b;
-  --ca-primary-hover:#066b4c;
-  --ca-bg:#f4f7fb;
-  --ca-card:#ffffff;
-  --ca-text:#172033;
-  --ca-muted:#718096;
-  --ca-border:#e2e8f0;
-  --ca-input:#ffffff;
-  --ca-danger:#dc3545;
+/* =====================================
+   ONE ONLINE - ADD CUSTOMER
+   INDEX THEME COMPATIBLE
+   WHITE / DARK / FUNNY
+===================================== */
 
-  font-family:Arial,Helvetica,sans-serif !important;
-  background:var(--ca-bg) !important;
-  color:var(--ca-text) !important;
+.ca-page{
+  width:100%;
   min-height:100vh;
   padding:25px;
-  width:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  transition:background .25s,color .25s;
+}
+
+.ca-page *{
   box-sizing:border-box;
-  color-scheme:light;
 }
 
-#customerApp *,
-#customerApp *::before,
-#customerApp *::after{
-  box-sizing:border-box;
-}
-
-#customerApp h1,
-#customerApp h2,
-#customerApp h3,
-#customerApp p,
-#customerApp label,
-#customerApp span,
-#customerApp td,
-#customerApp th{
-  font-family:Arial,Helvetica,sans-serif !important;
-}
-
-#customerApp .ca-container{
-  max-width:1400px;
-  margin:auto;
+.ca-page button,
+.ca-page input,
+.ca-page select,
+.ca-page textarea{
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 /* HEADER */
 
-#customerApp .ca-header{
+.ca-header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   flex-wrap:wrap;
   gap:15px;
   margin-bottom:25px;
 }
 
-#customerApp .ca-header h2{
+.ca-header h2{
+  color:var(--text);
   font-size:25px;
-  font-weight:700;
-  color:#172033 !important;
-  margin:0 0 7px;
+  font-weight:750;
+  margin:0 0 6px;
 }
 
-#customerApp .ca-header p{
-  color:#718096 !important;
-  font-size:13px;
+.ca-header p{
+  color:var(--muted);
+  font-size:12px;
   margin:0;
 }
 
-#customerApp .ca-tag{
-  background:#e7f5ef !important;
-  color:#087f5b !important;
-  padding:10px 15px;
-  border-radius:7px;
-  font-size:12px;
-  font-weight:bold;
+.ca-tag{
+  background:var(--hover);
+  color:var(--primary);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.5px;
 }
 
-/* STATISTICS */
+/* STAT CARDS */
 
-#customerApp .ca-stats{
+.ca-stats{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:15px;
   margin-bottom:22px;
 }
 
-#customerApp .ca-stat{
-  background:#ffffff !important;
-  border:1px solid #e2e8f0;
-  border-radius:10px;
-  padding:20px;
-  box-shadow:0 2px 8px rgba(0,0,0,.035);
+.ca-stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:19px;
+  box-shadow:var(--shadow);
+  transition:.25s;
 }
 
-#customerApp .ca-stat p{
-  color:#718096 !important;
+.ca-stat p{
+  color:var(--muted);
   font-size:12px;
   margin:0 0 9px;
 }
 
-#customerApp .ca-stat h3{
-  color:#172033 !important;
+.ca-stat h3{
+  color:var(--text);
   font-size:25px;
+  font-weight:750;
   margin:0;
-  font-weight:700;
+  overflow-wrap:anywhere;
 }
 
-/* CARDS */
+.ca-stat-icon{
+  float:right;
+  font-size:21px;
+}
 
-#customerApp .ca-card{
-  background:#ffffff !important;
-  border:1px solid #e2e8f0;
+/* FORM CARD */
+
+.ca-card{
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:11px;
   padding:23px;
   margin-bottom:20px;
-  box-shadow:0 2px 10px rgba(0,0,0,.035);
+  box-shadow:var(--shadow);
+  transition:background .25s,border .25s;
 }
 
-#customerApp .ca-card-title{
+.ca-card-title{
   display:flex;
   align-items:center;
   gap:10px;
+  color:var(--text);
   font-size:16px;
-  font-weight:700;
-  color:#172033 !important;
+  font-weight:750;
   margin:0 0 22px;
 }
 
-#customerApp .ca-card-title::before{
+.ca-card-title::before{
   content:"";
   width:4px;
   height:19px;
-  background:#10b981;
+  flex-shrink:0;
   border-radius:5px;
+  background:var(--primary);
 }
 
-/* FORM GRID */
-
-#customerApp .ca-grid{
+.ca-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:19px;
 }
 
-#customerApp .ca-group{
+.ca-group{
   display:flex;
   flex-direction:column;
   gap:8px;
   min-width:0;
 }
 
-#customerApp .ca-group label{
-  color:#465166 !important;
-  font-size:13px;
-  font-weight:600;
+.ca-group label{
+  color:var(--text);
+  font-size:12px;
+  font-weight:650;
 }
 
-#customerApp .ca-required{
-  color:#e5484d !important;
+.ca-required{
+  color:#ef4444;
 }
 
-#customerApp .ca-group input,
-#customerApp .ca-group select,
-#customerApp .ca-group textarea{
-  display:block;
+.ca-group input,
+.ca-group select,
+.ca-group textarea{
   width:100%;
-  min-width:0;
   height:43px;
   padding:10px 12px;
-
-  background:#ffffff !important;
-  background-color:#ffffff !important;
-  color:#172033 !important;
-  -webkit-text-fill-color:#172033 !important;
-
-  border:1px solid #dce3eb !important;
+  border:1px solid var(--border);
   border-radius:7px;
   outline:none;
-  font-family:Arial,sans-serif !important;
+
+  background:var(--bg);
+  color:var(--text);
+
   font-size:13px;
-  box-shadow:none !important;
   transition:.2s;
-  opacity:1 !important;
-  color-scheme:light;
+  box-shadow:none;
 }
 
-#customerApp .ca-group input::placeholder,
-#customerApp .ca-group textarea::placeholder{
-  color:#94a3b8 !important;
-  -webkit-text-fill-color:#94a3b8 !important;
-  opacity:1;
+.ca-group input::placeholder,
+.ca-group textarea::placeholder{
+  color:var(--muted);
+  opacity:.8;
 }
 
-#customerApp .ca-group input:focus,
-#customerApp .ca-group select:focus,
-#customerApp .ca-group textarea:focus{
-  border-color:#087f5b !important;
-  box-shadow:0 0 0 3px rgba(8,127,91,.10) !important;
+.ca-group input:focus,
+.ca-group select:focus,
+.ca-group textarea:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 12%,transparent);
 }
 
-#customerApp .ca-group input[readonly]{
-  background:#f1f5f9 !important;
-  color:#475569 !important;
-  -webkit-text-fill-color:#475569 !important;
+.ca-group input[readonly]{
+  background:var(--hover);
+  color:var(--muted);
+  cursor:not-allowed;
 }
 
-#customerApp .ca-group input[type="date"]{
-  color-scheme:light;
+.ca-group input[type="date"]{
+  color:var(--text);
+  color-scheme:normal;
 }
 
-#customerApp .ca-full{
+.ca-full{
   grid-column:1/-1;
 }
 
 /* BUTTONS */
 
-#customerApp .ca-actions{
+.ca-actions{
   display:flex;
   justify-content:flex-end;
+  flex-wrap:wrap;
   gap:10px;
   margin-top:25px;
-  flex-wrap:wrap;
 }
 
-#customerApp .ca-btn{
-  border:0 !important;
+.ca-btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+  padding:12px 19px;
+  border:1px solid transparent;
   border-radius:7px;
-  padding:12px 20px;
   cursor:pointer;
-  font-size:13px;
-  font-weight:700;
-  font-family:Arial,sans-serif !important;
+  font-size:12px;
+  font-weight:750;
   transition:.2s;
 }
 
-#customerApp .ca-primary{
-  background:#087f5b !important;
-  color:#ffffff !important;
+.ca-btn-primary{
+  background:var(--primary);
+  color:white;
 }
 
-#customerApp .ca-primary:hover{
-  background:#066b4c !important;
+.ca-btn-primary:hover{
+  opacity:.88;
+  transform:translateY(-1px);
 }
 
-#customerApp .ca-light{
-  background:#edf2f7 !important;
-  color:#334155 !important;
+.ca-btn-light{
+  background:var(--hover);
+  color:var(--text);
+  border-color:var(--border);
 }
 
-#customerApp .ca-light:hover{
-  background:#e2e8f0 !important;
+.ca-btn-light:hover{
+  border-color:var(--primary);
 }
 
-/* CUSTOMER LIST */
+.ca-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
 
-#customerApp .ca-toolbar{
+/* TABLE SECTION */
+
+.ca-toolbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -275,151 +267,219 @@
   margin-bottom:18px;
 }
 
-#customerApp .ca-search{
+.ca-search{
   width:100%;
   max-width:350px;
   height:42px;
   padding:10px 13px;
-  border:1px solid #dce3eb !important;
+  border:1px solid var(--border);
   border-radius:7px;
-  background:#ffffff !important;
-  color:#172033 !important;
-  -webkit-text-fill-color:#172033 !important;
   outline:none;
+  background:var(--bg);
+  color:var(--text);
   font-size:13px;
 }
 
-#customerApp .ca-search::placeholder{
-  color:#94a3b8 !important;
+.ca-search::placeholder{
+  color:var(--muted);
 }
 
-#customerApp .ca-table-wrap{
+.ca-search:focus{
+  border-color:var(--primary);
+}
+
+.ca-table-wrap{
   overflow-x:auto;
   width:100%;
+  border:1px solid var(--border);
+  border-radius:8px;
 }
 
-#customerApp table{
+.ca-table{
   width:100%;
-  min-width:1000px;
+  min-width:1050px;
   border-collapse:collapse;
-  background:#ffffff !important;
+  background:var(--card);
 }
 
-#customerApp th,
-#customerApp td{
+.ca-table th,
+.ca-table td{
   padding:14px 12px;
-  border-bottom:1px solid #e9eef4 !important;
   text-align:left;
   white-space:nowrap;
-  font-size:13px;
-  color:#334155 !important;
-  background:#ffffff !important;
-}
-
-#customerApp th{
-  background:#f8fafc !important;
-  color:#64748b !important;
-  font-weight:700;
+  border-bottom:1px solid var(--border);
+  color:var(--text);
   font-size:12px;
 }
 
-#customerApp tbody tr:hover td{
-  background:#f8fcfa !important;
+.ca-table th{
+  background:var(--hover);
+  color:var(--muted);
+  font-size:11px;
+  font-weight:750;
 }
 
-#customerApp .ca-table-btn{
-  border:0 !important;
-  background:transparent !important;
+.ca-table tbody tr:hover td{
+  background:var(--hover);
+}
+
+.ca-table tbody tr:last-child td{
+  border-bottom:0;
+}
+
+.ca-table-btn{
+  border:0;
+  background:transparent;
+  padding:5px;
   cursor:pointer;
   font-size:12px;
-  font-weight:bold;
-  padding:5px;
+  font-weight:750;
 }
 
-#customerApp .ca-edit{
-  color:#087f5b !important;
+.ca-edit{
+  color:var(--primary);
 }
 
-#customerApp .ca-delete{
-  color:#dc3545 !important;
+.ca-delete{
+  color:#ef4444;
 }
 
-#customerApp .ca-empty{
-  text-align:center;
-  padding:35px;
-  color:#94a3b8 !important;
+.ca-empty{
+  text-align:center!important;
+  padding:35px!important;
+  color:var(--muted)!important;
+}
+
+/* SMALL LABELS */
+
+.ca-count{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--hover);
+  color:var(--primary);
+  border-radius:20px;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:750;
+}
+
+/* FUNNY MODE DECORATION */
+
+.ca-page .ca-tag{
+  transition:.2s;
+}
+
+.ca-page .ca-card,
+.ca-page .ca-stat{
+  transition:background .25s,border-color .25s,box-shadow .25s;
 }
 
 /* RESPONSIVE */
 
-@media(max-width:850px){
-  #customerApp .ca-grid{
+@media(max-width:900px){
+
+  .ca-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
+
 }
 
-@media(max-width:550px){
-  #customerApp{
-    padding:14px;
+@media(max-width:600px){
+
+  .ca-page{
+    padding:15px;
   }
 
-  #customerApp .ca-grid{
-    grid-template-columns:1fr;
-  }
-
-  #customerApp .ca-stats{
-    grid-template-columns:1fr;
-  }
-
-  #customerApp .ca-card{
-    padding:16px;
-  }
-
-  #customerApp .ca-header h2{
+  .ca-header h2{
     font-size:21px;
   }
 
-  #customerApp .ca-actions .ca-btn{
-    flex:1;
+  .ca-stats{
+    grid-template-columns:1fr;
+    gap:11px;
   }
+
+  .ca-stat{
+    padding:15px;
+  }
+
+  .ca-card{
+    padding:16px;
+  }
+
+  .ca-grid{
+    grid-template-columns:1fr;
+    gap:15px;
+  }
+
+  .ca-actions{
+    flex-direction:column-reverse;
+  }
+
+  .ca-actions .ca-btn{
+    width:100%;
+  }
+
+  .ca-toolbar{
+    align-items:stretch;
+  }
+
+  .ca-search{
+    max-width:none;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div id="customerApp">
-<div class="ca-container">
+<div class="ca-page">
 
   <div class="ca-header">
     <div>
       <h2>Add Customer</h2>
       <p>ONE ONLINE / Customer Management</p>
     </div>
+
     <div class="ca-tag">CUSTOMER MODULE</div>
   </div>
 
+  <!-- STATISTICS -->
+
   <div class="ca-stats">
+
     <div class="ca-stat">
+      <span class="ca-stat-icon">👥</span>
       <p>Total Customers</p>
       <h3 id="caTotal">0</h3>
     </div>
 
     <div class="ca-stat">
+      <span class="ca-stat-icon">💰</span>
       <p>Total Due Amount</p>
-      <h3 id="caDue">৳0</h3>
+      <h3 id="caTotalDue">৳0</h3>
     </div>
 
     <div class="ca-stat">
+      <span class="ca-stat-icon">🔢</span>
       <p>Last Serial Number</p>
-      <h3 id="caLast">0001</h3>
+      <h3 id="caLastSerial">0001</h3>
     </div>
+
   </div>
 
   <form id="caForm">
 
+    <!-- CUSTOMER INFORMATION -->
+
     <div class="ca-card">
-      <div class="ca-card-title">Customer Information</div>
+
+      <div class="ca-card-title">
+        Customer Information
+      </div>
 
       <div class="ca-grid">
 
@@ -440,7 +500,7 @@
 
         <div class="ca-group">
           <label>Mobile Number</label>
-          <input id="caMobile" placeholder="01XXXXXXXXX">
+          <input id="caMobile" type="tel" placeholder="01XXXXXXXXX">
         </div>
 
         <div class="ca-group">
@@ -469,10 +529,16 @@
         </div>
 
       </div>
+
     </div>
 
+    <!-- BILLING INFORMATION -->
+
     <div class="ca-card">
-      <div class="ca-card-title">Billing Information</div>
+
+      <div class="ca-card-title">
+        Billing Information
+      </div>
 
       <div class="ca-grid">
 
@@ -497,10 +563,16 @@
         </div>
 
       </div>
+
     </div>
 
+    <!-- NETWORK INFORMATION -->
+
     <div class="ca-card">
-      <div class="ca-card-title">Network Information</div>
+
+      <div class="ca-card-title">
+        Network Information
+      </div>
 
       <div class="ca-grid">
 
@@ -517,34 +589,54 @@
       </div>
 
       <div class="ca-actions">
-        <button type="reset" class="ca-btn ca-light">Reset</button>
-        <button type="submit" class="ca-btn ca-primary" id="caSave">
+
+        <button type="reset" class="ca-btn ca-btn-light">
+          ↺ Reset
+        </button>
+
+        <button type="submit" class="ca-btn ca-btn-primary" id="caSave">
           + Add Customer
         </button>
+
       </div>
+
     </div>
 
   </form>
 
+  <!-- CUSTOMER RECORDS -->
+
   <div class="ca-card">
 
-    <div class="ca-card-title">Customer Records</div>
+    <div class="ca-card-title">
+      Customer Records
+      <span class="ca-count" id="caRecordCount">0 Records</span>
+    </div>
 
     <div class="ca-toolbar">
-      <input id="caSearch" class="ca-search"
-        placeholder="Search name, IP, mobile...">
 
-      <button class="ca-btn ca-light" type="button"
-        id="caExport">Export CSV</button>
+      <input
+        type="search"
+        id="caSearch"
+        class="ca-search"
+        placeholder="Search name, IP, mobile, email..."
+      >
+
+      <button type="button" class="ca-btn ca-btn-light" id="caExport">
+        ↓ Export CSV
+      </button>
+
     </div>
 
     <div class="ca-table-wrap">
-      <table>
+
+      <table class="ca-table">
+
         <thead>
           <tr>
             <th>Serial</th>
             <th>Customer Name</th>
-            <th>IP Address</th>
+            <th>Customer IP</th>
             <th>Mobile</th>
             <th>Area</th>
             <th>Billing Date</th>
@@ -554,36 +646,32 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody id="caList"></tbody>
+
+        <tbody id="caCustomerList"></tbody>
+
       </table>
+
     </div>
 
   </div>
 
 </div>
-</div>
 
 <script>
+
 (function(){
 
 "use strict";
 
-const KEY="one_online_demo_customers";
+/* =================================
+   CUSTOMER DEMO DATABASE
+================================= */
+
+const STORAGE_KEY="one_online_demo_customers";
 
 const $=id=>document.getElementById(id);
 
-let customers=[];
-
-try{
-  customers=JSON.parse(localStorage.getItem(KEY)||"[]");
-  if(!Array.isArray(customers))customers=[];
-}catch(e){
-  customers=[];
-}
-
-let editId=null;
-
-const fields={
+const FIELD_MAP={
   serial:"caSerial",
   name:"caName",
   ip:"caIP",
@@ -601,156 +689,333 @@ const fields={
   fiber:"caFiber"
 };
 
-function today(){
+let customers=[];
+
+let editId=null;
+
+try{
+  const saved=localStorage.getItem(STORAGE_KEY);
+  customers=saved?JSON.parse(saved):[];
+
+  if(!Array.isArray(customers))customers=[];
+
+}catch(error){
+  customers=[];
+}
+
+/* =================================
+   DATE
+================================= */
+
+function getToday(){
+
   const d=new Date();
+
   return [
     d.getFullYear(),
     String(d.getMonth()+1).padStart(2,"0"),
     String(d.getDate()).padStart(2,"0")
   ].join("-");
+
 }
 
-function nextSerial(){
-  const max=Math.max(0,...customers.map(c=>Number(c.serial)||0));
-  return String(max+1).padStart(4,"0");
+/* =================================
+   SERIAL
+================================= */
+
+function getNextSerial(){
+
+  const highest=Math.max(
+    0,
+    ...customers.map(c=>Number(c.serial)||0)
+  );
+
+  return String(highest+1).padStart(4,"0");
+
 }
 
-function saveStorage(){
-  localStorage.setItem(KEY,JSON.stringify(customers));
+/* =================================
+   STORAGE
+================================= */
+
+function saveData(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(customers)
+    );
+
+    return true;
+
+  }catch(error){
+
+    alert("Unable to save customer data in browser storage.");
+    return false;
+
+  }
+
 }
 
-function resetForm(){
-  $("caForm").reset();
+/* =================================
+   RESET FORM
+================================= */
+
+function resetCustomerForm(){
+
   editId=null;
-  $("caSerial").value=nextSerial();
-  $("caCreateDate").value=today();
+
+  $("caForm").reset();
+
+  $("caSerial").value=getNextSerial();
+
+  $("caCreateDate").value=getToday();
+
   $("caSave").textContent="+ Add Customer";
+
 }
 
-function render(){
+/* =================================
+   FORMAT MONEY
+================================= */
+
+function money(value){
+
+  return "৳"+Number(value||0).toLocaleString("en-IN",{
+    maximumFractionDigits:2
+  });
+
+}
+
+/* =================================
+   RENDER CUSTOMER LIST
+================================= */
+
+function renderCustomers(){
 
   const search=$("caSearch").value.toLowerCase().trim();
 
-  const filtered=customers.filter(c=>
-    [c.name,c.ip,c.mobile,c.email,c.area]
-    .some(v=>String(v||"").toLowerCase().includes(search))
-  );
+  const list=customers.filter(c=>{
 
-  const tbody=$("caList");
+    return [
+
+      c.serial,
+      c.name,
+      c.ip,
+      c.mobile,
+      c.email,
+      c.area,
+      c.address,
+      c.location,
+      c.onuMac
+
+    ].some(value=>
+      String(value||"").toLowerCase().includes(search)
+    );
+
+  });
+
+  const tbody=$("caCustomerList");
+
   tbody.innerHTML="";
 
-  if(!filtered.length){
+  if(!list.length){
+
     const tr=document.createElement("tr");
+
     const td=document.createElement("td");
+
     td.colSpan=10;
     td.className="ca-empty";
-    td.textContent="No customer records found.";
+
+    td.textContent=customers.length
+      ?"No matching customer found."
+      :"No customer records available. Add your first customer.";
+
     tr.appendChild(td);
+
     tbody.appendChild(tr);
+
   }
 
-  filtered.forEach(c=>{
+  list.forEach(c=>{
 
     const tr=document.createElement("tr");
 
     const values=[
-      c.serial,c.name,c.ip,c.mobile,c.area,
+
+      c.serial,
+      c.name,
+      c.ip,
+      c.mobile,
+      c.area,
       c.billingDate,
-      "৳"+(c.customerBill||0),
-      "৳"+(c.internetBill||0),
-      "৳"+(c.dueAmount||0)
+      money(c.customerBill),
+      money(c.internetBill),
+      money(c.dueAmount)
+
     ];
 
-    values.forEach(v=>{
+    values.forEach(value=>{
+
       const td=document.createElement("td");
-      td.textContent=v||"-";
+
+      td.textContent=value||"-";
+
       tr.appendChild(td);
+
     });
 
-    const td=document.createElement("td");
+    const action=document.createElement("td");
 
     const edit=document.createElement("button");
+
+    edit.type="button";
     edit.className="ca-table-btn ca-edit";
     edit.textContent="Edit";
-    edit.onclick=()=>editCustomer(c.id);
+
+    edit.addEventListener("click",()=>editCustomer(c.id));
 
     const del=document.createElement("button");
+
+    del.type="button";
     del.className="ca-table-btn ca-delete";
     del.textContent="Delete";
-    del.onclick=()=>deleteCustomer(c.id);
 
-    td.append(edit,del);
-    tr.appendChild(td);
+    del.addEventListener("click",()=>deleteCustomer(c.id));
+
+    action.append(edit,del);
+
+    tr.appendChild(action);
 
     tbody.appendChild(tr);
+
   });
+
+  updateStatistics();
+
+}
+
+/* =================================
+   STATISTICS
+================================= */
+
+function updateStatistics(){
 
   $("caTotal").textContent=customers.length;
 
   const totalDue=customers.reduce(
-    (sum,c)=>sum+(Number(c.dueAmount)||0),0
+    (sum,c)=>sum+(Number(c.dueAmount)||0),
+    0
   );
 
-  $("caDue").textContent="৳"+totalDue.toLocaleString();
+  $("caTotalDue").textContent=money(totalDue);
 
-  $("caLast").textContent=nextSerial();
+  $("caLastSerial").textContent=getNextSerial();
+
+  $("caRecordCount").textContent=
+    customers.length+" Records";
+
 }
 
-$("caForm").addEventListener("submit",function(e){
+/* =================================
+   ADD / UPDATE CUSTOMER
+================================= */
 
-  e.preventDefault();
+$("caForm").addEventListener("submit",function(event){
 
-  const c={id:editId||Date.now()};
+  event.preventDefault();
 
-  Object.keys(fields).forEach(key=>{
-    const el=$(fields[key]);
-    c[key]=el.value.trim();
+  const customer={
+    id:editId||Date.now()
+  };
 
-    if(["customerBill","internetBill","dueAmount"].includes(key)){
-      c[key]=Number(el.value)||0;
+  Object.keys(FIELD_MAP).forEach(key=>{
+
+    const input=$(FIELD_MAP[key]);
+
+    if(
+      key==="customerBill"||
+      key==="internetBill"||
+      key==="dueAmount"
+    ){
+
+      customer[key]=Number(input.value)||0;
+
+    }else{
+
+      customer[key]=input.value.trim();
+
     }
+
   });
 
-  if(!c.name||!c.ip){
-    alert("Customer Name and IP are required!");
+  if(!customer.name||!customer.ip){
+
+    alert("Customer Name and Customer IP are required.");
+
     return;
+
   }
 
-  const duplicate=customers.some(x=>
-    String(x.ip).toLowerCase()===c.ip.toLowerCase() &&
-    x.id!==editId
-  );
+  if(
+    customers.some(c=>
+      String(c.ip).toLowerCase()===customer.ip.toLowerCase()
+      &&c.id!==editId
+    )
+  ){
 
-  if(duplicate){
     alert("This Customer IP already exists!");
+
     return;
+
   }
 
-  if(editId){
-    customers=customers.map(x=>x.id===editId?c:x);
+  const updating=Boolean(editId);
+
+  if(updating){
+
+    customers=customers.map(c=>
+      c.id===editId?customer:c
+    );
+
   }else{
-    customers.push(c);
+
+    customers.push(customer);
+
   }
 
-  const wasEdit=Boolean(editId);
+  if(!saveData())return;
 
-  saveStorage();
-  render();
-  resetForm();
+  renderCustomers();
 
-  alert(wasEdit?"Customer Updated Successfully!":"Customer Added Successfully!");
+  resetCustomerForm();
+
+  alert(
+    updating
+      ?"Customer Updated Successfully!"
+      :"Customer Added Successfully!"
+  );
 
 });
 
+/* =================================
+   EDIT CUSTOMER
+================================= */
+
 function editCustomer(id){
 
-  const c=customers.find(x=>x.id===id);
-  if(!c)return;
+  const customer=customers.find(c=>c.id===id);
+
+  if(!customer)return;
 
   editId=id;
 
-  Object.keys(fields).forEach(key=>{
-    $(fields[key]).value=c[key]??"";
+  Object.keys(FIELD_MAP).forEach(key=>{
+
+    $(FIELD_MAP[key]).value=customer[key]??"";
+
   });
 
   $("caSave").textContent="Update Customer";
@@ -759,42 +1024,88 @@ function editCustomer(id){
     behavior:"smooth",
     block:"start"
   });
+
 }
+
+/* =================================
+   DELETE CUSTOMER
+================================= */
 
 function deleteCustomer(id){
 
-  if(!confirm("Are you sure you want to delete this customer?"))return;
+  if(!confirm("Are you sure you want to delete this customer?")){
+    return;
+  }
 
   customers=customers.filter(c=>c.id!==id);
 
-  saveStorage();
-  render();
-  resetForm();
+  if(!saveData())return;
+
+  renderCustomers();
+
+  if(editId===id){
+    resetCustomerForm();
+  }
+
 }
 
-$("caSearch").addEventListener("input",render);
+/* =================================
+   SEARCH
+================================= */
+
+$("caSearch").addEventListener("input",function(){
+
+  renderCustomers();
+
+});
+
+/* =================================
+   RESET BUTTON
+================================= */
 
 $("caForm").addEventListener("reset",function(){
+
   setTimeout(()=>{
-    if(!editId)resetForm();
+
+    resetCustomerForm();
+
   },0);
+
 });
+
+/* =================================
+   EXPORT CSV
+================================= */
 
 $("caExport").addEventListener("click",function(){
 
   if(!customers.length){
-    alert("No customers to export!");
+
+    alert("No customers available to export.");
+
     return;
+
   }
 
-  const keys=Object.keys(fields);
-
   const headers=[
-    "Serial","Customer Name","Customer IP","Mobile",
-    "Email","Area","Address","Location","Create Date",
-    "Billing Date","Customer Bill","Internet Bill",
-    "Due Amount","ONU MAC","Fiber"
+    "Serial Number",
+    "Customer Name",
+    "Customer IP",
+    "Mobile Number",
+    "Email",
+    "Area",
+    "Address",
+    "Location",
+    "Create Date",
+    "Billing Date",
+    "Customer Bill",
+    "Internet Bill",
+    "Due Amount",
+    "ONU MAC",
+    "Fiber"
   ];
+
+  const keys=Object.keys(FIELD_MAP);
 
   const rows=[
     headers,
@@ -802,7 +1113,9 @@ $("caExport").addEventListener("click",function(){
   ];
 
   const csv="\uFEFF"+rows.map(row=>
-    row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")
+    row.map(value=>
+      '"'+String(value).replace(/"/g,'""')+'"'
+    ).join(",")
   ).join("\r\n");
 
   const blob=new Blob([csv],{
@@ -810,20 +1123,32 @@ $("caExport").addEventListener("click",function(){
   });
 
   const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
 
-  a.href=url;
-  a.download="ONE-ONLINE-Customers.csv";
-  a.click();
+  const link=document.createElement("a");
+
+  link.href=url;
+  link.download="ONE-ONLINE-CUSTOMERS.csv";
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  link.remove();
 
   URL.revokeObjectURL(url);
 
 });
 
-resetForm();
-render();
+/* =================================
+   INITIALIZE
+================================= */
+
+resetCustomerForm();
+
+renderCustomers();
 
 })();
+
 </script>
 
 </body>
