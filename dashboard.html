@@ -3,53 +3,57 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ONE ONLINE Dashboard</title>
 
 <style>
-/* =========================
-   ONE ONLINE DASHBOARD CSS
-========================= */
+/* =====================================
+   ONE ONLINE DASHBOARD
+   CSS is scoped by the parent page loader
+===================================== */
 
-#pageContainer .oo-dashboard {
-  --primary:#087f5b;
-  --primary2:#0ca678;
-  --bg:#f5f7fb;
-  --card:#ffffff;
-  --text:#172033;
-  --muted:#718096;
-  --border:#e8edf3;
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--text);
-  background:var(--bg);
+.oo-dashboard {
+  --d-primary:var(--primary,#087f5b);
+  --d-bg:var(--bg,#f5f7fb);
+  --d-card:var(--card,#ffffff);
+  --d-text:var(--text,#172033);
+  --d-muted:var(--muted,#718096);
+  --d-border:var(--border,#e8edf3);
+  --d-hover:var(--hover,#e8f7ef);
+
+  background:var(--d-bg);
+  color:var(--d-text);
   min-height:100%;
   padding:24px;
+  font-family:Arial,Helvetica,sans-serif;
+  transition:background .2s,color .2s;
+}
+
+.oo-dashboard *,
+.oo-dashboard *::before,
+.oo-dashboard *::after {
   box-sizing:border-box;
 }
 
-#pageContainer .oo-dashboard *,
-#pageContainer .oo-dashboard *::before,
-#pageContainer .oo-dashboard *::after {
-  box-sizing:border-box;
+.oo-dashboard button {
+  font-family:inherit;
 }
 
-#pageContainer .oo-demo {
-  position:fixed;
-  top:12px;
-  right:16px;
-  z-index:9999;
+.oo-demo-tag {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
   background:#fff1c7;
   color:#946200;
   border:1px solid #f0d47b;
-  padding:7px 14px;
-  border-radius:7px;
-  font-size:11px;
+  padding:6px 11px;
+  border-radius:20px;
+  font-size:10px;
   font-weight:800;
-  letter-spacing:1px;
-  box-shadow:0 3px 12px #00000012;
+  letter-spacing:.7px;
 }
 
-#pageContainer .oo-header {
+.oo-dash-header {
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -58,419 +62,588 @@
   margin-bottom:25px;
 }
 
-#pageContainer .oo-heading h2 {
+.oo-dash-heading h2 {
   margin:0;
-  font-size:25px;
-  font-weight:750;
+  font-size:24px;
+  font-weight:800;
 }
 
-#pageContainer .oo-heading p {
+.oo-dash-heading p {
   margin:7px 0 0;
-  font-size:13px;
-  color:var(--muted);
-}
-
-#pageContainer .oo-date {
-  background:#fff;
-  border:1px solid var(--border);
-  padding:11px 15px;
-  border-radius:9px;
+  color:var(--d-muted);
   font-size:12px;
-  color:#526078;
 }
 
-#pageContainer .oo-section-title {
-  font-size:16px;
-  font-weight:750;
-  margin:25px 0 14px;
+.oo-header-right {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-#pageContainer .oo-grid {
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:16px;
+.oo-date-box {
+  padding:10px 13px;
+  background:var(--d-card);
+  border:1px solid var(--d-border);
+  border-radius:9px;
+  font-size:11px;
+  color:var(--d-muted);
 }
 
-#pageContainer .oo-card {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:19px;
-  min-width:0;
-  box-shadow:0 2px 8px #17203305;
-  transition:transform .2s,box-shadow .2s;
-}
-
-#pageContainer .oo-card:hover {
-  transform:translateY(-3px);
-  box-shadow:0 8px 22px #1720330d;
-}
-
-#pageContainer .oo-card-top {
+.oo-section-head {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
+  gap:12px;
+  margin:27px 0 14px;
 }
 
-#pageContainer .oo-card-label {
-  color:var(--muted);
-  font-size:12px;
-  font-weight:600;
+.oo-section-head h3 {
+  margin:0;
+  font-size:15px;
+  font-weight:800;
 }
 
-#pageContainer .oo-icon {
-  width:39px;
-  height:39px;
+.oo-section-head small {
+  color:var(--d-muted);
+  font-size:10px;
+}
+
+/* STATISTICS */
+
+.oo-stats-grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px;
+}
+
+.oo-stat-card {
+  position:relative;
+  overflow:hidden;
+  background:var(--d-card);
+  border:1px solid var(--d-border);
+  border-radius:13px;
+  padding:17px;
+  min-width:0;
+  box-shadow:var(--shadow,0 3px 12px #00000006);
+  transition:transform .2s,box-shadow .2s;
+}
+
+.oo-stat-card:hover {
+  transform:translateY(-3px);
+}
+
+.oo-stat-top {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.oo-stat-name {
+  font-size:11px;
+  font-weight:650;
+  color:var(--d-muted);
+}
+
+.oo-stat-icon {
+  width:38px;
+  height:38px;
   border-radius:10px;
   display:grid;
   place-items:center;
-  font-size:19px;
+  font-size:18px;
   flex-shrink:0;
 }
 
-#pageContainer .oo-value {
-  font-size:27px;
+.oo-stat-number {
+  font-size:25px;
   font-weight:800;
   margin-top:13px;
   letter-spacing:-.5px;
   overflow-wrap:anywhere;
 }
 
-#pageContainer .oo-note {
+.oo-stat-footer {
   margin-top:8px;
-  color:var(--muted);
-  font-size:11px;
+  color:var(--d-muted);
+  font-size:10px;
 }
 
-#pageContainer .oo-green {
-  color:#07945e;
-  font-weight:700;
+.oo-stat-footer b {
+  color:#0b9b68;
 }
 
-#pageContainer .oo-red {
-  color:#dc5555;
-  font-weight:700;
+.oo-stat-footer .negative {
+  color:#df5757;
 }
 
-#pageContainer .oo-main-grid {
+.oo-stat-card::after {
+  content:"";
+  position:absolute;
+  right:-25px;
+  bottom:-35px;
+  width:85px;
+  height:85px;
+  border-radius:50%;
+  background:var(--d-hover);
+  opacity:.55;
+  pointer-events:none;
+}
+
+/* QUICK ACCESS */
+
+.oo-quick-grid {
   display:grid;
-  grid-template-columns:1.55fr 1fr;
-  gap:16px;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:12px;
+}
+
+.oo-quick-btn {
+  border:1px solid var(--d-border);
+  background:var(--d-card);
+  color:var(--d-text);
+  border-radius:12px;
+  min-width:0;
+  padding:16px 8px;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  justify-content:center;
+  gap:9px;
+  cursor:pointer;
+  transition:.2s;
+  text-align:center;
+}
+
+.oo-quick-btn:hover {
+  border-color:var(--d-primary);
+  background:var(--d-hover);
+  transform:translateY(-3px);
+}
+
+.oo-quick-icon {
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-size:21px;
+}
+
+.oo-quick-btn strong {
+  font-size:11px;
+  font-weight:750;
+}
+
+.oo-quick-btn small {
+  color:var(--d-muted);
+  font-size:9px;
+}
+
+/* PANELS */
+
+.oo-dashboard-main {
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:15px;
   margin-top:16px;
 }
 
-#pageContainer .oo-panel {
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:20px;
+.oo-panel {
   min-width:0;
+  background:var(--d-card);
+  border:1px solid var(--d-border);
+  border-radius:13px;
+  padding:19px;
+  box-shadow:var(--shadow,0 3px 12px #00000006);
 }
 
-#pageContainer .oo-panel-head {
+.oo-panel-title {
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:10px;
   margin-bottom:20px;
 }
 
-#pageContainer .oo-panel-head h3 {
+.oo-panel-title h3 {
   margin:0;
-  font-size:15px;
+  font-size:14px;
+  font-weight:800;
 }
 
-#pageContainer .oo-panel-head span {
-  color:var(--muted);
-  font-size:11px;
+.oo-panel-title span {
+  font-size:10px;
+  color:var(--d-muted);
 }
 
-#pageContainer .oo-chart {
-  height:215px;
+/* COLLECTION CHART */
+
+.oo-chart {
+  height:205px;
   display:flex;
   align-items:flex-end;
-  gap:13px;
-  padding:10px 5px 0;
-  border-bottom:1px solid var(--border);
+  gap:12px;
+  padding:10px 4px 0;
+  border-bottom:1px solid var(--d-border);
   background:repeating-linear-gradient(
     to bottom,
     transparent 0,
-    transparent 51px,
-    #edf1f5 52px
+    transparent 50px,
+    var(--d-border) 51px
   );
 }
 
-#pageContainer .oo-chart-column {
+.oo-chart-column {
   height:100%;
   flex:1;
-  min-width:0;
   display:flex;
   align-items:center;
   justify-content:flex-end;
   flex-direction:column;
   gap:8px;
+  min-width:0;
 }
 
-#pageContainer .oo-bar {
-  width:min(38px,75%);
+.oo-chart-bar {
+  width:min(37px,80%);
   min-height:4px;
-  background:linear-gradient(180deg,#12b886,#087f5b);
   border-radius:6px 6px 0 0;
-  transition:height .5s;
+  background:linear-gradient(180deg,#12b886,#087f5b);
+  transition:height .7s;
 }
 
-#pageContainer .oo-chart-column small {
+.oo-chart-column small {
+  color:var(--d-muted);
+  font-size:9px;
+}
+
+.oo-chart-legend {
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  color:var(--d-muted);
   font-size:10px;
-  color:var(--muted);
 }
 
-#pageContainer .oo-legend {
-  margin-top:15px;
-  font-size:11px;
-  color:var(--muted);
+/* CUSTOMER STATUS */
+
+.oo-status-item {
+  margin:18px 0;
 }
 
-#pageContainer .oo-legend i {
-  display:inline-block;
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#0ca678;
-  margin-right:6px;
-}
-
-#pageContainer .oo-progress-item {
-  margin:19px 0;
-}
-
-#pageContainer .oo-progress-info {
+.oo-status-label {
   display:flex;
   justify-content:space-between;
-  font-size:12px;
+  gap:10px;
+  font-size:11px;
   margin-bottom:8px;
 }
 
-#pageContainer .oo-progress-info strong {
-  font-weight:750;
+.oo-status-label span {
+  color:var(--d-muted);
 }
 
-#pageContainer .oo-progress {
+.oo-status-track {
   height:8px;
-  background:#edf1f5;
   border-radius:20px;
+  background:var(--d-border);
   overflow:hidden;
 }
 
-#pageContainer .oo-progress-fill {
+.oo-status-fill {
   height:100%;
   border-radius:20px;
 }
 
-#pageContainer .oo-total-box {
-  margin-top:22px;
-  padding:14px;
-  background:#f0faf5;
+.oo-status-summary {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:20px;
+}
+
+.oo-status-mini {
+  background:var(--d-bg);
   border-radius:9px;
+  padding:12px;
 }
 
-#pageContainer .oo-total-box small {
-  color:var(--muted);
-  font-size:11px;
-}
-
-#pageContainer .oo-total-box strong {
+.oo-status-mini small {
   display:block;
-  margin-top:6px;
-  font-size:22px;
+  color:var(--d-muted);
+  font-size:10px;
 }
 
-#pageContainer .oo-table-wrap {
+.oo-status-mini strong {
+  display:block;
+  font-size:18px;
+  margin-top:6px;
+}
+
+/* TABLE */
+
+.oo-table-panel {
+  margin-top:16px;
+}
+
+.oo-table-wrap {
   overflow-x:auto;
 }
 
-#pageContainer .oo-table {
+.oo-table {
   width:100%;
-  border-collapse:collapse;
   min-width:570px;
+  border-collapse:collapse;
 }
 
-#pageContainer .oo-table th {
+.oo-table th {
   text-align:left;
-  color:#8490a1;
-  font-size:11px;
-  padding:12px 10px;
-  border-bottom:1px solid var(--border);
-}
-
-#pageContainer .oo-table td {
-  padding:13px 10px;
-  border-bottom:1px solid #f0f2f6;
-  font-size:12px;
+  color:var(--d-muted);
+  font-size:10px;
+  padding:12px 9px;
+  border-bottom:1px solid var(--d-border);
   white-space:nowrap;
 }
 
-#pageContainer .oo-user {
+.oo-table td {
+  padding:13px 9px;
+  border-bottom:1px solid var(--d-border);
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.oo-table tr:last-child td {
+  border-bottom:0;
+}
+
+.oo-customer-name {
   display:flex;
   align-items:center;
   gap:9px;
 }
 
-#pageContainer .oo-avatar {
-  width:33px;
-  height:33px;
+.oo-avatar {
+  width:32px;
+  height:32px;
   border-radius:50%;
+  background:var(--d-hover);
+  color:var(--d-primary);
   display:grid;
   place-items:center;
-  background:#e7f5ee;
-  color:#087f5b;
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
 }
 
-#pageContainer .oo-status {
-  display:inline-block;
+.oo-status-badge {
   padding:5px 9px;
   border-radius:20px;
-  font-size:10px;
-  font-weight:750;
+  font-size:9px;
+  font-weight:800;
 }
 
-#pageContainer .oo-paid {
-  color:#087f50;
+.oo-paid {
   background:#e5f8ef;
+  color:#07804e;
 }
 
-#pageContainer .oo-due {
-  color:#c46b19;
+.oo-due {
   background:#fff0e5;
+  color:#d66b20;
 }
 
-#pageContainer .oo-pending {
-  color:#987400;
+.oo-pending {
   background:#fff6d9;
+  color:#a77a00;
 }
 
-#pageContainer .oo-bottom-grid {
+/* BOTTOM */
+
+.oo-bottom-grid {
   display:grid;
   grid-template-columns:1.2fr 1fr;
-  gap:16px;
+  gap:15px;
   margin-top:16px;
 }
 
-#pageContainer .oo-activity {
+.oo-activity {
   display:flex;
-  gap:12px;
   align-items:center;
+  gap:11px;
   padding:13px 0;
-  border-bottom:1px solid #f0f2f6;
+  border-bottom:1px solid var(--d-border);
 }
 
-#pageContainer .oo-activity:last-child {
+.oo-activity:last-child {
   border-bottom:0;
 }
 
-#pageContainer .oo-activity-icon {
-  width:36px;
-  height:36px;
-  flex-shrink:0;
+.oo-activity-icon {
+  width:35px;
+  height:35px;
   border-radius:10px;
+  background:var(--d-hover);
   display:grid;
   place-items:center;
-  background:#e8f7ef;
   font-size:16px;
+  flex-shrink:0;
 }
 
-#pageContainer .oo-activity-info strong {
+.oo-activity-info {
+  min-width:0;
+}
+
+.oo-activity-info strong {
   display:block;
-  font-size:12px;
+  font-size:11px;
   margin-bottom:5px;
 }
 
-#pageContainer .oo-activity-info small {
-  color:var(--muted);
+.oo-activity-info small {
+  display:block;
+  color:var(--d-muted);
+  font-size:10px;
+}
+
+.oo-spend-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid var(--d-border);
   font-size:11px;
 }
 
-#pageContainer .oo-spend-row {
+.oo-spend-row span {
+  color:var(--d-muted);
+}
+
+.oo-spend-total {
   display:flex;
   justify-content:space-between;
   gap:10px;
-  padding:13px 0;
-  border-bottom:1px solid #f0f2f6;
-  font-size:12px;
-}
-
-#pageContainer .oo-spend-row strong {
-  font-size:13px;
-}
-
-#pageContainer .oo-spend-total {
-  margin-top:15px;
   padding:14px;
-  background:#fff2ef;
   border-radius:9px;
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
+  background:var(--d-hover);
+  margin-top:15px;
   font-size:12px;
-  font-weight:750;
+  font-weight:800;
 }
 
-#pageContainer .oo-spend-total strong {
-  color:#d9534f;
-  font-size:18px;
+.oo-spend-total strong {
+  font-size:16px;
+  color:var(--d-primary);
 }
 
-#pageContainer .oo-footer {
+.oo-footer {
   text-align:center;
-  color:#9aa4b2;
-  font-size:11px;
   padding:25px 0 5px;
+  color:var(--d-muted);
+  font-size:10px;
 }
+
+/* FUNNY MODE */
+
+body.funny .oo-dashboard {
+  --d-primary:#ec4899;
+  --d-hover:#ffe1f1;
+}
+
+body.funny .oo-stat-card,
+body.funny .oo-panel,
+body.funny .oo-quick-btn {
+  border-color:#f5c5df;
+}
+
+body.funny .oo-stat-card:nth-child(3n+1) .oo-stat-icon {
+  background:#ffe4ed !important;
+}
+
+body.funny .oo-stat-card:nth-child(3n+2) .oo-stat-icon {
+  background:#ede5ff !important;
+}
+
+body.funny .oo-stat-card:nth-child(3n) .oo-stat-icon {
+  background:#fff1cf !important;
+}
+
+body.funny .oo-dashboard .oo-section-head h3::after {
+  content:" ✨";
+}
+
+/* RESPONSIVE */
 
 @media(max-width:1100px) {
-  #pageContainer .oo-grid {
+  .oo-stats-grid {
     grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .oo-quick-grid {
+    grid-template-columns:repeat(3,minmax(0,1fr));
   }
 }
 
 @media(max-width:750px) {
-  #pageContainer .oo-dashboard {
+  .oo-dashboard {
     padding:16px;
   }
 
-  #pageContainer .oo-main-grid,
-  #pageContainer .oo-bottom-grid {
+  .oo-dashboard-main,
+  .oo-bottom-grid {
     grid-template-columns:1fr;
   }
 
-  #pageContainer .oo-heading h2 {
+  .oo-dash-heading h2 {
     font-size:21px;
   }
 }
 
 @media(max-width:430px) {
-  #pageContainer .oo-grid {
-    gap:10px;
+  .oo-stats-grid {
+    gap:9px;
   }
 
-  #pageContainer .oo-card {
-    padding:13px;
+  .oo-stat-card {
+    padding:12px;
   }
 
-  #pageContainer .oo-value {
+  .oo-stat-number {
     font-size:20px;
   }
 
-  #pageContainer .oo-card-label {
+  .oo-stat-name {
     font-size:10px;
   }
 
-  #pageContainer .oo-icon {
-    width:32px;
-    height:32px;
-    font-size:16px;
+  .oo-stat-icon {
+    width:31px;
+    height:31px;
+    font-size:15px;
+  }
+
+  .oo-quick-grid {
+    gap:8px;
+  }
+
+  .oo-quick-btn {
+    padding:12px 5px;
+  }
+
+  .oo-quick-icon {
+    width:36px;
+    height:36px;
+    font-size:18px;
+  }
+
+  .oo-quick-btn strong {
+    font-size:10px;
+  }
+
+  .oo-header-right {
+    width:100%;
   }
 }
 </style>
@@ -480,206 +653,417 @@
 
 <div class="oo-dashboard">
 
-  <div class="oo-demo">DEMO VERSION</div>
+  <!-- HEADER -->
 
-  <header class="oo-header">
-    <div class="oo-heading">
-      <h2>Dashboard Overview</h2>
-      <p>Welcome back! Here's your business overview.</p>
+  <header class="oo-dash-header">
+
+    <div class="oo-dash-heading">
+      <h2>Dashboard Overview 👋</h2>
+      <p>Welcome back, Admin! Here's your business summary.</p>
     </div>
-    <div class="oo-date" id="ooDate">Loading date...</div>
+
+    <div class="oo-header-right">
+      <span class="oo-demo-tag">● DEMO VERSION</span>
+      <div class="oo-date-box" id="ooDashDate">Loading date...</div>
+    </div>
+
   </header>
 
-  <div class="oo-section-title">Customer Overview</div>
+  <!-- CUSTOMER STATISTICS -->
 
-  <div class="oo-grid">
+  <div class="oo-section-head">
+    <h3>👥 Customer Overview</h3>
+    <small>Demo Information</small>
+  </div>
 
-    <div class="oo-card">
-      <div class="oo-card-top">
-        <span class="oo-card-label">Total Customers</span>
-        <div class="oo-icon" style="background:#e8f7ef">👥</div>
+  <div class="oo-stats-grid">
+
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Total Customers</span>
+        <div class="oo-stat-icon" style="background:#e8f7ef">👥</div>
       </div>
-      <div class="oo-value">1,248</div>
-      <div class="oo-note"><span class="oo-green">↑ 12.5%</span> Compared to last month</div>
+      <div class="oo-stat-number">1,248</div>
+      <div class="oo-stat-footer"><b>↑ 12.5%</b> Compared to last month</div>
     </div>
 
-    <div class="oo-card">
-      <div class="oo-card-top">
-        <span class="oo-card-label">Active Customers</span>
-        <div class="oo-icon" style="background:#e7f0ff">🟢</div>
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Active Customers</span>
+        <div class="oo-stat-icon" style="background:#e7f0ff">🟢</div>
       </div>
-      <div class="oo-value">1,105</div>
-      <div class="oo-note">Currently active customers</div>
+      <div class="oo-stat-number">1,105</div>
+      <div class="oo-stat-footer">Currently active connections</div>
     </div>
 
-    <div class="oo-card">
-      <div class="oo-card-top">
-        <span class="oo-card-label">Due Customers</span>
-        <div class="oo-icon" style="background:#fff0e5">⏳</div>
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Due Customers</span>
+        <div class="oo-stat-icon" style="background:#fff0e5">⏳</div>
       </div>
-      <div class="oo-value">86</div>
-      <div class="oo-note"><span class="oo-red">8 customers</span> need payment</div>
+      <div class="oo-stat-number">86</div>
+      <div class="oo-stat-footer"><span style="color:#d66b20">Payment due</span> customers</div>
     </div>
 
-    <div class="oo-card">
-      <div class="oo-card-top">
-        <span class="oo-card-label">Upcoming Customers</span>
-        <div class="oo-icon" style="background:#fff6d9">📅</div>
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Upcoming Customers</span>
+        <div class="oo-stat-icon" style="background:#fff6d9">📅</div>
       </div>
-      <div class="oo-value">57</div>
-      <div class="oo-note">Billing date approaching</div>
+      <div class="oo-stat-number">57</div>
+      <div class="oo-stat-footer">Upcoming billing dates</div>
     </div>
 
   </div>
 
-  <div class="oo-section-title">Financial Overview</div>
+  <!-- FINANCIAL STATISTICS -->
 
-  <div class="oo-grid">
+  <div class="oo-section-head">
+    <h3>💰 Financial Overview</h3>
+    <small>Monthly & Overall Summary</small>
+  </div>
 
-    <div class="oo-card">
-      <div class="oo-card-top">
-        <span class="oo-card-label">Total Collection</span>
-        <div class="oo-icon" style="background:#e5f8ef">💰</div>
+  <div class="oo-stats-grid">
+
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Today's Collection</span>
+        <div class="oo-stat-icon" style="background:#e5f8ef">💵</div>
       </div>
-      <div class="oo-value">৳ 2,45,800</div>
-      <div class="oo-note"><span class="oo-green">↑ 15.2%</span> This month</div>
+      <div class="oo-stat-number">৳ 8,500</div>
+      <div class="oo-stat-footer"><b>↑ 8%</b> Compared to yesterday</div>
     </div>
 
-    <div class="oo-card">
-      <div class="oo-card-top">
-        <span class="oo-card-label">Total Due Amount</span>
-        <div class="oo-icon" style="background:#fff0e5">💳</div>
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Monthly Collection</span>
+        <div class="oo-stat-icon" style="background:#e7f0ff">📈</div>
       </div>
-      <div class="oo-value">৳ 28,500</div>
-      <div class="oo-note">Outstanding payments</div>
+      <div class="oo-stat-number">৳ 2,45,800</div>
+      <div class="oo-stat-footer">November collection</div>
     </div>
 
-    <div class="oo-card">
-      <div class="oo-card-top">
-        <span class="oo-card-label">Total Spend</span>
-        <div class="oo-icon" style="background:#ffecec">📉</div>
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Total Due Amount</span>
+        <div class="oo-stat-icon" style="background:#fff0e5">💳</div>
       </div>
-      <div class="oo-value">৳ 45,200</div>
-      <div class="oo-note">Business expenses</div>
+      <div class="oo-stat-number">৳ 28,500</div>
+      <div class="oo-stat-footer">Outstanding customer bills</div>
     </div>
 
-    <div class="oo-card">
-      <div class="oo-card-top">
-        <span class="oo-card-label">Net Balance</span>
-        <div class="oo-icon" style="background:#e7f0ff">🏦</div>
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Total Spend</span>
+        <div class="oo-stat-icon" style="background:#ffecec">💸</div>
       </div>
-      <div class="oo-value">৳ 2,00,600</div>
-      <div class="oo-note">Collection minus spend</div>
+      <div class="oo-stat-number">৳ 45,200</div>
+      <div class="oo-stat-footer">Business expenses</div>
+    </div>
+
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Net Balance</span>
+        <div class="oo-stat-icon" style="background:#e8f7ef">🏦</div>
+      </div>
+      <div class="oo-stat-number">৳ 2,00,600</div>
+      <div class="oo-stat-footer">Collection minus spend</div>
+    </div>
+
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Total Emails Sent</span>
+        <div class="oo-stat-icon" style="background:#f0eaff">📧</div>
+      </div>
+      <div class="oo-stat-number">2,485</div>
+      <div class="oo-stat-footer">Email activity records</div>
+    </div>
+
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Deleted Customers</span>
+        <div class="oo-stat-icon" style="background:#ffecec">🗑️</div>
+      </div>
+      <div class="oo-stat-number">24</div>
+      <div class="oo-stat-footer">Deleted customer records</div>
+    </div>
+
+    <div class="oo-stat-card">
+      <div class="oo-stat-top">
+        <span class="oo-stat-name">Total Monthly Billing</span>
+        <div class="oo-stat-icon" style="background:#e7f0ff">🧾</div>
+      </div>
+      <div class="oo-stat-number">৳ 3,15,000</div>
+      <div class="oo-stat-footer">Expected monthly billing</div>
     </div>
 
   </div>
 
-  <div class="oo-main-grid">
+  <!-- QUICK ACCESS -->
+
+  <div class="oo-section-head">
+    <h3>⚡ Quick Access</h3>
+    <small>Quickly open your important pages</small>
+  </div>
+
+  <div class="oo-quick-grid">
+
+    <button class="oo-quick-btn" data-open-page="add-customer">
+      <div class="oo-quick-icon" style="background:#e8f7ef">➕</div>
+      <strong>Add Customer</strong>
+      <small>Create new customer</small>
+    </button>
+
+    <button class="oo-quick-btn" data-open-page="total-customer">
+      <div class="oo-quick-icon" style="background:#e7f0ff">👥</div>
+      <strong>Customers</strong>
+      <small>Manage customers</small>
+    </button>
+
+    <button class="oo-quick-btn" data-open-page="due-customer">
+      <div class="oo-quick-icon" style="background:#fff0e5">⏳</div>
+      <strong>Due Customers</strong>
+      <small>Check due payments</small>
+    </button>
+
+    <button class="oo-quick-btn" data-open-page="send-email">
+      <div class="oo-quick-icon" style="background:#f0eaff">📧</div>
+      <strong>Send Email</strong>
+      <small>Send customer email</small>
+    </button>
+
+    <button class="oo-quick-btn" data-open-page="spend-add">
+      <div class="oo-quick-icon" style="background:#ffecec">💸</div>
+      <strong>Add Spend</strong>
+      <small>Record new expense</small>
+    </button>
+
+    <button class="oo-quick-btn" data-open-page="email-settings">
+      <div class="oo-quick-icon" style="background:#e7f6ff">⚙️</div>
+      <strong>Email Settings</strong>
+      <small>Manage email system</small>
+    </button>
+
+  </div>
+
+  <!-- CHARTS -->
+
+  <div class="oo-section-head">
+    <h3>📊 Analytics & Reports</h3>
+    <small>Demo analytics</small>
+  </div>
+
+  <div class="oo-dashboard-main">
 
     <section class="oo-panel">
-      <div class="oo-panel-head">
+      <div class="oo-panel-title">
         <h3>Monthly Collection</h3>
-        <span>Last 7 months · Demo</span>
+        <span>Last 7 months</span>
       </div>
 
       <div class="oo-chart">
-        <div class="oo-chart-column"><div class="oo-bar" style="height:42%"></div><small>May</small></div>
-        <div class="oo-chart-column"><div class="oo-bar" style="height:55%"></div><small>Jun</small></div>
-        <div class="oo-chart-column"><div class="oo-bar" style="height:48%"></div><small>Jul</small></div>
-        <div class="oo-chart-column"><div class="oo-bar" style="height:68%"></div><small>Aug</small></div>
-        <div class="oo-chart-column"><div class="oo-bar" style="height:61%"></div><small>Sep</small></div>
-        <div class="oo-chart-column"><div class="oo-bar" style="height:82%"></div><small>Oct</small></div>
-        <div class="oo-chart-column"><div class="oo-bar" style="height:95%"></div><small>Nov</small></div>
+        <div class="oo-chart-column">
+          <div class="oo-chart-bar" style="height:42%"></div>
+          <small>May</small>
+        </div>
+        <div class="oo-chart-column">
+          <div class="oo-chart-bar" style="height:55%"></div>
+          <small>Jun</small>
+        </div>
+        <div class="oo-chart-column">
+          <div class="oo-chart-bar" style="height:48%"></div>
+          <small>Jul</small>
+        </div>
+        <div class="oo-chart-column">
+          <div class="oo-chart-bar" style="height:68%"></div>
+          <small>Aug</small>
+        </div>
+        <div class="oo-chart-column">
+          <div class="oo-chart-bar" style="height:61%"></div>
+          <small>Sep</small>
+        </div>
+        <div class="oo-chart-column">
+          <div class="oo-chart-bar" style="height:82%"></div>
+          <small>Oct</small>
+        </div>
+        <div class="oo-chart-column">
+          <div class="oo-chart-bar" style="height:95%"></div>
+          <small>Nov</small>
+        </div>
       </div>
 
-      <div class="oo-legend"><i></i> Collection Amount</div>
+      <div class="oo-chart-legend">
+        <span>🟢 Collection Amount</span>
+        <span>Demo Data</span>
+      </div>
     </section>
 
     <section class="oo-panel">
-      <div class="oo-panel-head">
-        <h3>Payment Summary</h3>
-        <span>This month</span>
+      <div class="oo-panel-title">
+        <h3>Customer Status</h3>
+        <span>Total 1,248</span>
       </div>
 
-      <div class="oo-progress-item">
-        <div class="oo-progress-info"><span>Collected Payments</span><strong>78%</strong></div>
-        <div class="oo-progress"><div class="oo-progress-fill" style="width:78%;background:#0ca678"></div></div>
+      <div class="oo-status-item">
+        <div class="oo-status-label">
+          <span>Active Customers</span>
+          <strong>1,105 (88.5%)</strong>
+        </div>
+        <div class="oo-status-track">
+          <div class="oo-status-fill" style="width:88.5%;background:#0ca678"></div>
+        </div>
       </div>
 
-      <div class="oo-progress-item">
-        <div class="oo-progress-info"><span>Due Payments</span><strong>15%</strong></div>
-        <div class="oo-progress"><div class="oo-progress-fill" style="width:15%;background:#f59e0b"></div></div>
+      <div class="oo-status-item">
+        <div class="oo-status-label">
+          <span>Due Customers</span>
+          <strong>86 (6.9%)</strong>
+        </div>
+        <div class="oo-status-track">
+          <div class="oo-status-fill" style="width:6.9%;background:#f59e0b"></div>
+        </div>
       </div>
 
-      <div class="oo-progress-item">
-        <div class="oo-progress-info"><span>Pending Payments</span><strong>7%</strong></div>
-        <div class="oo-progress"><div class="oo-progress-fill" style="width:7%;background:#64748b"></div></div>
+      <div class="oo-status-item">
+        <div class="oo-status-label">
+          <span>Other Customers</span>
+          <strong>57 (4.6%)</strong>
+        </div>
+        <div class="oo-status-track">
+          <div class="oo-status-fill" style="width:4.6%;background:#64748b"></div>
+        </div>
       </div>
 
-      <div class="oo-total-box">
-        <small>Total Monthly Billing</small>
-        <strong>৳ 3,15,000</strong>
+      <div class="oo-status-summary">
+        <div class="oo-status-mini">
+          <small>Paid Customers</small>
+          <strong>1,162</strong>
+        </div>
+        <div class="oo-status-mini">
+          <small>Unpaid Customers</small>
+          <strong>86</strong>
+        </div>
       </div>
     </section>
 
   </div>
 
-  <div class="oo-section-title">Recent Customer Records</div>
+  <!-- RECENT CUSTOMERS -->
 
-  <section class="oo-panel">
-    <div class="oo-panel-head">
-      <h3>Recent Customers</h3>
-      <span>Latest 5 records · Demo</span>
+  <div class="oo-section-head">
+    <h3>👤 Recent Customers</h3>
+    <small>Latest customer records</small>
+  </div>
+
+  <section class="oo-panel oo-table-panel">
+
+    <div class="oo-panel-title">
+      <h3>Customer Records</h3>
+      <span>Demo Records</span>
     </div>
 
     <div class="oo-table-wrap">
       <table class="oo-table">
         <thead>
           <tr>
-            <th>Customer</th>
+            <th>Customer Name</th>
             <th>IP Address</th>
             <th>Phone</th>
             <th>Bill Amount</th>
+            <th>Billing Date</th>
             <th>Status</th>
           </tr>
         </thead>
+
         <tbody>
           <tr>
-            <td><div class="oo-user"><div class="oo-avatar">AR</div><strong>Abdur Rahman</strong></div></td>
-            <td>192.168.1.101</td><td>01712-345678</td><td>৳ 1,000</td>
-            <td><span class="oo-status oo-paid">Paid</span></td>
+            <td>
+              <div class="oo-customer-name">
+                <div class="oo-avatar">AR</div>
+                <strong>Abdur Rahman</strong>
+              </div>
+            </td>
+            <td>192.168.1.101</td>
+            <td>01712-345678</td>
+            <td>৳ 1,000</td>
+            <td>05 Nov 2026</td>
+            <td><span class="oo-status-badge oo-paid">Paid</span></td>
           </tr>
+
           <tr>
-            <td><div class="oo-user"><div class="oo-avatar">MK</div><strong>Mohammad Karim</strong></div></td>
-            <td>192.168.1.102</td><td>01812-456789</td><td>৳ 700</td>
-            <td><span class="oo-status oo-due">Due</span></td>
+            <td>
+              <div class="oo-customer-name">
+                <div class="oo-avatar">MK</div>
+                <strong>Mohammad Karim</strong>
+              </div>
+            </td>
+            <td>192.168.1.102</td>
+            <td>01812-456789</td>
+            <td>৳ 700</td>
+            <td>08 Nov 2026</td>
+            <td><span class="oo-status-badge oo-due">Due</span></td>
           </tr>
+
           <tr>
-            <td><div class="oo-user"><div class="oo-avatar">SH</div><strong>Shahid Hasan</strong></div></td>
-            <td>192.168.1.103</td><td>01912-567890</td><td>৳ 1,200</td>
-            <td><span class="oo-status oo-paid">Paid</span></td>
+            <td>
+              <div class="oo-customer-name">
+                <div class="oo-avatar">SH</div>
+                <strong>Shahid Hasan</strong>
+              </div>
+            </td>
+            <td>192.168.1.103</td>
+            <td>01912-567890</td>
+            <td>৳ 1,200</td>
+            <td>10 Nov 2026</td>
+            <td><span class="oo-status-badge oo-paid">Paid</span></td>
           </tr>
+
           <tr>
-            <td><div class="oo-user"><div class="oo-avatar">MR</div><strong>Mahmudur Rahman</strong></div></td>
-            <td>192.168.1.104</td><td>01612-678901</td><td>৳ 500</td>
-            <td><span class="oo-status oo-pending">Pending</span></td>
+            <td>
+              <div class="oo-customer-name">
+                <div class="oo-avatar">MR</div>
+                <strong>Mahmudur Rahman</strong>
+              </div>
+            </td>
+            <td>192.168.1.104</td>
+            <td>01612-678901</td>
+            <td>৳ 500</td>
+            <td>15 Nov 2026</td>
+            <td><span class="oo-status-badge oo-pending">Upcoming</span></td>
           </tr>
+
           <tr>
-            <td><div class="oo-user"><div class="oo-avatar">NS</div><strong>Nazmul Sarker</strong></div></td>
-            <td>192.168.1.105</td><td>01512-789012</td><td>৳ 800</td>
-            <td><span class="oo-status oo-paid">Paid</span></td>
+            <td>
+              <div class="oo-customer-name">
+                <div class="oo-avatar">NS</div>
+                <strong>Nazmul Sarker</strong>
+              </div>
+            </td>
+            <td>192.168.1.105</td>
+            <td>01512-789012</td>
+            <td>৳ 800</td>
+            <td>17 Nov 2026</td>
+            <td><span class="oo-status-badge oo-paid">Paid</span></td>
           </tr>
         </tbody>
       </table>
     </div>
+
   </section>
+
+  <!-- RECENT ACTIVITY AND SPEND -->
+
+  <div class="oo-section-head">
+    <h3>📋 Business Activity</h3>
+    <small>Recent system updates</small>
+  </div>
 
   <div class="oo-bottom-grid">
 
     <section class="oo-panel">
-      <div class="oo-panel-head">
+      <div class="oo-panel-title">
         <h3>Recent Activities</h3>
-        <span>Demo activity</span>
+        <span>Demo Activity</span>
       </div>
 
       <div class="oo-activity">
@@ -707,25 +1091,45 @@
       </div>
 
       <div class="oo-activity">
-        <div class="oo-activity-icon">📉</div>
+        <div class="oo-activity-icon">💸</div>
         <div class="oo-activity-info">
           <strong>New Spend Added</strong>
           <small>Office expense ৳2,500 · Yesterday</small>
         </div>
       </div>
+
     </section>
 
     <section class="oo-panel">
-      <div class="oo-panel-head">
+      <div class="oo-panel-title">
         <h3>Spend Overview</h3>
-        <span>This month</span>
+        <span>This Month</span>
       </div>
 
-      <div class="oo-spend-row"><span>Office Expenses</span><strong>৳ 8,500</strong></div>
-      <div class="oo-spend-row"><span>Internet Bandwidth</span><strong>৳ 22,000</strong></div>
-      <div class="oo-spend-row"><span>Electricity Bill</span><strong>৳ 6,200</strong></div>
-      <div class="oo-spend-row"><span>Maintenance</span><strong>৳ 5,000</strong></div>
-      <div class="oo-spend-row"><span>Other Expenses</span><strong>৳ 3,500</strong></div>
+      <div class="oo-spend-row">
+        <span>Office Expenses</span>
+        <strong>৳ 8,500</strong>
+      </div>
+
+      <div class="oo-spend-row">
+        <span>Internet Bandwidth</span>
+        <strong>৳ 22,000</strong>
+      </div>
+
+      <div class="oo-spend-row">
+        <span>Electricity Bill</span>
+        <strong>৳ 6,200</strong>
+      </div>
+
+      <div class="oo-spend-row">
+        <span>Maintenance</span>
+        <strong>৳ 5,000</strong>
+      </div>
+
+      <div class="oo-spend-row">
+        <span>Other Expenses</span>
+        <strong>৳ 3,500</strong>
+      </div>
 
       <div class="oo-spend-total">
         <span>Total Spend</span>
@@ -736,66 +1140,78 @@
   </div>
 
   <footer class="oo-footer">
-    © 2026 ONE ONLINE · Dashboard Demo Preview
+    © 2026 ONE ONLINE · Management System · Demo Preview
   </footer>
 
 </div>
 
 <script>
-/* =========================
-   ONE ONLINE DASHBOARD JS
-========================= */
+/* =====================================
+   ONE ONLINE DASHBOARD JAVASCRIPT
+===================================== */
 
 (function () {
   "use strict";
 
-  function initializeDashboard() {
+  function initOneOnlineDashboard() {
+
     const root = document.querySelector(
       "#pageContainer .oo-dashboard"
     );
 
     if (!root) return;
 
-    // Current date
-    const dateElement = root.querySelector("#ooDate");
+    // DATE
+    const date = root.querySelector("#ooDashDate");
 
-    if (dateElement) {
-      dateElement.textContent = new Date().toLocaleDateString(
+    if (date) {
+      date.textContent = "📅 " + new Date().toLocaleDateString(
         "en-BD",
         {
-          weekday: "long",
-          day: "2-digit",
-          month: "long",
-          year: "numeric"
+          weekday:"short",
+          day:"2-digit",
+          month:"short",
+          year:"numeric"
         }
       );
     }
 
-    // Animate chart bars
-    const bars = root.querySelectorAll(".oo-bar");
+    // QUICK ACCESS NAVIGATION
+    root.querySelectorAll("[data-open-page]").forEach(function(button) {
 
-    bars.forEach(function (bar) {
+      button.addEventListener("click",function() {
+
+        const targetPage = this.getAttribute("data-open-page");
+
+        if (
+          targetPage &&
+          typeof window.loadPage === "function"
+        ) {
+          window.loadPage(targetPage,true);
+        }
+
+      });
+
+    });
+
+    // ANIMATED CHART
+    root.querySelectorAll(".oo-chart-bar").forEach(function(bar) {
+
       const finalHeight = bar.style.height;
+
       bar.style.height = "0";
 
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
           bar.style.height = finalHeight;
         });
       });
+
     });
+
   }
 
-  // Works with dynamically loaded dashboard HTML
-  if (document.readyState === "loading") {
-    document.addEventListener(
-      "DOMContentLoaded",
-      initializeDashboard,
-      { once: true }
-    );
-  } else {
-    initializeDashboard();
-  }
+  initOneOnlineDashboard();
 
 })();
 </script>
