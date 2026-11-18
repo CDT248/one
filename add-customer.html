@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Customer | ONE ONLINE</title>
+
+<style>
+:root{
+  --primary:#087f5b;
+  --primary-light:#e7f5ef;
+  --bg:#f4f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#718096;
+  --border:#e5eaf0;
+  --danger:#e5484d;
+  --shadow:0 4px 18px rgba(20,40,60,.05);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding:25px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.header h2{
+  font-size:25px;
+  margin-bottom:6px;
+}
+
+.header p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.header-tag{
+  background:var(--primary-light);
+  color:var(--primary);
+  padding:10px 16px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow);
+}
+
+.card-title{
+  font-size:17px;
+  font-weight:bold;
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.card-title span{
+  width:4px;
+  height:20px;
+  background:var(--primary);
+  border-radius:5px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:19px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.form-group label{
+  font-size:13px;
+  font-weight:600;
+  color:#465166;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid var(--border);
+  border-radius:7px;
+  outline:none;
+  font-size:14px;
+  background:#fff;
+  color:var(--text);
+  transition:.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(8,127,91,.09);
+}
+
+.form-group input[readonly]{
+  background:#f4f7f9;
+  color:#718096;
+}
+
+.form-group textarea{
+  resize:vertical;
+  min-height:44px;
+}
+
+.required{
+  color:var(--danger);
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:0;
+  padding:12px 22px;
+  border-radius:7px;
+  font-weight:bold;
+  font-size:13px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:white;
+}
+
+.btn-primary:hover{
+  background:#066b4c;
+}
+
+.btn-light{
+  background:#edf1f5;
+  color:#465166;
+}
+
+.btn-danger{
+  background:#fff0f0;
+  color:var(--danger);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:22px;
+}
+
+.stat{
+  background:white;
+  border:1px solid var(--border);
+  padding:18px;
+  border-radius:10px;
+}
+
+.stat p{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.stat h3{
+  font-size:23px;
+}
+
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.search{
+  max-width:350px;
+  width:100%;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:7px;
+  outline:none;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:950px;
+}
+
+th,td{
+  padding:14px 13px;
+  text-align:left;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  white-space:nowrap;
+}
+
+th{
+  background:#f8fafc;
+  color:#64748b;
+  font-size:12px;
+}
+
+tbody tr:hover{
+  background:#f9fcfa;
+}
+
+.status{
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+  background:#fff0e5;
+  color:#d97706;
+}
+
+.status.paid{
+  background:#e7f5ef;
+  color:#087f5b;
+}
+
+.table-btn{
+  border:0;
+  background:none;
+  cursor:pointer;
+  font-weight:bold;
+  padding:5px;
+  font-size:12px;
+}
+
+.edit{color:var(--primary)}
+.delete{color:var(--danger)}
+
+.empty{
+  text-align:center;
+  padding:35px;
+  color:var(--muted);
+}
+
+@media(max-width:800px){
+  body{padding:14px}
+  .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:520px){
+  .form-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .card{padding:16px}
+  .header h2{font-size:21px}
+  .actions .btn{flex:1}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div>
+      <h2>Add Customer</h2>
+      <p>ONE ONLINE / Customer Management</p>
+    </div>
+    <div class="header-tag">CUSTOMER MODULE</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <p>Total Customers</p>
+      <h3 id="totalCustomers">0</h3>
+    </div>
+    <div class="stat">
+      <p>Total Due Amount</p>
+      <h3 id="totalDue">৳0</h3>
+    </div>
+    <div class="stat">
+      <p>Last Serial Number</p>
+      <h3 id="lastSerial">0001</h3>
+    </div>
+  </div>
+
+  <form id="customerForm">
+
+    <div class="card">
+
+      <div class="card-title">
+        <span></span> Customer Information
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Serial Number</label>
+          <input id="serial" readonly>
+        </div>
+
+        <div class="form-group">
+          <label>Customer Name <span class="required">*</span></label>
+          <input id="name" required placeholder="Enter customer name">
+        </div>
+
+        <div class="form-group">
+          <label>Customer IP <span class="required">*</span></label>
+          <input id="ip" required placeholder="192.168.1.100">
+        </div>
+
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input id="mobile" placeholder="01XXXXXXXXX">
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input id="email" type="email" placeholder="customer@gmail.com">
+        </div>
+
+        <div class="form-group">
+          <label>Area</label>
+          <input id="area" placeholder="Enter area">
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <input id="address" placeholder="Enter full address">
+        </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <input id="location" placeholder="Enter location">
+        </div>
+
+        <div class="form-group">
+          <label>Create Date</label>
+          <input id="createDate" type="date">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+
+      <div class="card-title">
+        <span></span> Billing Information
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Billing Date</label>
+          <input id="billingDate" type="date">
+        </div>
+
+        <div class="form-group">
+          <label>Customer Bill (৳)</label>
+          <input id="customerBill" type="number" min="0" step="0.01" placeholder="0">
+        </div>
+
+        <div class="form-group">
+          <label>Internet Bill (৳)</label>
+          <input id="internetBill" type="number" min="0" step="0.01" placeholder="0">
+        </div>
+
+        <div class="form-group">
+          <label>Due Amount (৳)</label>
+          <input id="dueAmount" type="number" min="0" step="0.01" placeholder="0">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+
+      <div class="card-title">
+        <span></span> Network Information
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>ONU MAC Address</label>
+          <input id="onuMac" placeholder="XX:XX:XX:XX:XX:XX">
+        </div>
+
+        <div class="form-group">
+          <label>Fiber</label>
+          <input id="fiber" placeholder="Enter fiber information">
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button type="reset" class="btn btn-light" id="resetBtn">
+          Reset
+        </button>
+
+        <button type="submit" class="btn btn-primary" id="saveBtn">
+          + Add Customer
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+
+  <div class="card">
+
+    <div class="card-title">
+      <span></span> Customer Records
+    </div>
+
+    <div class="toolbar">
+      <input
+        class="search"
+        id="search"
+        placeholder="Search name, IP, mobile..."
+      >
+      <button class="btn btn-light" onclick="exportCSV()">
+        Export CSV
+      </button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Customer Name</th>
+            <th>IP Address</th>
+            <th>Mobile</th>
+            <th>Area</th>
+            <th>Billing Date</th>
+            <th>Customer Bill</th>
+            <th>Internet Bill</th>
+            <th>Due Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="customerList"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const STORAGE_KEY = "one_online_demo_customers";
+
+let customers = JSON.parse(
+  localStorage.getItem(STORAGE_KEY) || "[]"
+);
+
+let editId = null;
+
+const $ = id => document.getElementById(id);
+
+function today(){
+  const d = new Date();
+  return [
+    d.getFullYear(),
+    String(d.getMonth()+1).padStart(2,"0"),
+    String(d.getDate()).padStart(2,"0")
+  ].join("-");
+}
+
+function nextSerial(){
+  return String(
+    Math.max(0,...customers.map(c=>Number(c.serial)||0))+1
+  ).padStart(4,"0");
+}
+
+function saveStorage(){
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(customers)
+  );
+}
+
+function resetForm(){
+  $("customerForm").reset();
+  editId = null;
+
+  $("serial").value = nextSerial();
+  $("createDate").value = today();
+
+  $("saveBtn").textContent = "+ Add Customer";
+}
+
+function render(){
+
+  const search = $("search").value.toLowerCase();
+
+  const filtered = customers.filter(c =>
+    [
+      c.name,c.ip,c.mobile,c.email,c.area
+    ].some(v => String(v||"").toLowerCase().includes(search))
+  );
+
+  $("customerList").innerHTML = "";
+
+  if(!filtered.length){
+    $("customerList").innerHTML =
+      `<tr><td colspan="10" class="empty">No customer records found.</td></tr>`;
+  }
+
+  filtered.forEach(c=>{
+
+    const tr = document.createElement("tr");
+
+    const values = [
+      c.serial,c.name,c.ip,c.mobile,c.area,
+      c.billingDate,
+      "৳"+c.customerBill,
+      "৳"+c.internetBill,
+      "৳"+c.dueAmount
+    ];
+
+    values.forEach((value,index)=>{
+      const td = document.createElement("td");
+      td.textContent = value || "-";
+      tr.appendChild(td);
+    });
+
+    const action = document.createElement("td");
+
+    const edit = document.createElement("button");
+    edit.className = "table-btn edit";
+    edit.textContent = "Edit";
+    edit.onclick = ()=>editCustomer(c.id);
+
+    const del = document.createElement("button");
+    del.className = "table-btn delete";
+    del.textContent = "Delete";
+    del.onclick = ()=>deleteCustomer(c.id);
+
+    action.append(edit,del);
+    tr.appendChild(action);
+
+    $("customerList").appendChild(tr);
+
+  });
+
+  $("totalCustomers").textContent = customers.length;
+
+  const due = customers.reduce(
+    (sum,c)=>sum+(Number(c.dueAmount)||0),0
+  );
+
+  $("totalDue").textContent = "৳"+due.toLocaleString();
+
+  $("lastSerial").textContent = nextSerial();
+
+}
+
+$("customerForm").addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  const customer = {
+    id:editId || Date.now(),
+    serial:$("serial").value,
+    name:$("name").value.trim(),
+    ip:$("ip").value.trim(),
+    mobile:$("mobile").value.trim(),
+    email:$("email").value.trim(),
+    area:$("area").value.trim(),
+    address:$("address").value.trim(),
+    location:$("location").value.trim(),
+    createDate:$("createDate").value,
+    billingDate:$("billingDate").value,
+    customerBill:Number($("customerBill").value)||0,
+    internetBill:Number($("internetBill").value)||0,
+    dueAmount:Number($("dueAmount").value)||0,
+    onuMac:$("onuMac").value.trim(),
+    fiber:$("fiber").value.trim()
+  };
+
+  if(!customer.name || !customer.ip){
+    alert("Customer Name and IP are required!");
+    return;
+  }
+
+  if(customers.some(c=>
+    c.ip.toLowerCase()===customer.ip.toLowerCase() &&
+    c.id!==editId
+  )){
+    alert("This Customer IP already exists!");
+    return;
+  }
+
+  if(editId){
+    customers=customers.map(c=>
+      c.id===editId ? customer : c
+    );
+  }else{
+    customers.push(customer);
+  }
+
+  saveStorage();
+  render();
+  resetForm();
+
+  alert(editId ? "Customer Updated Successfully!" :
+                   "Customer Added Successfully!");
+
+});
+
+function editCustomer(id){
+
+  const c=customers.find(x=>x.id===id);
+  if(!c)return;
+
+  editId=id;
+
+  Object.keys(c).forEach(key=>{
+    if($(key)) $(key).value=c[key];
+  });
+
+  $("saveBtn").textContent="Update Customer";
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function deleteCustomer(id){
+
+  if(!confirm("Are you sure you want to delete this customer?"))return;
+
+  customers=customers.filter(c=>c.id!==id);
+
+  saveStorage();
+  render();
+  resetForm();
+
+}
+
+$("search").addEventListener("input",render);
+
+$("resetBtn").addEventListener("click",()=>{
+  setTimeout(resetForm,0);
+});
+
+function exportCSV(){
+
+  if(!customers.length){
+    alert("No customers to export!");
+    return;
+  }
+
+  const headers=[
+    "Serial","Customer Name","Customer IP",
+    "Mobile","Email","Area","Address","Location",
+    "Create Date","Billing Date","Customer Bill",
+    "Internet Bill","Due Amount","ONU MAC","Fiber"
+  ];
+
+  const keys=[
+    "serial","name","ip","mobile","email","area",
+    "address","location","createDate","billingDate",
+    "customerBill","internetBill","dueAmount","onuMac","fiber"
+  ];
+
+  const rows=[
+    headers,
+    ...customers.map(c=>keys.map(k=>c[k]??""))
+  ];
+
+  const csv="\uFEFF"+rows.map(row=>
+    row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")
+  ).join("\n");
+
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="ONE-ONLINE-Customers.csv";
+  a.click();
+
+  URL.revokeObjectURL(url);
+
+}
+
+resetForm();
+render();
+
+</script>
+
+</body>
+</html>
