@@ -3,92 +3,182 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ONE ONLINE - Add Customer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ONE ONLINE | Add Customer</title>
+
 <style>
-#addCustomerPage {
+#addCustomerPage{
   --ac-primary:var(--primary,#0d9488);
   --ac-text:var(--text,#172033);
   --ac-muted:var(--muted,#7b8495);
   --ac-card:var(--card,#fff);
   --ac-border:var(--border,#e5e7eb);
-  color:var(--ac-text);
-  font-family:inherit;
+  color:var(--ac-text);font-family:inherit;
 }
-#addCustomerPage * {box-sizing:border-box}
-#addCustomerPage .ac-head {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-#addCustomerPage h2 {font-size:22px;margin:0 0 5px}
-#addCustomerPage .muted {color:var(--ac-muted);font-size:13px}
-#addCustomerPage .ac-card {background:var(--ac-card);border:1px solid var(--ac-border);border-radius:14px;padding:20px;box-shadow:var(--shadow,0 4px 18px #00000008)}
-#addCustomerPage .ac-section {font-size:15px;font-weight:700;margin:18px 0 12px;padding-bottom:9px;border-bottom:1px solid var(--ac-border)}
-#addCustomerPage .ac-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-#addCustomerPage label {display:block;font-size:12px;font-weight:600;margin-bottom:6px}
-#addCustomerPage input,#addCustomerPage select,#addCustomerPage textarea {
-  width:100%;min-height:42px;border:1px solid var(--ac-border);border-radius:9px;
-  padding:10px 11px;background:var(--input-bg,var(--ac-card));color:var(--ac-text);
-  font:inherit;font-size:13px;outline:none;
-}
-#addCustomerPage input:focus,#addCustomerPage select:focus,#addCustomerPage textarea:focus {border-color:var(--ac-primary)}
-#addCustomerPage textarea {min-height:72px;resize:vertical}
-#addCustomerPage .ac-actions {display:flex;justify-content:flex-end;gap:10px;margin-top:22px;flex-wrap:wrap}
-#addCustomerPage button {border:0;border-radius:9px;padding:11px 18px;font-weight:700;cursor:pointer}
-#addCustomerPage .primary {background:var(--ac-primary);color:#fff}
-#addCustomerPage .secondary {background:var(--hover,#eef2f7);color:var(--ac-text)}
-#addCustomerPage .status {display:none;padding:11px 13px;border-radius:9px;margin-bottom:14px;font-size:13px}
-#addCustomerPage .status.ok {display:block;background:#dcfce7;color:#166534}
-#addCustomerPage .status.err {display:block;background:#fee2e2;color:#991b1b}
-@media(max-width:800px){#addCustomerPage .ac-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){#addCustomerPage .ac-grid{grid-template-columns:1fr}#addCustomerPage .ac-card{padding:14px}}
+#addCustomerPage *{box-sizing:border-box}
+#addCustomerPage .ac-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+#addCustomerPage h2{font-size:23px;margin:0 0 5px;font-weight:750}
+#addCustomerPage .ac-subtitle{font-size:13px;color:var(--ac-muted)}
+#addCustomerPage .ac-card{background:var(--ac-card);border:1px solid var(--ac-border);border-radius:14px;padding:22px;box-shadow:var(--shadow,0 3px 16px #00000008)}
+#addCustomerPage .ac-section{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:750;padding-bottom:11px;margin:8px 0 16px;border-bottom:1px solid var(--ac-border)}
+#addCustomerPage .ac-section .number{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;background:var(--hover,#e8f5f3);color:var(--ac-primary);font-size:12px}
+#addCustomerPage .ac-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+#addCustomerPage .ac-field label{display:block;font-size:12px;font-weight:650;margin-bottom:6px}
+#addCustomerPage .ac-field input,#addCustomerPage .ac-field select,#addCustomerPage .ac-field textarea{width:100%;min-height:43px;border:1px solid var(--ac-border);border-radius:9px;padding:10px 12px;background:var(--input-bg,var(--ac-card));color:var(--ac-text);font:inherit;font-size:13px;outline:none}
+#addCustomerPage .ac-field textarea{min-height:78px;resize:vertical}
+#addCustomerPage .ac-field input:focus,#addCustomerPage .ac-field select:focus,#addCustomerPage .ac-field textarea:focus{border-color:var(--ac-primary);box-shadow:0 0 0 3px #0d948812}
+#addCustomerPage .ac-full{grid-column:1/-1}
+#addCustomerPage .ac-required{color:#dc2626}
+#addCustomerPage .ac-help{display:block;font-size:11px;color:var(--ac-muted);margin-top:5px}
+#addCustomerPage .ac-due-box{padding:15px;border-radius:11px;background:var(--hover,#f5f8fa);border:1px solid var(--ac-border)}
+#addCustomerPage .ac-due-box .ac-grid{margin-top:13px}
+#addCustomerPage .ac-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:17px;border-top:1px solid var(--ac-border)}
+#addCustomerPage button{border:0;border-radius:9px;padding:11px 20px;font-size:13px;font-weight:700;cursor:pointer}
+#addCustomerPage button:disabled{opacity:.6;cursor:wait}
+#addCustomerPage .ac-primary{background:var(--ac-primary);color:#fff}
+#addCustomerPage .ac-secondary{background:var(--hover,#eef2f7);color:var(--ac-text)}
+#addCustomerPage .ac-alert{display:none;padding:12px 14px;border-radius:9px;margin-bottom:15px;font-size:13px;white-space:pre-wrap}
+#addCustomerPage .ac-alert.show{display:block}
+#addCustomerPage .ac-alert.success{background:#dcfce7;color:#166534}
+#addCustomerPage .ac-alert.error{background:#fee2e2;color:#991b1b}
+#addCustomerPage .ac-alert.warning{background:#fef3c7;color:#92400e}
+@media(max-width:850px){#addCustomerPage .ac-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){#addCustomerPage .ac-card{padding:14px}#addCustomerPage .ac-grid{grid-template-columns:1fr}#addCustomerPage h2{font-size:20px}#addCustomerPage .ac-actions button{flex:1}}
 </style>
 </head>
+
 <body>
 <div id="addCustomerPage">
-  <div class="ac-head">
+
+  <div class="ac-header">
     <div>
       <h2>Add New Customer</h2>
-      <div class="muted">Create a new customer record in ONE ONLINE</div>
+      <div class="ac-subtitle">Add customer details, billing information and due records</div>
     </div>
   </div>
 
   <div class="ac-card">
-    <div id="acStatus" class="status"></div>
+    <div id="acAlert" class="ac-alert"></div>
 
     <form id="acForm">
-      <div class="ac-section">Customer Information</div>
+
+      <div class="ac-section"><span class="number">01</span> Customer Details</div>
+
       <div class="ac-grid">
-        <div><label>Customer Name *</label><input name="name" required placeholder="Customer name"></div>
-        <div><label>Customer IP *</label><input name="ip" required placeholder="Example: LRSN014"></div>
-        <div><label>Phone</label><input name="phone" placeholder="Phone number"></div>
-        <div><label>Email</label><input name="email" type="email" placeholder="Email address"></div>
-        <div><label>Area</label><input name="area" placeholder="Area"></div>
-        <div><label>Location</label><input name="location" placeholder="Location"></div>
-        <div><label>Address</label><input name="address" placeholder="Full address"></div>
-        <div><label>ONU</label><input name="onu" placeholder="ONU details"></div>
-        <div><label>Fiber</label><input name="fiber" placeholder="Fiber details"></div>
-        <div><label>Create Date</label><input name="createDate" type="date" id="acCreateDate"></div>
+        <div class="ac-field">
+          <label>Customer Name <span class="ac-required">*</span></label>
+          <input name="name" required placeholder="Enter customer name">
+        </div>
+
+        <div class="ac-field">
+          <label>Customer IP <span class="ac-required">*</span></label>
+          <input name="ip" required placeholder="Example: LRSN014">
+        </div>
+
+        <div class="ac-field">
+          <label>Phone Number</label>
+          <input name="phone" placeholder="Phone number">
+        </div>
+
+        <div class="ac-field">
+          <label>Customer Email</label>
+          <input name="email" type="email" placeholder="Email address">
+        </div>
+
+        <div class="ac-field">
+          <label>Area</label>
+          <input name="area" placeholder="Customer area">
+        </div>
+
+        <div class="ac-field">
+          <label>Location</label>
+          <input name="location" placeholder="Customer location">
+        </div>
+
+        <div class="ac-field ac-full">
+          <label>Full Address</label>
+          <textarea name="address" placeholder="Customer full address"></textarea>
+        </div>
+
+        <div class="ac-field">
+          <label>ONU</label>
+          <input name="onu" placeholder="ONU details">
+        </div>
+
+        <div class="ac-field">
+          <label>Fiber</label>
+          <input name="fiber" placeholder="Fiber details">
+        </div>
+
+        <div class="ac-field">
+          <label>Customer Note / Reason</label>
+          <input name="reason" placeholder="Optional note">
+        </div>
+
+        <div class="ac-field">
+          <label>Customer Create Date</label>
+          <input name="createDate" id="acCreateDate" type="date">
+        </div>
       </div>
 
-      <div class="ac-section">Billing Information</div>
+      <div class="ac-section" style="margin-top:27px">
+        <span class="number">02</span> Billing Details
+      </div>
+
       <div class="ac-grid">
-        <div><label>Customer Bill (৳)</label><input name="customerBill" type="number" min="0" step="0.01" value="0"></div>
-        <div><label>IP Bill (৳)</label><input name="ipBill" type="number" min="0" step="0.01" value="0"></div>
-        <div><label>Current Due (৳)</label><input name="dueAmount" type="number" min="0" step="0.01" value="0"></div>
-        <div><label>Billing Date</label><input name="billingDate" type="date"></div>
-        <div><label>Bill Trigger</label>
-          <select name="billTrigger"><option value="ON">ON</option><option value="OFF">OFF</option></select>
+        <div class="ac-field">
+          <label>Customer Monthly Bill (৳)</label>
+          <input name="customerBill" type="number" min="0" step="0.01" value="0">
         </div>
-        <div><label>IP Bill Trigger</label>
-          <select name="ipBillTrigger"><option value="OFF">OFF</option><option value="ON">ON</option></select>
+
+        <div class="ac-field">
+          <label>IP Bill (৳)</label>
+          <input name="ipBill" type="number" min="0" step="0.01" value="0">
         </div>
-        <div><label>Collection Status</label>
-          <select name="collect"><option value="Due">Due</option><option value="Collected">Collected</option></select>
+
+        <div class="ac-field">
+          <label>Billing Date</label>
+          <input name="billingDate" type="date">
         </div>
-        <div><label>Reason</label><input name="reason" placeholder="Optional reason"></div>
+      </div>
+
+      <div class="ac-section" style="margin-top:27px">
+        <span class="number">03</span> Initial Due Information
+      </div>
+
+      <div class="ac-due-box">
+        <div class="ac-field">
+          <label>Initial Due Amount (৳)</label>
+          <input name="initialDue" id="acInitialDue" type="number" min="0" step="0.01" value="0">
+          <small class="ac-help">বকেয়া না থাকলে 0 রাখুন। বকেয়া থাকলে টাকার পরিমাণ লিখুন।</small>
+        </div>
+
+        <div class="ac-grid">
+          <div class="ac-field">
+            <label>Due From</label>
+            <select name="dueFrom">
+              <option value="Previous Due">Previous Due</option>
+              <option value="Bill">Bill</option>
+              <option value="IP Bill">IP Bill</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="ac-field">
+            <label>Due Reason</label>
+            <input name="dueReason" placeholder="Why is this due?">
+          </div>
+
+          <div class="ac-field">
+            <label>Due Note</label>
+            <input name="dueNote" placeholder="Optional note">
+          </div>
+        </div>
       </div>
 
       <div class="ac-actions">
-        <button type="reset" class="secondary">Reset</button>
-        <button type="submit" class="primary" id="acSubmit">Save Customer</button>
+        <button type="reset" class="ac-secondary">Reset Form</button>
+        <button type="submit" class="ac-primary" id="acSaveBtn">Save Customer</button>
       </div>
     </form>
   </div>
@@ -96,89 +186,173 @@
 
 <script>
 (function(){
-  const API_URL = "https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
-  const TOKEN_KEY = "one_online_customer_token";
-  const PARENT_TOKEN_KEY = "one_online_session_token";
-  const root = document.getElementById("addCustomerPage");
-  if (!root || root.dataset.ready) return;
-  root.dataset.ready = "1";
+  const API_URL="https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
+  const TOKEN_KEY="one_online_customer_token";
+  const root=document.getElementById("addCustomerPage");
 
-  const form = root.querySelector("#acForm");
-  const statusBox = root.querySelector("#acStatus");
-  const submitBtn = root.querySelector("#acSubmit");
-  root.querySelector("#acCreateDate").value = new Date().toISOString().slice(0,10);
+  if(!root || root.dataset.initialized==="yes") return;
+  root.dataset.initialized="yes";
 
-  function show(message, type){
-    statusBox.textContent = message;
-    statusBox.className = "status " + (type || "ok");
+  const $=id=>root.querySelector("#"+id);
+  const form=$("acForm");
+  const alertBox=$("acAlert");
+  const saveBtn=$("acSaveBtn");
+
+  let loginPromise=null;
+
+  $("acCreateDate").value=new Date().toISOString().slice(0,10);
+
+  function showMessage(message,type){
+    alertBox.textContent=message;
+    alertBox.className="ac-alert show "+type;
+    alertBox.scrollIntoView({behavior:"smooth",block:"nearest"});
   }
 
-  function getToken(){
-    return sessionStorage.getItem(TOKEN_KEY) ||
-           sessionStorage.getItem(PARENT_TOKEN_KEY) || "";
+  function getSavedToken(){
+    return localStorage.getItem(TOKEN_KEY)||"";
+  }
+
+  function clearToken(){
+    localStorage.removeItem(TOKEN_KEY);
   }
 
   async function login(){
-    let token = getToken();
-    if (token) return token;
+    const password=prompt("ONE ONLINE API Password দিন:");
+    if(password===null || !password.trim()) throw new Error("Login cancelled.");
 
-    const password = prompt("ONE ONLINE API Password দিন:");
-    if (password === null || !password.trim()) throw new Error("Login cancelled.");
-
-    const res = await fetch(API_URL,{
+    const response=await fetch(API_URL,{
       method:"POST",
       headers:{"Content-Type":"text/plain;charset=utf-8"},
       body:JSON.stringify({action:"login",password:password})
     });
 
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message || "Login failed.");
+    const result=await response.json();
+    if(!result.success) throw new Error(result.message||"Login failed.");
 
-    sessionStorage.setItem(TOKEN_KEY,data.token);
-    return data.token;
+    localStorage.setItem(TOKEN_KEY,result.token);
+    return result.token;
   }
 
-  form.addEventListener("submit",async function(e){
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Saving...";
+  async function getToken(){
+    const saved=getSavedToken();
+    if(saved) return saved;
+
+    if(!loginPromise){
+      loginPromise=login().finally(()=>{loginPromise=null;});
+    }
+    return loginPromise;
+  }
+
+  async function post(data,alreadyRetried){
+    const token=await getToken();
+
+    const response=await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({...data,token:token})
+    });
+
+    const result=await response.json();
+
+    if(result.unauthorized && !alreadyRetried){
+      clearToken();
+      return post(data,true);
+    }
+
+    if(!result.success) throw new Error(result.message||"Request failed.");
+    return result;
+  }
+
+  function num(v){
+    const n=Number(v||0);
+    return Number.isFinite(n)?n:0;
+  }
+
+  form.addEventListener("reset",()=>{
+    setTimeout(()=>{
+      $("acCreateDate").value=new Date().toISOString().slice(0,10);
+      $("acInitialDue").value="0";
+      alertBox.className="ac-alert";
+    },0);
+  });
+
+  form.addEventListener("submit",async event=>{
+    event.preventDefault();
+    if(saveBtn.disabled) return;
+
+    saveBtn.disabled=true;
+    saveBtn.textContent="Saving...";
 
     try{
-      const token = await login();
-      const fd = new FormData(form);
-      const data = Object.fromEntries(fd.entries());
+      const values=Object.fromEntries(new FormData(form).entries());
+      const initialDue=num(values.initialDue);
 
-      data.action = "add";
-      data.token = token;
+      if(!values.name.trim()) throw new Error("Customer name is required.");
+      if(!values.ip.trim()) throw new Error("Customer IP is required.");
+      if(initialDue<0) throw new Error("Due amount cannot be negative.");
 
-      ["customerBill","ipBill","dueAmount"].forEach(k=>{
-        data[k] = Number(data[k] || 0);
-      });
-
-      const response = await fetch(API_URL,{
-        method:"POST",
-        headers:{"Content-Type":"text/plain;charset=utf-8"},
-        body:JSON.stringify(data)
-      });
-
-      const result = await response.json();
-
-      if (!result.success){
-        if(result.unauthorized) sessionStorage.removeItem(TOKEN_KEY);
-        throw new Error(result.message || "Unable to save customer.");
+      if(initialDue>0 && !String(values.dueReason||"").trim()){
+        throw new Error("Initial Due দিলে Due Reason লিখুন।");
       }
 
-      show("Customer added successfully. Customer IP: " + data.ip,"ok");
+      // First create customer with zero due.
+      const customerResult=await post({
+        action:"add",
+        name:values.name.trim(),
+        ip:values.ip.trim(),
+        phone:values.phone,
+        email:values.email,
+        area:values.area,
+        address:values.address,
+        location:values.location,
+        onu:values.onu,
+        fiber:values.fiber,
+        reason:values.reason,
+        createDate:values.createDate,
+        customerBill:num(values.customerBill),
+        ipBill:num(values.ipBill),
+        billingDate:values.billingDate,
+        dueAmount:0,
+        collect:"Collected"
+      },false);
+
+      // Add initial due separately so Due Entries and History are recorded.
+      if(initialDue>0){
+        try{
+          await post({
+            action:"addDue",
+            ip:values.ip.trim(),
+            amount:initialDue,
+            dueFrom:values.dueFrom,
+            dueReason:values.dueReason,
+            notes:values.dueNote||"",
+            user:"Admin"
+          },false);
+        }catch(dueError){
+          form.reset();
+          showMessage(
+            "Customer was added, but the initial due could not be saved.\nPlease open Total Customer and add the due manually.\nReason: "+dueError.message,
+            "warning"
+          );
+          return;
+        }
+      }
+
       form.reset();
-      root.querySelector("#acCreateDate").value = new Date().toISOString().slice(0,10);
+      showMessage(
+        initialDue>0
+          ? "Customer added successfully. Initial due entry saved."
+          : (customerResult.message||"Customer added successfully."),
+        "success"
+      );
 
-      document.dispatchEvent(new CustomEvent("oneonline:customer-added",{detail:result}));
+      document.dispatchEvent(new CustomEvent("oneonline:customer-added"));
 
-    }catch(err){
-      show(err.message || "Something went wrong.","err");
+    }catch(error){
+      showMessage(error.message||"Unable to save customer.","error");
     }finally{
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Save Customer";
+      saveBtn.disabled=false;
+      saveBtn.textContent="Save Customer";
     }
   });
 })();
