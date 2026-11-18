@@ -1,1040 +1,416 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Customer | ONE ONLINE</title>
+<title>ONE ONLINE | Customer Management</title>
 
 <style>
-
-/* =====================================
-   ONE ONLINE - ADD CUSTOMER
-   INDEX THEME COMPATIBLE
-   WHITE / DARK / FUNNY
-===================================== */
-
 .ca-page{
-  width:100%;
-  min-height:100vh;
-  padding:25px;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  transition:background .25s,color .25s;
-}
-
-.ca-page *{box-sizing:border-box;}
-
-.ca-page button,
-.ca-page input,
-.ca-page select,
-.ca-page textarea{
+  width:100%;min-height:100vh;padding:25px;
+  background:var(--bg);color:var(--text);
   font-family:Arial,Helvetica,sans-serif;
 }
-
-/* HEADER */
-
-.ca-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:15px;
-  margin-bottom:25px;
+.ca-page *{box-sizing:border-box}
+.ca-page button,.ca-page input,.ca-page select,.ca-page textarea{font-family:Arial,Helvetica,sans-serif}
+.ca-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;margin-bottom:22px}
+.ca-header h2{color:var(--text);font-size:25px;font-weight:750;margin:0 0 6px}
+.ca-header p{color:var(--muted);font-size:12px;margin:0}
+.ca-tag{background:var(--hover);color:var(--primary);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:11px;font-weight:800}
+.ca-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:20px}
+.ca-stat,.ca-card{background:var(--card);border:1px solid var(--border);border-radius:11px;box-shadow:var(--shadow)}
+.ca-stat{padding:18px}
+.ca-stat p{color:var(--muted);font-size:12px;margin:0 0 9px}
+.ca-stat h3{color:var(--text);font-size:24px;margin:0;overflow-wrap:anywhere}
+.ca-stat-icon{float:right;font-size:21px}
+.ca-card{padding:22px;margin-bottom:20px}
+.ca-card-title{display:flex;align-items:center;gap:10px;color:var(--text);font-size:16px;font-weight:750;margin:0 0 20px}
+.ca-card-title:before{content:"";width:4px;height:19px;border-radius:5px;background:var(--primary)}
+.ca-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.ca-group{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ca-group label{color:var(--text);font-size:12px;font-weight:650}
+.ca-required{color:#ef4444}
+.ca-group input,.ca-group select,.ca-group textarea{
+  width:100%;min-height:42px;padding:10px 12px;border:1px solid var(--border);
+  border-radius:7px;outline:none;background:var(--bg);color:var(--text);font-size:13px;
 }
-
-.ca-header h2{
-  color:var(--text);
-  font-size:25px;
-  font-weight:750;
-  margin:0 0 6px;
-}
-
-.ca-header p{
-  color:var(--muted);
-  font-size:12px;
-  margin:0;
-}
-
-.ca-tag{
-  background:var(--hover);
-  color:var(--primary);
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:10px 14px;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.5px;
-}
-
-/* STAT CARDS */
-
-.ca-stats{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:15px;
-  margin-bottom:22px;
-}
-
-.ca-stat{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:19px;
-  box-shadow:var(--shadow);
-  transition:.25s;
-}
-
-.ca-stat p{
-  color:var(--muted);
-  font-size:12px;
-  margin:0 0 9px;
-}
-
-.ca-stat h3{
-  color:var(--text);
-  font-size:25px;
-  font-weight:750;
-  margin:0;
-  overflow-wrap:anywhere;
-}
-
-.ca-stat-icon{
-  float:right;
-  font-size:21px;
-}
-
-/* FORM CARD */
-
-.ca-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:23px;
-  margin-bottom:20px;
-  box-shadow:var(--shadow);
-  transition:background .25s,border .25s;
-}
-
-.ca-card-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:var(--text);
-  font-size:16px;
-  font-weight:750;
-  margin:0 0 22px;
-}
-
-.ca-card-title::before{
-  content:"";
-  width:4px;
-  height:19px;
-  flex-shrink:0;
-  border-radius:5px;
-  background:var(--primary);
-}
-
-.ca-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:19px;
-}
-
-.ca-group{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  min-width:0;
-}
-
-.ca-group label{
-  color:var(--text);
-  font-size:12px;
-  font-weight:650;
-}
-
-.ca-required{color:#ef4444;}
-
-.ca-group input,
-.ca-group select,
-.ca-group textarea{
-  width:100%;
-  height:43px;
-  padding:10px 12px;
-  border:1px solid var(--border);
-  border-radius:7px;
-  outline:none;
-  background:var(--bg);
-  color:var(--text);
-  font-size:13px;
-  transition:.2s;
-  box-shadow:none;
-}
-
-.ca-group input::placeholder,
-.ca-group textarea::placeholder{
-  color:var(--muted);
-  opacity:.8;
-}
-
-.ca-group input:focus,
-.ca-group select:focus,
-.ca-group textarea:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 12%,transparent);
-}
-
-.ca-group input[readonly]{
-  background:var(--hover);
-  color:var(--muted);
-  cursor:not-allowed;
-}
-
-.ca-group input[type="date"]{
-  color:var(--text);
-  color-scheme:normal;
-}
-
-.ca-full{grid-column:1/-1;}
-
-/* BUTTONS */
-
-.ca-actions{
-  display:flex;
-  justify-content:flex-end;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:25px;
-}
-
-.ca-btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:7px;
-  padding:12px 19px;
-  border:1px solid transparent;
-  border-radius:7px;
-  cursor:pointer;
-  font-size:12px;
-  font-weight:750;
-  transition:.2s;
-}
-
-.ca-btn-primary{
-  background:var(--primary);
-  color:white;
-}
-
-.ca-btn-primary:hover{
-  opacity:.88;
-  transform:translateY(-1px);
-}
-
-.ca-btn-light{
-  background:var(--hover);
-  color:var(--text);
-  border-color:var(--border);
-}
-
-.ca-btn-light:hover{border-color:var(--primary);}
-
-.ca-btn:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-/* TABLE SECTION */
-
-.ca-toolbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.ca-search{
-  width:100%;
-  max-width:350px;
-  height:42px;
-  padding:10px 13px;
-  border:1px solid var(--border);
-  border-radius:7px;
-  outline:none;
-  background:var(--bg);
-  color:var(--text);
-  font-size:13px;
-}
-
-.ca-search::placeholder{color:var(--muted);}
-.ca-search:focus{border-color:var(--primary);}
-
-.ca-table-wrap{
-  overflow-x:auto;
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:8px;
-}
-
-.ca-table{
-  width:100%;
-  min-width:1050px;
-  border-collapse:collapse;
-  background:var(--card);
-}
-
-.ca-table th,
-.ca-table td{
-  padding:14px 12px;
-  text-align:left;
-  white-space:nowrap;
-  border-bottom:1px solid var(--border);
-  color:var(--text);
-  font-size:12px;
-}
-
-.ca-table th{
-  background:var(--hover);
-  color:var(--muted);
-  font-size:11px;
-  font-weight:750;
-}
-
-.ca-table tbody tr:hover td{background:var(--hover);}
-.ca-table tbody tr:last-child td{border-bottom:0;}
-
-.ca-table-btn{
-  border:0;
-  background:transparent;
-  padding:5px;
-  cursor:pointer;
-  font-size:12px;
-  font-weight:750;
-}
-
-.ca-edit{color:var(--primary);}
-.ca-delete{color:#ef4444;}
-
-.ca-empty{
-  text-align:center!important;
-  padding:35px!important;
-  color:var(--muted)!important;
-}
-
-.ca-count{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--hover);
-  color:var(--primary);
-  border-radius:20px;
-  padding:5px 9px;
-  font-size:11px;
-  font-weight:750;
-}
-
-.ca-page .ca-tag{transition:.2s;}
-
-.ca-page .ca-card,
-.ca-page .ca-stat{
-  transition:background .25s,border-color .25s,box-shadow .25s;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-  .ca-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-}
-
+.ca-group textarea{height:75px;resize:vertical}
+.ca-group input:focus,.ca-group select:focus,.ca-group textarea:focus{border-color:var(--primary)}
+.ca-group input[readonly]{background:var(--hover);color:var(--muted)}
+.ca-full{grid-column:1/-1}
+.ca-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;margin-top:22px}
+.ca-btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;padding:11px 16px;border:1px solid transparent;border-radius:7px;cursor:pointer;font-size:12px;font-weight:750}
+.ca-btn-primary{background:var(--primary);color:white}
+.ca-btn-light{background:var(--hover);color:var(--text);border-color:var(--border)}
+.ca-btn-danger{background:#ef4444;color:white}
+.ca-btn-success{background:#16a34a;color:white}
+.ca-btn:disabled{opacity:.5;cursor:not-allowed}
+.ca-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.ca-tab{padding:10px 15px;border:1px solid var(--border);border-radius:7px;background:var(--card);color:var(--text);font-size:12px;font-weight:700;cursor:pointer}
+.ca-tab.active{background:var(--primary);color:white;border-color:var(--primary)}
+.ca-panel{display:none}
+.ca-panel.active{display:block}
+.ca-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.ca-search{width:100%;max-width:350px;height:41px;padding:10px 13px;border:1px solid var(--border);border-radius:7px;outline:none;background:var(--bg);color:var(--text);font-size:13px}
+.ca-table-wrap{overflow-x:auto;width:100%;border:1px solid var(--border);border-radius:8px}
+.ca-table{width:100%;min-width:950px;border-collapse:collapse;background:var(--card)}
+.ca-table th,.ca-table td{padding:12px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--border);color:var(--text);font-size:12px}
+.ca-table th{background:var(--hover);color:var(--muted);font-size:11px;font-weight:750}
+.ca-table tbody tr:hover td{background:var(--hover)}
+.ca-table tbody tr:last-child td{border-bottom:0}
+.ca-table-btn{border:0;background:transparent;padding:5px;cursor:pointer;font-size:12px;font-weight:750}
+.ca-edit{color:var(--primary)}
+.ca-delete{color:#ef4444}
+.ca-restore{color:#16a34a}
+.ca-empty{text-align:center!important;padding:35px!important;color:var(--muted)!important}
+.ca-count{display:inline-flex;background:var(--hover);color:var(--primary);border-radius:20px;padding:5px 9px;font-size:11px;font-weight:750}
+.ca-badge{display:inline-block;padding:5px 9px;border-radius:20px;background:var(--hover);font-size:11px;font-weight:700}
+.ca-modal{display:none;position:fixed;inset:0;background:#0009;z-index:99999;align-items:center;justify-content:center;padding:15px}
+.ca-modal.show{display:flex}
+.ca-modal-box{width:100%;max-width:600px;max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;box-shadow:0 15px 50px #0003}
+.ca-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.ca-modal-head h3{margin:0;color:var(--text);font-size:17px}
+.ca-close{border:0;background:var(--hover);color:var(--text);border-radius:6px;padding:7px 11px;cursor:pointer}
+.ca-notice{padding:12px;border:1px solid var(--border);background:var(--hover);border-radius:7px;color:var(--muted);font-size:12px;margin-bottom:15px}
+.ca-loading{text-align:center;color:var(--muted);padding:25px;font-size:13px}
+@media(max-width:1000px){.ca-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ca-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){
-  .ca-page{padding:15px;}
-  .ca-header h2{font-size:21px;}
-  .ca-stats{grid-template-columns:1fr;gap:11px;}
-  .ca-stat{padding:15px;}
-  .ca-card{padding:16px;}
-  .ca-grid{grid-template-columns:1fr;gap:15px;}
-  .ca-actions{flex-direction:column-reverse;}
-  .ca-actions .ca-btn{width:100%;}
-  .ca-toolbar{align-items:stretch;}
-  .ca-search{max-width:none;}
+ .ca-page{padding:14px}.ca-header h2{font-size:21px}
+ .ca-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .ca-stat{padding:13px}.ca-stat h3{font-size:20px}
+ .ca-card{padding:15px}.ca-grid{grid-template-columns:1fr;gap:14px}
+ .ca-actions{flex-direction:column-reverse}.ca-actions .ca-btn{width:100%}
+ .ca-toolbar{align-items:stretch}.ca-search{max-width:none}
+ .ca-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ca-tab{width:100%}
 }
-
 </style>
 </head>
 
 <body>
-
 <div class="ca-page">
 
   <div class="ca-header">
     <div>
-      <h2>Add Customer</h2>
-      <p>ONE ONLINE / Customer Management</p>
+      <h2>Customer Management</h2>
+      <p>ONE ONLINE / Customer Management System</p>
     </div>
-    <div class="ca-tag">CUSTOMER MODULE</div>
+    <div class="ca-tag">ONE ONLINE CUSTOMER MODULE</div>
   </div>
 
-  <!-- STATISTICS -->
-
+  <!-- DASHBOARD -->
   <div class="ca-stats">
-
-    <div class="ca-stat">
-      <span class="ca-stat-icon">👥</span>
-      <p>Total Customers</p>
-      <h3 id="caTotal">0</h3>
-    </div>
-
-    <div class="ca-stat">
-      <span class="ca-stat-icon">💰</span>
-      <p>Total Due Amount</p>
-      <h3 id="caTotalDue">৳0</h3>
-    </div>
-
-    <div class="ca-stat">
-      <span class="ca-stat-icon">🔢</span>
-      <p>Last Serial Number</p>
-      <h3 id="caLastSerial">0001</h3>
-    </div>
-
+    <div class="ca-stat"><span class="ca-stat-icon">👥</span><p>Total Customers</p><h3 id="caTotal">0</h3></div>
+    <div class="ca-stat"><span class="ca-stat-icon">💰</span><p>Total Due Amount</p><h3 id="caTotalDue">৳0</h3></div>
+    <div class="ca-stat"><span class="ca-stat-icon">🗑️</span><p>Deleted Customers</p><h3 id="caDeletedTotal">0</h3></div>
+    <div class="ca-stat"><span class="ca-stat-icon">🔢</span><p>Last Serial Number</p><h3 id="caLastSerial">0000</h3></div>
   </div>
 
-  <form id="caForm">
-
-    <!-- CUSTOMER INFORMATION -->
-
-    <div class="ca-card">
-
-      <div class="ca-card-title">Customer Information</div>
-
-      <div class="ca-grid">
-
-        <div class="ca-group">
-          <label>Serial Number</label>
-          <input id="caSerial" readonly>
-        </div>
-
-        <div class="ca-group">
-          <label>Customer Name <span class="ca-required">*</span></label>
-          <input id="caName" required placeholder="Enter customer name">
-        </div>
-
-        <div class="ca-group">
-          <label>Customer IP <span class="ca-required">*</span></label>
-          <input id="caIP" required placeholder="192.168.1.100">
-        </div>
-
-        <div class="ca-group">
-          <label>Mobile Number</label>
-          <input id="caMobile" type="tel" placeholder="01XXXXXXXXX">
-        </div>
-
-        <div class="ca-group">
-          <label>Email Address</label>
-          <input id="caEmail" type="email" placeholder="customer@gmail.com">
-        </div>
-
-        <div class="ca-group">
-          <label>Area</label>
-          <input id="caArea" placeholder="Enter area">
-        </div>
-
-        <div class="ca-group">
-          <label>Address</label>
-          <input id="caAddress" placeholder="Enter full address">
-        </div>
-
-        <div class="ca-group">
-          <label>Location</label>
-          <input id="caLocation" placeholder="Enter location">
-        </div>
-
-        <div class="ca-group">
-          <label>Create Date</label>
-          <input id="caCreateDate" type="date">
-        </div>
-
-      </div>
-    </div>
-
-    <!-- BILLING INFORMATION -->
-
-    <div class="ca-card">
-
-      <div class="ca-card-title">Billing Information</div>
-
-      <div class="ca-grid">
-
-        <div class="ca-group">
-          <label>Billing Date</label>
-          <input id="caBillingDate" type="date">
-        </div>
-
-        <div class="ca-group">
-          <label>Customer Bill (৳)</label>
-          <input id="caCustomerBill" type="number" min="0" step="0.01" placeholder="0">
-        </div>
-
-        <div class="ca-group">
-          <label>Internet Bill (৳)</label>
-          <input id="caInternetBill" type="number" min="0" step="0.01" placeholder="0">
-        </div>
-
-        <div class="ca-group">
-          <label>Due Amount (৳)</label>
-          <input id="caDueAmount" type="number" min="0" step="0.01" placeholder="0">
-        </div>
-
-      </div>
-    </div>
-
-    <!-- NETWORK INFORMATION -->
-
-    <div class="ca-card">
-
-      <div class="ca-card-title">Network Information</div>
-
-      <div class="ca-grid">
-
-        <div class="ca-group">
-          <label>ONU MAC Address</label>
-          <input id="caOnuMac" placeholder="XX:XX:XX:XX:XX:XX">
-        </div>
-
-        <div class="ca-group">
-          <label>Fiber</label>
-          <input id="caFiber" placeholder="Enter fiber information">
-        </div>
-
-      </div>
-
-      <div class="ca-actions">
-
-        <button type="reset" class="ca-btn ca-btn-light">
-          ↺ Reset
-        </button>
-
-        <button type="submit" class="ca-btn ca-btn-primary" id="caSave">
-          + Add Customer
-        </button>
-
-      </div>
-
-    </div>
-
-  </form>
-
-  <!-- CUSTOMER RECORDS -->
-
-  <div class="ca-card">
-
-    <div class="ca-card-title">
-      Customer Records
-      <span class="ca-count" id="caRecordCount">0 Records</span>
-    </div>
-
-    <div class="ca-toolbar">
-
-      <input
-        type="search"
-        id="caSearch"
-        class="ca-search"
-        placeholder="Search name, IP, mobile, email..."
-      >
-
-      <button type="button" class="ca-btn ca-btn-light" id="caExport">
-        ↓ Export CSV
-      </button>
-
-    </div>
-
-    <div class="ca-table-wrap">
-
-      <table class="ca-table">
-
-        <thead>
-          <tr>
-            <th>Serial</th>
-            <th>Customer Name</th>
-            <th>Customer IP</th>
-            <th>Mobile</th>
-            <th>Area</th>
-            <th>Billing Date</th>
-            <th>Customer Bill</th>
-            <th>Internet Bill</th>
-            <th>Due Amount</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody id="caCustomerList"></tbody>
-
-      </table>
-
-    </div>
-
+  <!-- NAVIGATION -->
+  <div class="ca-tabs">
+    <button class="ca-tab active" data-panel="active">👥 Active Customers</button>
+    <button class="ca-tab" data-panel="deleted">🗑️ Deleted Customers</button>
+    <button class="ca-tab" data-panel="due">💰 Due Entries</button>
+    <button class="ca-tab" data-panel="history">📜 Customer History</button>
   </div>
+
+  <!-- ACTIVE CUSTOMER PANEL -->
+  <section class="ca-panel active" id="panel-active">
+
+    <form id="caForm">
+
+      <div class="ca-card">
+        <div class="ca-card-title">Customer Information</div>
+        <div class="ca-grid">
+
+          <div class="ca-group"><label>Serial Number</label><input id="caSerial" readonly></div>
+          <div class="ca-group"><label>Customer Name <span class="ca-required">*</span></label><input id="caName" required placeholder="Enter customer name"></div>
+          <div class="ca-group"><label>Customer IP <span class="ca-required">*</span></label><input id="caIP" required placeholder="192.168.1.100"></div>
+          <div class="ca-group"><label>Mobile Number</label><input id="caMobile" type="tel" placeholder="01XXXXXXXXX"></div>
+          <div class="ca-group"><label>Email Address</label><input id="caEmail" type="email" placeholder="customer@gmail.com"></div>
+          <div class="ca-group"><label>Area</label><input id="caArea" placeholder="Enter area"></div>
+          <div class="ca-group"><label>Address</label><input id="caAddress" placeholder="Enter full address"></div>
+          <div class="ca-group"><label>Location</label><input id="caLocation" placeholder="Enter location"></div>
+          <div class="ca-group"><label>Create Date</label><input id="caCreateDate" type="date"></div>
+          <div class="ca-group ca-full"><label>Customer Reason / Note</label><input id="caReason" placeholder="Customer information or note"></div>
+
+        </div>
+      </div>
+
+      <div class="ca-card">
+        <div class="ca-card-title">Billing Information</div>
+        <div class="ca-grid">
+
+          <div class="ca-group"><label>Billing Date</label><input id="caBillingDate" type="date"></div>
+          <div class="ca-group"><label>Customer Bill (৳)</label><input id="caCustomerBill" type="number" min="0" step="0.01" placeholder="0"></div>
+          <div class="ca-group"><label>Internet Bill (৳)</label><input id="caInternetBill" type="number" min="0" step="0.01" placeholder="0"></div>
+          <div class="ca-group"><label>Due Amount (৳)</label><input id="caDueAmount" type="number" min="0" step="0.01" placeholder="0"></div>
+          <div class="ca-group"><label>Bill Trigger</label><select id="caBillTrigger"><option value="">Optional - Select</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
+          <div class="ca-group"><label>IP Bill Trigger</label><select id="caIPBillTrigger"><option value="">Optional - Select</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
+
+        </div>
+      </div>
+
+      <div class="ca-card">
+        <div class="ca-card-title">Network Information</div>
+        <div class="ca-grid">
+          <div class="ca-group"><label>ONU MAC Address</label><input id="caOnuMac" placeholder="XX:XX:XX:XX:XX:XX"></div>
+          <div class="ca-group"><label>Fiber</label><input id="caFiber" placeholder="Enter fiber information"></div>
+        </div>
+        <div class="ca-actions">
+          <button type="reset" class="ca-btn ca-btn-light">↺ Reset</button>
+          <button type="submit" class="ca-btn ca-btn-primary" id="caSave">+ Add Customer</button>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="ca-card">
+      <div class="ca-card-title">Active Customer Records <span class="ca-count" id="caRecordCount">0 Records</span></div>
+      <div class="ca-toolbar">
+        <input type="search" id="caSearch" class="ca-search" placeholder="Search name, IP, mobile, email...">
+        <button type="button" class="ca-btn ca-btn-light" id="caExport">↓ Export CSV</button>
+        <button type="button" class="ca-btn ca-btn-light" id="caRefresh">↻ Refresh</button>
+      </div>
+      <div class="ca-table-wrap">
+        <table class="ca-table">
+          <thead><tr>
+            <th>Serial</th><th>Name</th><th>IP</th><th>Mobile</th><th>Area</th>
+            <th>Billing Date</th><th>Customer Bill</th><th>Internet Bill</th><th>Due</th><th>Action</th>
+          </tr></thead>
+          <tbody id="caCustomerList"><tr><td colspan="10" class="ca-empty">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELETED CUSTOMER PANEL -->
+  <section class="ca-panel" id="panel-deleted">
+    <div class="ca-card">
+      <div class="ca-card-title">Deleted Customers <span class="ca-count" id="caDeletedCount">0 Records</span></div>
+      <div class="ca-toolbar">
+        <input type="search" id="caDeletedSearch" class="ca-search" placeholder="Search deleted customers...">
+        <button class="ca-btn ca-btn-light" id="caDeletedRefresh" type="button">↻ Refresh</button>
+      </div>
+      <div class="ca-table-wrap">
+        <table class="ca-table">
+          <thead><tr><th>Serial</th><th>Name</th><th>IP</th><th>Mobile</th><th>Due</th><th>Deleted Date</th><th>Action</th></tr></thead>
+          <tbody id="caDeletedList"><tr><td colspan="7" class="ca-empty">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUE ENTRY PANEL -->
+  <section class="ca-panel" id="panel-due">
+    <div class="ca-card">
+      <div class="ca-card-title">Add New Due Entry</div>
+      <div class="ca-notice">Due From, Due Amount এবং Due Reason দিতে হবে। Bill Trigger ঐচ্ছিক। নতুন Due Entry যোগ করলে Customer-এর Total Due Amount স্বয়ংক্রিয়ভাবে বাড়বে।</div>
+      <form id="caDueForm">
+        <div class="ca-grid">
+          <div class="ca-group ca-full">
+            <label>Select Customer <span class="ca-required">*</span></label>
+            <select id="caDueCustomer" required><option value="">Select Customer</option></select>
+          </div>
+          <div class="ca-group"><label>Due From <span class="ca-required">*</span></label><input id="caDueFrom" required placeholder="Example: October 2026"></div>
+          <div class="ca-group"><label>Due Amount (৳) <span class="ca-required">*</span></label><input id="caDueEntryAmount" type="number" min="0.01" step="0.01" required placeholder="Enter amount"></div>
+          <div class="ca-group"><label>Bill Trigger (Optional)</label><select id="caDueBillTrigger"><option value="">Not Set</option><option value="ON">ON</option><option value="OFF">OFF</option></select></div>
+          <div class="ca-group ca-full"><label>Due Reason <span class="ca-required">*</span></label><textarea id="caDueReason" required placeholder="Why was this due added?"></textarea></div>
+          <div class="ca-group ca-full"><label>Additional Notes</label><textarea id="caDueNotes" placeholder="Optional notes"></textarea></div>
+        </div>
+        <div class="ca-actions"><button type="submit" class="ca-btn ca-btn-primary" id="caDueSave">+ Add Due Entry</button></div>
+      </form>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-card-title">Due Entry Records <span class="ca-count" id="caDueCount">0 Records</span></div>
+      <div class="ca-toolbar">
+        <input type="search" id="caDueSearch" class="ca-search" placeholder="Search IP, name, due reason...">
+        <button class="ca-btn ca-btn-light" id="caDueRefresh" type="button">↻ Refresh</button>
+      </div>
+      <div class="ca-table-wrap">
+        <table class="ca-table">
+          <thead><tr><th>Date</th><th>Customer</th><th>IP</th><th>Due From</th><th>Amount</th><th>Reason</th><th>Status</th></tr></thead>
+          <tbody id="caDueList"><tr><td colspan="7" class="ca-empty">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY PANEL -->
+  <section class="ca-panel" id="panel-history">
+    <div class="ca-card">
+      <div class="ca-card-title">Customer History Log <span class="ca-count" id="caHistoryCount">0 Records</span></div>
+      <div class="ca-toolbar">
+        <input type="search" id="caHistorySearch" class="ca-search" placeholder="Search name, IP, action, field...">
+        <button class="ca-btn ca-btn-light" id="caHistoryRefresh" type="button">↻ Refresh</button>
+      </div>
+      <div class="ca-table-wrap">
+        <table class="ca-table">
+          <thead><tr><th>Date</th><th>Customer</th><th>IP</th><th>Action</th><th>Field</th><th>Old Value</th><th>New Value</th><th>Amount</th><th>Due From</th><th>Due Reason</th><th>Description</th></tr></thead>
+          <tbody id="caHistoryList"><tr><td colspan="11" class="ca-empty">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
 </div>
 
 <script>
-
 (function(){
-
 "use strict";
 
-/* =================================
-   GOOGLE SHEETS API CONFIGURATION
-================================= */
-
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
+/* =====================================
+   API CONFIGURATION
+   নতুন deployment URL হলে এখানে বদলাবেন
+===================================== */
+const API_URL = "https://script.google.com/macros/s/AKfycbxrhL_45Ey9QHICYzpNdsYRapqRZv36fzyEORs02MCnlAuju8yF-s5bDOfxY_l5qNrG/exec";
 
 const $ = id => document.getElementById(id);
 
-const FIELD_MAP = {
-  serial:"caSerial",
-  name:"caName",
-  ip:"caIP",
-  mobile:"caMobile",
-  email:"caEmail",
-  area:"caArea",
-  address:"caAddress",
-  location:"caLocation",
-  createDate:"caCreateDate",
-  billingDate:"caBillingDate",
-  customerBill:"caCustomerBill",
-  internetBill:"caInternetBill",
-  dueAmount:"caDueAmount",
-  onuMac:"caOnuMac",
-  fiber:"caFiber"
-};
-
 let customers = [];
+let deletedCustomers = [];
+let dueEntries = [];
+let historyEntries = [];
 let editId = null;
-let loading = false;
+let busy = false;
 
-
-/* =================================
-   DATE HELPERS
-================================= */
-
-function getToday(){
-
+function today(){
   const d = new Date();
-
-  return [
-    d.getFullYear(),
-    String(d.getMonth()+1).padStart(2,"0"),
-    String(d.getDate()).padStart(2,"0")
-  ].join("-");
-
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
 
-function dateForInput(value){
-
+function dateInput(value){
   if(!value) return "";
-
-  const str = String(value);
-
-  // API date format: yyyy-MM-dd HH:mm:ss
-  if(/^\d{4}-\d{2}-\d{2}/.test(str)){
-    return str.substring(0,10);
-  }
-
-  const d = new Date(value);
-
-  if(isNaN(d.getTime())) return "";
-
-  return [
-    d.getFullYear(),
-    String(d.getMonth()+1).padStart(2,"0"),
-    String(d.getDate()).padStart(2,"0")
-  ].join("-");
-
+  if(value instanceof Date) return value.toISOString().slice(0,10);
+  const s = String(value);
+  if(/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0,10);
+  const d = new Date(s);
+  return isNaN(d.getTime()) ? "" : d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
 
-
-/* =================================
-   SERIAL
-================================= */
-
-function getNextSerial(){
-
-  const highest = Math.max(
-    0,
-    ...customers.map(c=>Number(c.si || c.serial || c.id)||0)
-  );
-
-  return String(highest+1).padStart(4,"0");
-
+function money(value){
+  return "৳"+Number(value||0).toLocaleString("en-IN",{maximumFractionDigits:2});
 }
 
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[ch]);
+}
 
-/* =================================
+function customerSI(c){
+  return c.si ?? c.id ?? c.serial ?? "";
+}
+
+/* =====================================
    API GET — JSONP
-   Avoids browser CORS issues for GET
-================================= */
-
-function apiGet(action, params={}){
-
+===================================== */
+function apiGet(action,params={}){
   return new Promise((resolve,reject)=>{
-
-    const callbackName =
-      "oneOnlineCallback_" +
-      Date.now() +
-      "_" +
-      Math.floor(Math.random()*100000);
-
-    const query = new URLSearchParams({
-      action,
-      ...params,
-      callback:callbackName
-    });
-
-    const script = document.createElement("script");
-
-    const timeout = setTimeout(()=>{
-
+    const callbackName="oneOnline_"+Date.now()+"_"+Math.floor(Math.random()*100000);
+    const query=new URLSearchParams({action,...params,callback:callbackName});
+    const script=document.createElement("script");
+    const timeout=setTimeout(()=>{
       cleanup();
-
-      reject(new Error("API request timed out. Please try again."));
-
-    },20000);
+      reject(new Error("API request timed out."));
+    },25000);
 
     function cleanup(){
-
       clearTimeout(timeout);
-
       delete window[callbackName];
-
-      if(script.parentNode){
-        script.parentNode.removeChild(script);
-      }
-
+      script.remove();
     }
 
-    window[callbackName] = function(response){
-
+    window[callbackName]=response=>{
       cleanup();
-
-      if(!response || response.success !== true){
-
-        reject(new Error(
-          response?.message || "Unable to load data."
-        ));
-
+      if(!response || response.success!==true){
+        reject(new Error(response?.message || "Unable to load data."));
         return;
-
       }
-
       resolve(response);
-
     };
 
-    script.onerror = function(){
-
+    script.onerror=()=>{
       cleanup();
-
-      reject(new Error(
-        "Could not connect to Google Sheets API."
-      ));
-
+      reject(new Error("Could not connect to Google Sheets API."));
     };
 
-    script.src =
-      API_URL + "?" + query.toString();
-
+    script.src=API_URL+"?"+query.toString();
     document.body.appendChild(script);
-
   });
-
 }
 
-
-/* =================================
+/* =====================================
    API POST
-================================= */
-
+===================================== */
 async function apiPost(payload){
-
-  const response = await fetch(API_URL,{
-
+  const response=await fetch(API_URL,{
     method:"POST",
-
-    headers:{
-      "Content-Type":"text/plain;charset=utf-8"
-    },
-
+    headers:{"Content-Type":"text/plain;charset=utf-8"},
     body:JSON.stringify(payload)
-
   });
 
-  if(!response.ok){
+  const text=await response.text();
+  let result;
 
-    throw new Error(
-      "Server error: HTTP " + response.status
-    );
-
+  try{
+    result=JSON.parse(text);
+  }catch(e){
+    throw new Error("Server response পড়া যায়নি। Web App deployment ও API URL পরীক্ষা করুন।");
   }
 
-  const result = await response.json();
-
-  if(!result || result.success !== true){
-
-    throw new Error(
-      result?.message || "Operation failed."
-    );
-
+  if(!response.ok || !result.success){
+    throw new Error(result?.message || "Operation failed.");
   }
 
   return result;
-
 }
 
+/* =====================================
+   TAB NAVIGATION
+===================================== */
+document.querySelectorAll(".ca-tab").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".ca-tab").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".ca-panel").forEach(p=>p.classList.remove("active"));
 
-/* =================================
-   LOAD CUSTOMER DATA FROM SHEET
-================================= */
+    btn.classList.add("active");
+    $("panel-"+btn.dataset.panel).classList.add("active");
 
-async function loadCustomers(){
+    if(btn.dataset.panel==="deleted") loadDeleted();
+    if(btn.dataset.panel==="due") loadDues();
+    if(btn.dataset.panel==="history") loadHistory();
+  });
+});
 
-  if(loading) return;
-
-  loading = true;
-
-  $("caSave").disabled = true;
-
-  try{
-
-    const response = await apiGet("list");
-
-    customers = (response.customers || []).map(c=>({
-
-      id:String(c.si ?? c.id),
-      si:c.si,
-      serial:String(c.si ?? c.serial ?? ""),
-      name:c.name || "",
-      ip:c.ip || "",
-      mobile:c.mobile || c.phone || "",
-      email:c.email || "",
-      area:c.area || "",
-      address:c.address || "",
-      location:c.location || "",
-      createDate:dateForInput(c.createDate),
-      billingDate:dateForInput(c.billingDate),
-      customerBill:Number(c.customerBill)||0,
-      internetBill:Number(c.internetBill ?? c.ipBill)||0,
-      dueAmount:Number(c.dueAmount)||0,
-      onuMac:c.onuMac || c.onu || "",
-      fiber:c.fiber || ""
-
-    }));
-
-    renderCustomers();
-
-  }catch(error){
-
-    console.error("Customer load error:",error);
-
-    $("caCustomerList").innerHTML = "";
-
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-
-    td.colSpan = 10;
-    td.className = "ca-empty";
-    td.textContent = "Unable to load customers. " + error.message;
-
-    tr.appendChild(td);
-    $("caCustomerList").appendChild(tr);
-
-    alert("Customer Load Error: " + error.message);
-
-  }finally{
-
-    loading = false;
-    $("caSave").disabled = false;
-
-  }
-
+/* =====================================
+   SERIAL & FORM
+===================================== */
+function nextSerial(){
+  const max=Math.max(0,...customers.map(c=>Number(customerSI(c))||0));
+  return String(max+1).padStart(4,"0");
 }
 
-
-/* =================================
-   RESET FORM
-================================= */
-
-function resetCustomerForm(){
-
-  editId = null;
-
+function resetForm(){
+  editId=null;
   $("caForm").reset();
-
-  $("caSerial").value = getNextSerial();
-
-  $("caCreateDate").value = getToday();
-
-  $("caSave").textContent = "+ Add Customer";
-
+  $("caSerial").value=nextSerial();
+  $("caCreateDate").value=today();
+  $("caSave").textContent="+ Add Customer";
 }
 
+$("caForm").addEventListener("reset",()=>{
+  setTimeout(()=>{
+    editId=null;
+    $("caSerial").value=nextSerial();
+    $("caCreateDate").value=today();
+    $("caSave").textContent="+ Add Customer";
+  },0);
+});
 
-/* =================================
-   FORMAT MONEY
-================================= */
-
-function money(value){
-
-  return "৳" + Number(value||0).toLocaleString("en-IN",{
-    maximumFractionDigits:2
-  });
-
-}
-
-
-/* =================================
-   RENDER CUSTOMER LIST
-================================= */
-
-function renderCustomers(){
-
-  const search = $("caSearch").value.toLowerCase().trim();
-
-  const list = customers.filter(c=>{
-
-    return [
-
-      c.serial,
-      c.name,
-      c.ip,
-      c.mobile,
-      c.email,
-      c.area,
-      c.address,
-      c.location,
-      c.onuMac
-
-    ].some(value=>
-      String(value||"").toLowerCase().includes(search)
-    );
-
-  });
-
-  const tbody = $("caCustomerList");
-
-  tbody.innerHTML = "";
-
-  if(!list.length){
-
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-
-    td.colSpan = 10;
-    td.className = "ca-empty";
-
-    td.textContent = customers.length
-      ? "No matching customer found."
-      : "No customer records available. Add your first customer.";
-
-    tr.appendChild(td);
-    tbody.appendChild(tr);
-
-  }
-
-  list.forEach(c=>{
-
-    const tr = document.createElement("tr");
-
-    const values = [
-
-      c.serial,
-      c.name,
-      c.ip,
-      c.mobile,
-      c.area,
-      c.billingDate,
-      money(c.customerBill),
-      money(c.internetBill),
-      money(c.dueAmount)
-
-    ];
-
-    values.forEach(value=>{
-
-      const td = document.createElement("td");
-
-      td.textContent = value || "-";
-
-      tr.appendChild(td);
-
-    });
-
-    const action = document.createElement("td");
-
-    const edit = document.createElement("button");
-
-    edit.type = "button";
-    edit.className = "ca-table-btn ca-edit";
-    edit.textContent = "Edit";
-
-    edit.addEventListener("click",()=>editCustomer(c.id));
-
-    const del = document.createElement("button");
-
-    del.type = "button";
-    del.className = "ca-table-btn ca-delete";
-    del.textContent = "Delete";
-
-    del.addEventListener("click",()=>deleteCustomer(c.id));
-
-    action.append(edit,del);
-
-    tr.appendChild(action);
-
-    tbody.appendChild(tr);
-
-  });
-
-  updateStatistics();
-
-}
-
-
-/* =================================
-   STATISTICS
-================================= */
-
-function updateStatistics(){
-
-  $("caTotal").textContent = customers.length;
-
-  const totalDue = customers.reduce(
-    (sum,c)=>sum+(Number(c.dueAmount)||0),
-    0
-  );
-
-  $("caTotalDue").textContent = money(totalDue);
-
-  $("caLastSerial").textContent = getNextSerial();
-
-  $("caRecordCount").textContent =
-    customers.length + " Records";
-
-}
-
-
-/* =================================
-   GET FORM DATA
-================================= */
-
-function getFormData(){
-
+function getCustomerForm(){
   return {
-
     name:$("caName").value.trim(),
     ip:$("caIP").value.trim(),
     phone:$("caMobile").value.trim(),
@@ -1042,327 +418,513 @@ function getFormData(){
     area:$("caArea").value.trim(),
     address:$("caAddress").value.trim(),
     location:$("caLocation").value.trim(),
-
+    reason:$("caReason").value.trim(),
     createDate:$("caCreateDate").value,
     billingDate:$("caBillingDate").value,
-
     customerBill:Number($("caCustomerBill").value)||0,
     ipBill:Number($("caInternetBill").value)||0,
     dueAmount:Number($("caDueAmount").value)||0,
-
+    billTrigger:$("caBillTrigger").value,
+    ipBillTrigger:$("caIPBillTrigger").value,
     onu:$("caOnuMac").value.trim(),
     fiber:$("caFiber").value.trim()
-
   };
-
 }
 
-
-/* =================================
-   ADD / UPDATE CUSTOMER
-================================= */
-
-$("caForm").addEventListener("submit",async function(event){
-
-  event.preventDefault();
-
-  if(loading) return;
-
-  const customer = getFormData();
-
-  if(!customer.name || !customer.ip){
-
-    alert("Customer Name and Customer IP are required.");
-
-    return;
-
-  }
-
-  const updating = editId !== null;
-
-  const button = $("caSave");
-
-  button.disabled = true;
-
-  button.textContent = updating
-    ? "Updating..."
-    : "Saving...";
-
+/* =====================================
+   LOAD ACTIVE CUSTOMERS
+===================================== */
+async function loadCustomers(showError=true){
   try{
-
-    let result;
-
-    if(updating){
-
-      result = await apiPost({
-
-        action:"edit",
-        si:editId,
-        ...customer
-
-      });
-
-    }else{
-
-      result = await apiPost({
-
-        action:"add",
-        ...customer
-
-      });
-
-    }
-
-    await loadCustomers();
-
-    resetCustomerForm();
-
-    alert(
-      updating
-        ? "Customer Updated Successfully!"
-        : "Customer Added Successfully!"
-    );
-
+    const response=await apiGet("list");
+    customers=(response.customers||response.data||[]).map(c=>({
+      ...c,
+      si:c.si ?? c.id,
+      billingDate:dateInput(c.billingDate),
+      createDate:dateInput(c.createDate),
+      phone:c.phone ?? c.mobile ?? "",
+      ipBill:c.ipBill ?? c.internetBill ?? 0,
+      onu:c.onu ?? c.onuMac ?? ""
+    }));
+    renderCustomers();
+    updateStats();
+    populateDueCustomers();
   }catch(error){
-
-    console.error("Save customer error:",error);
-
-    alert("Save Error: " + error.message);
-
-  }finally{
-
-    button.disabled = false;
-
-    button.textContent = editId !== null
-      ? "Update Customer"
-      : "+ Add Customer";
-
+    console.error(error);
+    $("caCustomerList").innerHTML=`<tr><td colspan="10" class="ca-empty">${escapeHTML(error.message)}</td></tr>`;
+    if(showError) alert("Customer Load Error: "+error.message);
   }
-
-});
-
-
-/* =================================
-   EDIT CUSTOMER
-================================= */
-
-function editCustomer(id){
-
-  const customer = customers.find(c=>String(c.id)===String(id));
-
-  if(!customer) return;
-
-  editId = String(customer.si);
-
-  $("caSerial").value = customer.serial;
-  $("caName").value = customer.name;
-  $("caIP").value = customer.ip;
-  $("caMobile").value = customer.mobile;
-  $("caEmail").value = customer.email;
-  $("caArea").value = customer.area;
-  $("caAddress").value = customer.address;
-  $("caLocation").value = customer.location;
-  $("caCreateDate").value = customer.createDate;
-  $("caBillingDate").value = customer.billingDate;
-  $("caCustomerBill").value = customer.customerBill;
-  $("caInternetBill").value = customer.internetBill;
-  $("caDueAmount").value = customer.dueAmount;
-  $("caOnuMac").value = customer.onuMac;
-  $("caFiber").value = customer.fiber;
-
-  $("caSave").textContent = "Update Customer";
-
-  $("caForm").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-
 }
 
+function updateStats(){
+  $("caTotal").textContent=customers.length;
+  $("caTotalDue").textContent=money(customers.reduce((s,c)=>s+Number(c.dueAmount||0),0));
+  $("caLastSerial").textContent=customers.length ? nextSerial() : "0000";
+  $("caRecordCount").textContent=customers.length+" Records";
+}
 
-/* =================================
-   DELETE CUSTOMER
-   Moves customer to Deleted Spreadsheet
-================================= */
+/* =====================================
+   ACTIVE CUSTOMER TABLE
+===================================== */
+function renderCustomers(){
+  const q=$("caSearch").value.toLowerCase().trim();
+  const filtered=customers.filter(c=>
+    [c.si,c.name,c.ip,c.phone,c.email,c.area,c.address,c.location]
+    .some(v=>String(v??"").toLowerCase().includes(q))
+  );
 
-async function deleteCustomer(id){
+  const tbody=$("caCustomerList");
+  tbody.innerHTML="";
 
-  const customer = customers.find(c=>String(c.id)===String(id));
-
-  if(!customer) return;
-
-  if(!confirm(
-    "Are you sure you want to delete this customer?\n\n" +
-    "Customer: " + customer.name +
-    "\nIP: " + customer.ip +
-    "\n\nThis customer will be moved to Deleted Customer."
-  )){
-
+  if(!filtered.length){
+    tbody.innerHTML=`<tr><td colspan="10" class="ca-empty">${customers.length?"No matching customer found.":"No customer records available."}</td></tr>`;
     return;
-
   }
 
-  try{
+  filtered.forEach(c=>{
+    const tr=document.createElement("tr");
+    const cells=[
+      c.si,c.name,c.ip,c.phone,c.area,c.billingDate,
+      money(c.customerBill),money(c.ipBill),money(c.dueAmount)
+    ];
 
-    await apiPost({
-
-      action:"delete",
-      si:customer.si
-
+    cells.forEach(v=>{
+      const td=document.createElement("td");
+      td.textContent=v || "-";
+      tr.appendChild(td);
     });
 
-    await loadCustomers();
+    const td=document.createElement("td");
+    const edit=document.createElement("button");
+    edit.className="ca-table-btn ca-edit";
+    edit.textContent="Edit";
+    edit.type="button";
+    edit.onclick=()=>editCustomer(c.si);
 
-    if(editId === String(customer.si)){
-      resetCustomerForm();
-    }
+    const del=document.createElement("button");
+    del.className="ca-table-btn ca-delete";
+    del.textContent="Delete";
+    del.type="button";
+    del.onclick=()=>deleteCustomer(c);
 
-    alert("Customer moved to Deleted Customer successfully!");
+    const collect=document.createElement("button");
+    collect.className="ca-table-btn ca-restore";
+    collect.textContent="Collect";
+    collect.type="button";
+    collect.onclick=()=>collectBill(c);
 
-  }catch(error){
-
-    console.error("Delete customer error:",error);
-
-    alert("Delete Error: " + error.message);
-
-  }
-
+    td.append(edit,del,collect);
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  });
 }
 
+$("caSearch").addEventListener("input",renderCustomers);
 
-/* =================================
-   SEARCH
-================================= */
+/* =====================================
+   ADD / EDIT CUSTOMER
+===================================== */
+$("caForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(busy) return;
 
-$("caSearch").addEventListener("input",function(){
-
-  renderCustomers();
-
-});
-
-
-/* =================================
-   RESET BUTTON
-================================= */
-
-$("caForm").addEventListener("reset",function(){
-
-  editId = null;
-
-  setTimeout(()=>{
-
-    $("caSerial").value = getNextSerial();
-
-    $("caCreateDate").value = getToday();
-
-    $("caSave").textContent = "+ Add Customer";
-
-  },0);
-
-});
-
-
-/* =================================
-   EXPORT CSV
-================================= */
-
-$("caExport").addEventListener("click",function(){
-
-  if(!customers.length){
-
-    alert("No customers available to export.");
-
+  const data=getCustomerForm();
+  if(!data.name || !data.ip){
+    alert("Customer Name and Customer IP are required.");
     return;
-
   }
 
-  const headers = [
+  busy=true;
+  $("caSave").disabled=true;
+  $("caSave").textContent=editId ? "Updating..." : "Saving...";
 
-    "Serial Number",
-    "Customer Name",
-    "Customer IP",
-    "Mobile Number",
-    "Email",
-    "Area",
-    "Address",
-    "Location",
-    "Create Date",
-    "Billing Date",
-    "Customer Bill",
-    "Internet Bill",
-    "Due Amount",
-    "ONU MAC",
-    "Fiber"
+  try{
+    if(editId){
+      await apiPost({action:"edit",si:editId,...data});
+    }else{
+      await apiPost({action:"add",...data});
+    }
 
-  ];
-
-  const rows = [
-
-    headers,
-
-    ...customers.map(c=>[
-
-      c.serial,
-      c.name,
-      c.ip,
-      c.mobile,
-      c.email,
-      c.area,
-      c.address,
-      c.location,
-      c.createDate,
-      c.billingDate,
-      c.customerBill,
-      c.internetBill,
-      c.dueAmount,
-      c.onuMac,
-      c.fiber
-
-    ])
-
-  ];
-
-  const csv = "\uFEFF" + rows.map(row=>
-
-    row.map(value=>
-      '"' + String(value??"").replace(/"/g,'""') + '"'
-    ).join(",")
-
-  ).join("\r\n");
-
-  const blob = new Blob([csv],{
-    type:"text/csv;charset=utf-8;"
-  });
-
-  const url = URL.createObjectURL(blob);
-
-  const link = document.createElement("a");
-
-  link.href = url;
-  link.download = "ONE-ONLINE-CUSTOMERS.csv";
-
-  document.body.appendChild(link);
-
-  link.click();
-
-  link.remove();
-
-  URL.revokeObjectURL(url);
-
+    await loadCustomers(false);
+    resetForm();
+    alert(editId ? "Customer updated successfully." : "Customer added successfully.");
+  }catch(error){
+    alert("Save Error: "+error.message);
+  }finally{
+    busy=false;
+    $("caSave").disabled=false;
+    $("caSave").textContent=editId ? "Update Customer" : "+ Add Customer";
+  }
 });
 
+function editCustomer(si){
+  const c=customers.find(x=>String(x.si)===String(si));
+  if(!c) return;
 
-/* =================================
-   INITIALIZE
-================================= */
+  editId=String(c.si);
+  $("caSerial").value=c.si||"";
+  $("caName").value=c.name||"";
+  $("caIP").value=c.ip||"";
+  $("caMobile").value=c.phone||"";
+  $("caEmail").value=c.email||"";
+  $("caArea").value=c.area||"";
+  $("caAddress").value=c.address||"";
+  $("caLocation").value=c.location||"";
+  $("caReason").value=c.reason||"";
+  $("caCreateDate").value=dateInput(c.createDate);
+  $("caBillingDate").value=dateInput(c.billingDate);
+  $("caCustomerBill").value=c.customerBill??0;
+  $("caInternetBill").value=c.ipBill??0;
+  $("caDueAmount").value=c.dueAmount??0;
+  $("caBillTrigger").value=c.billTrigger||"";
+  $("caIPBillTrigger").value=c.ipBillTrigger||"";
+  $("caOnuMac").value=c.onu||"";
+  $("caFiber").value=c.fiber||"";
 
-resetCustomerForm();
+  $("caSave").textContent="Update Customer";
+  $("caForm").scrollIntoView({behavior:"smooth",block:"start"});
+}
 
+async function deleteCustomer(c){
+  if(!confirm("Delete this customer?\n\n"+c.name+"\n"+c.ip+"\n\nCustomer will move to Deleted Customers.")) return;
+
+  try{
+    await apiPost({action:"delete",si:c.si});
+    await loadCustomers(false);
+    if(String(editId)===String(c.si)) resetForm();
+    alert("Customer moved to Deleted Customers.");
+  }catch(error){
+    alert("Delete Error: "+error.message);
+  }
+}
+
+/* =====================================
+   DELETED CUSTOMERS
+===================================== */
+async function loadDeleted(){
+  $("caDeletedList").innerHTML='<tr><td colspan="7" class="ca-empty">Loading...</td></tr>';
+  try{
+    const r=await apiGet("deleted");
+    deletedCustomers=r.customers||r.data||[];
+    renderDeleted();
+    $("caDeletedTotal").textContent=deletedCustomers.length;
+  }catch(error){
+    $("caDeletedList").innerHTML=`<tr><td colspan="7" class="ca-empty">${escapeHTML(error.message)}</td></tr>`;
+  }
+}
+
+function renderDeleted(){
+  const q=$("caDeletedSearch").value.toLowerCase().trim();
+  const list=deletedCustomers.filter(c=>
+    [c.si,c.name,c.ip,c.phone,c.dueAmount].some(v=>String(v??"").toLowerCase().includes(q))
+  );
+
+  $("caDeletedCount").textContent=deletedCustomers.length+" Records";
+  const tbody=$("caDeletedList");
+  tbody.innerHTML="";
+
+  if(!list.length){
+    tbody.innerHTML='<tr><td colspan="7" class="ca-empty">No deleted customers found.</td></tr>';
+    return;
+  }
+
+  list.forEach(c=>{
+    const tr=document.createElement("tr");
+    [c.si,c.name,c.ip,c.phone,money(c.dueAmount),dateInput(c.deletedDate)].forEach(v=>{
+      const td=document.createElement("td");
+      td.textContent=v||"-";
+      tr.appendChild(td);
+    });
+
+    const td=document.createElement("td");
+    const restore=document.createElement("button");
+    restore.className="ca-table-btn ca-restore";
+    restore.textContent="Restore";
+    restore.onclick=()=>restoreCustomer(c);
+
+    const permanent=document.createElement("button");
+    permanent.className="ca-table-btn ca-delete";
+    permanent.textContent="Permanent Delete";
+    permanent.onclick=()=>permanentDelete(c);
+
+    td.append(restore,permanent);
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  });
+}
+
+$("caDeletedSearch").addEventListener("input",renderDeleted);
+
+async function restoreCustomer(c){
+  if(!confirm("Restore this customer?\n"+c.name+" ("+c.ip+")")) return;
+  try{
+    await apiPost({action:"restore",si:c.si});
+    await loadDeleted();
+    await loadCustomers(false);
+    alert("Customer restored successfully.");
+  }catch(error){
+    alert("Restore Error: "+error.message);
+  }
+}
+
+async function permanentDelete(c){
+  if(!confirm("WARNING: Permanently delete this customer?\n\nThis action cannot be undone.")) return;
+  try{
+    await apiPost({action:"permanentDelete",si:c.si});
+    await loadDeleted();
+    alert("Customer permanently deleted.");
+  }catch(error){
+    alert("Permanent Delete Error: "+error.message);
+  }
+}
+
+/* =====================================
+   DUE CUSTOMER DROPDOWN
+===================================== */
+function populateDueCustomers(){
+  const select=$("caDueCustomer");
+  const previous=select.value;
+  select.innerHTML='<option value="">Select Customer</option>';
+
+  customers.forEach(c=>{
+    const option=document.createElement("option");
+    option.value=c.si;
+    option.textContent=c.name+" — "+c.ip+" — Due: "+money(c.dueAmount);
+    select.appendChild(option);
+  });
+
+  if(previous) select.value=previous;
+}
+
+/* =====================================
+   ADD DUE ENTRY
+===================================== */
+$("caDueForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+
+  const si=$("caDueCustomer").value;
+  const dueFrom=$("caDueFrom").value.trim();
+  const amount=Number($("caDueEntryAmount").value);
+  const reason=$("caDueReason").value.trim();
+
+  if(!si || !dueFrom || amount<=0 || !reason){
+    alert("Please complete all required Due fields.");
+    return;
+  }
+
+  const c=customers.find(x=>String(x.si)===String(si));
+  if(!c){
+    alert("Customer not found.");
+    return;
+  }
+
+  $("caDueSave").disabled=true;
+  $("caDueSave").textContent="Saving...";
+
+  try{
+    await apiPost({
+      action:"addDue",
+      si:c.si,
+      ip:c.ip,
+      dueFrom:dueFrom,
+      dueAmount:amount,
+      dueReason:reason,
+      billTrigger:$("caDueBillTrigger").value,
+      notes:$("caDueNotes").value.trim(),
+      user:"Admin"
+    });
+
+    $("caDueForm").reset();
+    await loadCustomers(false);
+    await loadDues();
+    alert("Due entry added successfully.");
+  }catch(error){
+    alert("Due Entry Error: "+error.message);
+  }finally{
+    $("caDueSave").disabled=false;
+    $("caDueSave").textContent="+ Add Due Entry";
+  }
+});
+
+/* =====================================
+   LOAD DUE RECORDS
+===================================== */
+async function loadDues(){
+  $("caDueList").innerHTML='<tr><td colspan="7" class="ca-empty">Loading...</td></tr>';
+  try{
+    const r=await apiGet("dueentries");
+    dueEntries=r.dueEntries||r.data||[];
+    renderDues();
+  }catch(error){
+    $("caDueList").innerHTML=`<tr><td colspan="7" class="ca-empty">${escapeHTML(error.message)}</td></tr>`;
+  }
+}
+
+function renderDues(){
+  const q=$("caDueSearch").value.toLowerCase().trim();
+  const list=dueEntries.filter(d=>
+    [d.name,d.ip,d.dueFrom,d.dueReason,d.status,d.user].some(v=>String(v??"").toLowerCase().includes(q))
+  );
+
+  $("caDueCount").textContent=dueEntries.length+" Records";
+  const tbody=$("caDueList");
+  tbody.innerHTML="";
+
+  if(!list.length){
+    tbody.innerHTML='<tr><td colspan="7" class="ca-empty">No due entries found.</td></tr>';
+    return;
+  }
+
+  list.forEach(d=>{
+    const tr=document.createElement("tr");
+    [
+      d.entryDate,d.name,d.ip,d.dueFrom,money(d.dueAmount),
+      d.dueReason,d.status||d.collectStatus
+    ].forEach(v=>{
+      const td=document.createElement("td");
+      td.textContent=v||"-";
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+$("caDueSearch").addEventListener("input",renderDues);
+
+/* =====================================
+   CUSTOMER HISTORY
+===================================== */
+async function loadHistory(){
+  $("caHistoryList").innerHTML='<tr><td colspan="11" class="ca-empty">Loading...</td></tr>';
+  try{
+    const r=await apiGet("history");
+    historyEntries=r.history||r.data||[];
+    renderHistory();
+  }catch(error){
+    $("caHistoryList").innerHTML=`<tr><td colspan="11" class="ca-empty">${escapeHTML(error.message)}</td></tr>`;
+  }
+}
+
+function renderHistory(){
+  const q=$("caHistorySearch").value.toLowerCase().trim();
+  const list=historyEntries.filter(h=>
+    [h.name,h.ip,h.action,h.field,h.oldValue,h.newValue,h.description,h.dueFrom,h.dueReason]
+    .some(v=>String(v??"").toLowerCase().includes(q))
+  );
+
+  $("caHistoryCount").textContent=historyEntries.length+" Records";
+  const tbody=$("caHistoryList");
+  tbody.innerHTML="";
+
+  if(!list.length){
+    tbody.innerHTML='<tr><td colspan="11" class="ca-empty">No history records found.</td></tr>';
+    return;
+  }
+
+  list.forEach(h=>{
+    const tr=document.createElement("tr");
+    [
+      h.actionDate,h.name,h.ip,h.action,h.field,
+      h.oldValue,h.newValue,h.amount?money(h.amount):"",
+      h.dueFrom,h.dueReason,h.description
+    ].forEach(v=>{
+      const td=document.createElement("td");
+      td.textContent=v||"-";
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+$("caHistorySearch").addEventListener("input",renderHistory);
+
+/* =====================================
+   COLLECT BILL
+===================================== */
+async function collectBill(c){
+  const due=Number(c.dueAmount)||0;
+  const amountText=prompt(
+    "Customer: "+c.name+"\nIP: "+c.ip+"\nTotal Due: "+money(due)+"\n\nEnter collected amount:"
+  );
+
+  if(amountText===null) return;
+
+  const amount=Number(amountText);
+
+  if(!Number.isFinite(amount)||amount<=0){
+    alert("Please enter a valid amount.");
+    return;
+  }
+
+  if(due>0 && amount>due){
+    alert("Collect amount cannot exceed total due.");
+    return;
+  }
+
+  if(!confirm("Confirm payment collection?\nAmount: "+money(amount))) return;
+
+  try{
+    await apiPost({action:"collect",si:c.si,ip:c.ip,amount:amount});
+    await loadCustomers(false);
+    await loadDues();
+    await loadHistory();
+    alert("Payment collected successfully.");
+  }catch(error){
+    alert("Collect Error: "+error.message);
+  }
+}
+
+/* =====================================
+   EXPORT CSV
+===================================== */
+$("caExport").addEventListener("click",()=>{
+  if(!customers.length){
+    alert("No customers available to export.");
+    return;
+  }
+
+  const headers=[
+    "SI","IP","NAME","PHONE","REASON","BILL_TRIGGER",
+    "CUSTOMER_BILL","BILLING_DATE","IP_BILL_TRIGGER","IP_BILL",
+    "AREA","ADDRESS","LOCATION","ONU","FIBER","EMAIL",
+    "COLLECT","RENEW","CREATE_DATE","DUE_AMOUNT"
+  ];
+
+  const rows=[headers,...customers.map(c=>[
+    c.si,c.ip,c.name,c.phone,c.reason,c.billTrigger,
+    c.customerBill,c.billingDate,c.ipBillTrigger,c.ipBill,
+    c.area,c.address,c.location,c.onu,c.fiber,c.email,
+    c.collect,c.renew,c.createDate,c.dueAmount
+  ])];
+
+  const csv="\uFEFF"+rows.map(row=>
+    row.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")
+  ).join("\r\n");
+
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="ONE-ONLINE-CUSTOMERS.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* =====================================
+   REFRESH BUTTONS
+===================================== */
+$("caRefresh").onclick=()=>loadCustomers();
+$("caDeletedRefresh").onclick=loadDeleted;
+$("caDueRefresh").onclick=loadDues;
+$("caHistoryRefresh").onclick=loadHistory;
+
+/* =====================================
+   START
+===================================== */
+resetForm();
 loadCustomers();
 
 })();
-
 </script>
-
 </body>
 </html>
